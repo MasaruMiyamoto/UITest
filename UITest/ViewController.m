@@ -30,17 +30,19 @@
     [self.view addSubview:oya];
     
     UIScrollView *sv = [[UIScrollView alloc] initWithFrame:self.view.bounds];
-//    sv.backgroundColor = [UIColor cyanColor];
-    
+    sv.backgroundColor = [UIColor cyanColor];
+    sv.bounces = NO;
     [sv addSubview:oya];
     sv.contentSize = oya.bounds.size;
     [self.view addSubview:sv];
     
-    UIView *ko = [[UIView alloc] initWithFrame:CGRectMake(400, 10, 200, 200)];
-    ko.backgroundColor = [UIColor redColor];
+    UIView *buField = [[UIView alloc] initWithFrame:CGRectMake(713, 165, 0, 0)];
+    buField.backgroundColor = [UIColor redColor];
     
-    [ko addSubview:view];
-    [self.view addSubview:ko];
+    SetButton *button = [[SetButton alloc] init];
+    
+    [buField addSubview:button];
+    [self.view addSubview:buField];
 }
 
 - (void)didReceiveMemoryWarning {

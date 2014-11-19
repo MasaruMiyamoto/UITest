@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		44B0BCF81A1C739F00203F57 /* SetButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 44B0BCF71A1C739F00203F57 /* SetButton.m */; };
+		44B0BCFA1A1C79C500203F57 /* res.gif in Resources */ = {isa = PBXBuildFile; fileRef = 44B0BCF91A1C79C500203F57 /* res.gif */; };
 		78A434371A1AF72C00469530 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A434361A1AF72C00469530 /* main.m */; };
 		78A4343A1A1AF72C00469530 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A434391A1AF72C00469530 /* AppDelegate.m */; };
 		78A4343D1A1AF72C00469530 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A4343C1A1AF72C00469530 /* ViewController.m */; };
@@ -28,6 +30,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		44B0BCF61A1C739F00203F57 /* SetButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetButton.h; sourceTree = "<group>"; };
+		44B0BCF71A1C739F00203F57 /* SetButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetButton.m; sourceTree = "<group>"; };
+		44B0BCF91A1C79C500203F57 /* res.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = res.gif; sourceTree = "<group>"; };
 		78A434311A1AF72C00469530 /* UITest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UITest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78A434351A1AF72C00469530 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		78A434361A1AF72C00469530 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -90,6 +95,8 @@
 				78A4343C1A1AF72C00469530 /* ViewController.m */,
 				78A4345D1A1AF95B00469530 /* ViewClass.h */,
 				78A4345E1A1AF95B00469530 /* ViewClass.m */,
+				44B0BCF61A1C739F00203F57 /* SetButton.h */,
+				44B0BCF71A1C739F00203F57 /* SetButton.m */,
 				78A4343E1A1AF72C00469530 /* Main.storyboard */,
 				78A434411A1AF72C00469530 /* Images.xcassets */,
 				78A434431A1AF72C00469530 /* LaunchScreen.xib */,
@@ -103,6 +110,7 @@
 			children = (
 				78A434351A1AF72C00469530 /* Info.plist */,
 				78A434361A1AF72C00469530 /* main.m */,
+				44B0BCF91A1C79C500203F57 /* res.gif */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -205,6 +213,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				78A434401A1AF72C00469530 /* Main.storyboard in Resources */,
+				44B0BCFA1A1C79C500203F57 /* res.gif in Resources */,
 				78A434451A1AF72C00469530 /* LaunchScreen.xib in Resources */,
 				78A434421A1AF72C00469530 /* Images.xcassets in Resources */,
 			);
@@ -225,6 +234,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				78A4343D1A1AF72C00469530 /* ViewController.m in Sources */,
+				44B0BCF81A1C739F00203F57 /* SetButton.m in Sources */,
 				78A4343A1A1AF72C00469530 /* AppDelegate.m in Sources */,
 				78A434371A1AF72C00469530 /* main.m in Sources */,
 				78A4345F1A1AF95B00469530 /* ViewClass.m in Sources */,
@@ -420,6 +430,7 @@
 				78A434561A1AF72C00469530 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		78A434571A1AF72C00469530 /* Build configuration list for PBXNativeTarget "UITestTests" */ = {
 			isa = XCConfigurationList;
@@ -428,6 +439,7 @@
 				78A434591A1AF72C00469530 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

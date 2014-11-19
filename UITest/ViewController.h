@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ViewClass.h"
+#import "SetButton.h"
 
 @interface ViewController : UIViewController
 
