@@ -11,9 +11,9 @@
 @implementation ViewClass
 
 //@propertyの設定を実装
-@synthesize label1;
-@synthesize label2;
-@synthesize label3;
+//@synthesize label1;
+//@synthesize label2;
+//@synthesize label3;
 
 //クラスの初期化メソッド  
 - (id)init{
@@ -34,6 +34,10 @@
     label3.tag = 1;
     label3.frame = CGRectMake(10, 150, 300, 20);
     [self addSubview:label3];
+    
+    label1.text = @"LABEL1";
+    label2.text = @"LABEL2";
+    label3.text = @"LABEL3";
     
     return self;
 }
