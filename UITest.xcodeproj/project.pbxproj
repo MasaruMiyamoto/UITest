@@ -14,6 +14,7 @@
 		78A434421A1AF72C00469530 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78A434411A1AF72C00469530 /* Images.xcassets */; };
 		78A434451A1AF72C00469530 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78A434431A1AF72C00469530 /* LaunchScreen.xib */; };
 		78A434511A1AF72C00469530 /* UITestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A434501A1AF72C00469530 /* UITestTests.m */; };
+		78A4345F1A1AF95B00469530 /* ViewClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A4345E1A1AF95B00469530 /* ViewClass.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		78A4344A1A1AF72C00469530 /* UITestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UITestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		78A4344F1A1AF72C00469530 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		78A434501A1AF72C00469530 /* UITestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UITestTests.m; sourceTree = "<group>"; };
+		78A4345D1A1AF95B00469530 /* ViewClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewClass.h; sourceTree = "<group>"; };
+		78A4345E1A1AF95B00469530 /* ViewClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewClass.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +88,8 @@
 				78A434391A1AF72C00469530 /* AppDelegate.m */,
 				78A4343B1A1AF72C00469530 /* ViewController.h */,
 				78A4343C1A1AF72C00469530 /* ViewController.m */,
+				78A4345D1A1AF95B00469530 /* ViewClass.h */,
+				78A4345E1A1AF95B00469530 /* ViewClass.m */,
 				78A4343E1A1AF72C00469530 /* Main.storyboard */,
 				78A434411A1AF72C00469530 /* Images.xcassets */,
 				78A434431A1AF72C00469530 /* LaunchScreen.xib */,
@@ -222,6 +227,7 @@
 				78A4343D1A1AF72C00469530 /* ViewController.m in Sources */,
 				78A4343A1A1AF72C00469530 /* AppDelegate.m in Sources */,
 				78A434371A1AF72C00469530 /* main.m in Sources */,
+				78A4345F1A1AF95B00469530 /* ViewClass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
