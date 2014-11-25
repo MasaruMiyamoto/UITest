@@ -19,30 +19,36 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     
-    
+    //ラベルを貼付けるViewを作成
     UIView* oya = [[UIView alloc]init];
     oya.frame = CGRectMake(0, 0, 350, 1200);
     oya.backgroundColor = [UIColor yellowColor];
     
+    //ラベルのViewを呼び出す
     ViewClass* view = [[ViewClass alloc]init];
     
+    //oya に　view　を追加、表示
     [oya addSubview:view];
     [self.view addSubview:oya];
     
+    /*****スクロールの設定*****/
     UIScrollView *sv = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     sv.backgroundColor = [UIColor cyanColor];
     sv.bounces = NO;
     [sv addSubview:oya];
     sv.contentSize = oya.bounds.size;
     [self.view addSubview:sv];
+    /**********/
     
-    UIView *buField = [[UIView alloc] initWithFrame:CGRectMake(713, 165, 0, 0)];
+    /*****ボタンの設置*****/
+    UIView *buField = [[UIView alloc] initWithFrame:CGRectMake(713, 165, 228, 386)];
     buField.backgroundColor = [UIColor redColor];
     
     SetButton *button = [[SetButton alloc] init];
     
     [buField addSubview:button];
     [self.view addSubview:buField];
+    /**********/
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,7 +66,7 @@
             break;
             
         case 2:
-            // タグが1のビュー
+            // タグが2のビュー
             break;
             
         default:

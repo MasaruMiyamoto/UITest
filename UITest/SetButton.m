@@ -30,6 +30,7 @@ UIImageView *img,*del;
 -(id)init{
     self = [super init];
     self.frame = CGRectMake(0, 0, 500, 500);
+//    self.backgroundColor = [UIColor redColor];
     
     btn1 = [[UILabel alloc] init];
     btn1.userInteractionEnabled = YES;
@@ -95,7 +96,6 @@ UIImageView *img,*del;
     [self addSubview:btn7];
     
     btn8 = [[UILabel alloc] init];
-    btn8.userInteractionEnabled = YES;
     btn8.userInteractionEnabled = YES;
     btn8.textAlignment = NSTextAlignmentCenter;
     btn8.font = [UIFont systemFontOfSize:50];

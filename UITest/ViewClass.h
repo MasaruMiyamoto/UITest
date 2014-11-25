@@ -8,12 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewClass : UIView{
-    //クラス内に変数を定義
-    UILabel* label1;
-    UILabel* label2;
-    UILabel* label3;
-}
+@interface ViewClass : UIView
 //外部参照できる用にする
 //@property(nonatomic, readonly)UILabel* label1;
 //@property(nonatomic, readonly)UILabel* label2;

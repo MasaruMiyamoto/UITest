@@ -10,6 +10,11 @@
 
 @implementation ViewClass
 
+//クラス内に変数を定義
+UILabel* label1;
+UILabel* label2;
+UILabel* label3;
+
 //@propertyの設定を実装
 //@synthesize label1;
 //@synthesize label2;
@@ -30,8 +35,6 @@
     [self addSubview:label2];
     
     label3 = [[UILabel alloc] init];
-    label3.userInteractionEnabled = YES;
-    label3.tag = 1;
     label3.frame = CGRectMake(10, 150, 300, 20);
     [self addSubview:label3];
     
