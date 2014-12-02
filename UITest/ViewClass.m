@@ -16,9 +16,9 @@ UILabel* label2;
 UILabel* label3;
 
 //@propertyの設定を実装
-//@synthesize label1;
-//@synthesize label2;
-//@synthesize label3;
+@synthesize label1;
+@synthesize label2;
+@synthesize label3;
 
 //クラスの初期化メソッド  
 - (id)init{

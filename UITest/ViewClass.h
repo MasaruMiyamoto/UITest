@@ -10,9 +10,9 @@
 
 @interface ViewClass : UIView
 //外部参照できる用にする
-//@property(nonatomic, readonly)UILabel* label1;
-//@property(nonatomic, readonly)UILabel* label2;
-//@property(nonatomic, readonly)UILabel* label3;
+@property(nonatomic, readonly)UILabel* label1;
+@property(nonatomic, readonly)UILabel* label2;
+@property(nonatomic, readonly)UILabel* label3;
 
 
 @end
