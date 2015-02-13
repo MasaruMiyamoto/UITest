@@ -12,25 +12,36 @@
 #define locy 0
 #define side 70
 #define during 79
+#define lenge 30
 
 @implementation SetButton
 
-UILabel *btn,*btn0,*btn1,*btn2,*btn3,*btn4,*btn5,*btn6,*btn7,*btn8,*btn9,*btn_m;
-UIImageView *img,*del;
+UILabel *btn,
+        *btn0,
+        *btn1,
+        *btn2,
+        *btn3,
+        *btn4,
+        *btn5,
+        *btn6,
+        *btn7,
+        *btn8,
+        *btn9,
+        *btn_m;
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
+UIImageView *img,
+            *del;
+
+@synthesize btn;
+@synthesize img;
+@synthesize tmp;
 
 
--(id)init{
+-(id)init
+{
     self = [super init];
-    self.frame = CGRectMake(0, 0, 500, 500);
-//    self.backgroundColor = [UIColor redColor];
+    self.frame = CGRectMake(0, 0, side + during*2, side+during*4);
+    self.backgroundColor = [UIColor redColor];
     
     btn1 = [[UILabel alloc] init];
     btn1.userInteractionEnabled = YES;
@@ -160,5 +171,124 @@ UIImageView *img,*del;
     
     return self;
 }
+
+- (void)move :(int)x :(int)y
+{
+    
+    self.frame = CGRectMake(x, y, self.frame.size.width, self.frame.size.height);
+//    btn1.frame = CGRectMake(x,y+during+during,side,side);
+//    btn2.frame = CGRectMake(x+during,y+during+during,side,side);
+//    btn3.frame = CGRectMake(x+during+during,y+during+during,side,side);
+//    btn4.frame = CGRectMake(x,y+during,side,side);
+//    btn5.frame = CGRectMake(x+during,y+during,side,side);
+//    btn6.frame = CGRectMake(x+during+during,y+during,side,side);
+//    btn7.frame = CGRectMake(x,y,side,side);
+//    btn8.frame = CGRectMake(x+during,y,side,side);
+//    btn9.frame = CGRectMake(x+during+during,y,side,side);
+//    btn0.frame = CGRectMake(x + during/2,y+during+during+during,side,side);
+//    btn_m.frame = CGRectMake(x +during+ during/2,y+during+during+during,side,side);
+//    del.frame = CGRectMake(x+during, y+during+during+during+during, side,side);
+
+}
+
+- (id)labelCopy :(int)a
+{
+    
+    switch (a) {
+        case 1:
+            btn = [self deepLabelCopy:btn1];
+            btn.backgroundColor = [UIColor redColor];
+            break;
+        case 2:
+            btn = [self deepLabelCopy:btn2];
+            btn.backgroundColor = [UIColor redColor];
+            break;
+        case 3:
+            btn = [self deepLabelCopy:btn3];
+            btn.backgroundColor = [UIColor redColor];
+            break;
+        case 4:
+            btn = [self deepLabelCopy:btn4];
+            btn.backgroundColor = [UIColor redColor];
+            break;
+        case 5:
+            btn = [self deepLabelCopy:btn5];
+            btn.backgroundColor = [UIColor redColor];
+            break;
+        case 6:
+            btn = [self deepLabelCopy:btn6];
+            btn.backgroundColor = [UIColor redColor];
+            break;
+        case 7:
+            btn = [self deepLabelCopy:btn7];
+            btn.backgroundColor = [UIColor redColor];
+            break;
+        case 8:
+            btn = [self deepLabelCopy:btn8];
+            btn.backgroundColor = [UIColor redColor];
+            break;
+        case 9:
+            btn = [self deepLabelCopy:btn9];
+            btn.backgroundColor = [UIColor redColor];
+            break;
+        case 10:
+            btn = [self deepLabelCopy:btn0];
+            btn.backgroundColor = [UIColor redColor];
+            break;
+        case 11:
+            btn = [self deepLabelCopy:btn_m];
+            btn.backgroundColor = [UIColor redColor];
+            break;
+        case 12:
+            img = [self deepImageCopy:del];
+            [self setBack:img];
+            return img;
+            break;
+        default:
+            btn = [self labelReset];
+            break;
+    }
+    [self setBack:btn];
+    return btn;
+}
+
+- (UILabel *)deepLabelCopy:(UILabel *)label
+{
+    UILabel *duplicateLabel = [[UILabel alloc] initWithFrame:label.frame];
+    duplicateLabel.text = label.text;
+    duplicateLabel.textAlignment = NSTextAlignmentCenter;
+    duplicateLabel.font = [UIFont systemFontOfSize:50];
+//    NSLog(@"DEEP");
+    
+    return duplicateLabel;
+}
+
+- (UIImageView *)deepImageCopy :(UIImageView *)image
+{
+    UIImageView *duplicateImage = [[UIImageView alloc] initWithFrame:image.frame];
+    duplicateImage.image = image.image;
+    return duplicateImage;
+}
+
+- (UILabel *)labelReset
+{
+    UILabel *resetLabel = [[UILabel alloc] init];
+    return resetLabel;
+}
+
+- (void)setBack:(UIView *)obj
+{
+    tmp = CGPointMake(self.frame.origin.x + obj.center.x, self.frame.origin.y + obj.center.y);
+//    NSLog(@"%f",self.frame.origin.x);
+}
+
+- (void)back
+{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.5];
+    btn.center = tmp;
+    [UIView commitAnimations];
+}
+
 
 @end
