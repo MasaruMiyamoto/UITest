@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
 
 //式の作成用クラス(予定)
 @interface ViewClass : UIView

@@ -9,7 +9,7 @@
 #import "ViewClass.h"
 
 #define size 80
-#define width 418
+#define width 440
 #define height 80
 
 @implementation ViewClass
@@ -52,16 +52,13 @@ UILabel* Code;
     [self setLabel];
     [self setPosition];
     
+//    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+//    [appDelegate.toyBox setObject:self forKey:@"obj"];
+    
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
+
 
 -(void)setLabel
 {
@@ -73,7 +70,7 @@ UILabel* Code;
     A.adjustsFontSizeToFitWidth = YES;
     A.backgroundColor = [UIColor colorWithRed:0.2 green:0.8 blue:0.5 alpha:1.0];
     A.minimumScaleFactor = 20/50;
-    A.userInteractionEnabled = YES;
+    
     A.tag = 1;
     [self addSubview:A];
     
@@ -84,7 +81,6 @@ UILabel* Code;
     B.adjustsFontSizeToFitWidth = YES;
     B.backgroundColor = [UIColor colorWithRed:0.2 green:0.8 blue:0.5 alpha:1.0];
     B.minimumScaleFactor = 20/50;
-    B.userInteractionEnabled = YES;
     B.tag = 2;
     [self addSubview:B];
     
@@ -94,7 +90,6 @@ UILabel* Code;
     E.adjustsFontSizeToFitWidth = YES;
     E.backgroundColor = [UIColor colorWithRed:0.2 green:0.8 blue:0.5 alpha:1.0];
     E.minimumScaleFactor = 20/50;
-    E.userInteractionEnabled = YES;
     E.tag = 3;
     [self addSubview:E];
     
@@ -124,6 +119,7 @@ UILabel* Code;
     Code.font = [UIFont systemFontOfSize:45];
     Code.adjustsFontSizeToFitWidth = YES;
     Code.minimumScaleFactor = 20/50;
+    Code.tag = 4;
     [self addSubview:Code];
     
     A.text = @"A";
@@ -144,11 +140,12 @@ UILabel* Code;
     Y.frame = CGRectMake(B.frame.origin.x + 60, 0, size, size);
     Equal.frame = CGRectMake(Y.frame.origin.x + 50, 0, size, size);
     E.frame = CGRectMake(Equal.frame.origin.x + 70, 0, size, size);
+//    NSLog(@"%f",E.frame.origin.x);
 }
 
 - (void)move :(int)x :(int)y
 {
-    self.frame = CGRectMake(x, y, 418, 80);
+    self.frame = CGRectOffset(self.frame, x, y);
 }
 -(void)setVariable:(int)a :(int)b :(int)e
 {
@@ -158,34 +155,57 @@ UILabel* Code;
     
 }
 
+- (void)canMoving:(NSString *)str
+{
+    if([str isEqualToString:@"A"]){
+        A.userInteractionEnabled = YES;
+    }else if([str isEqualToString:@"B"]){
+        B.userInteractionEnabled = YES;
+    }else if([str isEqualToString:@"AB"]){
+        A.userInteractionEnabled = YES;
+        B.userInteractionEnabled = YES;
+    }
+}
+
+- (void)cannotMoving:(NSString *)str
+{
+    if([str isEqualToString:@"A"]){
+        A.userInteractionEnabled = NO;
+    }else if([str isEqualToString:@"B"]){
+        B.userInteractionEnabled = NO;
+    }else if([str isEqualToString:@"AB"]){
+        A.userInteractionEnabled = NO;
+        B.userInteractionEnabled = NO;
+    }
+}
 /*****タッチイベント*****/
-//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-//{
-//    UITouch *touch = [touches anyObject];
-//
-////    CGPoint location = [touch previousLocationInView:self.view];
-//    [super touchesBegan:touches withEvent:event];
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+
+//    CGPoint location = [touch previousLocationInView:self.view];
+    [super touchesBegan:touches withEvent:event];
 //    NSLog(@"%ld",(long)touch.view.tag);
-//    
-////    NSLog(@"%f,%f",location.x,location.y);
-//    //    if([event touchesForView:oya] != nil){
-//    //        NSLog(@"oya");
-//    //    }
-//    
-//}
-//
-//- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-//{
-//    UITouch *touch = [touches anyObject];
+    
+//    NSLog(@"%f,%f",location.x,location.y);
+    //    if([event touchesForView:oya] != nil){
+    //        NSLog(@"oya");
+    //    }
+    
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
 //    CGPoint location = [touch locationInView:self];
-//    [super touchesMoved:touches withEvent:event];
-//}
-//
-//- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-//{
-//    [super touchesEnded:touches withEvent:event];
+    [super touchesMoved:touches withEvent:event];
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesEnded:touches withEvent:event];
 //    NSLog(@"formal");
-//}
+}
 /*****ここまで*****/
 
 @end

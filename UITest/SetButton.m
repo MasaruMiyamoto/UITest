@@ -175,7 +175,7 @@ UIImageView *img,
 - (void)move :(int)x :(int)y
 {
     
-    self.frame = CGRectMake(x, y, self.frame.size.width, self.frame.size.height);
+    self.frame = CGRectOffset(self.frame,x, y);
 //    btn1.frame = CGRectMake(x,y+during+during,side,side);
 //    btn2.frame = CGRectMake(x+during,y+during+during,side,side);
 //    btn3.frame = CGRectMake(x+during+during,y+during+during,side,side);
@@ -197,47 +197,36 @@ UIImageView *img,
     switch (a) {
         case 1:
             btn = [self deepLabelCopy:btn1];
-            btn.backgroundColor = [UIColor redColor];
             break;
         case 2:
             btn = [self deepLabelCopy:btn2];
-            btn.backgroundColor = [UIColor redColor];
             break;
         case 3:
             btn = [self deepLabelCopy:btn3];
-            btn.backgroundColor = [UIColor redColor];
             break;
         case 4:
             btn = [self deepLabelCopy:btn4];
-            btn.backgroundColor = [UIColor redColor];
             break;
         case 5:
             btn = [self deepLabelCopy:btn5];
-            btn.backgroundColor = [UIColor redColor];
             break;
         case 6:
             btn = [self deepLabelCopy:btn6];
-            btn.backgroundColor = [UIColor redColor];
             break;
         case 7:
             btn = [self deepLabelCopy:btn7];
-            btn.backgroundColor = [UIColor redColor];
             break;
         case 8:
             btn = [self deepLabelCopy:btn8];
-            btn.backgroundColor = [UIColor redColor];
             break;
         case 9:
             btn = [self deepLabelCopy:btn9];
-            btn.backgroundColor = [UIColor redColor];
             break;
         case 10:
             btn = [self deepLabelCopy:btn0];
-            btn.backgroundColor = [UIColor redColor];
             break;
         case 11:
             btn = [self deepLabelCopy:btn_m];
-            btn.backgroundColor = [UIColor redColor];
             break;
         case 12:
             img = [self deepImageCopy:del];
@@ -258,7 +247,9 @@ UIImageView *img,
     duplicateLabel.text = label.text;
     duplicateLabel.textAlignment = NSTextAlignmentCenter;
     duplicateLabel.font = [UIFont systemFontOfSize:50];
-//    NSLog(@"DEEP");
+    duplicateLabel.tag  = label.tag;
+    duplicateLabel.backgroundColor = [UIColor redColor];
+    //    NSLog(@"DEEP");
     
     return duplicateLabel;
 }
@@ -267,6 +258,7 @@ UIImageView *img,
 {
     UIImageView *duplicateImage = [[UIImageView alloc] initWithFrame:image.frame];
     duplicateImage.image = image.image;
+    duplicateImage.tag = image.tag;
     return duplicateImage;
 }
 
@@ -278,7 +270,10 @@ UIImageView *img,
 
 - (void)setBack:(UIView *)obj
 {
-    tmp = CGPointMake(self.frame.origin.x + obj.center.x, self.frame.origin.y + obj.center.y);
+//    tmp = CGPointMake(self.frame.origin.x + obj.center.x, self.frame.origin.y + obj.center.y);
+    
+    tmp = CGPointMake(obj.center.x, obj.center.y);
+    
 //    NSLog(@"%f",self.frame.origin.x);
 }
 
@@ -290,5 +285,137 @@ UIImageView *img,
     [UIView commitAnimations];
 }
 
+
+/*****タップ操作*****/
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [btn removeFromSuperview];
+    [super touchesBegan:touches withEvent:event];
+    UITouch *touch = [touches anyObject];
+    CGPoint location = [touch previousLocationInView:self];
+    
+//    NSLog(@"%ld",(long)touch.view.tag);
+//    NSLog(@"%f,%f",location.x,location.y);
+
+    btn = [self labelCopy:(int)touch.view.tag];
+    btn.center = CGPointMake(location.x, location.y);
+    [self addSubview:btn];
+    
+//    NSLog(@"view");
+
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesMoved:touches withEvent:event];
+    UITouch *touch = [touches anyObject];
+    CGPoint location = [touch locationInView:self];
+    
+    btn.center = CGPointMake(location.x, location.y);
+    
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesEnded:touches withEvent:event];
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSMutableArray *list = [appDelegate.toyBox objectForKey:@"list"];
+    for (NSString *str in list) {
+        [self isTrriger :str];
+    }
+    [self back];
+}
+
+/*****タップ操作　ここまで*****/
+
+- (void)isTrriger :(NSString *)str{
+    BOOL isCode = false;
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSMutableArray *fmember = [appDelegate.toyBox objectForKey:str];
+    for (UILabel *member in fmember){
+        
+        CGPoint convertStr = [self convertPoint:member.center fromView:[fmember objectAtIndex:0]];
+        
+//        NSLog(@"%@",str);
+//        NSLog(@"btn %@",NSStringFromCGRect(convertStr));
+//        NSLog(@"btn %@",NSStringFromCGRect(btn.frame));
+        
+        if(CGRectContainsPoint(btn.frame, convertStr)){
+            
+//            NSLog(@"In App");
+//            member.text = [NSString stringWithFormat:@"%@",btn.text];
+            if(member.tag != 4){
+//                NSLog(@"tag");
+                member.text = [self chengeMember:member.text :btn.tag];
+                
+                if(member.tag == 2){
+                    if([member.text hasPrefix:@"-"]){
+                        member.text = [member.text substringFromIndex:1];
+                        isCode = true;
+                    }
+                }
+                
+            }
+        }
+    }
+    if(isCode){
+        for (UILabel *member in fmember){
+            if (member.tag == 4 ){
+                if([member.text isEqualToString:@"+"]){
+                    member.text = @"-";
+                }else{
+                    member.text = @"+";
+                }
+            }
+        }
+    }
+}
+
+- (NSString *)chengeMember :(NSString *)x :(NSInteger)y{
+    NSString *a = [NSString stringWithFormat:@"%ld",(long)y];
+    
+    if(y == 10){
+        a = @"0";
+    }
+    
+    if(y == 11){
+        a = @"-";
+        if(![x hasPrefix:@"0"] && ![x hasPrefix:@"-"]){
+//            NSLog(@"1");
+            if([x isEqualToString:@""]){
+                return @"";
+            }
+            [btn removeFromSuperview];
+            return x = [@"-" stringByAppendingString:x];
+        }else if([x hasPrefix:@"-"]){
+//            NSLog(@"2");
+            [btn removeFromSuperview];
+            return [x substringFromIndex:1];
+        }else{
+//            NSLog(@"3");
+            return x;
+        }
+    }
+    
+    if(y == 12){
+        [btn removeFromSuperview];
+        return x = @"";
+    }
+    
+    if([x isEqualToString:@"0"] && y == 10){
+        return x;
+    }
+    
+    if([x hasPrefix:@"0"]){
+        x = [x stringByAppendingString:a];
+        [btn removeFromSuperview];
+        return [x substringFromIndex:1];
+    }
+    
+    [btn removeFromSuperview];
+    return [x stringByAppendingString:a];
+}
 
 @end

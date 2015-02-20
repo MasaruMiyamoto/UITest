@@ -17,6 +17,7 @@ UIView *oya;
 ViewClass *formula1;
 ViewClass *formula2;
 SetButton *button;
+SelectButtons *selects;
 
 UIView *btn;
 
@@ -26,6 +27,7 @@ UIView *btn;
      //Do any additional setup after loading the view, typically from a nib.
     
     [self initLabels];
+    [self initSelects];
     [self initButtons];
     
 }
@@ -36,64 +38,19 @@ UIView *btn;
     // Dispose of any resources that can be recreated.
 }
 
-/*****タッチイベント*****/
-/*****基本的にこれが更新*****/
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    UITouch *touch = [touches anyObject];
-    
-    CGPoint location = [touch previousLocationInView:self.view];
-    [super touchesBegan:touches withEvent:event];
-    
-//    NSLog(@"%ld",(long)touch.view.tag);
-//    NSLog(@"%f,%f",location.x,location.y);
-    
-    if([event touchesForView:formula1] != nil){
-        NSLog(@"oya");
-    }
-    
-    
-    btn = [button labelCopy:(int)touch.view.tag];
-    btn.center = CGPointMake(location.x, location.y);
-    [self.view addSubview:btn];
-    
-//    NSLog(@"view");
-
-}
-
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    UITouch *touch = [touches anyObject];
-    CGPoint location = [touch locationInView:self.view];
-    [super touchesMoved:touches withEvent:event];
-    
-    btn.center = CGPointMake(location.x, location.y);
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [super touchesEnded:touches withEvent:event];
-    if (CGRectIntersectsRect(btn.frame, formula1.A.frame)) {
-        NSLog(@"OK");
-    }
-    [button back];
-//    [btn removeFromSuperview];
-}
-
 
 /*****初期設定*****/
 - (void)initLabels
 {
     //ラベルを貼付けるViewを作成
     oya = [[UIView alloc]init];
-    oya.frame = CGRectMake(0, 0, 1024, 1200);
-//    oya.frame = CGRectMake(0, 0, 700, 768);
+//    oya.frame = CGRectMake(0, 0, 1024, 1200);
+    oya.frame = CGRectMake(0, 0, 1024, 768);
     oya.backgroundColor = [UIColor yellowColor];
 
     formula1 = [[ViewClass alloc] initWithPosition:91:123];
     //oya に　formula1　を追加、表示
     [formula1 setVariable:6 :2 :-10];
-//    formula1.userInteractionEnabled = YES;
     [oya addSubview:formula1];
     [self.view addSubview:oya];
     
@@ -103,7 +60,20 @@ UIView *btn;
     [oya addSubview:formula2];
     [self.view addSubview:oya];
     
-//    [self initScroller:oya];
+    /*****おもちゃ箱に式のデータを保存*****/
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    
+    NSMutableArray *f1 = [NSMutableArray arrayWithObjects:formula1.A ,formula1.Code, formula1.B, formula1.E, nil];
+    [appDelegate.toyBox setObject:f1 forKey:@"formula1"];
+    
+    NSMutableArray *f2 = [NSMutableArray arrayWithObjects:formula2.A , formula2.Code, formula2.B, formula2.E, nil];
+    [appDelegate.toyBox setObject:f2 forKey:@"formula2"];
+    
+    NSMutableArray *list = [NSMutableArray arrayWithObjects:@"formula1", @"formula2", nil];
+    [appDelegate.toyBox setObject:list forKey:@"list"];
+    /**********/
+    
+    [self initScroller:oya];
 }
 
 - (void)initButtons
@@ -111,14 +81,10 @@ UIView *btn;
     /*****ボタンの設置*****/
     // root viewに直接貼付ける
     
-//    buField = [[UIView alloc] initWithFrame:CGRectMake(713, 165, 228, 386)];
-//    buField.backgroundColor = [UIColor greenColor];
-    
     button = [[SetButton alloc] init];
     [button move:713 :165];
     [self.view addSubview:button];
-//    [buField addSubview:button];
-//    [self.view addSubview:buField];
+
     /**********/
 }
 
@@ -133,7 +99,36 @@ UIView *btn;
     [self.view addSubview:sv];
     /**********/
 }
+
+-(void)hoge:(id)sender
+{
+    NSLog(@"hoge");
+}
+
+-(void)startAction :(id)sender
+{
+    NSLog(@"start");
+    if(selects.Sel1.alpha == 1.0){
+        NSLog(@"Sel1");
+        [self scrollUpDate];
+        [self upDate];
+    }else if(selects.Sel2.alpha == 1.0){
+        NSLog(@"Sel2");
+    }else{
+        NSLog(@"Both");
+    }
+}
+
+
+- (void)initSelects
+{
+    selects = [[SelectButtons alloc] initWithPosition: 161: 380];
+    [selects btnPushed:self];
+    [oya addSubview:selects];
+    
+}
 /**********/
+
 
 //変更点の更新
 - (void)upDate
@@ -147,4 +142,6 @@ UIView *btn;
 {
     oya.frame = CGRectMake(0, 0, 1024, oya.frame.size.height + 768);
 }
+
+
 @end
