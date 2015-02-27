@@ -15,24 +15,26 @@
 @implementation ViewClass
 
 //クラス内に変数を定義
-UILabel* A;
-UILabel* B;
-UILabel* E;
-UILabel* X;
-UILabel* Y;
-UILabel* Equal;
-UILabel* Code;
+UILabel *A;
+UILabel *B;
+UILabel *E;
+UILabel *X;
+UILabel *Y;
+UILabel *Equal;
+UILabel *Code;
+UILabel *Mul;
 
 //@propertyの設定を実装
 @synthesize A;
 @synthesize B;
 @synthesize E;
+
 @synthesize X;
 @synthesize Y;
 @synthesize Equal;
 @synthesize Code;
 
-
+@synthesize Mul;
 
 //クラスの初期化メソッド  
 - (id)init
@@ -58,11 +60,17 @@ UILabel* Code;
     return self;
 }
 
-
+- (void)initMul
+{
+    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, width + 100, height);
+    A.tag = 0;
+    [self setMul];
+    [self setMulPosition];
+    
+}
 
 -(void)setLabel
 {
-    
     A = [[UILabel alloc] init];
     A.textAlignment = NSTextAlignmentCenter;
     A.font = [UIFont systemFontOfSize:50];
@@ -70,7 +78,6 @@ UILabel* Code;
     A.adjustsFontSizeToFitWidth = YES;
     A.backgroundColor = [UIColor colorWithRed:0.2 green:0.8 blue:0.5 alpha:1.0];
     A.minimumScaleFactor = 20/50;
-    
     A.tag = 1;
     [self addSubview:A];
     
@@ -131,6 +138,24 @@ UILabel* Code;
     Code.text = @"+";
 }
 
+-(void)setMul
+{
+    Mul = [[UILabel alloc] init];
+    Mul.textAlignment = NSTextAlignmentCenter;
+    Mul.font = [UIFont systemFontOfSize:50];
+    Mul.adjustsFontSizeToFitWidth = YES;
+    Mul.backgroundColor = [UIColor colorWithRed:0.2 green:0.8 blue:0.5 alpha:1.0];
+    Mul.minimumScaleFactor = 20/50;
+    Mul.tag = 5;
+    Mul.text = @"";
+    [self addSubview:Mul];
+}
+
+-(void)setMulPosition
+{
+    Mul.frame = CGRectMake(E.frame.origin.x + 100, 0, size, size);
+}
+
 -(void)setPosition
 {
     A.frame = CGRectMake(0, 0, 80, 80);
@@ -147,12 +172,25 @@ UILabel* Code;
 {
     self.frame = CGRectOffset(self.frame, x, y);
 }
+
 -(void)setVariable:(int)a :(int)b :(int)e
 {
+    _ValA = a;
+    _ValB = b;
+    _ValE = e;
+    
     A.text = [NSString stringWithFormat:@"%d",a];
-    B.text = [NSString stringWithFormat:@"%d",b];
     E.text = [NSString stringWithFormat:@"%d",e];
     
+    if(b>0){
+        Code.text = @"+";
+        B.text = [NSString stringWithFormat:@"%d",b];
+    }else if(b<0){
+        Code.text = @"-";
+        B.text = [NSString stringWithFormat:@"%d",-b];
+    }
+    
+//    NSLog(@"a = %d, b = %d, e = %d",_ValA,_ValB,_ValE);
 }
 
 - (void)canMoving:(NSString *)str
@@ -178,6 +216,8 @@ UILabel* Code;
         B.userInteractionEnabled = NO;
     }
 }
+
+
 /*****タッチイベント*****/
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -196,7 +236,7 @@ UILabel* Code;
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    UITouch *touch = [touches anyObject];
+//    UITouch *touch = [touches anyObject];
 //    CGPoint location = [touch locationInView:self];
     [super touchesMoved:touches withEvent:event];
 }
@@ -208,4 +248,31 @@ UILabel* Code;
 }
 /*****ここまで*****/
 
+
+-(void)upDate
+{
+    
+//    NSLog(@"update");
+//    NSLog(@"valA = %d",_ValA);
+    int mul;
+    
+    if([Mul.text isEqualToString:@""]){
+        mul = 1;
+    }else if([Mul.text isEqualToString:@"-"]){
+        mul = -1;
+    }else{
+        mul = (int)[Mul.text integerValue];
+    }
+    
+    A.text = [NSString stringWithFormat:@"%d",_ValA*mul];
+    E.text = [NSString stringWithFormat:@"%d",_ValE*mul];
+    
+    if(_ValB*mul>=0){
+        Code.text = @"+";
+        B.text = [NSString stringWithFormat:@"%d",_ValB*mul];
+    }else if(_ValB*mul<0){
+        Code.text = @"-";
+        B.text = [NSString stringWithFormat:@"%d",-_ValB*mul];
+    }
+}
 @end

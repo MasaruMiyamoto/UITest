@@ -17,6 +17,7 @@
 
 - (void) move :(int)x :(int)y;
 - (void) back;
+- (void)setUpdate:(BOOL)flag;
 - (UILabel *)labelCopy :(int)a;
 
 @end

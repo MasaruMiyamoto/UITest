@@ -13,15 +13,26 @@
 @interface ViewClass : UIView
 
 //外部参照できるようにする
-@property(nonatomic, readonly)UILabel* A;
-@property(nonatomic, readonly)UILabel* B;
-@property(nonatomic, readonly)UILabel* E;
-@property(nonatomic, readonly)UILabel* X;
-@property(nonatomic, readonly)UILabel* Y;
-@property(nonatomic, readonly)UILabel* Equal;
-@property(nonatomic, readonly)UILabel* Code;
+@property(nonatomic, readonly)UILabel *A;
+@property(nonatomic, readonly)UILabel *B;
+@property(nonatomic, readonly)UILabel *E;
 
--(id)initWithPosition:(int)x :(int)y;
--(void)setVariable:(int)a :(int)b :(int)e;
+@property(nonatomic, readonly)UILabel *X;
+@property(nonatomic, readonly)UILabel *Y;
+@property(nonatomic, readonly)UILabel *Equal;
+@property(nonatomic, readonly)UILabel *Code;
+
+@property(nonatomic, readonly)UILabel *Mul;
+
+@property(nonatomic, readonly)int ValA;
+@property(nonatomic, readonly)int ValB;
+@property(nonatomic, readonly)int ValE;
+
+- (id)initWithPosition:(int)x :(int)y;
+- (void)initMul;
+- (void)setVariable:(int)a :(int)b :(int)e;
+- (void)canMoving :(NSString *)str;
+- (void)cannotMoving :(NSString *)str;
+- (void)upDate;
 
 @end

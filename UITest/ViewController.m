@@ -14,12 +14,34 @@
 
 @implementation ViewController
 UIView *oya;
+UIScrollView *sv;
+
 ViewClass *formula1;
 ViewClass *formula2;
 SetButton *button;
 SelectButtons *selects;
 
+CGPoint offset;
+
 UIView *btn;
+
+int a1 = 6;
+int b1 = -2;
+int e1 = -10;
+
+int a2 = 2;
+int b2 = 6;
+int e2 = 2;
+
+int fa1;
+int fb1;
+int fe1;
+
+int fa2;
+int fb2;
+int fe2;
+
+
 
 - (void)viewDidLoad
 {
@@ -44,19 +66,18 @@ UIView *btn;
 {
     //ラベルを貼付けるViewを作成
     oya = [[UIView alloc]init];
-//    oya.frame = CGRectMake(0, 0, 1024, 1200);
     oya.frame = CGRectMake(0, 0, 1024, 768);
     oya.backgroundColor = [UIColor yellowColor];
 
     formula1 = [[ViewClass alloc] initWithPosition:91:123];
     //oya に　formula1　を追加、表示
-    [formula1 setVariable:6 :2 :-10];
+    [formula1 setVariable:a1 :b1 :e1];
     [oya addSubview:formula1];
     [self.view addSubview:oya];
     
     formula2 = [[ViewClass alloc] initWithPosition:91:252];
     //oya に　formula2　を追加、表示
-    [formula2 setVariable:2 :6 :2];
+    [formula2 setVariable:a2 :b2 :e2];
     [oya addSubview:formula2];
     [self.view addSubview:oya];
     
@@ -72,6 +93,7 @@ UIView *btn;
     NSMutableArray *list = [NSMutableArray arrayWithObjects:@"formula1", @"formula2", nil];
     [appDelegate.toyBox setObject:list forKey:@"list"];
     /**********/
+    [button setUpdate:false];
     
     [self initScroller:oya];
 }
@@ -88,44 +110,75 @@ UIView *btn;
     /**********/
 }
 
-- (void)initScroller :(UIView *)oya
+- (void)initScroller :(UIView *)view
 {
     /*****スクロールの設定*****/
-    UIScrollView *sv = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+    sv = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     //    sv.backgroundColor = [UIColor cyanColor];
     sv.bounces = NO;
-    [sv addSubview:oya];
-    sv.contentSize = oya.bounds.size;
+    [sv addSubview:view];
+    sv.contentSize = view.bounds.size;
     [self.view addSubview:sv];
     /**********/
 }
 
--(void)hoge:(id)sender
+-(void)reStart:(id)sender
 {
-    NSLog(@"hoge");
+    [oya removeFromSuperview];
+    [button removeFromSuperview];
+    [self initLabels];
+    [self initButtons];
+    [self initSelects];
+    NSLog(@"ひとがゴミのようだ！！！");
 }
 
 -(void)startAction :(id)sender
 {
-    NSLog(@"start");
+//    NSLog(@"start");
     if(selects.Sel1.alpha == 1.0){
-        NSLog(@"Sel1");
+//        NSLog(@"Sel1");
+        [self setVal];
         [self scrollUpDate];
+        [self secondLabels];
         [self upDate];
+        
+        [sv setContentOffset:offset animated:YES];
+        [selects dontSelects:self];
+        
     }else if(selects.Sel2.alpha == 1.0){
-        NSLog(@"Sel2");
+//        NSLog(@"Sel2");
     }else{
-        NSLog(@"Both");
+//        NSLog(@"Both");
     }
+    
 }
 
-
+- (void)setVal
+{
+    fa1 = (int)[formula1.A.text integerValue];
+    if([formula1.Code.text isEqual:@"+"]){
+//        NSLog(@"+");
+        fb1 = (int)[formula1.B.text integerValue];
+    }else{
+        fb1 = -(int)[formula1.B.text integerValue];
+    }
+    fe1 = (int)[formula1.E.text integerValue];
+    
+    fa2 = (int)[formula2.A.text integerValue];
+    if([formula2.Code.text isEqual:@"+"]){
+//        NSLog(@"+");
+        fb2 = (int)[formula2.B.text integerValue];
+    }else{
+        fb2 = -(int)[formula2.B.text integerValue];
+    }
+    fe2 = (int)[formula2.E.text integerValue];
+    
+}
 - (void)initSelects
 {
     selects = [[SelectButtons alloc] initWithPosition: 161: 380];
     [selects btnPushed:self];
     [oya addSubview:selects];
-    
 }
 /**********/
 
@@ -135,13 +188,53 @@ UIView *btn;
 {
     [self.view addSubview:oya];
     [self initScroller:oya];
-//    [self.view addSubview:buField];
+    [self.view addSubview:button];
 }
 
 - (void)scrollUpDate
 {
+    offset.y = oya.frame.size.height;
     oya.frame = CGRectMake(0, 0, 1024, oya.frame.size.height + 768);
 }
 
 
+- (void)secondLabels
+{
+    formula1 = [[ViewClass alloc] initWithPosition:91:123 + 768];
+    //oya に　formula1　を追加、表示
+    [formula1 setVariable: fa1: fb1: fe1];
+    [formula1 initMul];
+    [oya addSubview:formula1];
+    [self.view addSubview:oya];
+    
+//    NSLog(@"-------------");
+    formula2 = [[ViewClass alloc] initWithPosition:91:252 + 768];
+    //oya に　formula2　を追加、表示
+    [formula2 setVariable: fa2: fb2: fe2];
+    [formula2 initMul];
+    [oya addSubview:formula2];
+    [self.view addSubview:oya];
+    
+    /*****おもちゃ箱に式のデータを保存*****/
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    [appDelegate initToyBox];
+    
+    NSMutableArray *f1 = [NSMutableArray arrayWithObjects:formula1.A, formula1.Mul, nil];
+    [appDelegate.toyBox setObject:f1 forKey:@"formula1"];
+    
+    NSMutableArray *f2 = [NSMutableArray arrayWithObjects:formula2.A, formula2.Mul, nil];
+    [appDelegate.toyBox setObject:f2 forKey:@"formula2"];
+    
+    NSMutableArray *list = [NSMutableArray arrayWithObjects:@"formula1", @"formula2", nil];
+    [appDelegate.toyBox setObject:list forKey:@"list"];
+    
+    NSMutableArray *f = [NSMutableArray arrayWithObjects:formula1, formula2, nil];
+    [appDelegate.toyBox setObject:f forKey:@"formula"];
+    
+    appDelegate.View = self;
+    [button setUpdate:true];
+    /**********/
+    
+//    [self initScroller:oya];
+}
 @end

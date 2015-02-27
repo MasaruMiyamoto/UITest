@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "ViewClass.h"
+#import "JudgeClass.h"
 
 @interface AppDelegate ()
 
@@ -14,16 +16,38 @@
 
 @implementation AppDelegate
 
+JudgeClass *Jclass;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.toyBox = [[NSMutableDictionary alloc] init];
+    Jclass = [[JudgeClass alloc] init];
     return YES;
 }
 
 - (void)initToyBox{
     self.toyBox = [[NSMutableDictionary alloc] init];
 }
+
+- (void)upDate
+{
+//    NSLog(@"update");
+    NSMutableArray *member = [self.toyBox objectForKey:@"formula"];
+    for (ViewClass *fs in member) {
+        [fs upDate];
+//        NSLog(@"for in");
+    }
+    
+    NSLog(@"for out");
+    if([Jclass judgeCheck:member[0] :member[1]] != 0){
+        NSLog(@"hoge");
+        [Jclass setPosition:46 :252];
+        
+    }
+    
+}
+
+
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

@@ -32,6 +32,8 @@ UILabel *btn,
 UIImageView *img,
             *del;
 
+bool IsUpdate;
+
 @synthesize btn;
 @synthesize img;
 @synthesize tmp;
@@ -285,6 +287,11 @@ UIImageView *img,
     [UIView commitAnimations];
 }
 
+- (void)setUpdate:(BOOL)flag
+{
+    IsUpdate = flag;
+}
+
 
 /*****タップ操作*****/
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -322,9 +329,13 @@ UIImageView *img,
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     NSMutableArray *list = [appDelegate.toyBox objectForKey:@"list"];
     for (NSString *str in list) {
+//        NSLog(@"Throgh");
         [self isTrriger :str];
     }
     [self back];
+    if(IsUpdate){
+        [appDelegate upDate];
+    }
 }
 
 /*****タップ操作　ここまで*****/
@@ -339,13 +350,16 @@ UIImageView *img,
         CGPoint convertStr = [self convertPoint:member.center fromView:[fmember objectAtIndex:0]];
         
 //        NSLog(@"%@",str);
-//        NSLog(@"btn %@",NSStringFromCGRect(convertStr));
+//        NSLog(@"str %@",NSStringFromCGPoint(convertStr));
 //        NSLog(@"btn %@",NSStringFromCGRect(btn.frame));
         
         if(CGRectContainsPoint(btn.frame, convertStr)){
             
 //            NSLog(@"In App");
 //            member.text = [NSString stringWithFormat:@"%@",btn.text];
+            if(member.tag == 0){
+                break;
+            }
             if(member.tag != 4){
 //                NSLog(@"tag");
                 member.text = [self chengeMember:member.text :btn.tag];
@@ -384,9 +398,6 @@ UIImageView *img,
         a = @"-";
         if(![x hasPrefix:@"0"] && ![x hasPrefix:@"-"]){
 //            NSLog(@"1");
-            if([x isEqualToString:@""]){
-                return @"";
-            }
             [btn removeFromSuperview];
             return x = [@"-" stringByAppendingString:x];
         }else if([x hasPrefix:@"-"]){

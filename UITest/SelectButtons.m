@@ -20,7 +20,6 @@ UIButton *Sel2;
 UIButton *Random;
 UIButton *Start;
 
-
 - (id)init
 {
     self = [super init];
@@ -88,7 +87,7 @@ UIButton *Start;
     Random.frame = CGRectOffset(Random.frame, 75, 0);
     Sel1.frame = CGRectOffset(Sel1.frame, 0, 100);
     Sel2.frame = CGRectOffset(Sel2.frame, 150, 100);
-    Start.frame = CGRectOffset(Start.frame, 30, 200);
+    Start.frame = CGRectOffset(Start.frame, 25, 200);
 }
 
 - (void)move :(int)x :(int)y
@@ -118,7 +117,17 @@ UIButton *Start;
 
 -(void)randomAction :(id)sender
 {
-        NSLog(@"random");
+//        NSLog(@"random");
 }
+
+- (void)dontSelects:(id)mainView
+{
+    Sel1.userInteractionEnabled = NO;
+    Sel2.userInteractionEnabled = NO;
+    Random.userInteractionEnabled = NO;
+    [Start setTitle:@"やりなおし" forState:UIControlStateNormal];
+    [Start addTarget:mainView action:@selector(reStart:) forControlEvents:UIControlEventTouchUpInside];
+}
+
 
 @end
