@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class ViewController;
 @class ViewClass;
 @class JudgeClass;
 

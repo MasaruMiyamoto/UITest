@@ -29,7 +29,7 @@
 @property(nonatomic, readonly)int ValE;
 
 - (id)initWithPosition:(int)x :(int)y;
-- (void)initMul;
+- (void)chengeMode:(int)mode;
 - (void)setVariable:(int)a :(int)b :(int)e;
 - (void)canMoving :(NSString *)str;
 - (void)cannotMoving :(NSString *)str;

@@ -13,13 +13,19 @@
 @end
 
 @implementation ViewController
+
+
 UIView *oya;
 UIScrollView *sv;
+
+@synthesize oya;
 
 ViewClass *formula1;
 ViewClass *formula2;
 SetButton *button;
 SelectButtons *selects;
+
+AppDelegate *appDelegate;
 
 CGPoint offset;
 
@@ -48,6 +54,9 @@ int fe2;
     [super viewDidLoad];
      //Do any additional setup after loading the view, typically from a nib.
     
+    appDelegate = [[UIApplication sharedApplication] delegate];
+    appDelegate.View = self;
+    
     [self initLabels];
     [self initSelects];
     [self initButtons];
@@ -67,22 +76,24 @@ int fe2;
     //ラベルを貼付けるViewを作成
     oya = [[UIView alloc]init];
     oya.frame = CGRectMake(0, 0, 1024, 768);
-    oya.backgroundColor = [UIColor yellowColor];
+//    oya.backgroundColor = [UIColor yellowColor];
 
     formula1 = [[ViewClass alloc] initWithPosition:91:123];
     //oya に　formula1　を追加、表示
     [formula1 setVariable:a1 :b1 :e1];
+    [formula1 chengeMode:1];
     [oya addSubview:formula1];
-    [self.view addSubview:oya];
+//    [self.view addSubview:oya];
     
     formula2 = [[ViewClass alloc] initWithPosition:91:252];
     //oya に　formula2　を追加、表示
     [formula2 setVariable:a2 :b2 :e2];
+    [formula2 chengeMode:1];
     [oya addSubview:formula2];
-    [self.view addSubview:oya];
+//    [self.view addSubview:oya];
     
     /*****おもちゃ箱に式のデータを保存*****/
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    appDelegate = [[UIApplication sharedApplication] delegate];
     
     NSMutableArray *f1 = [NSMutableArray arrayWithObjects:formula1.A ,formula1.Code, formula1.B, formula1.E, nil];
     [appDelegate.toyBox setObject:f1 forKey:@"formula1"];
@@ -198,25 +209,28 @@ int fe2;
 }
 
 
+/**********/
+/***** 2ページ目の動作 *****/
+
 - (void)secondLabels
 {
-    formula1 = [[ViewClass alloc] initWithPosition:91:123 + 768];
+    formula1 = [[ViewClass alloc] initWithPosition: 91: 123 + 768];
     //oya に　formula1　を追加、表示
     [formula1 setVariable: fa1: fb1: fe1];
-    [formula1 initMul];
+    [formula1 chengeMode:2];
     [oya addSubview:formula1];
-    [self.view addSubview:oya];
+//    [self.view addSubview:oya];
     
 //    NSLog(@"-------------");
-    formula2 = [[ViewClass alloc] initWithPosition:91:252 + 768];
+    formula2 = [[ViewClass alloc] initWithPosition: 91: 252 + 768];
     //oya に　formula2　を追加、表示
     [formula2 setVariable: fa2: fb2: fe2];
-    [formula2 initMul];
+    [formula2 chengeMode:2];
     [oya addSubview:formula2];
     [self.view addSubview:oya];
     
     /*****おもちゃ箱に式のデータを保存*****/
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    appDelegate = [[UIApplication sharedApplication] delegate];
     [appDelegate initToyBox];
     
     NSMutableArray *f1 = [NSMutableArray arrayWithObjects:formula1.A, formula1.Mul, nil];

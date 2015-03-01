@@ -16,12 +16,14 @@
 
 @implementation AppDelegate
 
+@synthesize View;
 JudgeClass *Jclass;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.toyBox = [[NSMutableDictionary alloc] init];
     Jclass = [[JudgeClass alloc] init];
+    
     return YES;
 }
 
@@ -38,11 +40,15 @@ JudgeClass *Jclass;
 //        NSLog(@"for in");
     }
     
-    NSLog(@"for out");
+//    NSLog(@"for out");
     if([Jclass judgeCheck:member[0] :member[1]] != 0){
-        NSLog(@"hoge");
-        [Jclass setPosition:46 :252];
+//        NSLog(@"flag = %d",[Jclass judgeCheck:member[0] :member[1]]);
+//        NSLog(@"hoge");
+        [Jclass setPosition:10 :252];
+        [View.view addSubview:Jclass];
         
+    }else{
+        [Jclass resetPosition];
     }
     
 }

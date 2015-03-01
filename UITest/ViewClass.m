@@ -11,6 +11,7 @@
 #define size 80
 #define width 440
 #define height 80
+#define chooseColor colorWithRed:0.2 green:0.8 blue:0.5 alpha:1.0
 
 @implementation ViewClass
 
@@ -50,7 +51,7 @@ UILabel *Mul;
 {
     self = [super init];
     self.frame = CGRectMake(x, y, width, height);
-    self.backgroundColor = [UIColor cyanColor];
+//    self.backgroundColor = [UIColor cyanColor];
     [self setLabel];
     [self setPosition];
     
@@ -64,7 +65,7 @@ UILabel *Mul;
 {
     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, width + 100, height);
     A.tag = 0;
-    [self setMul];
+    [self mulMode];
     [self setMulPosition];
     
 }
@@ -76,9 +77,7 @@ UILabel *Mul;
     A.font = [UIFont systemFontOfSize:50];
     A.frame = CGRectMake(0, 0, size, size);
     A.adjustsFontSizeToFitWidth = YES;
-    A.backgroundColor = [UIColor colorWithRed:0.2 green:0.8 blue:0.5 alpha:1.0];
     A.minimumScaleFactor = 20/50;
-    A.tag = 1;
     [self addSubview:A];
     
     
@@ -86,18 +85,14 @@ UILabel *Mul;
     B.textAlignment = NSTextAlignmentCenter;
     B.font = [UIFont systemFontOfSize:50];
     B.adjustsFontSizeToFitWidth = YES;
-    B.backgroundColor = [UIColor colorWithRed:0.2 green:0.8 blue:0.5 alpha:1.0];
     B.minimumScaleFactor = 20/50;
-    B.tag = 2;
     [self addSubview:B];
     
     E = [[UILabel alloc] init];
     E.textAlignment = NSTextAlignmentCenter;
     E.font = [UIFont systemFontOfSize:50];
     E.adjustsFontSizeToFitWidth = YES;
-    E.backgroundColor = [UIColor colorWithRed:0.2 green:0.8 blue:0.5 alpha:1.0];
     E.minimumScaleFactor = 20/50;
-    E.tag = 3;
     [self addSubview:E];
     
     X = [[UILabel alloc] init];
@@ -126,7 +121,6 @@ UILabel *Mul;
     Code.font = [UIFont systemFontOfSize:45];
     Code.adjustsFontSizeToFitWidth = YES;
     Code.minimumScaleFactor = 20/50;
-    Code.tag = 4;
     [self addSubview:Code];
     
     A.text = @"A";
@@ -138,18 +132,94 @@ UILabel *Mul;
     Code.text = @"+";
 }
 
--(void)setMul
+/***** モード変更 *****/
+
+//外部参照による選択
+-(void)chengeMode:(int)mode
+{
+    switch (mode) {
+        case 1:
+            [self enterMode];
+            break;
+            
+        case 2:
+            [self initMul];
+            break;
+            
+        case 31:
+            [self culMode:YES];
+            break;
+            
+        case 32:
+            [self culMode:NO];
+            break;
+            
+        default:
+            NSLog(@"No");
+            break;
+    }
+}
+
+//入力モード
+- (void)enterMode
+{
+    A.tag = 1;
+    B.tag = 2;
+    E.tag = 3;
+    Code.tag = 4;
+    
+    A.backgroundColor = [UIColor chooseColor];
+    B.backgroundColor = [UIColor chooseColor];
+    E.backgroundColor = [UIColor chooseColor];
+    
+}
+
+
+//倍数モード
+-(void)mulMode
 {
     Mul = [[UILabel alloc] init];
     Mul.textAlignment = NSTextAlignmentCenter;
     Mul.font = [UIFont systemFontOfSize:50];
     Mul.adjustsFontSizeToFitWidth = YES;
-    Mul.backgroundColor = [UIColor colorWithRed:0.2 green:0.8 blue:0.5 alpha:1.0];
     Mul.minimumScaleFactor = 20/50;
-    Mul.tag = 5;
     Mul.text = @"";
+    
+    A.tag = 0;
+    Mul.tag = 5;
+    
+    Mul.backgroundColor = [UIColor chooseColor];
+    
     [self addSubview:Mul];
 }
+
+//筆算モード
+- (void) culMode :(BOOL)chenge
+{
+    A.text = @"";
+    Code.text =@"";
+    B.text = @"";
+    E.text = @"";
+    
+    E.backgroundColor = [UIColor chooseColor];
+    E.tag = 3;
+    
+    if(chenge){
+        //yが残る
+        X.text = @"";
+        B.backgroundColor = [UIColor chooseColor];
+        B.tag = 2;
+    }else{
+        //xが残る
+        Y.text = @"";
+        A.backgroundColor = [UIColor chooseColor];
+        A.tag = 1;
+    }
+    
+}
+
+/**********/
+
 
 -(void)setMulPosition
 {

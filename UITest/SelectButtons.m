@@ -32,7 +32,7 @@ UIButton *Start;
 {
     self = [super init];
     self.frame = CGRectMake(0, 0, width*2, height*3 + 70);
-    self.backgroundColor = [UIColor whiteColor];
+//    self.backgroundColor = [UIColor whiteColor];
     [self setSelects];
     [self move:x :y];
     return self;

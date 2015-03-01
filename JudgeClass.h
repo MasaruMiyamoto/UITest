@@ -11,7 +11,8 @@
 
 @interface JudgeClass : UIView
 
--(void)setPosition:(int)x :(int)y;
+- (void)setPosition:(int)x :(int)y;
+- (void)resetPosition;
 - (int)judgeCheck:(ViewClass *)f1 :(ViewClass *)f2;
 
 @end

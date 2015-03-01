@@ -43,7 +43,7 @@ bool IsUpdate;
 {
     self = [super init];
     self.frame = CGRectMake(0, 0, side + during*2, side+during*4);
-    self.backgroundColor = [UIColor redColor];
+//    self.backgroundColor = [UIColor redColor];
     
     btn1 = [[UILabel alloc] init];
     btn1.userInteractionEnabled = YES;
@@ -250,7 +250,7 @@ bool IsUpdate;
     duplicateLabel.textAlignment = NSTextAlignmentCenter;
     duplicateLabel.font = [UIFont systemFontOfSize:50];
     duplicateLabel.tag  = label.tag;
-    duplicateLabel.backgroundColor = [UIColor redColor];
+//    duplicateLabel.backgroundColor = [UIColor redColor];
     //    NSLog(@"DEEP");
     
     return duplicateLabel;
@@ -335,6 +335,7 @@ bool IsUpdate;
     [self back];
     if(IsUpdate){
         [appDelegate upDate];
+        [appDelegate.View.view bringSubviewToFront:btn];
     }
 }
 

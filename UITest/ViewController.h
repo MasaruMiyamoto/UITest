@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
 #import "ViewClass.h"
 #import "SetButton.h"
 #import "SelectButtons.h"
 
 @interface ViewController : UIViewController
+
+@property(nonatomic, readonly)UIView *oya;
 
 
 @end
