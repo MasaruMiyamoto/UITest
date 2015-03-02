@@ -55,7 +55,6 @@ int fe2;
      //Do any additional setup after loading the view, typically from a nib.
     
     appDelegate = [[UIApplication sharedApplication] delegate];
-    appDelegate.View = self;
     
     [self initLabels];
     [self initSelects];

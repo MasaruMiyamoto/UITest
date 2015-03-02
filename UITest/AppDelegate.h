@@ -16,7 +16,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (retain, nonatomic) NSMutableDictionary *toyBox;
-@property (retain, nonatomic) UIViewController *View;
+@property (retain, nonatomic) ViewController *View;
 
 - (void)initToyBox;
 - (void)upDate;

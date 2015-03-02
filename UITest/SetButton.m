@@ -14,6 +14,8 @@
 #define during 79
 #define lenge 30
 
+#define custom colorWithRed:0.95 green:0.9 blue:0.0 alpha:1.0
+
 @implementation SetButton
 
 UILabel *btn,
@@ -51,7 +53,7 @@ bool IsUpdate;
     btn1.font = [UIFont systemFontOfSize:50];
     btn1.frame = CGRectMake(locx,locy+during+during,side,side);
     btn1.text = @"1";
-    btn1.backgroundColor = [UIColor colorWithRed:0.95 green:0.9 blue:0.0 alpha:1.0];
+    btn1.backgroundColor = [UIColor custom];
     [self addSubview:btn1];
     
     btn2 = [[UILabel alloc] init];
@@ -60,7 +62,7 @@ bool IsUpdate;
     btn2.font = [UIFont systemFontOfSize:50];
     btn2.frame = CGRectMake(locx+during,locy+during+during,side,side);
     btn2.text = @"2";
-    btn2.backgroundColor = [UIColor colorWithRed:0.95 green:0.9 blue:0.0 alpha:1.0];
+    btn2.backgroundColor = [UIColor custom];
     [self addSubview:btn2];
     
     btn3 = [[UILabel alloc] init];
@@ -69,7 +71,7 @@ bool IsUpdate;
     btn3.font = [UIFont systemFontOfSize:50];
     btn3.frame = CGRectMake(locx+during+during,locy+during+during,side,side);
     btn3.text = @"3";
-    btn3.backgroundColor = [UIColor colorWithRed:0.95 green:0.9 blue:0.0 alpha:1.0];
+    btn3.backgroundColor = [UIColor custom];
     [self addSubview:btn3];
     
     btn4 = [[UILabel alloc] init];
@@ -78,7 +80,7 @@ bool IsUpdate;
     btn4.font = [UIFont systemFontOfSize:50];
     btn4.frame = CGRectMake(locx,locy+during,side,side);
     btn4.text = @"4";
-    btn4.backgroundColor = [UIColor colorWithRed:0.95 green:0.9 blue:0.0 alpha:1.0];
+    btn4.backgroundColor = [UIColor custom];
     [self addSubview:btn4];
     
     btn5 = [[UILabel alloc] init];
@@ -87,7 +89,7 @@ bool IsUpdate;
     btn5.font = [UIFont systemFontOfSize:50];
     btn5.frame = CGRectMake(locx+during,locy+during,side,side);
     btn5.text = @"5";
-    btn5.backgroundColor = [UIColor colorWithRed:0.95 green:0.9 blue:0.0 alpha:1.0];
+    btn5.backgroundColor = [UIColor custom];
     [self addSubview:btn5];
     
     btn6 = [[UILabel alloc] init];
@@ -96,7 +98,7 @@ bool IsUpdate;
     btn6.font = [UIFont systemFontOfSize:50];
     btn6.frame = CGRectMake(locx+during+during,locy+during,side,side);
     btn6.text = @"6";
-    btn6.backgroundColor = [UIColor colorWithRed:0.95 green:0.9 blue:0.0 alpha:1.0];
+    btn6.backgroundColor = [UIColor custom];
     [self addSubview:btn6];
     
     btn7 = [[UILabel alloc] init];
@@ -105,7 +107,7 @@ bool IsUpdate;
     btn7.font = [UIFont systemFontOfSize:50];
     btn7.frame = CGRectMake(locx,locy,side,side);
     btn7.text = @"7";
-    btn7.backgroundColor = [UIColor colorWithRed:0.95 green:0.9 blue:0.0 alpha:1.0];
+    btn7.backgroundColor = [UIColor custom];
     [self addSubview:btn7];
     
     btn8 = [[UILabel alloc] init];
@@ -114,7 +116,7 @@ bool IsUpdate;
     btn8.font = [UIFont systemFontOfSize:50];
     btn8.frame = CGRectMake(locx+during,locy,side,side);
     btn8.text = @"8";
-    btn8.backgroundColor = [UIColor colorWithRed:0.95 green:0.9 blue:0.0 alpha:1.0];
+    btn8.backgroundColor = [UIColor custom];
     [self addSubview:btn8];
     
     btn9 = [[UILabel alloc] init];
@@ -123,7 +125,7 @@ bool IsUpdate;
     btn9.font = [UIFont systemFontOfSize:50];
     btn9.frame = CGRectMake(locx+during+during,locy,side,side);
     btn9.text = @"9";
-    btn9.backgroundColor = [UIColor colorWithRed:0.95 green:0.9 blue:0.0 alpha:1.0];
+    btn9.backgroundColor = [UIColor custom];
     [self addSubview:btn9];
     
     btn0 = [[UILabel alloc] init];
@@ -132,7 +134,7 @@ bool IsUpdate;
     btn0.font = [UIFont systemFontOfSize:50];
     btn0.frame = CGRectMake(locx + during/2,locy+during+during+during,side,side);
     btn0.text = @"0";
-    btn0.backgroundColor = [UIColor colorWithRed:0.95 green:0.9 blue:0.0 alpha:1.0];
+    btn0.backgroundColor = [UIColor custom];
     [self addSubview:btn0];
     
     btn_m = [[UILabel alloc] init];
@@ -141,7 +143,7 @@ bool IsUpdate;
     btn_m.font = [UIFont systemFontOfSize:50];
     btn_m.frame = CGRectMake(locx +during+ during/2,locy+during+during+during,side,side);
     btn_m.text = @"-";
-    btn_m.backgroundColor = [UIColor colorWithRed:0.95 green:0.9 blue:0.0 alpha:1.0];
+    btn_m.backgroundColor = [UIColor custom];
     [self addSubview:btn_m];
     
     del = [[UIImageView alloc] init];
@@ -250,7 +252,7 @@ bool IsUpdate;
     duplicateLabel.textAlignment = NSTextAlignmentCenter;
     duplicateLabel.font = [UIFont systemFontOfSize:50];
     duplicateLabel.tag  = label.tag;
-//    duplicateLabel.backgroundColor = [UIColor redColor];
+    duplicateLabel.backgroundColor = [UIColor custom];
     //    NSLog(@"DEEP");
     
     return duplicateLabel;
@@ -335,7 +337,7 @@ bool IsUpdate;
     [self back];
     if(IsUpdate){
         [appDelegate upDate];
-        [appDelegate.View.view bringSubviewToFront:btn];
+//        [appDelegate.View bringSubviewToFront:btn];
     }
 }
 

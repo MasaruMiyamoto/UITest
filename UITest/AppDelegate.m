@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "ViewClass.h"
 #import "JudgeClass.h"
+#import "ViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,13 +18,15 @@
 @implementation AppDelegate
 
 @synthesize View;
+
 JudgeClass *Jclass;
+ViewController *View;
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.toyBox = [[NSMutableDictionary alloc] init];
     Jclass = [[JudgeClass alloc] init];
-    
     return YES;
 }
 
@@ -34,6 +37,7 @@ JudgeClass *Jclass;
 - (void)upDate
 {
 //    NSLog(@"update");
+    
     NSMutableArray *member = [self.toyBox objectForKey:@"formula"];
     for (ViewClass *fs in member) {
         [fs upDate];
@@ -44,8 +48,8 @@ JudgeClass *Jclass;
     if([Jclass judgeCheck:member[0] :member[1]] != 0){
 //        NSLog(@"flag = %d",[Jclass judgeCheck:member[0] :member[1]]);
 //        NSLog(@"hoge");
-        [Jclass setPosition:10 :252];
-        [View.view addSubview:Jclass];
+        [Jclass setPosition:10 :252 + 768];
+        [View.oya addSubview:Jclass];
         
     }else{
         [Jclass resetPosition];
