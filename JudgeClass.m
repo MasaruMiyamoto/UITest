@@ -24,7 +24,7 @@ AppDelegate *appdelegate;
 
 - (id)init{
     self = [super init];
-    self.frame = CGRectMake(0, 0, Width, Height);
+    self.frame = CGRectMake(0, 0, Width, Height*2 + 15);
     [self setLabel];
     [self makeClass];
     return self;
@@ -33,6 +33,7 @@ AppDelegate *appdelegate;
 - (void)setPosition:(int)x :(int)y
 {
     self.frame = CGRectMake( x, y, self.frame.size.width, self.frame.size.height);
+//    self.backgroundColor = [UIColor cyanColor];
 //    [self setLabel];
 }
 
@@ -133,14 +134,14 @@ AppDelegate *appdelegate;
 /***** 計算処理クラスの作成 *****/
 - (void) makeClass
 {
-    formula = [[ViewClass alloc] initWithPosition: 91: 340];
-    appdelegate = [[UIApplication sharedApplication] delegate];
+    formula = [[ViewClass alloc] initWithPosition: 80 : 95];
+//    appdelegate = [[UIApplication sharedApplication] delegate];
     [self display];
 }
 
 - (void) display
 {
-    [appdelegate.window addSubview:formula];
+    [self addSubview:formula];
 }
 
 - (void)unDisplay
