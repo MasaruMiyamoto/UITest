@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "ViewClass.h"
 #import "JudgeClass.h"
+#import "SelectButtons.h"
 #import "ViewController.h"
 
 @interface AppDelegate ()
@@ -21,12 +22,16 @@
 
 JudgeClass *Jclass;
 ViewController *View;
-
+SetButton *Button;
+ViewClass *formula;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.toyBox = [[NSMutableDictionary alloc] init];
+    Button = [[SetButton alloc] init];
     Jclass = [[JudgeClass alloc] init];
+//    formula = [[ViewClass alloc] init];
+    
     return YES;
 }
 
@@ -54,6 +59,16 @@ ViewController *View;
     }else{
         [Jclass resetPosition];
     }
+    
+    NSLog(@"1 mode");
+}
+
+- (void)upDate2
+{
+    NSLog(@"2 mode");
+    
+    
+//    [View.oya addSubview:formula];
     
 }
 

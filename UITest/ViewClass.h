@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
+#import "SetButton.h"
 
 //式の作成用クラス(予定)
 @interface ViewClass : UIView
@@ -31,8 +32,10 @@
 - (id)initWithPosition:(int)x :(int)y;
 - (void)chengeMode:(int)mode;
 - (void)setVariable:(int)a :(int)b :(int)e;
+- (void) setResult:(int)val :(int)con;
 - (void)canMoving :(NSString *)str;
 - (void)cannotMoving :(NSString *)str;
 - (void)upDate;
+- (void)upDate2;
 
 @end

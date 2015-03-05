@@ -15,6 +15,8 @@
 
 @implementation ViewClass
 
+AppDelegate *appDelegate;
+
 //クラス内に変数を定義
 UILabel *A;
 UILabel *B;
@@ -24,6 +26,10 @@ UILabel *Y;
 UILabel *Equal;
 UILabel *Code;
 UILabel *Mul;
+
+//筆算の結果を保持
+int Val;
+int Con;
 
 //@propertyの設定を実装
 @synthesize A;
@@ -51,7 +57,7 @@ UILabel *Mul;
 {
     self = [super init];
     self.frame = CGRectMake(x, y, width, height);
-//    self.backgroundColor = [UIColor cyanColor];
+    self.backgroundColor = [UIColor cyanColor];
     [self setLabel];
     [self setPosition];
     
@@ -79,7 +85,6 @@ UILabel *Mul;
     A.adjustsFontSizeToFitWidth = YES;
     A.minimumScaleFactor = 20/50;
     [self addSubview:A];
-    
     
     B = [[UILabel alloc] init];
     B.textAlignment = NSTextAlignmentCenter;
@@ -197,24 +202,43 @@ UILabel *Mul;
 - (void) culMode :(BOOL)chenge
 {
     A.text = @"";
-    Code.text =@"";
+    Code.text = @"";
     B.text = @"";
     E.text = @"";
     
     E.backgroundColor = [UIColor chooseColor];
     E.tag = 3;
     
+    appDelegate = [[UIApplication sharedApplication] delegate];
+//    [appDelegate initToyBox];
+//    [appDelegate.toyBox setObject:self forKey:@"formula"];
+    
+    
     if(chenge){
         //yが残る
         X.text = @"";
         B.backgroundColor = [UIColor chooseColor];
-        B.tag = 2;
+        B.tag = 5;
     }else{
         //xが残る
         Y.text = @"";
         A.backgroundColor = [UIColor chooseColor];
         A.tag = 1;
     }
+    
+    NSMutableArray *f = [NSMutableArray arrayWithObjects:self.A, self.Code, self.B, self.E, nil];
+    [appDelegate.toyBox setObject:f forKey:@"obj"];
+    
+//    NSMutableArray *list = [appDelegate.toyBox objectForKey:@"list"];
+//    [list addObject:@"obj"];
+    
+    NSMutableArray *list = [NSMutableArray arrayWithObjects:@"obj", nil];
+//    [appDelegate.toyBox setObject:list forKey:@"list"];
+    
+    [appDelegate.toyBox setObject:list forKey:@"list"];
+    [appDelegate.Button setUpdateMode: @"upDate2"];
+    appDelegate.formula = self;
+    NSLog(@"cul");
     
 }
 
@@ -261,6 +285,13 @@ UILabel *Mul;
     }
     
 //    NSLog(@"a = %d, b = %d, e = %d",_ValA,_ValB,_ValE);
+}
+
+- (void) setResult:(int)val :(int)con
+{
+    Val = val;
+    Con = con;
+//    NSLog(@"val = %d, con = %d",Val,Con);
 }
 
 - (void)canMoving:(NSString *)str
@@ -314,11 +345,27 @@ UILabel *Mul;
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesEnded:touches withEvent:event];
-//    NSLog(@"formal");
+    NSLog(@"formal");
 }
 /*****ここまで*****/
 
+-(BOOL)checkSum
+{
+    int a = (int)[A.text integerValue];
+    int b = (int)[B.text integerValue];
+    int e = (int)[E.text integerValue];
+    
+    if (e == Con) {
+        if(a == Val)
+            return YES;
+        else if(b == Val)
+            return YES;
+    }
+    return NO;
+}
 
+/***** 更新処理 *****/
+//係数の乗法
 -(void)upDate
 {
     
@@ -337,12 +384,28 @@ UILabel *Mul;
     A.text = [NSString stringWithFormat:@"%d",_ValA*mul];
     E.text = [NSString stringWithFormat:@"%d",_ValE*mul];
     
-    if(_ValB*mul>=0){
+    if(_ValB*mul >= 0){
         Code.text = @"+";
         B.text = [NSString stringWithFormat:@"%d",_ValB*mul];
-    }else if(_ValB*mul<0){
+    }else if(_ValB*mul < 0){
         Code.text = @"-";
         B.text = [NSString stringWithFormat:@"%d",-_ValB*mul];
     }
+    
 }
+
+- (void)upDate2
+{
+    if([self checkSum]){
+        
+    }
+}
+
++ (ViewClass *)copy: (ViewClass *)origin
+{
+    ViewClass *Copy = origin;
+    return Copy;
+}
+/*****  *****/
+
 @end

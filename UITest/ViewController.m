@@ -103,7 +103,7 @@ int fe2;
     NSMutableArray *list = [NSMutableArray arrayWithObjects:@"formula1", @"formula2", nil];
     [appDelegate.toyBox setObject:list forKey:@"list"];
     /**********/
-    [button setUpdate:false];
+    [button setUpdateMode:@"upDate"];
     
     [self initScroller:oya];
 }
@@ -116,6 +116,7 @@ int fe2;
     button = [[SetButton alloc] init];
     [button move:713 :165];
     [self.view addSubview:button];
+    appDelegate.Button = button;
 
     /**********/
 }
@@ -245,7 +246,7 @@ int fe2;
     [appDelegate.toyBox setObject:f forKey:@"formula"];
     
     appDelegate.View = self;
-    [button setUpdate:true];
+    [button setUpdateMode:@"upDate"];
     /**********/
     
 //    [self initScroller:oya];

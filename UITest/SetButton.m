@@ -34,7 +34,7 @@ UILabel *btn,
 UIImageView *img,
             *del;
 
-bool IsUpdate;
+int IsUpdate;
 
 @synthesize btn;
 @synthesize img;
@@ -289,9 +289,15 @@ bool IsUpdate;
     [UIView commitAnimations];
 }
 
-- (void)setUpdate:(BOOL)flag
+- (void)setUpdateMode:(NSString *)mode
 {
-    IsUpdate = flag;
+    int x;
+    if([mode isEqualToString:@"upDate"])
+        x = 1;
+    else if([mode isEqualToString:@"upDate2"])
+        x = 2;
+    
+    IsUpdate = x;
 }
 
 
@@ -335,10 +341,20 @@ bool IsUpdate;
         [self isTrriger :str];
     }
     [self back];
-    if(IsUpdate){
-        [appDelegate upDate];
-//        [appDelegate.View bringSubviewToFront:btn];
+    
+    switch (IsUpdate) {
+        case 1:
+            [appDelegate upDate];
+            break;
+            
+        case 2:
+            [appDelegate upDate2];
+            break;
+            
+        default:
+            break;
     }
+    
 }
 
 /*****タップ操作　ここまで*****/

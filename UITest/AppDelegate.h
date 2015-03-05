@@ -11,14 +11,19 @@
 @class ViewController;
 @class ViewClass;
 @class JudgeClass;
+@class SetButton;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (retain, nonatomic) NSMutableDictionary *toyBox;
 @property (retain, nonatomic) ViewController *View;
+@property (retain, nonatomic) SetButton *Button;
+@property (retain, nonatomic) ViewClass *formula;
 
 - (void)initToyBox;
 - (void)upDate;
+- (void)upDate2;
+
 @end
 

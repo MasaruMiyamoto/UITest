@@ -60,14 +60,17 @@ AppDelegate *appdelegate;
 
 - (int)judgeCheck:(ViewClass *)f1 :(ViewClass *)f2
 {
-    int A1,B1;
-    int A2,B2;
+    int A1,B1,E1;
+    int A2,B2,E2;
     
     A1 = (int)[f1.A.text integerValue];
     B1 = (int)[[f1.Code.text stringByAppendingString:f1.B.text] integerValue];
+    E1 = (int)[f1.E.text integerValue];
     
     A2 = (int)[f2.A.text integerValue];
     B2 = (int)[[f2.Code.text stringByAppendingString:f2.B.text] integerValue];
+    E2 = (int)[f2.E.text integerValue];
+    
     
 //    NSLog(@"A1 = %d, A2 = %d",A1,A2);
 //    NSLog(@"B1 = %d, B2 = %d",B1,B2);
@@ -81,18 +84,22 @@ AppDelegate *appdelegate;
     if(A1 - A2 == 0){
         [self events:f1.A :f2.A :1 :NO];
         [formula chengeMode:31];
+        [formula setResult:B1-B2 :E1-E2];
         return 1;
     }else if(A1 + A2 == 0){
         [self events:f1.A :f2.A :2 :YES];
         [formula chengeMode:31];
+        [formula setResult:B1+B2 :E1+E2];
         return 2;
     }else if(B1 - B2 == 0){
         [self events:f1.B :f2.B :1 :NO];
         [formula chengeMode:32];
+        [formula setResult:A1-A2 :E1-E2];
         return 3;
     }else if(B1 + B2 == 0){
         [self events:f1.B :f2.B :2 :YES];
         [formula chengeMode:32];
+        [formula setResult:A1+A2 :E1+E2];
         return 4;
     }
     return 0;
