@@ -24,6 +24,6 @@
 - (void)initToyBox;
 - (void)upDate;
 - (void)upDate2;
-
+- (void)upDate3;
 @end
 

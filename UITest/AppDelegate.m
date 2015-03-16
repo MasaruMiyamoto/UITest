@@ -51,27 +51,36 @@ ViewClass *formula;
     
 //    NSLog(@"for out");
     if([Jclass judgeCheck:member[0] :member[1]] != 0){
-//        NSLog(@"flag = %d",[Jclass judgeCheck:member[0] :member[1]]);
-//        NSLog(@"hoge");
+
         [Jclass setPosition:10 :252 + 768];
         [View.oya addSubview:Jclass];
         
     }else{
         [Jclass resetPosition];
     }
-    
     NSLog(@"1 mode");
 }
 
 - (void)upDate2
 {
     NSLog(@"2 mode");
-    
-    
-//    [View.oya addSubview:formula];
-    
+    NSLog(@" %d",[formula checkSum]);
+//    [self initToyBox];
+    if([formula checkSum]){
+        [self initToyBox];
+        ViewClass *Cf = [[ViewClass alloc] init];
+        Cf = [Cf copyWithPosition: formula: 91: 450 +768];
+        [Cf levelingLabel:Cf];
+//        NSLog(@" %@",Cf.B.text);
+        [View.oya addSubview:Cf];
+        [Button setUpdateMode:@"upDate3"];
+    }
 }
 
+- (void)upDate3
+{
+    NSLog(@"3 mode");
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -20,11 +20,11 @@ UILabel *Code;
 UILabel *Line;
 
 ViewClass *formula;
-AppDelegate *appdelegate;
+AppDelegate *appDelegate;
 
 - (id)init{
     self = [super init];
-    self.frame = CGRectMake(0, 0, Width, Height*2 + 15);
+    self.frame = CGRectMake(0, 0, Width, Height);
     [self setLabel];
     [self makeClass];
     return self;

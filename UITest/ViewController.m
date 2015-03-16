@@ -127,6 +127,7 @@ int fe2;
     sv = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     //    sv.backgroundColor = [UIColor cyanColor];
     sv.bounces = NO;
+    sv.panGestureRecognizer.minimumNumberOfTouches = 2;
     [sv addSubview:view];
     sv.contentSize = view.bounds.size;
     [self.view addSubview:sv];

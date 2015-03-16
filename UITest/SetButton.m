@@ -296,6 +296,8 @@ int IsUpdate;
         x = 1;
     else if([mode isEqualToString:@"upDate2"])
         x = 2;
+    else if([mode isEqualToString:@"upDate3"])
+        x = 3;
     
     IsUpdate = x;
 }
@@ -349,6 +351,10 @@ int IsUpdate;
             
         case 2:
             [appDelegate upDate2];
+            break;
+            
+        case 3:
+            [appDelegate upDate3];
             break;
             
         default:

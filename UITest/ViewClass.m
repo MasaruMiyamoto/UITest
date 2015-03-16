@@ -9,9 +9,10 @@
 #import "ViewClass.h"
 
 #define size 80
-#define width 440
+#define width 440 + 100
 #define height 80
 #define chooseColor colorWithRed:0.2 green:0.8 blue:0.5 alpha:1.0
+#define custom colorWithRed:0.95 green:0.9 blue:0.0 alpha:1.0
 
 @implementation ViewClass
 
@@ -25,6 +26,8 @@ UILabel *X;
 UILabel *Y;
 UILabel *Equal;
 UILabel *Code;
+
+// 倍数の際や、式計算時の数字格納用ラベル
 UILabel *Mul;
 
 //筆算の結果を保持
@@ -42,12 +45,14 @@ int Con;
 @synthesize Code;
 
 @synthesize Mul;
+@synthesize tmp;
 
 //クラスの初期化メソッド  
 - (id)init
 {
     self = [super init];
     self.frame = CGRectMake(0, 0, width, height);
+    self.backgroundColor = [UIColor cyanColor];
     [self setLabel];
     [self setPosition];
     return self;
@@ -69,8 +74,8 @@ int Con;
 
 - (void)initMul
 {
-    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, width + 100, height);
-    A.tag = 0;
+//    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, width + 100, height);
+//    A.tag = 0;
     [self mulMode];
     [self setMulPosition];
     
@@ -237,7 +242,7 @@ int Con;
     
     [appDelegate.toyBox setObject:list forKey:@"list"];
     [appDelegate.Button setUpdateMode: @"upDate2"];
-    appDelegate.formula = self;
+//    appDelegate.formula = self;
     NSLog(@"cul");
     
 }
@@ -298,11 +303,15 @@ int Con;
 {
     if([str isEqualToString:@"A"]){
         A.userInteractionEnabled = YES;
+        A.backgroundColor = [UIColor redColor];
     }else if([str isEqualToString:@"B"]){
         B.userInteractionEnabled = YES;
+        B.backgroundColor = [UIColor redColor];
     }else if([str isEqualToString:@"AB"]){
         A.userInteractionEnabled = YES;
         B.userInteractionEnabled = YES;
+        A.backgroundColor = [UIColor redColor];
+        B.backgroundColor = [UIColor redColor];
     }
 }
 
@@ -310,11 +319,15 @@ int Con;
 {
     if([str isEqualToString:@"A"]){
         A.userInteractionEnabled = NO;
+        A.backgroundColor = [UIColor clearColor];
     }else if([str isEqualToString:@"B"]){
         B.userInteractionEnabled = NO;
+        B.backgroundColor = [UIColor clearColor];
     }else if([str isEqualToString:@"AB"]){
         A.userInteractionEnabled = NO;
         B.userInteractionEnabled = NO;
+        A.backgroundColor = [UIColor clearColor];
+        B.backgroundColor = [UIColor clearColor];
     }
 }
 
@@ -322,30 +335,90 @@ int Con;
 /*****タッチイベント*****/
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    UITouch *touch = [touches anyObject];
-
-//    CGPoint location = [touch previousLocationInView:self.view];
-    [super touchesBegan:touches withEvent:event];
-//    NSLog(@"%ld",(long)touch.view.tag);
+    [[self nextResponder] touchesBegan:touches withEvent:event];
     
-//    NSLog(@"%f,%f",location.x,location.y);
-    //    if([event touchesForView:oya] != nil){
-    //        NSLog(@"oya");
-    //    }
+    UITouch *touch = [touches anyObject];
+    CGPoint location = [touch previousLocationInView:self];
+    [super touchesBegan:touches withEvent:event];
+    NSLog(@"tag = %ld",(long)touch.view.tag);
+    switch (touch.view.tag) {
+        case 1:
+            A.center = location;
+            self.Code.text = @"÷";
+            self.B.backgroundColor = [UIColor chooseColor];
+            break;
+        case 2:
+            break;
+            
+        default:
+            break;
+    }
+//    NSLog(@"began");
     
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-//    UITouch *touch = [touches anyObject];
-//    CGPoint location = [touch locationInView:self];
+    [[self nextResponder] touchesMoved:touches withEvent:event];
+    UITouch *touch = [touches anyObject];
+    CGPoint location = [touch locationInView:self];
     [super touchesMoved:touches withEvent:event];
+    
+    switch (touch.view.tag) {
+        case 1:
+            A.center = location;
+            break;
+        case 2:
+            B.center = location;
+            break;
+        default:
+            break;
+    }
+//    NSLog(@"move");
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    [[self nextResponder] touchesEnded:touches withEvent:event];
     [super touchesEnded:touches withEvent:event];
-    NSLog(@"formal");
+    UITouch *touch = [touches anyObject];
+//    CGPoint location = [touch locationInView:self];
+    
+    switch (touch.view.tag) {
+        case 1:
+            if (CGRectContainsPoint(self.B.frame, self.A.center)) {
+                
+                self.B.text = self.A.text;
+                self.A.text = @"";
+                
+                if ([self.B.text hasPrefix:@"-"]) {
+                    self.B.text = [@"(" stringByAppendingString:self.B.text];
+                    self.B.text = [self.B.text stringByAppendingString:@")"];
+                    self.B.frame = CGRectMake(self.B.frame.origin.x, self.B.frame.origin.y, 100, size);
+                    self.B.textAlignment = NSTextAlignmentLeft;
+                }
+                
+                self.A.backgroundColor = [UIColor clearColor];
+                self.B.backgroundColor = [UIColor clearColor];
+                
+                self.Y.text = @"=";
+                self.Y.frame = CGRectMake(self.B.frame.origin.x + 70, 0, size, size);
+                [self mulMode];
+                self.Mul.frame = CGRectOffset(self.Y.frame, 70, 0);
+                
+            }else{
+                [self back:A];
+                self.Code.text = @"";
+                self.B.backgroundColor = [UIColor clearColor];
+            }
+            break;
+        case 2:
+            break;
+            
+        default:
+            break;
+    }
+//    NSLog(@"formal");
 }
 /*****ここまで*****/
 
@@ -397,15 +470,80 @@ int Con;
 - (void)upDate2
 {
     if([self checkSum]){
-        
+        NSLog(@"checkSum");
+//        appDelegate.formulaR = self;
     }
 }
 
-+ (ViewClass *)copy: (ViewClass *)origin
+- (ViewClass *)copyWithPosition: (ViewClass *)origin :(int)x :(int)y
 {
-    ViewClass *Copy = origin;
+    ViewClass *Copy = [[ViewClass alloc] init];
+//    Copy = [Copy initWithFrame:origin.frame];
+    Copy.A.text = origin.A.text;
+    Copy.B.text = origin.B.text;
+    Copy.E.text = origin.E.text;
+    
+    Copy.X.text = origin.X.text;
+    Copy.Y.text = origin.Y.text;
+    
+    Copy.Code.text = origin.Code.text;
+    Copy.Equal.text = origin.Equal.text;
+    
+    Copy.A.backgroundColor = origin.A.backgroundColor;
+    Copy.B.backgroundColor = origin.B.backgroundColor;
+    Copy.E.backgroundColor = origin.E.backgroundColor;
+    
+    [Copy move: x:y];
     return Copy;
 }
 /*****  *****/
 
+- (void)levelingLabel:(ViewClass *)mine
+{
+//    NSLog(@"leveling");
+    if([mine.A.text isEqualToString:@""]){
+        NSLog(@"enter");
+        
+        mine.A.text = mine.B.text;
+        mine.B.text = @"";
+//        mine.B.backgroundColor = [UIColor clearColor];
+        mine.X.text = mine.Y.text;
+        mine.Y.text = @"";
+        
+    }
+    
+    [self bringSubviewToFront:mine.A];
+    mine.Equal.frame = CGRectOffset(mine.Equal.frame, -180, 0);
+    mine.E.frame = CGRectOffset(mine.E.frame, -180, 0);
+    mine.E.backgroundColor = [UIColor clearColor];
+    [self canMoving:@"A"];
+    A.tag = 1;
+    [self setBack:A];
+    
+    
+    // 計算領域の生成
+    mine.Code.frame = CGRectOffset(mine.E.frame, 70, 0);
+    mine.B.frame = CGRectOffset(mine.Code.frame, 70, 0);
+    mine.B.backgroundColor = [UIColor clearColor];
+    NSLog(@" code = %lf", mine.Code.frame.origin.x);
+//    NSLog(@" mul = %lf", mine.Mul.frame.origin.x);
+    
+}
+
+- (void)setBack:(UIView *)obj
+{
+    //    tmp = CGPointMake(self.frame.origin.x + obj.center.x, self.frame.origin.y + obj.center.y);
+    
+    tmp = CGPointMake(obj.center.x, obj.center.y);
+    
+    //    NSLog(@"%f",self.frame.origin.x);
+}
+
+- (void)back:(UILabel *)lbl
+{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.5];
+    lbl.center = tmp;
+    [UIView commitAnimations];
+}
 @end
