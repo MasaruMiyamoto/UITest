@@ -39,13 +39,13 @@ int a2 = 2;
 int b2 = 6;
 int e2 = 2;
 
-int fa1;
-int fb1;
-int fe1;
-
-int fa2;
-int fb2;
-int fe2;
+//int fa1;
+//int fb1;
+//int fe1;
+//
+//int fa2;
+//int fb2;
+//int fe2;
 
 
 
@@ -115,6 +115,7 @@ int fe2;
     
     button = [[SetButton alloc] init];
     [button move:713 :165];
+    [button setUpdateMode:@"init"];
     [self.view addSubview:button];
     appDelegate.Button = button;
 
@@ -138,6 +139,7 @@ int fe2;
 {
     [oya removeFromSuperview];
     [button removeFromSuperview];
+    
     [self initLabels];
     [self initButtons];
     [self initSelects];
@@ -165,31 +167,47 @@ int fe2;
     
 }
 
+- (void)randomAction :(id)sender
+{
+    [self makeRandom];
+    
+    [formula1 setVariable:a1 :b1 :e1];
+//    formula1.A.text = [NSString stringWithFormat:@"%d",a1];
+//    formula1.B.text = [NSString stringWithFormat:@"%d",b1];
+//    formula1.E.text = [NSString stringWithFormat:@"%d",e1];
+
+    [formula2 setVariable:a2 :b2 :e2];
+//    formula2.A.text = [NSString stringWithFormat:@"%d",a2];
+//    formula2.B.text = [NSString stringWithFormat:@"%d",b2];
+//    formula2.E.text = [NSString stringWithFormat:@"%d",e2];
+}
+
 - (void)setVal
 {
-    fa1 = (int)[formula1.A.text integerValue];
+    a1 = (int)[formula1.A.text integerValue];
     if([formula1.Code.text isEqual:@"+"]){
 //        NSLog(@"+");
-        fb1 = (int)[formula1.B.text integerValue];
+        b1 = (int)[formula1.B.text integerValue];
     }else{
-        fb1 = -(int)[formula1.B.text integerValue];
+        b1 = -(int)[formula1.B.text integerValue];
     }
-    fe1 = (int)[formula1.E.text integerValue];
+    e1 = (int)[formula1.E.text integerValue];
     
-    fa2 = (int)[formula2.A.text integerValue];
+    a2 = (int)[formula2.A.text integerValue];
     if([formula2.Code.text isEqual:@"+"]){
 //        NSLog(@"+");
-        fb2 = (int)[formula2.B.text integerValue];
+        b2 = (int)[formula2.B.text integerValue];
     }else{
-        fb2 = -(int)[formula2.B.text integerValue];
+        b2 = -(int)[formula2.B.text integerValue];
     }
-    fe2 = (int)[formula2.E.text integerValue];
+    e2 = (int)[formula2.E.text integerValue];
     
 }
 - (void)initSelects
 {
     selects = [[SelectButtons alloc] initWithPosition: 161: 380];
     [selects btnPushed:self];
+    [selects randomAction:self];
     [oya addSubview:selects];
 }
 /**********/
@@ -217,7 +235,7 @@ int fe2;
 {
     formula1 = [[ViewClass alloc] initWithPosition: 91: 123 + 768];
     //oya に　formula1　を追加、表示
-    [formula1 setVariable: fa1: fb1: fe1];
+    [formula1 setVariable: a1: b1: e1];
     [formula1 chengeMode:2];
     [oya addSubview:formula1];
 //    [self.view addSubview:oya];
@@ -225,7 +243,7 @@ int fe2;
 //    NSLog(@"-------------");
     formula2 = [[ViewClass alloc] initWithPosition: 91: 252 + 768];
     //oya に　formula2　を追加、表示
-    [formula2 setVariable: fa2: fb2: fe2];
+    [formula2 setVariable: a2: b2: e2];
     [formula2 chengeMode:2];
     [oya addSubview:formula2];
     [self.view addSubview:oya];
@@ -252,4 +270,46 @@ int fe2;
     
 //    [self initScroller:oya];
 }
+
+/***** ランダム値の生成 *****/
+- (void)makeRandom
+{
+    int min = -10;
+    int max = 10;
+    
+    int x,y;
+    int a,b,c,d;
+    
+    int p = -100;
+    int q = -100;
+    
+    while (YES){
+    
+        x = arc4random_uniform(max + 1 - min) + min;
+        y = arc4random_uniform(max + 1 - min) + min;
+        
+        a = arc4random_uniform(max + 1 - min) + min;
+        b = arc4random_uniform(max + 1 - min) + min;
+        c = arc4random_uniform(max + 1 - min) + min;
+        d = arc4random_uniform(max + 1 - min) + min;
+        
+        p = a*x + b*y;
+        q = c*x + d*y;
+        NSLog(@"p = %d, q = %d",p,q);
+        
+        if((p> -20 && p < 20) && (q <20 && q > -20))
+           break;
+    }
+    
+//    NSLog(@"p = %d, q = %d",p,q);
+    
+    a1 = a;
+    b1 = b;
+    e1 = p;
+    
+    a2 = c;
+    b2 = d;
+    e2 = q;
+}
+
 @end

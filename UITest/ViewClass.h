@@ -42,6 +42,6 @@
 -(BOOL)checkSum;
 - (ViewClass *)copyWithPosition: (ViewClass *)origin :(int)x :(int)y;
 - (void)levelingLabel:(ViewClass *)mine;
-
+- (BOOL) checkDiv;
 
 @end

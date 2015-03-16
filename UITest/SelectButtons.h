@@ -17,4 +17,5 @@
 - (id) initWithPosition:(int)x :(int)y;
 - (void)btnPushed:(id)mainView;
 - (void)dontSelects:(id)mainView;
+-(void)randomAction :(id)mainView;
 @end

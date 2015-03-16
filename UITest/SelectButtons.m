@@ -72,7 +72,7 @@ UIButton *Start;
     Random.backgroundColor = [UIColor colorWithRed:1.0 green:0.47 blue:1.0 alpha:1.0];
     [Random setTitle:@"もんだい" forState:UIControlStateNormal];
     [Random setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [Random addTarget:self action:@selector(randomAction:) forControlEvents:UIControlEventTouchUpInside];
+//    [Random addTarget:self action:@selector(randomAction:) forControlEvents:UIControlEventTouchUpInside];
     
     [self setLocation];
     
@@ -115,9 +115,11 @@ UIButton *Start;
 
 
 
--(void)randomAction :(id)sender
+-(void)randomAction :(id)mainView
 {
 //        NSLog(@"random");
+    [Random addTarget:mainView action:@selector(randomAction:) forControlEvents:UIControlEventTouchUpInside];
+    
 }
 
 - (void)dontSelects:(id)mainView

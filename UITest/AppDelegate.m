@@ -18,12 +18,14 @@
 
 @implementation AppDelegate
 
-@synthesize View;
 
 JudgeClass *Jclass;
 ViewController *View;
 SetButton *Button;
-ViewClass *formula;
+ViewClass *form;
+
+@synthesize View;
+@synthesize form;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -64,12 +66,12 @@ ViewClass *formula;
 - (void)upDate2
 {
     NSLog(@"2 mode");
-    NSLog(@" %d",[formula checkSum]);
+    NSLog(@" %d",[form checkSum]);
 //    [self initToyBox];
-    if([formula checkSum]){
+    if([form checkSum]){
         [self initToyBox];
         ViewClass *Cf = [[ViewClass alloc] init];
-        Cf = [Cf copyWithPosition: formula: 91: 450 +768];
+        Cf = [Cf copyWithPosition: form: 91: 450 +768];
         [Cf levelingLabel:Cf];
 //        NSLog(@" %@",Cf.B.text);
         [View.oya addSubview:Cf];
@@ -80,6 +82,8 @@ ViewClass *formula;
 - (void)upDate3
 {
     NSLog(@"3 mode");
+    if([form checkDiv])
+        NSLog(@"Div OK");
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

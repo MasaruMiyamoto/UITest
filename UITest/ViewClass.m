@@ -231,19 +231,62 @@ int Con;
         A.tag = 1;
     }
     
+    
+    //おもちゃ箱への登録
     NSMutableArray *f = [NSMutableArray arrayWithObjects:self.A, self.Code, self.B, self.E, nil];
     [appDelegate.toyBox setObject:f forKey:@"obj"];
     
-//    NSMutableArray *list = [appDelegate.toyBox objectForKey:@"list"];
-//    [list addObject:@"obj"];
-    
     NSMutableArray *list = [NSMutableArray arrayWithObjects:@"obj", nil];
-//    [appDelegate.toyBox setObject:list forKey:@"list"];
     
     [appDelegate.toyBox setObject:list forKey:@"list"];
     [appDelegate.Button setUpdateMode: @"upDate2"];
-//    appDelegate.formula = self;
+
     NSLog(@"cul");
+    
+}
+
+//割り算モード
+- (void)diviMode
+{
+    self.B.text = self.A.text;
+    self.A.text = @"";
+    
+    int b = (int)[self.B.text integerValue];
+    if ([self.B.text hasPrefix:@"-"]) {
+        self.B.text = [@"(" stringByAppendingString:self.B.text];
+        self.B.text = [self.B.text stringByAppendingString:@")"];
+        self.B.frame = CGRectMake(self.B.frame.origin.x, self.B.frame.origin.y, 100, size);
+        self.B.textAlignment = NSTextAlignmentLeft;
+    }
+    
+    self.A.backgroundColor = [UIColor clearColor];
+    self.B.backgroundColor = [UIColor clearColor];
+    
+    self.Y.text = @"=";
+    self.Y.frame = CGRectMake(self.B.frame.origin.x + 70, 0, size, size);
+    [self mulMode];
+    self.Mul.frame = CGRectOffset(self.Y.frame, 70, 0);
+    
+    [self moveAnime:self.A :-60 :0];
+    [self moveAnime:self.B :-60 :0];
+    [self moveAnime:self.E :-60 :0];
+    [self moveAnime:self.X :-60 :0];
+    [self moveAnime:self.Y :-60 :0];
+    [self moveAnime:self.Code :-60 :0];
+    [self moveAnime:self.Equal :-60 :0];
+    [self moveAnime:self.Mul :-60 :0];
+    
+    int a = (int)[self.E.text integerValue];
+    
+    Val = a/b;
+    
+    //おもちゃ箱への登録
+    NSMutableArray *f = [NSMutableArray arrayWithObjects:self.A, self.Mul, nil];
+    [appDelegate.toyBox setObject:f forKey:@"obj"];
+    NSMutableArray *list = [NSMutableArray arrayWithObjects:@"obj", nil];
+    [appDelegate.toyBox setObject:list forKey:@"list"];
+    
+    appDelegate.form = self;
     
 }
 
@@ -386,31 +429,18 @@ int Con;
     
     switch (touch.view.tag) {
         case 1:
+            
             if (CGRectContainsPoint(self.B.frame, self.A.center)) {
                 
-                self.B.text = self.A.text;
-                self.A.text = @"";
+                [self diviMode];
                 
-                if ([self.B.text hasPrefix:@"-"]) {
-                    self.B.text = [@"(" stringByAppendingString:self.B.text];
-                    self.B.text = [self.B.text stringByAppendingString:@")"];
-                    self.B.frame = CGRectMake(self.B.frame.origin.x, self.B.frame.origin.y, 100, size);
-                    self.B.textAlignment = NSTextAlignmentLeft;
-                }
-                
-                self.A.backgroundColor = [UIColor clearColor];
-                self.B.backgroundColor = [UIColor clearColor];
-                
-                self.Y.text = @"=";
-                self.Y.frame = CGRectMake(self.B.frame.origin.x + 70, 0, size, size);
-                [self mulMode];
-                self.Mul.frame = CGRectOffset(self.Y.frame, 70, 0);
                 
             }else{
-                [self back:A];
+//                [self back:A];
                 self.Code.text = @"";
                 self.B.backgroundColor = [UIColor clearColor];
             }
+            [self back:A];
             break;
         case 2:
             break;
@@ -434,6 +464,16 @@ int Con;
         else if(b == Val)
             return YES;
     }
+    return NO;
+}
+
+- (BOOL) checkDiv
+{
+    int e = (int)[self.Mul.text integerValue];
+    
+    NSLog(@"Val = %d, e = %d",Val,e);
+    if(Val == e)
+        return YES;
     return NO;
 }
 
@@ -530,13 +570,19 @@ int Con;
     
 }
 
+//アニメーション
+- (void) moveAnime :(UILabel *)lbl :(int)x :(int)y
+{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.7];
+    lbl.frame = CGRectOffset(lbl.frame, x, y);
+    [UIView commitAnimations];
+}
+
+
 - (void)setBack:(UIView *)obj
 {
-    //    tmp = CGPointMake(self.frame.origin.x + obj.center.x, self.frame.origin.y + obj.center.y);
-    
     tmp = CGPointMake(obj.center.x, obj.center.y);
-    
-    //    NSLog(@"%f",self.frame.origin.x);
 }
 
 - (void)back:(UILabel *)lbl

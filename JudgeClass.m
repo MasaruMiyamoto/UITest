@@ -85,21 +85,25 @@ AppDelegate *appDelegate;
         [self events:f1.A :f2.A :1 :NO];
         [formula chengeMode:31];
         [formula setResult:B1-B2 :E1-E2];
+        appDelegate.form = formula;
         return 1;
     }else if(A1 + A2 == 0){
         [self events:f1.A :f2.A :2 :YES];
         [formula chengeMode:31];
         [formula setResult:B1+B2 :E1+E2];
+        appDelegate.form = formula;
         return 2;
     }else if(B1 - B2 == 0){
         [self events:f1.B :f2.B :1 :NO];
         [formula chengeMode:32];
         [formula setResult:A1-A2 :E1-E2];
+        appDelegate.form = formula;
         return 3;
     }else if(B1 + B2 == 0){
         [self events:f1.B :f2.B :2 :YES];
         [formula chengeMode:32];
         [formula setResult:A1+A2 :E1+E2];
+        appDelegate.form = formula;
         return 4;
     }
     return 0;

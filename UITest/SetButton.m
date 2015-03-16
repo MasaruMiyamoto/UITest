@@ -298,7 +298,8 @@ int IsUpdate;
         x = 2;
     else if([mode isEqualToString:@"upDate3"])
         x = 3;
-    
+    else
+        x = 0;
     IsUpdate = x;
 }
 
