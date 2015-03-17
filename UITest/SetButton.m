@@ -34,6 +34,8 @@ UILabel *btn,
 UIImageView *img,
             *del;
 
+AppDelegate *appDelegate;
+
 int IsUpdate;
 
 @synthesize btn;
@@ -159,6 +161,7 @@ int IsUpdate;
     
     img = [[UIImageView alloc] init];
     
+   appDelegate = [[UIApplication sharedApplication] delegate];
     
     btn1.tag = 1;
     btn2.tag = 2;
@@ -292,8 +295,10 @@ int IsUpdate;
 - (void)setUpdateMode:(NSString *)mode
 {
     int x;
-    if([mode isEqualToString:@"upDate"])
+    if([mode isEqualToString:@"upDate"]){
+        [appDelegate upDate];
         x = 1;
+    }
     else if([mode isEqualToString:@"upDate2"])
         x = 2;
     else if([mode isEqualToString:@"upDate3"])
@@ -337,7 +342,6 @@ int IsUpdate;
 {
     [super touchesEnded:touches withEvent:event];
     
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     NSMutableArray *list = [appDelegate.toyBox objectForKey:@"list"];
     for (NSString *str in list) {
 //        NSLog(@"Throgh");

@@ -56,7 +56,7 @@ ViewClass *form;
 
         [Jclass setPosition:10 :252 + 768];
         [View.oya addSubview:Jclass];
-        
+        NSLog(@"ちぇけらー！");
     }else{
         [Jclass resetPosition];
     }

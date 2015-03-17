@@ -31,13 +31,13 @@ CGPoint offset;
 
 UIView *btn;
 
-int a1 = 6;
-int b1 = -2;
-int e1 = -10;
+int a1 = 8;
+int b1 = -7;
+int e1 = 11;
 
 int a2 = 2;
-int b2 = 6;
-int e2 = 2;
+int b2 = -4;
+int e2 = 14;
 
 //int fa1;
 //int fb1;
@@ -139,7 +139,7 @@ int e2 = 2;
 {
     [oya removeFromSuperview];
     [button removeFromSuperview];
-    
+    [appDelegate initToyBox];
     [self initLabels];
     [self initButtons];
     [self initSelects];
