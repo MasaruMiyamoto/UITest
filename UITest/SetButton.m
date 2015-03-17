@@ -380,8 +380,8 @@ int IsUpdate;
         CGPoint convertStr = [self convertPoint:member.center fromView:[fmember objectAtIndex:0]];
         
 //        NSLog(@"%@",str);
-//        NSLog(@"str %@",NSStringFromCGPoint(convertStr));
-//        NSLog(@"btn %@",NSStringFromCGRect(btn.frame));
+        NSLog(@"str %@",NSStringFromCGPoint(convertStr));
+        NSLog(@"btn %@",NSStringFromCGRect(btn.frame));
         
         if(CGRectContainsPoint(btn.frame, convertStr)){
             

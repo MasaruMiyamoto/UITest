@@ -39,13 +39,13 @@ int a2 = 2;
 int b2 = -4;
 int e2 = 14;
 
-//int fa1;
-//int fb1;
-//int fe1;
-//
-//int fa2;
-//int fb2;
-//int fe2;
+int fa1;
+int fb1;
+int fe1;
+
+int fa2;
+int fb2;
+int fe2;
 
 
 
@@ -103,7 +103,6 @@ int e2 = 14;
     NSMutableArray *list = [NSMutableArray arrayWithObjects:@"formula1", @"formula2", nil];
     [appDelegate.toyBox setObject:list forKey:@"list"];
     /**********/
-    [button setUpdateMode:@"upDate"];
     
     [self initScroller:oya];
 }
@@ -151,6 +150,10 @@ int e2 = 14;
 //    NSLog(@"start");
     if(selects.Sel1.alpha == 1.0){
 //        NSLog(@"Sel1");
+        [self keepVal];
+        
+        NSLog(@"%@",formula1.A.text);
+        
         [self setVal];
         [self scrollUpDate];
         [self secondLabels];
@@ -184,9 +187,27 @@ int e2 = 14;
 
 - (void)setVal
 {
+    fa1 = (int)[formula1.A.text integerValue];
+    if([formula1.Code.text isEqual:@"+"]){
+        fb1 = (int)[formula1.B.text integerValue];
+    }else{
+        fb1 = -(int)[formula1.B.text integerValue];
+    }
+    fe1 = (int)[formula1.E.text integerValue];
+    
+    fa2 = (int)[formula2.A.text integerValue];
+    if([formula2.Code.text isEqual:@"+"]){
+        fb2 = (int)[formula2.B.text integerValue];
+    }else{
+        fb2 = -(int)[formula2.B.text integerValue];
+    }
+    fe2 = (int)[formula2.E.text integerValue];
+}
+
+- (void)keepVal
+{
     a1 = (int)[formula1.A.text integerValue];
     if([formula1.Code.text isEqual:@"+"]){
-//        NSLog(@"+");
         b1 = (int)[formula1.B.text integerValue];
     }else{
         b1 = -(int)[formula1.B.text integerValue];
@@ -195,14 +216,13 @@ int e2 = 14;
     
     a2 = (int)[formula2.A.text integerValue];
     if([formula2.Code.text isEqual:@"+"]){
-//        NSLog(@"+");
         b2 = (int)[formula2.B.text integerValue];
     }else{
         b2 = -(int)[formula2.B.text integerValue];
     }
     e2 = (int)[formula2.E.text integerValue];
-    
 }
+
 - (void)initSelects
 {
     selects = [[SelectButtons alloc] initWithPosition: 161: 380];
@@ -235,15 +255,14 @@ int e2 = 14;
 {
     formula1 = [[ViewClass alloc] initWithPosition: 91: 123 + 768];
     //oya に　formula1　を追加、表示
-    [formula1 setVariable: a1: b1: e1];
+    [formula1 setVariable: fa1: fb1: fe1];
     [formula1 chengeMode:2];
     [oya addSubview:formula1];
-//    [self.view addSubview:oya];
     
 //    NSLog(@"-------------");
     formula2 = [[ViewClass alloc] initWithPosition: 91: 252 + 768];
     //oya に　formula2　を追加、表示
-    [formula2 setVariable: a2: b2: e2];
+    [formula2 setVariable: fa2: fb2: fe2];
     [formula2 chengeMode:2];
     [oya addSubview:formula2];
     [self.view addSubview:oya];
@@ -251,22 +270,18 @@ int e2 = 14;
     /*****おもちゃ箱に式のデータを保存*****/
     appDelegate = [[UIApplication sharedApplication] delegate];
     [appDelegate initToyBox];
-    
     NSMutableArray *f1 = [NSMutableArray arrayWithObjects:formula1.A, formula1.Mul, nil];
     [appDelegate.toyBox setObject:f1 forKey:@"formula1"];
-    
     NSMutableArray *f2 = [NSMutableArray arrayWithObjects:formula2.A, formula2.Mul, nil];
     [appDelegate.toyBox setObject:f2 forKey:@"formula2"];
-    
     NSMutableArray *list = [NSMutableArray arrayWithObjects:@"formula1", @"formula2", nil];
     [appDelegate.toyBox setObject:list forKey:@"list"];
-    
     NSMutableArray *f = [NSMutableArray arrayWithObjects:formula1, formula2, nil];
     [appDelegate.toyBox setObject:f forKey:@"formula"];
-    
     appDelegate.View = self;
-    [button setUpdateMode:@"upDate"];
     /**********/
+    
+    [button setUpdateMode:@"upDate"];
     
 //    [self initScroller:oya];
 }

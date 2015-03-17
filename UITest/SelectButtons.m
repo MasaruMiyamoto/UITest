@@ -128,6 +128,9 @@ UIButton *Start;
     Sel2.userInteractionEnabled = NO;
     Random.userInteractionEnabled = NO;
     [Start setTitle:@"やりなおし" forState:UIControlStateNormal];
+    
+    [Start removeTarget:mainView action:@selector(startAction:) forControlEvents:UIControlEventTouchUpInside];
+    
     [Start addTarget:mainView action:@selector(reStart:) forControlEvents:UIControlEventTouchUpInside];
 }
 
