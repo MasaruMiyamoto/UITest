@@ -297,10 +297,13 @@ int IsUpdate;
     int x;
     if([mode isEqualToString:@"upDate"]){
         [appDelegate upDate];
+        NSLog(@"chenge 1 mode");
         x = 1;
     }
-    else if([mode isEqualToString:@"upDate2"])
+    else if([mode isEqualToString:@"upDate2"]){
         x = 2;
+        NSLog(@"chenge 2 mode");
+    }
     else if([mode isEqualToString:@"upDate3"])
         x = 3;
     else
@@ -380,8 +383,8 @@ int IsUpdate;
         CGPoint convertStr = [self convertPoint:member.center fromView:[fmember objectAtIndex:0]];
         
 //        NSLog(@"%@",str);
-        NSLog(@"str %@",NSStringFromCGPoint(convertStr));
-        NSLog(@"btn %@",NSStringFromCGRect(btn.frame));
+//        NSLog(@"str %@",NSStringFromCGPoint(convertStr));
+//        NSLog(@"btn %@",NSStringFromCGRect(btn.frame));
         
         if(CGRectContainsPoint(btn.frame, convertStr)){
             

@@ -48,15 +48,16 @@ ViewClass *form;
     NSMutableArray *member = [self.toyBox objectForKey:@"formula"];
     for (ViewClass *fs in member) {
         [fs upDate];
-//        NSLog(@"for in");
+        NSLog(@"for in");
     }
     
 //    NSLog(@"for out");
     if([Jclass judgeCheck:member[0] :member[1]] != 0){
 
         [Jclass setPosition:10 :252 + 768];
+//        [Button setUpdateMode:@"upDate2"];
         [View.oya addSubview:Jclass];
-        NSLog(@"ちぇけらー！");
+//        NSLog(@"ちぇけらー！");
     }else{
         [Jclass resetPosition];
     }

@@ -175,14 +175,7 @@ int fe2;
     [self makeRandom];
     
     [formula1 setVariable:a1 :b1 :e1];
-//    formula1.A.text = [NSString stringWithFormat:@"%d",a1];
-//    formula1.B.text = [NSString stringWithFormat:@"%d",b1];
-//    formula1.E.text = [NSString stringWithFormat:@"%d",e1];
-
     [formula2 setVariable:a2 :b2 :e2];
-//    formula2.A.text = [NSString stringWithFormat:@"%d",a2];
-//    formula2.B.text = [NSString stringWithFormat:@"%d",b2];
-//    formula2.E.text = [NSString stringWithFormat:@"%d",e2];
 }
 
 - (void)setVal
@@ -312,7 +305,8 @@ int fe2;
         q = c*x + d*y;
         NSLog(@"p = %d, q = %d",p,q);
         
-        if((p> -20 && p < 20) && (q <20 && q > -20))
+        if( ((p> -20 && p < 20) && (q <20 && q > -20))
+            && (x != 0 && y != 0 && a != 0 && b != 0 && c != 0 && d != 0))
            break;
     }
     
