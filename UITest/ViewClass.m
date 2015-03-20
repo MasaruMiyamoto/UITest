@@ -241,7 +241,7 @@ int Con;
     [appDelegate.toyBox setObject:list forKey:@"list"];
     [appDelegate.Button setUpdateMode: @"upDate2"];
 
-    NSLog(@"cul");
+//    NSLog(@"cul");
     
 }
 
@@ -314,6 +314,7 @@ int Con;
 {
     self.frame = CGRectOffset(self.frame, x, y);
 }
+
 
 -(void)setVariable:(int)a :(int)b :(int)e
 {

@@ -72,8 +72,8 @@ AppDelegate *appDelegate;
     E2 = (int)[f2.E.text integerValue];
     
     
-    NSLog(@"A1 = %d, A2 = %d",A1,A2);
-    NSLog(@"B1 = %d, B2 = %d",B1,B2);
+//    NSLog(@"A1 = %d, A2 = %d",A1,A2);
+//    NSLog(@"B1 = %d, B2 = %d",B1,B2);
     
     /** ２回目以降の処理のリセット **/
     [self chengeTextColor:f1.A :f2.A :0];

@@ -149,15 +149,16 @@ int fe2;
 {
 //    NSLog(@"start");
     if(selects.Sel1.alpha == 1.0){
-//        NSLog(@"Sel1");
         [self keepVal];
         
-        NSLog(@"%@",formula1.A.text);
+//        NSLog(@"%@",formula1.A.text);
         
         [self setVal];
         [self scrollUpDate];
         [self secondLabels];
+//        NSLog(@"Sel1");
         [self upDate];
+        
         
         [sv setContentOffset:offset animated:YES];
         [selects dontSelects:self];
@@ -275,6 +276,7 @@ int fe2;
     /**********/
     
     [button setUpdateMode:@"upDate"];
+    [appDelegate upDate];
     
 //    [self initScroller:oya];
 }

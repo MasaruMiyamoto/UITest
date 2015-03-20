@@ -296,19 +296,19 @@ int IsUpdate;
 {
     int x;
     if([mode isEqualToString:@"upDate"]){
-        [appDelegate upDate];
-        NSLog(@"chenge 1 mode");
+//        NSLog(@"chenge 1 mode");
         x = 1;
     }
     else if([mode isEqualToString:@"upDate2"]){
         x = 2;
-        NSLog(@"chenge 2 mode");
+//        NSLog(@"chenge 2 mode");
     }
     else if([mode isEqualToString:@"upDate3"])
         x = 3;
     else
         x = 0;
     IsUpdate = x;
+//    NSLog(@"x = %d",x);
 }
 
 

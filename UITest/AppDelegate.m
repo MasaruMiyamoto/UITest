@@ -48,7 +48,7 @@ ViewClass *form;
     NSMutableArray *member = [self.toyBox objectForKey:@"formula"];
     for (ViewClass *fs in member) {
         [fs upDate];
-        NSLog(@"for in");
+//        NSLog(@"for in");
     }
     
 //    NSLog(@"for out");
@@ -60,14 +60,15 @@ ViewClass *form;
 //        NSLog(@"ちぇけらー！");
     }else{
         [Jclass resetPosition];
+//        NSLog(@"ここ通った？");
     }
-    NSLog(@"1 mode");
+//    NSLog(@"1 mode");
 }
 
 - (void)upDate2
 {
-    NSLog(@"2 mode");
-    NSLog(@" %d",[form checkSum]);
+//    NSLog(@"2 mode");
+//    NSLog(@" %d",[form checkSum]);
 //    [self initToyBox];
     if([form checkSum]){
         [self initToyBox];
