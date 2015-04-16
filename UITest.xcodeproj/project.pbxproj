@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		44ABDF111ADF79880019ECD3 /* SetField.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ABDF101ADF79880019ECD3 /* SetField.m */; };
+		44ABDF171ADFA0F90019ECD3 /* RandomClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ABDF161ADFA0F90019ECD3 /* RandomClass.m */; };
 		44AC726E1A962B3A00AFF9CD /* SelectButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AC726D1A962B3A00AFF9CD /* SelectButtons.m */; };
 		44AD14F21AA0351C00143EAF /* JudgeClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AD14F11AA0351C00143EAF /* JudgeClass.m */; };
 		44B0BCF81A1C739F00203F57 /* SetButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 44B0BCF71A1C739F00203F57 /* SetButton.m */; };
@@ -32,6 +34,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		44ABDF0F1ADF79880019ECD3 /* SetField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetField.h; sourceTree = "<group>"; };
+		44ABDF101ADF79880019ECD3 /* SetField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetField.m; sourceTree = "<group>"; };
+		44ABDF151ADFA0F90019ECD3 /* RandomClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomClass.h; sourceTree = "<group>"; };
+		44ABDF161ADFA0F90019ECD3 /* RandomClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RandomClass.m; sourceTree = "<group>"; };
 		44AC726C1A962B3A00AFF9CD /* SelectButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectButtons.h; sourceTree = "<group>"; };
 		44AC726D1A962B3A00AFF9CD /* SelectButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectButtons.m; sourceTree = "<group>"; };
 		44AD14F01AA0351C00143EAF /* JudgeClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JudgeClass.h; path = ../JudgeClass.h; sourceTree = "<group>"; };
@@ -103,10 +109,14 @@
 				78A4345E1A1AF95B00469530 /* ViewClass.m */,
 				44B0BCF61A1C739F00203F57 /* SetButton.h */,
 				44B0BCF71A1C739F00203F57 /* SetButton.m */,
+				44ABDF0F1ADF79880019ECD3 /* SetField.h */,
+				44ABDF101ADF79880019ECD3 /* SetField.m */,
 				44AC726C1A962B3A00AFF9CD /* SelectButtons.h */,
 				44AC726D1A962B3A00AFF9CD /* SelectButtons.m */,
 				44AD14F01AA0351C00143EAF /* JudgeClass.h */,
 				44AD14F11AA0351C00143EAF /* JudgeClass.m */,
+				44ABDF151ADFA0F90019ECD3 /* RandomClass.h */,
+				44ABDF161ADFA0F90019ECD3 /* RandomClass.m */,
 				78A4343E1A1AF72C00469530 /* Main.storyboard */,
 				78A434411A1AF72C00469530 /* Images.xcassets */,
 				78A434431A1AF72C00469530 /* LaunchScreen.xib */,
@@ -244,12 +254,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				78A4343D1A1AF72C00469530 /* ViewController.m in Sources */,
+				44ABDF111ADF79880019ECD3 /* SetField.m in Sources */,
 				44B0BCF81A1C739F00203F57 /* SetButton.m in Sources */,
 				78A4343A1A1AF72C00469530 /* AppDelegate.m in Sources */,
 				78A434371A1AF72C00469530 /* main.m in Sources */,
 				78A4345F1A1AF95B00469530 /* ViewClass.m in Sources */,
 				44AD14F21AA0351C00143EAF /* JudgeClass.m in Sources */,
 				44AC726E1A962B3A00AFF9CD /* SelectButtons.m in Sources */,
+				44ABDF171ADFA0F90019ECD3 /* RandomClass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,7 +337,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -361,7 +373,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -433,7 +445,7 @@
 				78A434531A1AF72C00469530 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		78A434541A1AF72C00469530 /* Build configuration list for PBXNativeTarget "UITest" */ = {
 			isa = XCConfigurationList;
@@ -442,7 +454,7 @@
 				78A434561A1AF72C00469530 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		78A434571A1AF72C00469530 /* Build configuration list for PBXNativeTarget "UITestTests" */ = {
 			isa = XCConfigurationList;
@@ -451,7 +463,7 @@
 				78A434591A1AF72C00469530 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

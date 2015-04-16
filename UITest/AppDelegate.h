@@ -17,13 +17,16 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (retain, nonatomic) NSMutableDictionary *toyBox;
+
+@property (assign, nonatomic) int IsUpdate;
+
+
 @property (retain, nonatomic) ViewController *View;
 @property (retain, nonatomic) SetButton *Button;
 @property (retain, nonatomic) ViewClass *form;
 
 - (void)initToyBox;
 - (void)upDate;
-- (void)upDate2;
-- (void)upDate3;
+- (void)setUpdateMode:(NSString *)mode;
 @end
 

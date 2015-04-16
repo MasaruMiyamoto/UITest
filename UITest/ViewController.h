@@ -8,15 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
-#import "ViewClass.h"
+//#import "ViewClass.h"
 #import "SetButton.h"
 #import "SelectButtons.h"
-
+#import "SetField.h"
+#import "RandomClass.h"
 
 @interface ViewController : UIViewController
 
 @property(nonatomic, readonly)UIView *oya;
-
+- (void)newScroll;
 
 @end
 

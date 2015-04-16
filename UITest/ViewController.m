@@ -75,34 +75,9 @@ int fe2;
     //ラベルを貼付けるViewを作成
     oya = [[UIView alloc]init];
     oya.frame = CGRectMake(0, 0, 1024, 768);
-//    oya.backgroundColor = [UIColor yellowColor];
 
-    formula1 = [[ViewClass alloc] initWithPosition:91:123];
-    //oya に　formula1　を追加、表示
-    [formula1 setVariable:a1 :b1 :e1];
-    [formula1 chengeMode:1];
-    [oya addSubview:formula1];
-//    [self.view addSubview:oya];
-    
-    formula2 = [[ViewClass alloc] initWithPosition:91:252];
-    //oya に　formula2　を追加、表示
-    [formula2 setVariable:a2 :b2 :e2];
-    [formula2 chengeMode:1];
-    [oya addSubview:formula2];
-//    [self.view addSubview:oya];
-    
-    /*****おもちゃ箱に式のデータを保存*****/
-    appDelegate = [[UIApplication sharedApplication] delegate];
-    
-    NSMutableArray *f1 = [NSMutableArray arrayWithObjects:formula1.A ,formula1.Code, formula1.B, formula1.E, nil];
-    [appDelegate.toyBox setObject:f1 forKey:@"formula1"];
-    
-    NSMutableArray *f2 = [NSMutableArray arrayWithObjects:formula2.A , formula2.Code, formula2.B, formula2.E, nil];
-    [appDelegate.toyBox setObject:f2 forKey:@"formula2"];
-    
-    NSMutableArray *list = [NSMutableArray arrayWithObjects:@"formula1", @"formula2", nil];
-    [appDelegate.toyBox setObject:list forKey:@"list"];
-    /**********/
+    SetField *init = [[SetField alloc] init];
+    [init firstSet:oya];
     
     [self initScroller:oya];
 }
@@ -114,7 +89,7 @@ int fe2;
     
     button = [[SetButton alloc] init];
     [button move:713 :165];
-    [button setUpdateMode:@"init"];
+    [appDelegate setUpdateMode:@"init"];
     [self.view addSubview:button];
     appDelegate.Button = button;
 
@@ -128,6 +103,7 @@ int fe2;
     //    sv.backgroundColor = [UIColor cyanColor];
     sv.bounces = NO;
     sv.panGestureRecognizer.minimumNumberOfTouches = 2;
+    sv.panGestureRecognizer.maximumNumberOfTouches = 2;
     [sv addSubview:view];
     sv.contentSize = view.bounds.size;
     [self.view addSubview:sv];
@@ -149,18 +125,14 @@ int fe2;
 {
 //    NSLog(@"start");
     if(selects.Sel1.alpha == 1.0){
-        [self keepVal];
+//        [self keepVal];
         
 //        NSLog(@"%@",formula1.A.text);
         
-        [self setVal];
-        [self scrollUpDate];
+//        [self setVal];
         [self secondLabels];
-//        NSLog(@"Sel1");
-        [self upDate];
         
-        
-        [sv setContentOffset:offset animated:YES];
+        [self newScroll];
         [selects dontSelects:self];
         
     }else if(selects.Sel2.alpha == 1.0){
@@ -169,52 +141,6 @@ int fe2;
 //        NSLog(@"Both");
     }
     
-}
-
-- (void)randomAction :(id)sender
-{
-    [self makeRandom];
-    
-    [formula1 setVariable:a1 :b1 :e1];
-    [formula2 setVariable:a2 :b2 :e2];
-}
-
-- (void)setVal
-{
-    fa1 = (int)[formula1.A.text integerValue];
-    if([formula1.Code.text isEqual:@"+"]){
-        fb1 = (int)[formula1.B.text integerValue];
-    }else{
-        fb1 = -(int)[formula1.B.text integerValue];
-    }
-    fe1 = (int)[formula1.E.text integerValue];
-    
-    fa2 = (int)[formula2.A.text integerValue];
-    if([formula2.Code.text isEqual:@"+"]){
-        fb2 = (int)[formula2.B.text integerValue];
-    }else{
-        fb2 = -(int)[formula2.B.text integerValue];
-    }
-    fe2 = (int)[formula2.E.text integerValue];
-}
-
-- (void)keepVal
-{
-    a1 = (int)[formula1.A.text integerValue];
-    if([formula1.Code.text isEqual:@"+"]){
-        b1 = (int)[formula1.B.text integerValue];
-    }else{
-        b1 = -(int)[formula1.B.text integerValue];
-    }
-    e1 = (int)[formula1.E.text integerValue];
-    
-    a2 = (int)[formula2.A.text integerValue];
-    if([formula2.Code.text isEqual:@"+"]){
-        b2 = (int)[formula2.B.text integerValue];
-    }else{
-        b2 = -(int)[formula2.B.text integerValue];
-    }
-    e2 = (int)[formula2.E.text integerValue];
 }
 
 - (void)initSelects
@@ -238,89 +164,33 @@ int fe2;
 - (void)scrollUpDate
 {
     offset.y = oya.frame.size.height;
+    NSLog(@"%f", offset.y);
     oya.frame = CGRectMake(0, 0, 1024, oya.frame.size.height + 768);
 }
 
+- (void)newScroll
+{
+    [self scrollUpDate];
+    [self upDate];
+    [sv setContentOffset:offset animated:YES];
+}
 
 /**********/
 /***** 2ページ目の動作 *****/
 
 - (void)secondLabels
 {
-    formula1 = [[ViewClass alloc] initWithPosition: 91: 123 + 768];
-    //oya に　formula1　を追加、表示
-    [formula1 setVariable: fa1: fb1: fe1];
-    [formula1 chengeMode:2];
-    [oya addSubview:formula1];
-    
-//    NSLog(@"-------------");
-    formula2 = [[ViewClass alloc] initWithPosition: 91: 252 + 768];
-    //oya に　formula2　を追加、表示
-    [formula2 setVariable: fa2: fb2: fe2];
-    [formula2 chengeMode:2];
-    [oya addSubview:formula2];
-    [self.view addSubview:oya];
-    
-    /*****おもちゃ箱に式のデータを保存*****/
-    appDelegate = [[UIApplication sharedApplication] delegate];
-    [appDelegate initToyBox];
-    NSMutableArray *f1 = [NSMutableArray arrayWithObjects:formula1.A, formula1.Mul, nil];
-    [appDelegate.toyBox setObject:f1 forKey:@"formula1"];
-    NSMutableArray *f2 = [NSMutableArray arrayWithObjects:formula2.A, formula2.Mul, nil];
-    [appDelegate.toyBox setObject:f2 forKey:@"formula2"];
-    NSMutableArray *list = [NSMutableArray arrayWithObjects:@"formula1", @"formula2", nil];
-    [appDelegate.toyBox setObject:list forKey:@"list"];
-    NSMutableArray *f = [NSMutableArray arrayWithObjects:formula1, formula2, nil];
-    [appDelegate.toyBox setObject:f forKey:@"formula"];
+    SetField *init = [[SetField alloc] init];
+    [init secondSet:oya];
     appDelegate.View = self;
-    /**********/
-    
-    [button setUpdateMode:@"upDate"];
-    [appDelegate upDate];
-    
-//    [self initScroller:oya];
 }
 
+
 /***** ランダム値の生成 *****/
-- (void)makeRandom
+- (void)randomAction :(id)sender
 {
-    int min = -10;
-    int max = 10;
-    
-    int x,y;
-    int a,b,c,d;
-    
-    int p = -100;
-    int q = -100;
-    
-    while (YES){
-    
-        x = arc4random_uniform(max + 1 - min) + min;
-        y = arc4random_uniform(max + 1 - min) + min;
-        
-        a = arc4random_uniform(max + 1 - min) + min;
-        b = arc4random_uniform(max + 1 - min) + min;
-        c = arc4random_uniform(max + 1 - min) + min;
-        d = arc4random_uniform(max + 1 - min) + min;
-        
-        p = a*x + b*y;
-        q = c*x + d*y;
-        NSLog(@"p = %d, q = %d",p,q);
-        
-        if( ((p> -20 && p < 20) && (q <20 && q > -20))
-            && (x != 0 && y != 0 && a != 0 && b != 0 && c != 0 && d != 0))
-           break;
-    }
-    
-//    NSLog(@"p = %d, q = %d",p,q);
-    
-    a1 = a;
-    b1 = b;
-    e1 = p;
-    
-    a2 = c;
-    b2 = d;
-    e2 = q;
+    RandomClass *ram = [[RandomClass alloc] init];
+    [ram makeRandom];
 }
 
 @end

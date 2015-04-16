@@ -38,10 +38,10 @@
 - (void)canMoving :(NSString *)str;
 - (void)cannotMoving :(NSString *)str;
 - (void)upDate;
-- (void)upDate2;
+//- (void)upDate2;
 -(BOOL)checkSum;
 - (ViewClass *)copyWithPosition: (ViewClass *)origin :(int)x :(int)y;
 - (void)levelingLabel:(ViewClass *)mine;
 - (BOOL) checkDiv;
-
+- (void)setAns :(UILabel *)lbly :(UILabel *)lblmul :(int)x :(int)y;
 @end

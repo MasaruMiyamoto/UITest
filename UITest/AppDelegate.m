@@ -19,6 +19,7 @@
 @implementation AppDelegate
 
 
+
 JudgeClass *Jclass;
 ViewController *View;
 SetButton *Button;
@@ -26,6 +27,7 @@ ViewClass *form;
 
 @synthesize View;
 @synthesize form;
+@synthesize IsUpdate;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -42,6 +44,25 @@ ViewClass *form;
 }
 
 - (void)upDate
+{
+//    NSLog(@"IsUpdate = %d", IsUpdate);
+    
+    switch (IsUpdate) {
+        case 1:
+            [self upDate1];
+            break;
+        case 2:
+            [self upDate2];
+            break;
+        case 3:
+            [self upDate3];
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)upDate1
 {
 //    NSLog(@"update");
     
@@ -77,16 +98,45 @@ ViewClass *form;
         [Cf levelingLabel:Cf];
 //        NSLog(@" %@",Cf.B.text);
         [View.oya addSubview:Cf];
-        [Button setUpdateMode:@"upDate3"];
+        [self setUpdateMode:@"upDate3"];
     }
 }
 
 - (void)upDate3
 {
-    NSLog(@"3 mode");
-    if([form checkDiv])
-        NSLog(@"Div OK");
+//    NSLog(@"3 mode");
+    if([form checkDiv]){
+//        NSLog(@"Div OK");
+        ViewClass *f3 = [[ViewClass alloc] init];
+        [f3 setAns:form.X :form.Mul :91 :550 +768];
+        [View.oya addSubview:f3];
+        
+        [View newScroll];
+        
+    }
 }
+
+- (void)setUpdateMode:(NSString *)mode
+{
+    int x;
+    if([mode isEqualToString:@"upDate1"]){
+        //        NSLog(@"chenge 1 mode");
+        x = 1;
+    }
+    else if([mode isEqualToString:@"upDate2"]){
+        x = 2;
+        //        NSLog(@"chenge 2 mode");
+    }
+    else if([mode isEqualToString:@"upDate3"])
+        x = 3;
+    else {
+        x = 0;
+//        NSLog(@"IsUpdate = 0");
+    }
+    IsUpdate = x;
+    //    NSLog(@"x = %d",x);
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

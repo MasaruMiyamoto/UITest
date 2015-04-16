@@ -133,9 +133,9 @@ int Con;
     Code.minimumScaleFactor = 20/50;
     [self addSubview:Code];
     
-    A.text = @"A";
-    B.text = @"B";
-    E.text = @"E";
+    A.text = @"";
+    B.text = @"";
+    E.text = @"";
     X.text = @"x";
     Y.text = @"y";
     Equal.text = @"=";
@@ -239,7 +239,7 @@ int Con;
     NSMutableArray *list = [NSMutableArray arrayWithObjects:@"obj", nil];
     
     [appDelegate.toyBox setObject:list forKey:@"list"];
-    [appDelegate.Button setUpdateMode: @"upDate2"];
+    [appDelegate setUpdateMode: @"upDate2"];
 
 //    NSLog(@"cul");
     
@@ -435,12 +435,12 @@ int Con;
                 
                 [self diviMode];
                 
-                
             }else{
 //                [self back:A];
                 self.Code.text = @"";
                 self.B.backgroundColor = [UIColor clearColor];
             }
+            
             [self back:A];
             break;
         case 2:
@@ -472,7 +472,7 @@ int Con;
 {
     int e = (int)[self.Mul.text integerValue];
     
-    NSLog(@"Val = %d, e = %d",Val,e);
+//    NSLog(@"Val = %d, e = %d",Val,e);
     if(Val == e)
         return YES;
     return NO;
@@ -508,13 +508,13 @@ int Con;
     
 }
 
-- (void)upDate2
-{
-    if([self checkSum]){
-        NSLog(@"checkSum");
-//        appDelegate.formulaR = self;
-    }
-}
+//- (void)upDate2
+//{
+//    if([self checkSum]){
+//        NSLog(@"checkSum");
+////        appDelegate.formulaR = self;
+//    }
+//}
 
 - (ViewClass *)copyWithPosition: (ViewClass *)origin :(int)x :(int)y
 {
@@ -533,6 +533,9 @@ int Con;
     Copy.A.backgroundColor = origin.A.backgroundColor;
     Copy.B.backgroundColor = origin.B.backgroundColor;
     Copy.E.backgroundColor = origin.E.backgroundColor;
+    
+    Copy.Mul.text = origin.Mul.text;
+    
     
     [Copy move: x:y];
     return Copy;
@@ -566,9 +569,29 @@ int Con;
     mine.Code.frame = CGRectOffset(mine.E.frame, 70, 0);
     mine.B.frame = CGRectOffset(mine.Code.frame, 70, 0);
     mine.B.backgroundColor = [UIColor clearColor];
-    NSLog(@" code = %lf", mine.Code.frame.origin.x);
+//    NSLog(@" code = %lf", mine.Code.frame.origin.x);
 //    NSLog(@" mul = %lf", mine.Mul.frame.origin.x);
     
+}
+
+- (void)setAns :(UILabel *)lbl1 :(UILabel *)lbl2 :(int)x :(int)y
+{
+    self.X.frame = CGRectMake(0, 0, size, size);
+    self.Equal.frame = CGRectMake(self.X.frame.origin.x + 50, 0, size, size);
+    self.E.frame = CGRectMake(self.Equal.frame.origin.x + 70, 0, size, size);
+    
+    self.X.text = lbl1.text;
+    self.Equal.text = @"=";
+    self.E.text = lbl2.text;
+    
+    [self.A removeFromSuperview];
+    [self.B removeFromSuperview];
+    [self.Mul removeFromSuperview];
+    [self.Code removeFromSuperview];
+    [self.Y removeFromSuperview];
+    
+    [self move:x :y];
+    appDelegate.form = self;
 }
 
 //アニメーション

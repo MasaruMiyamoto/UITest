@@ -36,8 +36,6 @@ UIImageView *img,
 
 AppDelegate *appDelegate;
 
-int IsUpdate;
-
 @synthesize btn;
 @synthesize img;
 @synthesize tmp;
@@ -292,24 +290,7 @@ int IsUpdate;
     [UIView commitAnimations];
 }
 
-- (void)setUpdateMode:(NSString *)mode
-{
-    int x;
-    if([mode isEqualToString:@"upDate"]){
-//        NSLog(@"chenge 1 mode");
-        x = 1;
-    }
-    else if([mode isEqualToString:@"upDate2"]){
-        x = 2;
-//        NSLog(@"chenge 2 mode");
-    }
-    else if([mode isEqualToString:@"upDate3"])
-        x = 3;
-    else
-        x = 0;
-    IsUpdate = x;
-//    NSLog(@"x = %d",x);
-}
+
 
 
 /*****タップ操作*****/
@@ -347,27 +328,12 @@ int IsUpdate;
     
     NSMutableArray *list = [appDelegate.toyBox objectForKey:@"list"];
     for (NSString *str in list) {
-//        NSLog(@"Throgh");
+        //        NSLog(@"Throgh");
         [self isTrriger :str];
     }
-    [self back];
     
-    switch (IsUpdate) {
-        case 1:
-            [appDelegate upDate];
-            break;
-            
-        case 2:
-            [appDelegate upDate2];
-            break;
-            
-        case 3:
-            [appDelegate upDate3];
-            break;
-            
-        default:
-            break;
-    }
+    [appDelegate upDate];
+    [self back];
     
 }
 
