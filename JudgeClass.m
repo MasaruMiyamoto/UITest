@@ -25,6 +25,7 @@ AppDelegate *appDelegate;
 - (id)init{
     self = [super init];
     self.frame = CGRectMake(0, 0, Width, Height);
+//    NSLog(@"make judgecalss");
     [self setLabel];
     [self makeClass];
     return self;
@@ -34,6 +35,7 @@ AppDelegate *appDelegate;
 {
     self.frame = CGRectMake( x, y, self.frame.size.width, self.frame.size.height);
 //    self.backgroundColor = [UIColor cyanColor];
+//    NSLog(@"set judge");
 //    [self setLabel];
 }
 
@@ -78,7 +80,7 @@ AppDelegate *appDelegate;
     /** ２回目以降の処理のリセット **/
     [self chengeTextColor:f1.A :f2.A :0];
     [self chengeTextColor:f1.B :f2.B :0];
-    [self unDisplay];
+//    [self unDisplay];
     /****/
     
     if(A1 - A2 == 0){

@@ -20,8 +20,9 @@ UIScrollView *sv;
 
 @synthesize oya;
 
-ViewClass *formula1;
-ViewClass *formula2;
+//ViewClass *formula1;
+//ViewClass *formula2;
+
 SetButton *button;
 SelectButtons *selects;
 
@@ -29,32 +30,11 @@ AppDelegate *appDelegate;
 
 CGPoint offset;
 
-UIView *btn;
-
-int a1 = 8;
-int b1 = -7;
-int e1 = 11;
-
-int a2 = 2;
-int b2 = -4;
-int e2 = 14;
-
-int fa1;
-int fb1;
-int fe1;
-
-int fa2;
-int fb2;
-int fe2;
-
-
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
      //Do any additional setup after loading the view, typically from a nib.
-    
-    appDelegate = [[UIApplication sharedApplication] delegate];
     
     [self initLabels];
     [self initSelects];
@@ -86,7 +66,6 @@ int fe2;
 {
     /*****ボタンの設置*****/
     // root viewに直接貼付ける
-    
     button = [[SetButton alloc] init];
     [button move:713 :165];
     [appDelegate setUpdateMode:@"init"];
@@ -114,6 +93,7 @@ int fe2;
 {
     [oya removeFromSuperview];
     [button removeFromSuperview];
+    [selects removeFromSuperview];
     [appDelegate initToyBox];
     [self initLabels];
     [self initButtons];
@@ -130,11 +110,11 @@ int fe2;
 //        NSLog(@"%@",formula1.A.text);
         
 //        [self setVal];
-        [self secondLabels];
         
         [self newScroll];
+        [self secondLabels];
         [selects dontSelects:self];
-        
+        [appDelegate upDate];
     }else if(selects.Sel2.alpha == 1.0){
 //        NSLog(@"Sel2");
     }else{
@@ -164,7 +144,7 @@ int fe2;
 - (void)scrollUpDate
 {
     offset.y = oya.frame.size.height;
-    NSLog(@"%f", offset.y);
+//    NSLog(@"%f", offset.y);
     oya.frame = CGRectMake(0, 0, 1024, oya.frame.size.height + 768);
 }
 

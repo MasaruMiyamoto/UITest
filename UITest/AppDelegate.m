@@ -34,7 +34,7 @@ ViewClass *form;
     self.toyBox = [[NSMutableDictionary alloc] init];
     Button = [[SetButton alloc] init];
     Jclass = [[JudgeClass alloc] init];
-//    formula = [[ViewClass alloc] init];
+    form = [[ViewClass alloc] init];
     
     return YES;
 }
@@ -64,7 +64,7 @@ ViewClass *form;
 
 - (void)upDate1
 {
-//    NSLog(@"update");
+    NSLog(@"update 1");
     
     NSMutableArray *member = [self.toyBox objectForKey:@"formula"];
     for (ViewClass *fs in member) {
@@ -74,21 +74,21 @@ ViewClass *form;
     
 //    NSLog(@"for out");
     if([Jclass judgeCheck:member[0] :member[1]] != 0){
-
         [Jclass setPosition:10 :252 + 768];
-//        [Button setUpdateMode:@"upDate2"];
         [View.oya addSubview:Jclass];
-//        NSLog(@"ちぇけらー！");
+        [View.oya bringSubviewToFront:Jclass];
+        NSLog(@"Jclass position.y = %f",Jclass.frame.origin.y);
+        NSLog(@"ちぇけらー！");
     }else{
         [Jclass resetPosition];
-//        NSLog(@"ここ通った？");
+        NSLog(@"ここ通った？");
     }
-//    NSLog(@"1 mode");
+    NSLog(@"1 mode");
 }
 
 - (void)upDate2
 {
-//    NSLog(@"2 mode");
+    NSLog(@"2 mode");
 //    NSLog(@" %d",[form checkSum]);
 //    [self initToyBox];
     if([form checkSum]){

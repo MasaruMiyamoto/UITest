@@ -36,13 +36,13 @@
 //        NSLog(@"p = %d, q = %d",p,q);
         
         if( ((p> -20 && p < 20) && (q <20 && q > -20))
-           && (x != 0 && y != 0 && a != 0 && b != 0 && c != 0 && d != 0))
+           && (x != 0 && y != 0 && a != 0 && b != 0 && c != 0 && d != 0 && p != 0 && q != 0))
             break;
     }
     
     //    NSLog(@"p = %d, q = %d",p,q);
-    NSLog(@"a = %d, b = %d, p = %d",a,b,p);
-    NSLog(@"c = %d, d = %d, q = %d",c,d,q);
+//    NSLog(@"a = %d, b = %d, p = %d",a,b,p);
+//    NSLog(@"c = %d, d = %d, q = %d",c,d,q);
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     
@@ -58,7 +58,10 @@
     if(b < 0){
         lc1.text = [NSString stringWithFormat:@"-"];
         b = -1 * b;
+    }else{
+        lc1.text = [NSString stringWithFormat:@"+"];
     }
+    
     lb1.text = [NSString stringWithFormat:@"%d",b];
     
     le1.text = [NSString stringWithFormat:@"%d",p];
@@ -76,7 +79,10 @@
     if(d < 0){
         lc2.text = [NSString stringWithFormat:@"-"];
         d = -1 * d;
+    }else{
+        lc2.text = [NSString stringWithFormat:@"+"];
     }
+    
     lb2.text = [NSString stringWithFormat:@"%d",d];
     
     le2.text = [NSString stringWithFormat:@"%d",q];

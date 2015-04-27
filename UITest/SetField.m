@@ -82,7 +82,7 @@ int a2,b2,e2;
     /**********/
     
     [appDelegate setUpdateMode:@"upDate1"];
-    [appDelegate upDate];
+//    [appDelegate upDate];
 }
 
 //大域変数に格納　原則secondSet内でのみの呼び出し
