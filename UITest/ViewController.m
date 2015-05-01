@@ -58,7 +58,6 @@ CGPoint offset;
 
     SetField *init = [[SetField alloc] init];
     [init firstSet:oya];
-    
     [self initScroller:oya];
 }
 

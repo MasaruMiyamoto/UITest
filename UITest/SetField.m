@@ -24,14 +24,12 @@ int a2,b2,e2;
 //    [formula1 setVariable:1 :2 :3];
     [formula1 chengeMode:1];
     [oya addSubview:formula1];
-    //    [self.view addSubview:oya];
     
     ViewClass *formula2 = [[ViewClass alloc] initWithPosition:91:252];
     //oya に　formula2　を追加、表示
 //    [formula2 setVariable:1 :2 :3];
     [formula2 chengeMode:1];
     [oya addSubview:formula2];
-    //    [self.view addSubview:oya];
     
     /*****おもちゃ箱に式のデータを保存*****/
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
@@ -66,7 +64,6 @@ int a2,b2,e2;
     [formula2 setVariable: a2: b2: e2];
     [formula2 chengeMode:2];
     [oya addSubview:formula2];
-//    [self.view addSubview:oya];
     
     /*****おもちゃ箱に式のデータを保存*****/
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
@@ -82,8 +79,40 @@ int a2,b2,e2;
     /**********/
     
     [appDelegate setUpdateMode:@"upDate1"];
-//    [appDelegate upDate];
 }
+
+
+- (void)thirdSet :(UIView *)oya :(ViewClass *)view
+{
+    //求めた一方解　[view] を表示する
+    ViewClass *View = [[ViewClass alloc] init];
+    NSLog(@"view.position = %f",view.frame.origin.y);
+    View = [View copyWithPosition:view :91 :100 + 768 + 768];
+    NSLog(@"View.position = %f",view.frame.origin.y);
+    [oya addSubview:View];
+    
+    ViewClass *formula1 = [[ViewClass alloc] initWithPosition: 91: 268 + 768 +768];
+    //oya に　formula1　を追加、表示
+    
+    [formula1 setVariable: a1: b1: e1];
+//    [formula1 chengeMode:2];
+    [oya addSubview:formula1];
+    
+    ViewClass *formula2 = [[ViewClass alloc] initWithPosition: 91: 397 + 768 +768];
+    //oya に　formula2　を追加、表示
+    
+    [formula2 setVariable: a2: b2: e2];
+//    [formula2 chengeMode:2];
+    [oya addSubview:formula2];
+    
+    /*****おもちゃ箱に式のデータを保存*****/
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    
+    /**********/
+    
+    [appDelegate setUpdateMode:@"upDate4"];
+}
+
 
 //大域変数に格納　原則secondSet内でのみの呼び出し
 - (void)getVal :(NSString *)str

@@ -12,6 +12,7 @@
 @class ViewClass;
 @class JudgeClass;
 @class SetButton;
+@class SetField;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -24,6 +25,7 @@
 @property (retain, nonatomic) ViewController *View;
 @property (retain, nonatomic) SetButton *Button;
 @property (retain, nonatomic) ViewClass *form;
+@property (retain, nonatomic) SetField *Set;
 
 - (void)initToyBox;
 - (void)upDate;

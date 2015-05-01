@@ -9,8 +9,9 @@
 #import "AppDelegate.h"
 #import "ViewClass.h"
 #import "JudgeClass.h"
-#import "SelectButtons.h"
+//#import "SelectButtons.h"
 #import "ViewController.h"
+#import "SetField.h"
 
 @interface AppDelegate ()
 
@@ -24,6 +25,7 @@ JudgeClass *Jclass;
 ViewController *View;
 SetButton *Button;
 ViewClass *form;
+SetField *Set;
 
 @synthesize View;
 @synthesize form;
@@ -35,7 +37,7 @@ ViewClass *form;
     Button = [[SetButton alloc] init];
     Jclass = [[JudgeClass alloc] init];
     form = [[ViewClass alloc] init];
-    
+    Set = [[SetField alloc] init];
     return YES;
 }
 
@@ -77,18 +79,18 @@ ViewClass *form;
         [Jclass setPosition:10 :252 + 768];
         [View.oya addSubview:Jclass];
         [View.oya bringSubviewToFront:Jclass];
-        NSLog(@"Jclass position.y = %f",Jclass.frame.origin.y);
-        NSLog(@"ちぇけらー！");
+//        NSLog(@"Jclass position.y = %f",Jclass.frame.origin.y);
+//        NSLog(@"ちぇけらー！");
     }else{
         [Jclass resetPosition];
-        NSLog(@"ここ通った？");
+//        NSLog(@"ここ通った？");
     }
-    NSLog(@"1 mode");
+//    NSLog(@"1 mode");
 }
 
 - (void)upDate2
 {
-    NSLog(@"2 mode");
+//    NSLog(@"2 mode");
 //    NSLog(@" %d",[form checkSum]);
 //    [self initToyBox];
     if([form checkSum]){
@@ -112,29 +114,30 @@ ViewClass *form;
         [View.oya addSubview:f3];
         
         [View newScroll];
-        
+//        [form copyWithPosition:f3 :0 :0];
+        [Set thirdSet:View.oya :f3];
     }
 }
 
 - (void)setUpdateMode:(NSString *)mode
 {
     int x;
-    if([mode isEqualToString:@"upDate1"]){
-        //        NSLog(@"chenge 1 mode");
+    
+    if([mode isEqualToString:@"upDate1"])
         x = 1;
-    }
-    else if([mode isEqualToString:@"upDate2"]){
+    else if([mode isEqualToString:@"upDate2"])
         x = 2;
-        //        NSLog(@"chenge 2 mode");
-    }
     else if([mode isEqualToString:@"upDate3"])
         x = 3;
+    else if([mode isEqualToString:@"upDate4"])
+        x = 4;
     else {
         x = 0;
 //        NSLog(@"IsUpdate = 0");
     }
+    
     IsUpdate = x;
-    //    NSLog(@"x = %d",x);
+//        NSLog(@"x = %d",x);
 }
 
 
