@@ -40,6 +40,9 @@ CGPoint offset;
     [self initSelects];
     [self initButtons];
     
+    RandomClass *ram = [[RandomClass alloc] init];
+    [ram makeRandom];
+    
 }
 
 - (void)didReceiveMemoryWarning

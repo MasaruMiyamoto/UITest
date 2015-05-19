@@ -22,13 +22,13 @@ int a2,b2,e2;
     
     //oya に　formula1　を追加、表示
 //    [formula1 setVariable:1 :2 :3];
-    [formula1 chengeMode:1];
+    [formula1 chengeMode:11];
     [oya addSubview:formula1];
     
     ViewClass *formula2 = [[ViewClass alloc] initWithPosition:91:252];
     //oya に　formula2　を追加、表示
 //    [formula2 setVariable:1 :2 :3];
-    [formula2 chengeMode:1];
+    [formula2 chengeMode:11];
     [oya addSubview:formula2];
     
     /*****おもちゃ箱に式のデータを保存*****/
@@ -43,6 +43,8 @@ int a2,b2,e2;
     NSMutableArray *list = [NSMutableArray arrayWithObjects:@"formula1", @"formula2", nil];
     [appDelegate.toyBox setObject:list forKey:@"list"];
     /**********/
+    
+    
     
 }
 
@@ -67,6 +69,7 @@ int a2,b2,e2;
     
     /*****おもちゃ箱に式のデータを保存*****/
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    
     [appDelegate initToyBox];
     NSMutableArray *f1 = [NSMutableArray arrayWithObjects:formula1.A, formula1.Mul, nil];
     [appDelegate.toyBox setObject:f1 forKey:@"formula1"];
@@ -76,6 +79,7 @@ int a2,b2,e2;
     [appDelegate.toyBox setObject:list forKey:@"list"];
     NSMutableArray *f = [NSMutableArray arrayWithObjects:formula1, formula2, nil];
     [appDelegate.toyBox setObject:f forKey:@"formula"];
+    
     /**********/
     
     [appDelegate setUpdateMode:@"upDate1"];
@@ -84,29 +88,57 @@ int a2,b2,e2;
 
 - (void)thirdSet :(UIView *)oya :(ViewClass *)view
 {
-    //求めた一方解　[view] を表示する
-    ViewClass *View = [[ViewClass alloc] init];
-    NSLog(@"view.position = %f",view.frame.origin.y);
-    View = [View copyWithPosition:view :91 :100 + 768 + 768];
-    NSLog(@"View.position = %f",view.frame.origin.y);
-    [oya addSubview:View];
     
-    ViewClass *formula1 = [[ViewClass alloc] initWithPosition: 91: 268 + 768 +768];
+    ViewClass *formula1 = [[ViewClass alloc] initWithPosition: 91: 230 + 768 +768];
     //oya に　formula1　を追加、表示
     
     [formula1 setVariable: a1: b1: e1];
-//    [formula1 chengeMode:2];
+    [formula1 chengeMode:12];
     [oya addSubview:formula1];
     
-    ViewClass *formula2 = [[ViewClass alloc] initWithPosition: 91: 397 + 768 +768];
+    ViewClass *formula2 = [[ViewClass alloc] initWithPosition: 91: 359 + 768 +768];
     //oya に　formula2　を追加、表示
     
     [formula2 setVariable: a2: b2: e2];
-//    [formula2 chengeMode:2];
+    [formula2 chengeMode:12];
     [oya addSubview:formula2];
+    
+    //求めた一方解　[view] を表示する
+    ViewClass *View = [[ViewClass alloc] init];
+    //    NSLog(@"view.position = %f",view.frame.origin.y);
+    View = [View copyWithPosition:view :91 :100 + 768 + 768];
+    //    NSLog(@"View.position = %f",view.frame.origin.y);
+    
+    [View chengeMode:4];
+    [oya addSubview:View];
+    
+//    NSLog(@"%d",[View isXY]);
     
     /*****おもちゃ箱に式のデータを保存*****/
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    
+    [appDelegate initToyBox];
+    
+    if([View isXY]){
+        
+        NSMutableArray *f1 = [NSMutableArray arrayWithObjects:formula1.A, formula1.X, nil];
+        [appDelegate.toyBox setObject:f1 forKey:@"formula1"];
+        NSMutableArray *f2 = [NSMutableArray arrayWithObjects:formula2.A, formula2.X, nil];
+        [appDelegate.toyBox setObject:f2 forKey:@"formula2"];
+        
+    }else{
+        
+        NSMutableArray *f1 = [NSMutableArray arrayWithObjects:formula1.A, formula1.Y, nil];
+        [appDelegate.toyBox setObject:f1 forKey:@"formula1"];
+        NSMutableArray *f2 = [NSMutableArray arrayWithObjects:formula2.A, formula2.Y, nil];
+        [appDelegate.toyBox setObject:f2 forKey:@"formula2"];
+        
+    }
+    
+    NSMutableArray *list = [NSMutableArray arrayWithObjects:@"formula1", @"formula2", nil];
+    [appDelegate.toyBox setObject:list forKey:@"list"];
+    NSMutableArray *f = [NSMutableArray arrayWithObjects:formula1, formula2, nil];
+    [appDelegate.toyBox setObject:f forKey:@"formula"];
     
     /**********/
     

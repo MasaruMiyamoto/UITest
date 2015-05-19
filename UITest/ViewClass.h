@@ -31,6 +31,8 @@
 
 @property(nonatomic, readonly)CGPoint tmp;
 
+
+
 - (id)initWithPosition:(int)x :(int)y;
 - (void)chengeMode:(int)mode;
 - (void)setVariable:(int)a :(int)b :(int)e;
@@ -39,9 +41,11 @@
 - (void)cannotMoving :(NSString *)str;
 - (void)upDate;
 //- (void)upDate2;
--(BOOL)checkSum;
+- (BOOL)checkSum;
+- (BOOL) isXY;
 - (ViewClass *)copyWithPosition: (ViewClass *)origin :(int)x :(int)y;
 - (void)levelingLabel:(ViewClass *)mine;
 - (BOOL) checkDiv;
 - (void)setAns :(UILabel *)lbly :(UILabel *)lblmul :(int)x :(int)y;
+
 @end

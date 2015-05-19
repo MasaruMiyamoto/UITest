@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "ViewClass.h"
+
 @interface SetField : NSObject
 
 - (void)firstSet :(UIView *)oya;

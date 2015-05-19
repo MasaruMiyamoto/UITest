@@ -8,11 +8,11 @@
 
 #import "ViewClass.h"
 
-#define size 80
-#define width 440 + 100
-#define height 80
-#define chooseColor colorWithRed:0.2 green:0.8 blue:0.5 alpha:1.0
-#define custom colorWithRed:0.95 green:0.9 blue:0.0 alpha:1.0
+#define Size 80
+#define Width 440 + 100
+#define Height 80
+#define ChooseColor colorWithRed:0.2 green:0.8 blue:0.5 alpha:1.0
+#define Custom colorWithRed:0.95 green:0.9 blue:0.0 alpha:1.0
 
 @implementation ViewClass
 
@@ -34,6 +34,11 @@ UILabel *Mul;
 int Val;
 int Con;
 
+//代入するための土台
+UIView *Label;
+int LabelPosition;
+int LabelValue;
+
 //@propertyの設定を実装
 @synthesize A;
 @synthesize B;
@@ -51,7 +56,7 @@ int Con;
 - (id)init
 {
     self = [super init];
-    self.frame = CGRectMake(0, 0, width, height);
+    self.frame = CGRectMake(0, 0, Width, Height);
     self.backgroundColor = [UIColor cyanColor];
     [self setLabel];
     [self setPosition];
@@ -61,7 +66,7 @@ int Con;
 - (id) initWithPosition:(int)x :(int)y
 {
     self = [super init];
-    self.frame = CGRectMake(x, y, width, height);
+    self.frame = CGRectMake(x, y, Width, Height);
     self.backgroundColor = [UIColor cyanColor];
     [self setLabel];
     [self setPosition];
@@ -86,7 +91,7 @@ int Con;
     A = [[UILabel alloc] init];
     A.textAlignment = NSTextAlignmentCenter;
     A.font = [UIFont systemFontOfSize:50];
-    A.frame = CGRectMake(0, 0, size, size);
+    A.frame = CGRectMake(0, 0, Size, Size);
     A.adjustsFontSizeToFitWidth = YES;
     A.minimumScaleFactor = 20/50;
     [self addSubview:A];
@@ -148,10 +153,12 @@ int Con;
 -(void)chengeMode:(int)mode
 {
     switch (mode) {
-        case 1:
+        case 11:
             [self enterMode];
             break;
-            
+        case 12:
+            [self subMode];
+            break;
         case 2:
             [self initMul];
             break;
@@ -164,8 +171,11 @@ int Con;
             [self culMode:NO];
             break;
             
+        case 4:
+            [self singleMode];
+            break;
         default:
-            NSLog(@"No");
+            NSLog(@"No chengeMode");
             break;
     }
 }
@@ -178,12 +188,19 @@ int Con;
     E.tag = 3;
     Code.tag = 4;
     
-    A.backgroundColor = [UIColor chooseColor];
-    B.backgroundColor = [UIColor chooseColor];
-    E.backgroundColor = [UIColor chooseColor];
+    A.backgroundColor = [UIColor ChooseColor];
+    B.backgroundColor = [UIColor ChooseColor];
+    E.backgroundColor = [UIColor ChooseColor];
     
 }
 
+//代入受付モード
+- (void)subMode
+{
+    X.tag = 1;
+    Y.tag = 2;
+    
+}
 
 //倍数モード
 -(void)mulMode
@@ -198,7 +215,7 @@ int Con;
     A.tag = 0;
     Mul.tag = 5;
     
-    Mul.backgroundColor = [UIColor chooseColor];
+    Mul.backgroundColor = [UIColor ChooseColor];
     
     [self addSubview:Mul];
 }
@@ -211,7 +228,7 @@ int Con;
     B.text = @"";
     E.text = @"";
     
-    E.backgroundColor = [UIColor chooseColor];
+    E.backgroundColor = [UIColor ChooseColor];
     E.tag = 3;
     
     appDelegate = [[UIApplication sharedApplication] delegate];
@@ -222,12 +239,12 @@ int Con;
     if(chenge){
         //yが残る
         X.text = @"";
-        B.backgroundColor = [UIColor chooseColor];
+        B.backgroundColor = [UIColor ChooseColor];
         B.tag = 5;
     }else{
         //xが残る
         Y.text = @"";
-        A.backgroundColor = [UIColor chooseColor];
+        A.backgroundColor = [UIColor ChooseColor];
         A.tag = 1;
     }
     
@@ -255,7 +272,7 @@ int Con;
     if ([self.B.text hasPrefix:@"-"]) {
         self.B.text = [@"(" stringByAppendingString:self.B.text];
         self.B.text = [self.B.text stringByAppendingString:@")"];
-        self.B.frame = CGRectMake(self.B.frame.origin.x, self.B.frame.origin.y, 100, size);
+        self.B.frame = CGRectMake(self.B.frame.origin.x, self.B.frame.origin.y, 100, Size);
         self.B.textAlignment = NSTextAlignmentLeft;
     }
     
@@ -263,7 +280,7 @@ int Con;
     self.B.backgroundColor = [UIColor clearColor];
     
     self.Y.text = @"=";
-    self.Y.frame = CGRectMake(self.B.frame.origin.x + 70, 0, size, size);
+    self.Y.frame = CGRectMake(self.B.frame.origin.x + 70, 0, Size, Size);
     [self mulMode];
     self.Mul.frame = CGRectOffset(self.Y.frame, 70, 0);
     
@@ -290,23 +307,57 @@ int Con;
     
 }
 
+
+//代入モード
+- (void) singleMode
+{
+    self.X.frame = CGRectMake(0, 0, Size, Size);
+    self.Equal.frame = CGRectMake(self.X.frame.origin.x + 50, 0, Size, Size);
+    self.E.frame = CGRectMake(self.Equal.frame.origin.x + 70, 0, Size, Size);
+    
+    [self.A removeFromSuperview];
+    [self.B removeFromSuperview];
+    [self.Mul removeFromSuperview];
+    [self.Code removeFromSuperview];
+    [self.Y removeFromSuperview];
+    
+    Label = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.E.frame.origin.x + Size, Size)];
+//    Label.backgroundColor = [UIColor orangeColor];
+    
+    Label.layer.cornerRadius = 30.0;
+    Label.clipsToBounds = YES;
+    
+    LabelPosition = Label.center.x - X.center.x;
+    LabelValue = (int)[E.text integerValue];
+    
+    // touchesBegan判定用
+    Label.tag = 3;
+    
+    [Label addSubview:self.X];
+    [Label addSubview:self.Equal];
+    [Label addSubview:self.E];
+    [self setBack:Label];
+    
+    [self addSubview:Label];
+    [self canMoving:@"Label"];
+}
 /**********/
 
 
 -(void)setMulPosition
 {
-    Mul.frame = CGRectMake(E.frame.origin.x + 100, 0, size, size);
+    Mul.frame = CGRectMake(E.frame.origin.x + 100, 0, Size, Size);
 }
 
 -(void)setPosition
 {
     A.frame = CGRectMake(0, 0, 80, 80);
-    X.frame = CGRectMake(A.frame.origin.x + 60, 0, size, size);
-    Code.frame = CGRectMake(X.frame.origin.x +50, 0, size, size);
-    B.frame = CGRectMake(Code.frame.origin.x + 70, 0, size, size);
-    Y.frame = CGRectMake(B.frame.origin.x + 60, 0, size, size);
-    Equal.frame = CGRectMake(Y.frame.origin.x + 50, 0, size, size);
-    E.frame = CGRectMake(Equal.frame.origin.x + 70, 0, size, size);
+    X.frame = CGRectMake(A.frame.origin.x + 60, 0, Size, Size);
+    Code.frame = CGRectMake(X.frame.origin.x +50, 0, Size, Size);
+    B.frame = CGRectMake(Code.frame.origin.x + 70, 0, Size, Size);
+    Y.frame = CGRectMake(B.frame.origin.x + 60, 0, Size, Size);
+    Equal.frame = CGRectMake(Y.frame.origin.x + 50, 0, Size, Size);
+    E.frame = CGRectMake(Equal.frame.origin.x + 70, 0, Size, Size);
 //    NSLog(@"%f",E.frame.origin.x);
 }
 
@@ -347,15 +398,21 @@ int Con;
 {
     if([str isEqualToString:@"A"]){
         A.userInteractionEnabled = YES;
-        A.backgroundColor = [UIColor redColor];
+        A.backgroundColor = [UIColor orangeColor];
     }else if([str isEqualToString:@"B"]){
         B.userInteractionEnabled = YES;
-        B.backgroundColor = [UIColor redColor];
+        B.backgroundColor = [UIColor orangeColor];
+    }else if([str isEqualToString:@"X"]){
+        X.userInteractionEnabled = YES;
+        X.backgroundColor = [UIColor orangeColor];
+    }else if([str isEqualToString:@"Label"]){
+        Label.userInteractionEnabled = YES;
+        Label.backgroundColor = [UIColor orangeColor];
     }else if([str isEqualToString:@"AB"]){
         A.userInteractionEnabled = YES;
         B.userInteractionEnabled = YES;
-        A.backgroundColor = [UIColor redColor];
-        B.backgroundColor = [UIColor redColor];
+        A.backgroundColor = [UIColor orangeColor];
+        B.backgroundColor = [UIColor orangeColor];
     }
 }
 
@@ -367,6 +424,12 @@ int Con;
     }else if([str isEqualToString:@"B"]){
         B.userInteractionEnabled = NO;
         B.backgroundColor = [UIColor clearColor];
+    }else if([str isEqualToString:@"X"]){
+        X.userInteractionEnabled = NO;
+        X.backgroundColor = [UIColor clearColor];
+    }else if([str isEqualToString:@"Label"]){
+        Label.userInteractionEnabled = NO;
+        Label.backgroundColor = [UIColor clearColor];
     }else if([str isEqualToString:@"AB"]){
         A.userInteractionEnabled = NO;
         B.userInteractionEnabled = NO;
@@ -384,16 +447,20 @@ int Con;
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch previousLocationInView:self];
     [super touchesBegan:touches withEvent:event];
-    NSLog(@"tag = %ld",(long)touch.view.tag);
+    
+//    NSLog(@"tag = %ld",(long)touch.view.tag);
+    
     switch (touch.view.tag) {
         case 1:
             A.center = location;
             self.Code.text = @"÷";
-            self.B.backgroundColor = [UIColor chooseColor];
+            self.B.backgroundColor = [UIColor ChooseColor];
             break;
         case 2:
             break;
-            
+        case 3:
+            Label.center = [self labelLocation: location];
+            break;
         default:
             break;
     }
@@ -415,6 +482,10 @@ int Con;
         case 2:
             B.center = location;
             break;
+        case 3:
+            Label.center = [self labelLocation: location];
+            Label.backgroundColor = [self subJudge:Label];
+            break;
         default:
             break;
     }
@@ -430,22 +501,28 @@ int Con;
     
     switch (touch.view.tag) {
         case 1:
-            
             if (CGRectContainsPoint(self.B.frame, self.A.center)) {
-                
                 [self diviMode];
-                
             }else{
-//                [self back:A];
                 self.Code.text = @"";
                 self.B.backgroundColor = [UIColor clearColor];
             }
-            
             [self back:A];
             break;
         case 2:
             break;
+        case 3:
+            // 代入判定メソッド
+            if (Label.backgroundColor == [UIColor redColor]) {
+                NSMutableArray *list = [appDelegate.toyBox objectForKey:@"list"];
+                for (NSString *str in list) {
+                    //        NSLog(@"Throgh");
+                    [self subStart :str :Label];
+                }
+            }
+            [self back:Label];
             
+            break;
         default:
             break;
     }
@@ -477,6 +554,19 @@ int Con;
         return YES;
     return NO;
 }
+
+
+//一方解がXかYかの判定
+- (BOOL) isXY
+{
+    if ([X.text isEqualToString:@"x"]) {
+        return true;
+    }else{
+        return false;
+    }
+    return false;
+}
+
 
 /***** 更新処理 *****/
 //係数の乗法
@@ -546,7 +636,7 @@ int Con;
 {
 //    NSLog(@"leveling");
     if([mine.A.text isEqualToString:@""]){
-        NSLog(@"enter");
+//        NSLog(@"enter");
         
         mine.A.text = mine.B.text;
         mine.B.text = @"";
@@ -576,9 +666,9 @@ int Con;
 
 - (void)setAns :(UILabel *)lbl1 :(UILabel *)lbl2 :(int)x :(int)y
 {
-    self.X.frame = CGRectMake(0, 0, size, size);
-    self.Equal.frame = CGRectMake(self.X.frame.origin.x + 50, 0, size, size);
-    self.E.frame = CGRectMake(self.Equal.frame.origin.x + 70, 0, size, size);
+    self.X.frame = CGRectMake(0, 0, Size, Size);
+    self.Equal.frame = CGRectMake(self.X.frame.origin.x + 50, 0, Size, Size);
+    self.E.frame = CGRectMake(self.Equal.frame.origin.x + 70, 0, Size, Size);
     
     self.X.text = lbl1.text;
     self.Equal.text = @"=";
@@ -609,11 +699,104 @@ int Con;
     tmp = CGPointMake(obj.center.x, obj.center.y);
 }
 
-- (void)back:(UILabel *)lbl
+- (void)back:(UIView *)lbl
 {
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.5];
     lbl.center = tmp;
     [UIView commitAnimations];
+}
+
+-(CGPoint)labelLocation :(CGPoint)location
+{
+    return CGPointMake(location.x + LabelPosition, location.y);
+}
+
+
+//代入判定メソッド
+- (UIColor *) subJudge :(UIView *)XY
+{
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSMutableArray *list = [appDelegate.toyBox objectForKey:@"list"];
+    
+    CGPoint point = CGPointMake(XY.center.x - LabelPosition, XY.center.y);
+    
+    for (NSString *str in list) {
+        //        NSLog(@"Throgh");
+        NSMutableArray *fmember = [appDelegate.toyBox objectForKey:str];
+        for (UILabel *member in fmember){
+            
+            CGRect convertStr = [self convertRect:member.frame fromView:[fmember objectAtIndex:0]];
+            if(CGRectContainsPoint(convertStr, point)){
+                
+                if(member.tag == 0){
+                    break;
+                }
+                
+                return [UIColor redColor];
+            }
+        }
+    }
+    
+    return [UIColor orangeColor];
+}
+
+//代入メソッド
+- (void) subStart :(NSString *)str :(UIView *)XY
+{
+    BOOL isCode = false;
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSMutableArray *fmember = [appDelegate.toyBox objectForKey:str];
+    
+    CGPoint point = CGPointMake(XY.center.x - LabelPosition, XY.center.y);
+    
+    
+    
+    
+    for (UIView *member in fmember){
+        
+        CGRect convertStr = [self convertRect:member.frame fromView:[fmember objectAtIndex:0]];
+        
+//        NSLog(@"%@",str);
+//        NSLog(@"str %@",NSStringFromCGPoint(convertStr));
+//        NSLog(@"btn %@",NSStringFromCGRect(btn.frame));
+        
+        if(CGRectContainsPoint(convertStr,point)){
+            
+//            NSLog(@"In App");
+//            member.text = [NSString stringWithFormat:@"%@",btn.text];
+            if(member.tag == 0){
+                break;
+            }
+            
+            NSLog(@"Label tag = %ld",XY.tag);
+            NSLog(@"Label Val = %d",LabelValue);
+            //代入開始
+            
+            
+            
+            //                member.text = [self chengeMember:member.text :btn.tag];
+            
+            //                if(member.tag == 2){
+            //                    if([member.text hasPrefix:@"-"]){
+            //                        member.text = [member.text substringFromIndex:1];
+            //                        isCode = true;
+            //                    }
+            //                }
+            
+        }
+    }
+//    if(isCode){
+//        for (UILabel *member in fmember){
+//            if (member.tag == 4 ){
+//                if([member.text isEqualToString:@"+"]){
+//                    member.text = @"-";
+//                }else{
+//                    member.text = @"+";
+//                }
+//            }
+//        }
+//    }
 }
 @end

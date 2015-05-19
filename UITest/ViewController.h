@@ -17,7 +17,8 @@
 @interface ViewController : UIViewController
 
 @property(nonatomic, readonly)UIView *oya;
-- (void)newScroll;
 
+- (void)newScroll;
+//- (void)randomAction :(id)sender;
 @end
 

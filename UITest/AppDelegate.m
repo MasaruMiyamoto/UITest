@@ -38,6 +38,7 @@ SetField *Set;
     Jclass = [[JudgeClass alloc] init];
     form = [[ViewClass alloc] init];
     Set = [[SetField alloc] init];
+//    [View randomAction:nil];
     return YES;
 }
 
@@ -66,7 +67,7 @@ SetField *Set;
 
 - (void)upDate1
 {
-    NSLog(@"update 1");
+//    NSLog(@"update 1");
     
     NSMutableArray *member = [self.toyBox objectForKey:@"formula"];
     for (ViewClass *fs in member) {
@@ -92,7 +93,7 @@ SetField *Set;
 {
 //    NSLog(@"2 mode");
 //    NSLog(@" %d",[form checkSum]);
-//    [self initToyBox];
+
     if([form checkSum]){
         [self initToyBox];
         ViewClass *Cf = [[ViewClass alloc] init];
@@ -117,6 +118,11 @@ SetField *Set;
 //        [form copyWithPosition:f3 :0 :0];
         [Set thirdSet:View.oya :f3];
     }
+}
+
+- (void)upDate4
+{
+    NSLog(@"update 4");
 }
 
 - (void)setUpdateMode:(NSString *)mode
