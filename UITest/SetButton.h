@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
+#import "AnimationClass.h"
 
 @interface SetButton : UIView
 
@@ -18,5 +19,6 @@
 - (void) move :(int)x :(int)y;
 - (void) back;
 - (UILabel *)labelCopy :(int)a;
+- (void)isMove :(BOOL)f;
 
 @end

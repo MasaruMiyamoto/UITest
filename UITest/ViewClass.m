@@ -200,6 +200,19 @@ int LabelValue;
     X.tag = 1;
     Y.tag = 2;
     
+    //代入ボックスを生成して、隠す
+    Mul = [[UILabel alloc] init];
+    Mul.textAlignment = NSTextAlignmentCenter;
+    Mul.font = [UIFont systemFontOfSize:50];
+    Mul.adjustsFontSizeToFitWidth = YES;
+    Mul.minimumScaleFactor = 20/50;
+    Mul.text = @"";
+//    Mul.backgroundColor = [UIColor ChooseColor];
+    
+    Mul.hidden = YES;
+    
+    [self addSubview:Mul];
+    
 }
 
 //倍数モード
@@ -248,7 +261,6 @@ int LabelValue;
         A.tag = 1;
     }
     
-    
     //おもちゃ箱への登録
     NSMutableArray *f = [NSMutableArray arrayWithObjects:self.A, self.Code, self.B, self.E, nil];
     [appDelegate.toyBox setObject:f forKey:@"obj"];
@@ -266,32 +278,39 @@ int LabelValue;
 - (void)diviMode
 {
     self.B.text = self.A.text;
-    self.A.text = @"";
+//    self.A.text = @"";
     
     int b = (int)[self.B.text integerValue];
     if ([self.B.text hasPrefix:@"-"]) {
-        self.B.text = [@"(" stringByAppendingString:self.B.text];
-        self.B.text = [self.B.text stringByAppendingString:@")"];
+        self.B.text = [@"( " stringByAppendingString:self.B.text];
+        self.B.text = [self.B.text stringByAppendingString:@" )"];
         self.B.frame = CGRectMake(self.B.frame.origin.x, self.B.frame.origin.y, 100, Size);
         self.B.textAlignment = NSTextAlignmentLeft;
     }
     
-    self.A.backgroundColor = [UIColor clearColor];
-    self.B.backgroundColor = [UIColor clearColor];
+//    self.A.backgroundColor = [UIColor clearColor];
+//    self.B.backgroundColor = [UIColor clearColor];
     
     self.Y.text = @"=";
     self.Y.frame = CGRectMake(self.B.frame.origin.x + 70, 0, Size, Size);
     [self mulMode];
     self.Mul.frame = CGRectOffset(self.Y.frame, 70, 0);
     
-    [self moveAnime:self.A :-60 :0];
-    [self moveAnime:self.B :-60 :0];
-    [self moveAnime:self.E :-60 :0];
-    [self moveAnime:self.X :-60 :0];
-    [self moveAnime:self.Y :-60 :0];
-    [self moveAnime:self.Code :-60 :0];
-    [self moveAnime:self.Equal :-60 :0];
-    [self moveAnime:self.Mul :-60 :0];
+    [AnimationClass fadeOut:self.A :0];
+    [AnimationClass fadeIn:self.B :0];
+    [AnimationClass fadeIn:self.Y :0];
+    [AnimationClass fadeIn:self.Mul :0];
+    
+    [AnimationClass delay:1];
+    
+    [AnimationClass moveAnime:self.A :-60 :0];
+    [AnimationClass moveAnime:self.B :-60 :0];
+    [AnimationClass moveAnime:self.E :-60 :0];
+    [AnimationClass moveAnime:self.X :-60 :0];
+    [AnimationClass moveAnime:self.Y :-60 :0];
+    [AnimationClass moveAnime:self.Code :-60 :0];
+    [AnimationClass moveAnime:self.Equal :-60 :0];
+    [AnimationClass moveAnime:self.Mul :-60 :0];
     
     int a = (int)[self.E.text integerValue];
     
@@ -305,11 +324,13 @@ int LabelValue;
     
     appDelegate.form = self;
     
+    [appDelegate setUpdateMode:@"upDate3"];
+    [appDelegate upDate];
 }
 
 
 //代入モード
-- (void) singleMode
+- (void)singleMode
 {
     self.X.frame = CGRectMake(0, 0, Size, Size);
     self.Equal.frame = CGRectMake(self.X.frame.origin.x + 50, 0, Size, Size);
@@ -340,6 +361,53 @@ int LabelValue;
     
     [self addSubview:Label];
     [self canMoving:@"Label"];
+}
+
+- (void)setMode :(int)Val
+{
+    //移動距離
+    int MoveDistance = 80;
+    
+    //数値入力領域の表示
+    Mul.hidden = NO;
+    
+    //値の入力
+    Mul.text = [NSString stringWithFormat:@"%d",Val];
+    
+    if ([self.Mul.text hasPrefix:@"-"]) {
+        self.Mul.text = [@"( " stringByAppendingString:self.Mul.text];
+        self.Mul.text = [self.Mul.text stringByAppendingString:@" )"];
+        self.Mul.frame = CGRectMake(self.Mul.frame.origin.x, self.Mul.frame.origin.y, 100, Size);
+        self.Mul.textAlignment = NSTextAlignmentLeft;
+//        MoveDistance += 20;
+    }
+    
+    if (![self isXY]) {     //x部分に代入するため、x部分の変更を判定
+        //x部分に代入
+        Mul.frame = CGRectMake(self.X.frame.origin.x + 70, 0, Size, Size);
+        
+//        [self moveAnime:self.Code :MoveDistance :0];
+//        [self moveAnime:self.B :MoveDistance :0];
+//        [self moveAnime:self.Y :MoveDistance :0];
+
+        [AnimationClass moveAnime:self.Code :MoveDistance :0];
+        [AnimationClass moveAnime:self.B :MoveDistance :0];
+        [AnimationClass moveAnime:self.Y :MoveDistance :0];
+        
+    }else{
+        //y部分に代入
+        Mul.frame = CGRectMake(self.Y.frame.origin.x + 70, 0, Size, Size);
+    }
+    
+    [AnimationClass moveAnime:self.Equal :MoveDistance :0];
+    [AnimationClass moveAnime:self.E :MoveDistance :0];
+    
+    [AnimationClass fadeIn:Mul :1.0];
+    
+    [AnimationClass delay:1.5];
+    
+    [AnimationClass movePosition:self :91 :100 + 768 + 768];
+    
 }
 /**********/
 
@@ -453,8 +521,12 @@ int LabelValue;
     switch (touch.view.tag) {
         case 1:
             A.center = location;
-            self.Code.text = @"÷";
-            self.B.backgroundColor = [UIColor ChooseColor];
+//            self.Code.text = @"÷";
+//            self.B.backgroundColor = [UIColor ChooseColor];
+            
+            [AnimationClass fadeIn:self.Code :0];
+            [AnimationClass fadeIn:self.B :0];
+            
             break;
         case 2:
             break;
@@ -504,8 +576,11 @@ int LabelValue;
             if (CGRectContainsPoint(self.B.frame, self.A.center)) {
                 [self diviMode];
             }else{
-                self.Code.text = @"";
-                self.B.backgroundColor = [UIColor clearColor];
+//                self.Code.text = @"";
+//                self.B.backgroundColor = [UIColor clearColor];
+                
+                [AnimationClass fadeOut:self.Code :0];
+                [AnimationClass fadeOut:self.B :0];
             }
             [self back:A];
             break;
@@ -545,7 +620,7 @@ int LabelValue;
     return NO;
 }
 
-- (BOOL) checkDiv
+- (BOOL)checkDiv
 {
     int e = (int)[self.Mul.text integerValue];
     
@@ -557,13 +632,14 @@ int LabelValue;
 
 
 //一方解がXかYかの判定
-- (BOOL) isXY
+- (BOOL)isXY
 {
     if ([X.text isEqualToString:@"x"]) {
         return true;
-    }else{
+    }else if([Y.text isEqualToString:@"y"]){
         return false;
     }
+    NSLog(@"something error");
     return false;
 }
 
@@ -640,7 +716,6 @@ int LabelValue;
         
         mine.A.text = mine.B.text;
         mine.B.text = @"";
-//        mine.B.backgroundColor = [UIColor clearColor];
         mine.X.text = mine.Y.text;
         mine.Y.text = @"";
         
@@ -658,9 +733,14 @@ int LabelValue;
     // 計算領域の生成
     mine.Code.frame = CGRectOffset(mine.E.frame, 70, 0);
     mine.B.frame = CGRectOffset(mine.Code.frame, 70, 0);
-    mine.B.backgroundColor = [UIColor clearColor];
 //    NSLog(@" code = %lf", mine.Code.frame.origin.x);
 //    NSLog(@" mul = %lf", mine.Mul.frame.origin.x);
+    
+    self.Code.text = @"÷";
+    self.B.backgroundColor = [UIColor ChooseColor];
+    
+    self.Code.alpha = 0;
+    self.B.alpha = 0;
     
 }
 
@@ -684,16 +764,9 @@ int LabelValue;
     appDelegate.form = self;
 }
 
-//アニメーション
-- (void) moveAnime :(UILabel *)lbl :(int)x :(int)y
-{
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.7];
-    lbl.frame = CGRectOffset(lbl.frame, x, y);
-    [UIView commitAnimations];
-}
+//**********アニメーション関係**********//
 
-
+//バックアニメーション
 - (void)setBack:(UIView *)obj
 {
     tmp = CGPointMake(obj.center.x, obj.center.y);
@@ -707,14 +780,17 @@ int LabelValue;
     [UIView commitAnimations];
 }
 
+//********************//
+
 -(CGPoint)labelLocation :(CGPoint)location
 {
     return CGPointMake(location.x + LabelPosition, location.y);
 }
 
 
+//****************************代入ステージ****************************//
 //代入判定メソッド
-- (UIColor *) subJudge :(UIView *)XY
+- (UIColor *)subJudge :(UIView *)XY
 {
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     NSMutableArray *list = [appDelegate.toyBox objectForKey:@"list"];
@@ -742,19 +818,16 @@ int LabelValue;
 }
 
 //代入メソッド
-- (void) subStart :(NSString *)str :(UIView *)XY
+- (void)subStart :(NSString *)str :(UIView *)XY
 {
-    BOOL isCode = false;
+//    BOOL isCode = false;
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     NSMutableArray *fmember = [appDelegate.toyBox objectForKey:str];
     
     CGPoint point = CGPointMake(XY.center.x - LabelPosition, XY.center.y);
     
-    
-    
-    
-    for (UIView *member in fmember){
+    for (UILabel *member in fmember){
         
         CGRect convertStr = [self convertRect:member.frame fromView:[fmember objectAtIndex:0]];
         
@@ -770,33 +843,32 @@ int LabelValue;
                 break;
             }
             
-            NSLog(@"Label tag = %ld",XY.tag);
-            NSLog(@"Label Val = %d",LabelValue);
+//            NSLog(@"Label tag = %ld",XY.tag);
+//            NSLog(@"Label Val = %d",LabelValue);
             //代入開始
+            member.text = @"×";
             
+            appDelegate.form = fmember[2];
+            [XY removeFromSuperview];
+            NSMutableArray *formula = [appDelegate.toyBox objectForKey:@"formula"];
+            for (ViewClass *str in formula) {
+                [AnimationClass fadeOut:str :0];
+            }
             
-            
-            //                member.text = [self chengeMember:member.text :btn.tag];
-            
-            //                if(member.tag == 2){
-            //                    if([member.text hasPrefix:@"-"]){
-            //                        member.text = [member.text substringFromIndex:1];
-            //                        isCode = true;
-            //                    }
-            //                }
+            [appDelegate upDate];
             
         }
     }
-//    if(isCode){
-//        for (UILabel *member in fmember){
-//            if (member.tag == 4 ){
-//                if([member.text isEqualToString:@"+"]){
-//                    member.text = @"-";
-//                }else{
-//                    member.text = @"+";
-//                }
-//            }
-//        }
-//    }
 }
+
+//代入と式の整理　（外部参照）
+- (void)substitution
+{
+    self.alpha = 1.0;
+    [self setMode :LabelValue];
+    [appDelegate setUpdateMode:@"upDate5"];
+}
+
+
+//****************************代入ステージ終了****************************//
 @end

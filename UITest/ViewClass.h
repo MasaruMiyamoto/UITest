@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
-#import "SetButton.h"
+//#import "SetButton.h"
+#import "AnimationClass.h"
 
 //式の作成用クラス(予定)
 @interface ViewClass : UIView
@@ -42,10 +43,11 @@
 - (void)upDate;
 //- (void)upDate2;
 - (BOOL)checkSum;
-- (BOOL) isXY;
+- (BOOL)isXY;
 - (ViewClass *)copyWithPosition: (ViewClass *)origin :(int)x :(int)y;
 - (void)levelingLabel:(ViewClass *)mine;
-- (BOOL) checkDiv;
+- (BOOL)checkDiv;
 - (void)setAns :(UILabel *)lbly :(UILabel *)lblmul :(int)x :(int)y;
+- (void)substitution;
 
 @end

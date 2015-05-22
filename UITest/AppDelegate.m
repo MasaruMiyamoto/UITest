@@ -60,11 +60,18 @@ SetField *Set;
         case 3:
             [self upDate3];
             break;
+        case 4:
+            [self upDate4];
+            break;
+        case 5:
+            [self upDate5];
+            break;
         default:
             break;
     }
 }
 
+//倍数の入力と筆算クラスの生成
 - (void)upDate1
 {
 //    NSLog(@"update 1");
@@ -80,6 +87,9 @@ SetField *Set;
         [Jclass setPosition:10 :252 + 768];
         [View.oya addSubview:Jclass];
         [View.oya bringSubviewToFront:Jclass];
+        
+        [AnimationClass fadeIn:Jclass :0];
+        
 //        NSLog(@"Jclass position.y = %f",Jclass.frame.origin.y);
 //        NSLog(@"ちぇけらー！");
     }else{
@@ -89,6 +99,7 @@ SetField *Set;
 //    NSLog(@"1 mode");
 }
 
+//筆算の正否判定と割り算クラスの生成
 - (void)upDate2
 {
 //    NSLog(@"2 mode");
@@ -97,32 +108,52 @@ SetField *Set;
     if([form checkSum]){
         [self initToyBox];
         ViewClass *Cf = [[ViewClass alloc] init];
-        Cf = [Cf copyWithPosition: form: 91: 450 +768];
+        Cf = [Cf copyWithPosition: form: 91: 510 +768];
         [Cf levelingLabel:Cf];
 //        NSLog(@" %@",Cf.B.text);
         [View.oya addSubview:Cf];
-        [self setUpdateMode:@"upDate3"];
+        
+        [AnimationClass fadeIn:Cf :0];
+        
+//        [self setUpdateMode:@"upDate3"];
+        [Button isMove:false];
     }
 }
 
+//割り算の解答と代入クラスの生成
 - (void)upDate3
 {
-//    NSLog(@"3 mode");
+    NSLog(@"3 mode");
+    [Button isMove:true];
+    
     if([form checkDiv]){
 //        NSLog(@"Div OK");
         ViewClass *f3 = [[ViewClass alloc] init];
-        [f3 setAns:form.X :form.Mul :91 :550 +768];
+        [f3 setAns:form.X :form.Mul :91 :639 +768];
         [View.oya addSubview:f3];
+        
+        [AnimationClass fadeIn:f3 :0];
+        [AnimationClass delay:2];
         
         [View newScroll];
 //        [form copyWithPosition:f3 :0 :0];
         [Set thirdSet:View.oya :f3];
+        [Button isMove:false];
     }
 }
 
 - (void)upDate4
 {
     NSLog(@"update 4");
+    [Button isMove:true];
+    NSLog(@"%@",form.A.text);
+    [form substitution];
+    [View.oya bringSubviewToFront:form];
+}
+
+- (void)upDate5
+{
+    
 }
 
 - (void)setUpdateMode:(NSString *)mode
@@ -137,13 +168,15 @@ SetField *Set;
         x = 3;
     else if([mode isEqualToString:@"upDate4"])
         x = 4;
+    else if([mode isEqualToString:@"upDate5"])
+        x = 5;
     else {
         x = 0;
 //        NSLog(@"IsUpdate = 0");
     }
     
     IsUpdate = x;
-//        NSLog(@"x = %d",x);
+        NSLog(@"x = %d",x);
 }
 
 

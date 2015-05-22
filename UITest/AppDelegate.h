@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AnimationClass.h"
 
 @class ViewController;
 @class ViewClass;

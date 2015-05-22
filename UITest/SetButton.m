@@ -34,6 +34,8 @@ UILabel *btn,
 UIImageView *img,
             *del;
 
+BOOL flag = false;
+
 AppDelegate *appDelegate;
 
 @synthesize btn;
@@ -174,6 +176,8 @@ AppDelegate *appDelegate;
     btn_m.tag = 11;
     del.tag = 12;
     
+    [self isMove:true];
+    
     return self;
 }
 
@@ -196,6 +200,49 @@ AppDelegate *appDelegate;
 
 }
 
+- (void)isMove :(BOOL)f
+{
+    if (!f) {
+        
+        [AnimationClass fadeOut:btn0 :0.5];
+        [AnimationClass fadeOut:btn1 :0.5];
+        [AnimationClass fadeOut:btn2 :0.5];
+        [AnimationClass fadeOut:btn3 :0.5];
+        [AnimationClass fadeOut:btn4 :0.5];
+        [AnimationClass fadeOut:btn5 :0.5];
+        [AnimationClass fadeOut:btn6 :0.5];
+        [AnimationClass fadeOut:btn7 :0.5];
+        [AnimationClass fadeOut:btn8 :0.5];
+        [AnimationClass fadeOut:btn9 :0.5];
+        [AnimationClass fadeOut:btn_m :0.5];
+        [AnimationClass fadeOut:del :0.5];
+        
+    }else{
+        
+        [AnimationClass fadeIn:btn0 :btn0.alpha];
+        [AnimationClass fadeIn:btn1 :btn1.alpha];
+        [AnimationClass fadeIn:btn2 :btn2.alpha];
+        [AnimationClass fadeIn:btn3 :btn3.alpha];
+        [AnimationClass fadeIn:btn4 :btn4.alpha];
+        [AnimationClass fadeIn:btn5 :btn5.alpha];
+        [AnimationClass fadeIn:btn6 :btn6.alpha];
+        [AnimationClass fadeIn:btn7 :btn7.alpha];
+        [AnimationClass fadeIn:btn8 :btn8.alpha];
+        [AnimationClass fadeIn:btn9 :btn9.alpha];
+        [AnimationClass fadeIn:btn_m :btn_m.alpha];
+        [AnimationClass fadeIn:del :del.alpha];
+        
+    }
+    
+    flag = f;
+}
+
+- (BOOL)canMove
+{
+    
+    
+    return flag;
+}
 - (id)labelCopy :(int)a
 {
     
@@ -304,10 +351,13 @@ AppDelegate *appDelegate;
 //    NSLog(@"%ld",(long)touch.view.tag);
 //    NSLog(@"%f,%f",location.x,location.y);
 
-    btn = [self labelCopy:(int)touch.view.tag];
-    btn.center = CGPointMake(location.x, location.y);
-    [self addSubview:btn];
-    
+    if ([self canMove]) {
+        
+        btn = [self labelCopy:(int)touch.view.tag];
+        btn.center = CGPointMake(location.x, location.y);
+        [self addSubview:btn];
+        
+    }
 //    NSLog(@"view");
 
 }
@@ -318,6 +368,7 @@ AppDelegate *appDelegate;
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInView:self];
     
+    if([self canMove])
     btn.center = CGPointMake(location.x, location.y);
     
 }
@@ -326,15 +377,16 @@ AppDelegate *appDelegate;
 {
     [super touchesEnded:touches withEvent:event];
     
-    NSMutableArray *list = [appDelegate.toyBox objectForKey:@"list"];
-    for (NSString *str in list) {
-        //        NSLog(@"Throgh");
-        [self isTrriger :str];
+    if([self canMove]){
+        NSMutableArray *list = [appDelegate.toyBox objectForKey:@"list"];
+        for (NSString *str in list) {
+            //        NSLog(@"Throgh");
+            [self isTrriger :str];
+        }
+        
+        [appDelegate upDate];
+        [self back];
     }
-    
-    [appDelegate upDate];
-    [self back];
-    
 }
 
 /*****タップ操作　ここまで*****/

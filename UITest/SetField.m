@@ -121,16 +121,16 @@ int a2,b2,e2;
     
     if([View isXY]){
         
-        NSMutableArray *f1 = [NSMutableArray arrayWithObjects:formula1.A, formula1.X, nil];
+        NSMutableArray *f1 = [NSMutableArray arrayWithObjects:formula1.A, formula1.X, formula1, nil];
         [appDelegate.toyBox setObject:f1 forKey:@"formula1"];
-        NSMutableArray *f2 = [NSMutableArray arrayWithObjects:formula2.A, formula2.X, nil];
+        NSMutableArray *f2 = [NSMutableArray arrayWithObjects:formula2.A, formula2.X, formula2, nil];
         [appDelegate.toyBox setObject:f2 forKey:@"formula2"];
         
     }else{
         
-        NSMutableArray *f1 = [NSMutableArray arrayWithObjects:formula1.A, formula1.Y, nil];
+        NSMutableArray *f1 = [NSMutableArray arrayWithObjects:formula1.A, formula1.Y, formula1, nil];
         [appDelegate.toyBox setObject:f1 forKey:@"formula1"];
-        NSMutableArray *f2 = [NSMutableArray arrayWithObjects:formula2.A, formula2.Y, nil];
+        NSMutableArray *f2 = [NSMutableArray arrayWithObjects:formula2.A, formula2.Y, formula2, nil];
         [appDelegate.toyBox setObject:f2 forKey:@"formula2"];
         
     }

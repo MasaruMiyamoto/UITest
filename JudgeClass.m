@@ -147,7 +147,7 @@ AppDelegate *appDelegate;
 /***** 計算処理クラスの作成 *****/
 - (void) makeClass
 {
-    formula = [[ViewClass alloc] initWithPosition: 80 : 95];
+    formula = [[ViewClass alloc] initWithPosition: 80 : 115];
 //    appdelegate = [[UIApplication sharedApplication] delegate];
     [self display];
 }
