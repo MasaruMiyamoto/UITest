@@ -35,9 +35,12 @@
 
 
 - (id)initWithPosition:(int)x :(int)y;
-- (void)chengeMode:(int)mode;
+
+- (void)changeMode:(NSString *)mode;
+- (void)changeMode:(NSString *)mode :(ViewClass *)main;
+
 - (void)setVariable:(int)a :(int)b :(int)e;
-- (void) setResult:(int)val :(int)con;
+- (void)setResult:(int)val :(int)con;
 - (void)canMoving :(NSString *)str;
 - (void)cannotMoving :(NSString *)str;
 - (void)upDate;
@@ -45,7 +48,6 @@
 - (BOOL)checkSum;
 - (BOOL)isXY;
 - (ViewClass *)copyWithPosition: (ViewClass *)origin :(int)x :(int)y;
-- (void)levelingLabel:(ViewClass *)mine;
 - (BOOL)checkDiv;
 - (void)setAns :(UILabel *)lbly :(UILabel *)lblmul :(int)x :(int)y;
 - (void)substitution;

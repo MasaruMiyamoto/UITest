@@ -109,7 +109,7 @@ SetField *Set;
         [self initToyBox];
         ViewClass *Cf = [[ViewClass alloc] init];
         Cf = [Cf copyWithPosition: form: 91: 510 +768];
-        [Cf levelingLabel:Cf];
+        [Cf changeMode:@"divisionLabel"];
 //        NSLog(@" %@",Cf.B.text);
         [View.oya addSubview:Cf];
         
@@ -129,14 +129,17 @@ SetField *Set;
     if([form checkDiv]){
 //        NSLog(@"Div OK");
         ViewClass *f3 = [[ViewClass alloc] init];
-        [f3 setAns:form.X :form.Mul :91 :639 +768];
+        f3 = [f3 copyWithPosition:form :91 :639 + 768];
+        [f3 changeMode:@"solutionMode"];
+        
+//        [f3 setAns:form.X :form.Mul :91 :639 +768];
+        
         [View.oya addSubview:f3];
         
         [AnimationClass fadeIn:f3 :0];
         [AnimationClass delay:2];
         
         [View newScroll];
-//        [form copyWithPosition:f3 :0 :0];
         [Set thirdSet:View.oya :f3];
         [Button isMove:false];
     }

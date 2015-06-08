@@ -22,13 +22,13 @@ int a2,b2,e2;
     
     //oya に　formula1　を追加、表示
 //    [formula1 setVariable:1 :2 :3];
-    [formula1 chengeMode:11];
+    [formula1 changeMode:@"standardMode"];
     [oya addSubview:formula1];
     
     ViewClass *formula2 = [[ViewClass alloc] initWithPosition:91:252];
     //oya に　formula2　を追加、表示
 //    [formula2 setVariable:1 :2 :3];
-    [formula2 chengeMode:11];
+    [formula2 changeMode:@"standardMode"];
     [oya addSubview:formula2];
     
     /*****おもちゃ箱に式のデータを保存*****/
@@ -54,8 +54,8 @@ int a2,b2,e2;
     //oya に　formula1　を追加、表示
     
     [self getVal:@"formula1"];
+    [formula1 changeMode:@"uniformMode"];
     [formula1 setVariable: a1: b1: e1];
-    [formula1 chengeMode:2];
     [oya addSubview:formula1];
     
     //    NSLog(@"-------------");
@@ -63,8 +63,8 @@ int a2,b2,e2;
     //oya に　formula2　を追加、表示
     
     [self getVal:@"formula2"];
+    [formula2 changeMode:@"uniformMode"];
     [formula2 setVariable: a2: b2: e2];
-    [formula2 chengeMode:2];
     [oya addSubview:formula2];
     
     /*****おもちゃ箱に式のデータを保存*****/
@@ -91,25 +91,21 @@ int a2,b2,e2;
     
     ViewClass *formula1 = [[ViewClass alloc] initWithPosition: 91: 230 + 768 +768];
     //oya に　formula1　を追加、表示
-    
     [formula1 setVariable: a1: b1: e1];
-    [formula1 chengeMode:12];
+    [formula1 changeMode:@"receptionMode"];
     [oya addSubview:formula1];
     
     ViewClass *formula2 = [[ViewClass alloc] initWithPosition: 91: 359 + 768 +768];
     //oya に　formula2　を追加、表示
     
     [formula2 setVariable: a2: b2: e2];
-    [formula2 chengeMode:12];
+    [formula2 changeMode:@"receptionMode"];
     [oya addSubview:formula2];
     
     //求めた一方解　[view] を表示する
     ViewClass *View = [[ViewClass alloc] init];
-    //    NSLog(@"view.position = %f",view.frame.origin.y);
     View = [View copyWithPosition:view :91 :100 + 768 + 768];
-    //    NSLog(@"View.position = %f",view.frame.origin.y);
-    
-    [View chengeMode:4];
+    [View changeMode:@"substitutionMode"];
     [oya addSubview:View];
     
 //    NSLog(@"%d",[View isXY]);

@@ -78,32 +78,32 @@ AppDelegate *appDelegate;
 //    NSLog(@"B1 = %d, B2 = %d",B1,B2);
     
     /** ２回目以降の処理のリセット **/
-    [self chengeTextColor:f1.A :f2.A :0];
-    [self chengeTextColor:f1.B :f2.B :0];
+    [self changeTextColor:f1.A :f2.A :0];
+    [self changeTextColor:f1.B :f2.B :0];
 //    [self unDisplay];
     /****/
     
     if(A1 - A2 == 0){
         [self events:f1.A :f2.A :1 :NO];
-        [formula chengeMode:31];
+        [formula changeMode:@"calculationModeX"];
         [formula setResult:B1-B2 :E1-E2];
         appDelegate.form = formula;
         return 1;
     }else if(A1 + A2 == 0){
         [self events:f1.A :f2.A :2 :YES];
-        [formula chengeMode:31];
+        [formula changeMode:@"calculationModeX"];
         [formula setResult:B1+B2 :E1+E2];
         appDelegate.form = formula;
         return 2;
     }else if(B1 - B2 == 0){
         [self events:f1.B :f2.B :1 :NO];
-        [formula chengeMode:32];
+        [formula changeMode:@"calculationModeY"];
         [formula setResult:A1-A2 :E1-E2];
         appDelegate.form = formula;
         return 3;
     }else if(B1 + B2 == 0){
         [self events:f1.B :f2.B :2 :YES];
-        [formula chengeMode:32];
+        [formula changeMode:@"calculationModeY"];
         [formula setResult:A1+A2 :E1+E2];
         appDelegate.form = formula;
         return 4;
@@ -124,9 +124,9 @@ AppDelegate *appDelegate;
     Line.backgroundColor = [UIColor blackColor];
 }
 
-- (void)chengeTextColor :(UILabel *)a :(UILabel *)b :(int)chenge
+- (void)changeTextColor :(UILabel *)a :(UILabel *)b :(int)change
 {
-    switch (chenge) {
+    switch (change) {
         case 1:
             a.textColor = [UIColor redColor];
             b.textColor = [UIColor redColor];
@@ -163,9 +163,9 @@ AppDelegate *appDelegate;
 }
 
 /***** 処理をまとめる *****/
-- (void) events :(UILabel *)f1 :(UILabel *)f2 :(int)chenge :(BOOL)flag
+- (void) events :(UILabel *)f1 :(UILabel *)f2 :(int)change :(BOOL)flag
 {
-    [self chengeTextColor:f1 :f2 :chenge];
+    [self changeTextColor:f1 :f2 :change];
     [self makeClass];
     [self writeCode:flag];
 }

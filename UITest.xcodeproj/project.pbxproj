@@ -451,7 +451,7 @@
 				78A434531A1AF72C00469530 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		78A434541A1AF72C00469530 /* Build configuration list for PBXNativeTarget "UITest" */ = {
 			isa = XCConfigurationList;
@@ -460,7 +460,7 @@
 				78A434561A1AF72C00469530 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		78A434571A1AF72C00469530 /* Build configuration list for PBXNativeTarget "UITestTests" */ = {
 			isa = XCConfigurationList;
@@ -469,7 +469,7 @@
 				78A434591A1AF72C00469530 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
