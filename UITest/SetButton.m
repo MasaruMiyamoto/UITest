@@ -415,7 +415,7 @@ AppDelegate *appDelegate;
 //                NSLog(@"tag");
                 member.text = [self chengeMember:member.text :btn.tag];
                 
-                if(member.tag == 2){
+                if(member.tag == 22){
                     if([member.text hasPrefix:@"-"]){
                         member.text = [member.text substringFromIndex:1];
                         isCode = true;

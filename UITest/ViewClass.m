@@ -165,42 +165,46 @@ int LabelValue;
     SWITCH (mode) {
         
         CASE (@"standardMode"){
-            [self standardMode];
+            [self standardMode]; //1
             break;
         }
         CASE (@"uniformMode"){
-            [self uniformMode];
+            [self uniformMode];  //2
             break;
         }
         CASE (@"calculationModeX"){
-            [self calculationMode:YES];
+            [self calculationMode:YES];  //3-1
             break;
         }
         CASE (@"calculationModeY"){
-            [self calculationMode:NO];
+            [self calculationMode:NO];  //3-2
             break;
         }
         
-        CASE (@"divisionLabel"){
+        CASE (@"divisionLabel"){  //4-1
             [self divisionLabel];
             break;
         }
         
         CASE (@"divisionMode"){
-            [self divisionMode];
+            [self divisionMode];  //4-2
             break;
         }
         
         CASE (@"solutionMode"){
-            [self solutionMode];
+            [self solutionMode];  //5
             break;
         }
         CASE (@"substitutionMode"){
-            [self substitutionMode];
+            [self substitutionMode];  //6
             break;
         }
         CASE (@"receptionMode"){
-            [self receptionMode];
+            [self receptionMode];  //7
+            break;
+        }
+        CASE (@"transPositionMode"){
+            [self transPositionMode];  //8
             break;
         }
         DEFAULT {
@@ -209,7 +213,6 @@ int LabelValue;
         }
     }
     
-        
 //    switch (mode) {
 //        case 11:
 //            [self enterMode];
@@ -240,191 +243,191 @@ int LabelValue;
 }
 
 
-//入力モード
-- (void)enterMode
-{
-    A.tag = 1;
-    B.tag = 2;
-    E.tag = 3;
-    Code.tag = 4;
-    
-    A.backgroundColor = [UIColor intoColor];
-    B.backgroundColor = [UIColor intoColor];
-    E.backgroundColor = [UIColor intoColor];
-    
-}
-
-//代入受付モード
-- (void)subMode
-{
-    X.tag = 1;
-    Y.tag = 2;
-    
-    //代入ボックスを生成して、隠す
-    Mul = [[UILabel alloc] init];
-    Mul.textAlignment = NSTextAlignmentCenter;
-    Mul.font = [UIFont systemFontOfSize:50];
-    Mul.adjustsFontSizeToFitWidth = YES;
-    Mul.minimumScaleFactor = 20/50;
-    Mul.text = @"";
+////入力モード
+//- (void)enterMode
+//{
+//    A.tag = 1;
+//    B.tag = 2;
+//    E.tag = 3;
+//    Code.tag = 4;
+//    
+//    A.backgroundColor = [UIColor intoColor];
+//    B.backgroundColor = [UIColor intoColor];
+//    E.backgroundColor = [UIColor intoColor];
+//    
+//}
+//
+////代入受付モード
+//- (void)subMode
+//{
+//    X.tag = 1;
+//    Y.tag = 2;
+//    
+//    //代入ボックスを生成して、隠す
+//    Mul = [[UILabel alloc] init];
+//    Mul.textAlignment = NSTextAlignmentCenter;
+//    Mul.font = [UIFont systemFontOfSize:50];
+//    Mul.adjustsFontSizeToFitWidth = YES;
+//    Mul.minimumScaleFactor = 20/50;
+//    Mul.text = @"";
+////    Mul.backgroundColor = [UIColor intoColor];
+//    
+//    Mul.hidden = YES;
+//    
+//    [self addSubview:Mul];
+//    
+//}
+//
+////倍数モード
+//-(void)mulMode
+//{
+//    Mul = [[UILabel alloc] init];
+//    Mul.textAlignment = NSTextAlignmentCenter;
+//    Mul.font = [UIFont systemFontOfSize:50];
+//    Mul.adjustsFontSizeToFitWidth = YES;
+//    Mul.minimumScaleFactor = 20/50;
+//    Mul.text = @"";
 //    Mul.backgroundColor = [UIColor intoColor];
-    
-    Mul.hidden = YES;
-    
-    [self addSubview:Mul];
-    
-}
-
-//倍数モード
--(void)mulMode
-{
-    Mul = [[UILabel alloc] init];
-    Mul.textAlignment = NSTextAlignmentCenter;
-    Mul.font = [UIFont systemFontOfSize:50];
-    Mul.adjustsFontSizeToFitWidth = YES;
-    Mul.minimumScaleFactor = 20/50;
-    Mul.text = @"";
-    Mul.backgroundColor = [UIColor intoColor];
-    
-    
-    A.tag = 0;
-    Mul.tag = 5;
-    
-    
-    
-    [self addSubview:Mul];
-}
-
-//筆算モード
-- (void) culMode :(BOOL)chenge
-{
-    A.text = @"";
-    Code.text = @"";
-    B.text = @"";
-    E.text = @"";
-    
-    E.backgroundColor = [UIColor intoColor];
-    E.tag = 3;
-    
-    appDelegate = [[UIApplication sharedApplication] delegate];
-//    [appDelegate initToyBox];
-//    [appDelegate.toyBox setObject:self forKey:@"formula"];
-    
-    
-    if(chenge){
-        //yが残る
-        X.text = @"";
-        B.backgroundColor = [UIColor intoColor];
-        B.tag = 5;
-    }else{
-        //xが残る
-        Y.text = @"";
-        A.backgroundColor = [UIColor intoColor];
-        A.tag = 1;
-    }
-    
-    //おもちゃ箱への登録
-    NSMutableArray *f = [NSMutableArray arrayWithObjects:self.A, self.Code, self.B, self.E, nil];
-    [appDelegate.toyBox setObject:f forKey:@"obj"];
-    
-    NSMutableArray *list = [NSMutableArray arrayWithObjects:@"obj", nil];
-    
-    [appDelegate.toyBox setObject:list forKey:@"list"];
-    [appDelegate setUpdateMode: @"upDate2"];
-
-//    NSLog(@"cul");
-    
-}
-
-//割り算モード
-- (void)diviMode
-{
-    self.B.text = self.A.text;
-//    self.A.text = @"";
-    
-    int b = (int)[self.B.text integerValue];
-    if ([self.B.text hasPrefix:@"-"]) {
-        self.B.text = [@"( " stringByAppendingString:self.B.text];
-        self.B.text = [self.B.text stringByAppendingString:@" )"];
-        self.B.frame = CGRectMake(self.B.frame.origin.x, self.B.frame.origin.y, 100, Size);
-        self.B.textAlignment = NSTextAlignmentLeft;
-    }
-    
-//    self.A.backgroundColor = [UIColor clearColor];
-//    self.B.backgroundColor = [UIColor clearColor];
-    
-    self.Y.text = @"=";
-    self.Y.frame = CGRectMake(self.B.frame.origin.x + 70, 0, Size, Size);
-    [self mulMode];
-    self.Mul.frame = CGRectOffset(self.Y.frame, 70, 0);
-    
-    [AnimationClass fadeOut:self.A :0];
-    [AnimationClass fadeIn:self.B :0];
-    [AnimationClass fadeIn:self.Y :0];
-    [AnimationClass fadeIn:self.Mul :0];
-    
-    [AnimationClass delay:1];
-    
-    [AnimationClass moveAnime:self.A :-60 :0];
-    [AnimationClass moveAnime:self.B :-60 :0];
-    [AnimationClass moveAnime:self.E :-60 :0];
-    [AnimationClass moveAnime:self.X :-60 :0];
-    [AnimationClass moveAnime:self.Y :-60 :0];
-    [AnimationClass moveAnime:self.Code :-60 :0];
-    [AnimationClass moveAnime:self.Equal :-60 :0];
-    [AnimationClass moveAnime:self.Mul :-60 :0];
-    
-    int a = (int)[self.E.text integerValue];
-    
-    Val = a/b;
-    
-    //おもちゃ箱への登録
-    NSMutableArray *f = [NSMutableArray arrayWithObjects:self.A, self.Mul, nil];
-    [appDelegate.toyBox setObject:f forKey:@"obj"];
-    NSMutableArray *list = [NSMutableArray arrayWithObjects:@"obj", nil];
-    [appDelegate.toyBox setObject:list forKey:@"list"];
-    
-    appDelegate.form = self;
-    
-    [appDelegate setUpdateMode:@"upDate3"];
-    [appDelegate upDate];
-}
-
-
-//代入モード
-- (void)singleMode
-{
-    self.X.frame = CGRectMake(0, 0, Size, Size);
-    self.Equal.frame = CGRectMake(self.X.frame.origin.x + 50, 0, Size, Size);
-    self.E.frame = CGRectMake(self.Equal.frame.origin.x + 70, 0, Size, Size);
-    
-    [self.A removeFromSuperview];
-    [self.B removeFromSuperview];
-    [self.Mul removeFromSuperview];
-    [self.Code removeFromSuperview];
-    [self.Y removeFromSuperview];
-    
-    Label = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.E.frame.origin.x + Size, Size)];
-//    Label.backgroundColor = [UIColor orangeColor];
-    
-    Label.layer.cornerRadius = 30.0;
-    Label.clipsToBounds = YES;
-    
-    LabelPosition = Label.center.x - X.center.x;
-    LabelValue = (int)[E.text integerValue];
-    
-    // touchesBegan判定用
-    Label.tag = 3;
-    
-    [Label addSubview:self.X];
-    [Label addSubview:self.Equal];
-    [Label addSubview:self.E];
-    [self setBack:Label];
-    
-    [self addSubview:Label];
-    [self canMoving:@"Label"];
-}
-
+//    
+//    
+//    A.tag = 0;
+//    Mul.tag = 5;
+//    
+//    
+//    
+//    [self addSubview:Mul];
+//}
+//
+////筆算モード
+//- (void) culMode :(BOOL)chenge
+//{
+//    A.text = @"";
+//    Code.text = @"";
+//    B.text = @"";
+//    E.text = @"";
+//    
+//    E.backgroundColor = [UIColor intoColor];
+//    E.tag = 3;
+//    
+//    appDelegate = [[UIApplication sharedApplication] delegate];
+////    [appDelegate initToyBox];
+////    [appDelegate.toyBox setObject:self forKey:@"formula"];
+//    
+//    
+//    if(chenge){
+//        //yが残る
+//        X.text = @"";
+//        B.backgroundColor = [UIColor intoColor];
+//        B.tag = 5;
+//    }else{
+//        //xが残る
+//        Y.text = @"";
+//        A.backgroundColor = [UIColor intoColor];
+//        A.tag = 1;
+//    }
+//    
+//    //おもちゃ箱への登録
+//    NSMutableArray *f = [NSMutableArray arrayWithObjects:self.A, self.Code, self.B, self.E, nil];
+//    [appDelegate.toyBox setObject:f forKey:@"obj"];
+//    
+//    NSMutableArray *list = [NSMutableArray arrayWithObjects:@"obj", nil];
+//    
+//    [appDelegate.toyBox setObject:list forKey:@"list"];
+//    [appDelegate setUpdateMode: @"upDate2"];
+//
+////    NSLog(@"cul");
+//    
+//}
+//
+////割り算モード
+//- (void)diviMode
+//{
+//    self.B.text = self.A.text;
+////    self.A.text = @"";
+//    
+//    int b = (int)[self.B.text integerValue];
+//    if ([self.B.text hasPrefix:@"-"]) {
+//        self.B.text = [@"( " stringByAppendingString:self.B.text];
+//        self.B.text = [self.B.text stringByAppendingString:@" )"];
+//        self.B.frame = CGRectMake(self.B.frame.origin.x, self.B.frame.origin.y, 100, Size);
+//        self.B.textAlignment = NSTextAlignmentLeft;
+//    }
+//    
+////    self.A.backgroundColor = [UIColor clearColor];
+////    self.B.backgroundColor = [UIColor clearColor];
+//    
+//    self.Y.text = @"=";
+//    self.Y.frame = CGRectMake(self.B.frame.origin.x + 70, 0, Size, Size);
+//    [self mulMode];
+//    self.Mul.frame = CGRectOffset(self.Y.frame, 70, 0);
+//    
+//    [AnimationClass fadeOut:self.A :0];
+//    [AnimationClass fadeIn:self.B :0];
+//    [AnimationClass fadeIn:self.Y :0];
+//    [AnimationClass fadeIn:self.Mul :0];
+//    
+//    [AnimationClass delay:1];
+//    
+//    [AnimationClass moveAnime:self.A :-60 :0];
+//    [AnimationClass moveAnime:self.B :-60 :0];
+//    [AnimationClass moveAnime:self.E :-60 :0];
+//    [AnimationClass moveAnime:self.X :-60 :0];
+//    [AnimationClass moveAnime:self.Y :-60 :0];
+//    [AnimationClass moveAnime:self.Code :-60 :0];
+//    [AnimationClass moveAnime:self.Equal :-60 :0];
+//    [AnimationClass moveAnime:self.Mul :-60 :0];
+//    
+//    int a = (int)[self.E.text integerValue];
+//    
+//    Val = a/b;
+//    
+//    //おもちゃ箱への登録
+//    NSMutableArray *f = [NSMutableArray arrayWithObjects:self.A, self.Mul, nil];
+//    [appDelegate.toyBox setObject:f forKey:@"obj"];
+//    NSMutableArray *list = [NSMutableArray arrayWithObjects:@"obj", nil];
+//    [appDelegate.toyBox setObject:list forKey:@"list"];
+//    
+//    appDelegate.form = self;
+//    
+//    [appDelegate setUpdateMode:@"upDate3"];
+//    [appDelegate upDate];
+//}
+//
+//
+////代入モード
+//- (void)singleMode
+//{
+//    self.X.frame = CGRectMake(0, 0, Size, Size);
+//    self.Equal.frame = CGRectMake(self.X.frame.origin.x + 50, 0, Size, Size);
+//    self.E.frame = CGRectMake(self.Equal.frame.origin.x + 70, 0, Size, Size);
+//    
+//    [self.A removeFromSuperview];
+//    [self.B removeFromSuperview];
+//    [self.Mul removeFromSuperview];
+//    [self.Code removeFromSuperview];
+//    [self.Y removeFromSuperview];
+//    
+//    Label = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.E.frame.origin.x + Size, Size)];
+////    Label.backgroundColor = [UIColor orangeColor];
+//    
+//    Label.layer.cornerRadius = 30.0;
+//    Label.clipsToBounds = YES;
+//    
+//    LabelPosition = Label.center.x - X.center.x;
+//    LabelValue = (int)[E.text integerValue];
+//    
+//    // touchesBegan判定用
+//    Label.tag = 3;
+//    
+//    [Label addSubview:self.X];
+//    [Label addSubview:self.Equal];
+//    [Label addSubview:self.E];
+//    [self setBack:Label];
+//    
+//    [self addSubview:Label];
+//    [self canMoving:@"Label"];
+//}
+//
 - (void)setMode :(int)Val
 {
     //移動距離
@@ -471,7 +474,7 @@ int LabelValue;
     [AnimationClass movePosition:self :91 :100 + 768 + 768];
     
 }
-/**********/
+///**********/
 
 /**********改良型**********/
 //ラベルの初期設定とself.frameの配置は終わっているので
@@ -490,14 +493,20 @@ int LabelValue;
     Equal.frame = CGRectMake(Y.frame.origin.x + 50, 0, Size, Size);
     E.frame = CGRectMake(Equal.frame.origin.x + 70, 0, Size, Size);
 
-    A.tag = 1;
-    B.tag = 2;
-    E.tag = 3;
-    Code.tag = 4;
+//    A.tag = 1;
+//    B.tag = 2;
+//    E.tag = 3;
+//    Code.tag = 4;
     
-    A.backgroundColor = [UIColor intoColor];
-    B.backgroundColor = [UIColor intoColor];
-    E.backgroundColor = [UIColor intoColor];
+//    A.backgroundColor = [UIColor intoColor];
+//    B.backgroundColor = [UIColor intoColor];
+//    E.backgroundColor = [UIColor intoColor];
+
+    //入力受付
+    [self receiveValue:A :1];
+    [self receiveValue:B :22];
+    [self receiveValue:E :3];
+    [self receiveValue:Code :4];
     
     [self addSubview:A];
     [self addSubview:B];
@@ -521,9 +530,11 @@ int LabelValue;
     E.frame = CGRectMake(Equal.frame.origin.x + 70, 0, Size, Size);
     Mul.frame = CGRectMake(E.frame.origin.x + 100, 0, Size, Size);
     
-    Mul.tag = 1;
-    
-    Mul.backgroundColor = [UIColor intoColor];
+//    Mul.tag = 1;
+//    Mul.backgroundColor = [UIColor intoColor];
+
+    //入力受付
+    [self receiveValue:Mul :5];
     
     [self addSubview:A];
     [self addSubview:B];
@@ -553,11 +564,15 @@ int LabelValue;
         Equal.frame = CGRectMake(240 + 50, 0, Size, Size);
         E.frame = CGRectMake(Equal.frame.origin.x + 70, 0, Size, Size);
         
-        B.backgroundColor = [UIColor intoColor];
-        E.backgroundColor = [UIColor intoColor];
+//        B.backgroundColor = [UIColor intoColor];
+//        E.backgroundColor = [UIColor intoColor];
         
-        B.tag = 1;
-        E.tag = 3;
+//        B.tag = 1;
+//        E.tag = 3;
+        
+        //入力受付
+        [self receiveValue:B :2];
+        [self receiveValue:E :3];
         
         [self addSubview:B];
         [self addSubview:Y];
@@ -589,11 +604,15 @@ int LabelValue;
         Equal.frame = CGRectMake(240 + 50, 0, Size, Size);
         E.frame = CGRectMake(Equal.frame.origin.x + 70, 0, Size, Size);
         
-        A.backgroundColor = [UIColor intoColor];
-        E.backgroundColor = [UIColor intoColor];
+//        A.backgroundColor = [UIColor intoColor];
+//        E.backgroundColor = [UIColor intoColor];
         
-        A.tag = 1;
-        E.tag = 3;
+//        A.tag = 1;
+//        E.tag = 3;
+        
+        //入力受付
+        [self receiveValue:A :1];
+        [self receiveValue:E :3];
         
         [self addSubview:A];
         [self addSubview:X];
@@ -623,12 +642,15 @@ int LabelValue;
         X.text = Y.text;
     }
     Code.text = @"÷";
-    B.text = @"";
     Y.text = @"=";
     
     //入力部分の設定
-    B.backgroundColor = [UIColor intoColor];
-    Mul.backgroundColor = [UIColor intoColor];
+//    B.backgroundColor = [UIColor intoColor];
+//    Mul.backgroundColor = [UIColor intoColor];
+    
+    //入力受付
+    [self receiveValue:B :1];
+    [self receiveValue:Mul :2];
     
     //全体のラベル設定
     A.frame = CGRectMake(0, 0, Size, Size);
@@ -780,6 +802,7 @@ int LabelValue;
     E.frame = CGRectMake(Equal.frame.origin.x + 70, 0, Size, Size);
     Mul.frame = CGRectMake(E.frame.origin.x + 100, 0, Size, Size);
     
+    //代入受けるためのタグ
     X.tag = 1;
     Y.tag = 2;
     
@@ -795,8 +818,65 @@ int LabelValue;
     Mul.hidden = YES;
     
 }
-/*************************/
 
+//⑧移項モード
+- (void)transPositionMode
+{
+    //*このメソッドでは移項に入るための数値入力待機状態を作成
+    //xかyの値が変わっていたら分岐
+    
+    if(![X.text isEqualToString:@"x"]){
+        //xに代入されたときの処理
+        [self receiveValue:A :1];
+        
+        //ラベルの配置
+        A.frame = CGRectMake(0, 0, Size, Size);
+        
+        Code.frame = CGRectMake(A.frame.origin.x +60, 0, Size, Size);
+        B.frame = CGRectMake(Code.frame.origin.x + 70, 0, Size, Size);
+        Y.frame = CGRectMake(B.frame.origin.x + 60, 0, Size, Size);
+        Equal.frame = CGRectMake(Y.frame.origin.x + 50, 0, Size, Size);
+        E.frame = CGRectMake(Equal.frame.origin.x + 70, 0, Size, Size);
+        
+        X.frame = CGRectMake(E.frame.origin.x + 70, 0, Size, Size);
+        Mul.frame = CGRectMake(X.frame.origin.x + 70, 0, Size, Size);
+        
+        
+        
+    }else if(![Y.text isEqualToString:@"y"]){
+        //yに代入されたときの処理
+        [self receiveValue:B :2];
+        
+        //ラベルの配置
+        A.frame = CGRectMake(0, 0, Size, Size);
+        X.frame = CGRectMake(A.frame.origin.x + 60, 0, Size, Size);
+        Code.frame = CGRectMake(X.frame.origin.x +50, 0, Size, Size);
+        B.frame = CGRectMake(Code.frame.origin.x + 70, 0, Size, Size);
+        
+        Equal.frame = CGRectMake(B.frame.origin.x + 60, 0, Size, Size);
+        E.frame = CGRectMake(Equal.frame.origin.x + 70, 0, Size, Size);
+        
+        Y.frame = CGRectMake(E.frame.origin.x + 70, 0, Size, Size);
+        Mul.frame = CGRectMake(Y.frame.origin.x + 70, 0, Size, Size);
+        
+    }else{
+        //例外のとき（念のため）
+        NSLog(@"error");
+    }
+    
+    [self addSubview:A];
+    [self addSubview:B];
+    [self addSubview:E];
+    [self addSubview:X];
+    [self addSubview:Y];
+    [self addSubview:Equal];
+    [self addSubview:Code];
+    [self addSubview:Mul];
+    
+}
+
+/*************************/
+/*************************/
 
 //-(void)setMulPosition
 //{
@@ -892,6 +972,18 @@ int LabelValue;
     }
 }
 
+/*****数値入力設定*****/
+- (void)receiveValue :(UILabel *)origin :(short int)index{
+    origin.tag = index;
+    
+    //Codeだけがここ適用されない
+    if(index != 4){
+        origin.text = @"";
+        origin.backgroundColor = [UIColor intoColor];
+    }
+    
+}
+/********************/
 
 /*****タッチイベント*****/
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event

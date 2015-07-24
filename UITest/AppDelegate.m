@@ -136,12 +136,13 @@ SetField *Set;
         
         [View.oya addSubview:f3];
         
+        [Button isMove:false];
         [AnimationClass fadeIn:f3 :0];
         [AnimationClass delay:2];
         
         [View newScroll];
         [Set thirdSet:View.oya :f3];
-        [Button isMove:false];
+        
     }
 }
 
@@ -149,9 +150,17 @@ SetField *Set;
 {
     NSLog(@"update 4");
     [Button isMove:true];
-    NSLog(@"%@",form.A.text);
+//    NSLog(@"%@",form.A.text);
     [form substitution];
     [View.oya bringSubviewToFront:form];
+    [AnimationClass delay:1];
+    
+    //移項モードへ
+    ViewClass *f4 = [[[ViewClass alloc] init] copyWithPosition:form :91 :form.frame.origin.y + 100];
+    [f4 changeMode:@"transPositionMode"];
+    [View.oya addSubview:f4];
+    [AnimationClass fadeIn:f4 :0];
+    
 }
 
 - (void)upDate5
