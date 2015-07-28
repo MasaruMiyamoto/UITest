@@ -156,7 +156,7 @@ SetField *Set;
     [AnimationClass delay:1];
     
     //移項モードへ
-    ViewClass *f4 = [[[ViewClass alloc] init] copyWithPosition:form :91 :form.frame.origin.y + 100];
+    ViewClass *f4 = [[[ViewClass alloc] init] copyWithPosition:form :91 :form.frame.origin.y + 131];
     [f4 changeMode:@"transPositionMode"];
     [View.oya addSubview:f4];
     [AnimationClass fadeIn:f4 :0];
