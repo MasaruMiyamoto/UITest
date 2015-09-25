@@ -37,7 +37,7 @@
 - (id)initWithPosition:(int)x :(int)y;
 
 - (void)changeMode:(NSString *)mode;
-- (void)changeMode:(NSString *)mode :(ViewClass *)main;
+//- (void)changeMode:(NSString *)mode :(ViewClass *)main;
 
 - (void)setVariable:(int)a :(int)b :(int)e;
 - (void)setResult:(int)val :(int)con;
@@ -49,7 +49,7 @@
 - (BOOL)isXY;
 - (ViewClass *)copyWithPosition: (ViewClass *)origin :(int)x :(int)y;
 - (BOOL)checkDiv;
-- (void)setAns :(UILabel *)lbly :(UILabel *)lblmul :(int)x :(int)y;
+//- (void)setAns :(UILabel *)lbly :(UILabel *)lblmul :(int)x :(int)y;
 - (void)substitution;
 
 @end
