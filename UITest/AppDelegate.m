@@ -165,7 +165,7 @@ SetField *Set;
 
 - (void)upDate5
 {
-    
+    NSLog(@"update 5");
 }
 
 - (void)setUpdateMode:(NSString *)mode

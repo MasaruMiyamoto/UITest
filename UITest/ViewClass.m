@@ -582,7 +582,9 @@ int LabelValue;
         X.frame = CGRectMake(E.frame.origin.x + 70, 0, Size, Size);
         Mul.frame = CGRectMake(X.frame.origin.x + 70, 0, Size, Size);
         
-        
+        //移項時に表示される
+        X.alpha = 0;
+        Mul.alpha = 0;
         
     }else if(![Y.text isEqualToString:@"y"]){
         //yに代入されたときの処理
@@ -600,6 +602,10 @@ int LabelValue;
         
         Y.frame = CGRectMake(E.frame.origin.x + 70, 0, Size, Size);
         Mul.frame = CGRectMake(Y.frame.origin.x + 70, 0, Size, Size);
+        
+        //移行時に表示される
+        Y.alpha = 0;
+        Mul.alpha = 0;
         
     }else{
         //例外のとき（念のため）
@@ -625,7 +631,6 @@ int LabelValue;
     [self addSubview:Code];
     [self addSubview:Mul];
     
-    
     NSMutableArray *f = [NSMutableArray arrayWithObjects:A, Code, B, nil];
     [appDelegate.toyBox setObject:f forKey:@"obj"];
     
@@ -633,6 +638,7 @@ int LabelValue;
     
     [appDelegate.toyBox setObject:list forKey:@"list"];
     
+    [appDelegate setUpdateMode:@"upDate5"];
 }
 
 /*************************/
