@@ -157,7 +157,7 @@ SetField *Set;
     
     //移項モードへ
     ViewClass *f4 = [[[ViewClass alloc] init] copyWithPosition:form :91 :form.frame.origin.y + 131];
-    [f4 changeMode:@"transPositionMode"];
+    [f4 changeMode:@"transPositionSetMode"];
     [View.oya addSubview:f4];
     [AnimationClass fadeIn:f4 :0];
     
@@ -166,6 +166,15 @@ SetField *Set;
 - (void)upDate5
 {
     NSLog(@"update 5");
+    if([form checkMul]){
+        NSLog(@"OK Mul");
+        [Button isMove:false];
+        
+        ViewClass *f5 = [[[ViewClass alloc] init] copyWithPosition:form :91 :form.frame.origin.y + 131];
+        [f5 changeMode:@"transPositionMode"];
+        [View.oya addSubview:f5];
+        [AnimationClass fadeIn:f5 :0];
+    }
 }
 
 - (void)setUpdateMode:(NSString *)mode
@@ -188,7 +197,7 @@ SetField *Set;
     }
     
     IsUpdate = x;
-        NSLog(@"x = %d",x);
+        NSLog(@"mode x = %d",x);
 }
 
 

@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
-//#import "SetButton.h"
 #import "AnimationClass.h"
 
 //式の作成用クラス(予定)
@@ -41,15 +40,25 @@
 
 - (void)setVariable:(int)a :(int)b :(int)e;
 - (void)setResult:(int)val :(int)con;
+
+//ラベルの動作可能判定と不可判定
 - (void)canMoving :(NSString *)str;
-- (void)cannotMoving :(NSString *)str;
+//- (void)cannotMoving :(NSString *)str;
+
 - (void)upDate;
 //- (void)upDate2;
-- (BOOL)checkSum;
-- (BOOL)isXY;
-- (ViewClass *)copyWithPosition: (ViewClass *)origin :(int)x :(int)y;
-- (BOOL)checkDiv;
-//- (void)setAns :(UILabel *)lbly :(UILabel *)lblmul :(int)x :(int)y;
-- (void)substitution;
 
+//クラスの値のコピーとselfの位置の設定
+- (ViewClass *)copyWithPosition: (ViewClass *)origin :(int)x :(int)y;
+
+//計算チェック
+- (BOOL)checkSum;
+- (BOOL)checkDiv;
+- (BOOL)checkMul;
+
+- (void)substitution;
+//一方解の判定
+- (BOOL)isXY;
+
+- (void)tPAction;
 @end

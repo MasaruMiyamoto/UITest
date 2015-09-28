@@ -194,8 +194,12 @@ int LabelValue;
             [self receptionMode];  //7
             break;
         }
+        CASE (@"transPositionSetMode"){
+            [self transPositionSetMode];  //8
+            break;
+        }
         CASE (@"transPositionMode"){
-            [self transPositionMode];  //8
+            [self transPositionMode];  //9
             break;
         }
         DEFAULT {
@@ -398,7 +402,7 @@ int LabelValue;
     Mul.frame = CGRectMake(Y.frame.origin.x + 70, 0, Size, Size);
     
     //移動アニメーション対応設定
-    [self canMoving:@"A"];
+    [self canMoving:@"divA"];
     [self setBack:A];
     
     //    NSLog(@" code = %lf", mine.Code.frame.origin.x);
@@ -478,6 +482,7 @@ int LabelValue;
     [appDelegate.toyBox setObject:list forKey:@"list"];
     
     appDelegate.form = self;
+    NSLog(@"form to 4-2");
     
     [appDelegate setUpdateMode:@"upDate3"];
     [appDelegate upDate];
@@ -499,6 +504,7 @@ int LabelValue;
     [self addSubview:E];
     
     appDelegate.form = self;
+    NSLog(@"form number 5");
 }
 
 //⑥代入モード
@@ -558,10 +564,10 @@ int LabelValue;
     
 }
 
-//⑧移項モード
-- (void)transPositionMode
+//⑧移項準備モード
+- (void)transPositionSetMode
 {
-    NSLog(@"⑧TransPositionMode");
+    NSLog(@"⑧TransPositionSetMode");
     
     //*このメソッドでは移項に入るための数値入力待機状態を作成
     //xかyの値が変わっていたら分岐
@@ -607,20 +613,13 @@ int LabelValue;
         Y.alpha = 0;
         Mul.alpha = 0;
         
+        //正負の入力に気をつけよう
+        Code.text = @"+";
+        
     }else{
         //例外のとき（念のため）
         NSLog(@"error");
     }
-    
-//　7/28　保留
-//    A.frame = CGRectMake(0, 0, Size, Size);
-//    X.frame = CGRectMake(A.frame.origin.x + 60, 0, Size, Size);
-//    Code.frame = CGRectMake(X.frame.origin.x +50, 0, Size, Size);
-//    B.frame = CGRectMake(Code.frame.origin.x + 70, 0, Size, Size);
-//    Y.frame = CGRectMake(B.frame.origin.x + 60, 0, Size, Size);
-//    Equal.frame = CGRectMake(Y.frame.origin.x + 50, 0, Size, Size);
-//    E.frame = CGRectMake(Equal.frame.origin.x + 70, 0, Size, Size);
-//    Mul.frame = CGRectMake(E.frame.origin.x + 100, 0, Size, Size);
     
     [self addSubview:A];
     [self addSubview:B];
@@ -633,35 +632,77 @@ int LabelValue;
     
     NSMutableArray *f = [NSMutableArray arrayWithObjects:A, Code, B, nil];
     [appDelegate.toyBox setObject:f forKey:@"obj"];
-    
     NSMutableArray *list = [NSMutableArray arrayWithObjects:@"obj", nil];
-    
     [appDelegate.toyBox setObject:list forKey:@"list"];
+    
+    appDelegate.form = self;
+    NSLog(@"form number 8");
+    NSLog(@"Val = %d",Val);
     
     [appDelegate setUpdateMode:@"upDate5"];
 }
 
+//⑨移項実践モード
+- (void)transPositionMode
+{
+    NSLog(@"⑨TransPositionMode");
+    
+    [self addSubview:A];
+    [self addSubview:B];
+    [self addSubview:E];
+    [self addSubview:X];
+    [self addSubview:Y];
+    [self addSubview:Equal];
+    [self addSubview:Code];
+    [self addSubview:Mul];
+    
+    
+    if(![self isXY]){
+        
+        //ラベルの配置
+        A.frame = CGRectMake(0, 0, Size, Size);
+        
+        Code.frame = CGRectMake(A.frame.origin.x +60, 0, Size, Size);
+        B.frame = CGRectMake(Code.frame.origin.x + 70, 0, Size, Size);
+        Y.frame = CGRectMake(B.frame.origin.x + 60, 0, Size, Size);
+        Equal.frame = CGRectMake(Y.frame.origin.x + 50, 0, Size, Size);
+        E.frame = CGRectMake(Equal.frame.origin.x + 70, 0, Size, Size);
+        
+        X.frame = CGRectMake(E.frame.origin.x + 70, 0, Size, Size);
+        Mul.frame = CGRectMake(X.frame.origin.x + 70, 0, Size, Size);
+        
+        //Aを移項する
+        [self canMoving:@"transA"];
+        [self setBack:A];
+        [self bringSubviewToFront:A];
+    }else{
+        
+        //ラベルの配置
+        A.frame = CGRectMake(0, 0, Size, Size);
+        X.frame = CGRectMake(A.frame.origin.x + 60, 0, Size, Size);
+        Code.frame = CGRectMake(X.frame.origin.x +50, 0, Size, Size);
+        B.frame = CGRectMake(Code.frame.origin.x + 70, 0, Size, Size);
+        
+        Equal.frame = CGRectMake(B.frame.origin.x + 60, 0, Size, Size);
+        E.frame = CGRectMake(Equal.frame.origin.x + 70, 0, Size, Size);
+        
+        Y.frame = CGRectMake(E.frame.origin.x + 70, 0, Size, Size);
+        Mul.frame = CGRectMake(Y.frame.origin.x + 70, 0, Size, Size);
+
+        //Bを移項する
+        [self canMoving:@"transB"];
+        [self setBack:B];
+        [self bringSubviewToFront:B];
+    }
+
+    Mul.text = @"";
+    [self receiveValue:Mul :5];
+    
+}
 /*************************/
 /*************************/
 
-
-//-(void)setMulPosition
-//{
-//    Mul.frame = CGRectMake(E.frame.origin.x + 100, 0, Size, Size);
-//}
-
-//-(void)setPosition
-//{
-//    A.frame = CGRectMake(0, 0, 80, 80);
-//    X.frame = CGRectMake(A.frame.origin.x + 60, 0, Size, Size);
-//    Code.frame = CGRectMake(X.frame.origin.x +50, 0, Size, Size);
-//    B.frame = CGRectMake(Code.frame.origin.x + 70, 0, Size, Size);
-//    Y.frame = CGRectMake(B.frame.origin.x + 60, 0, Size, Size);
-//    Equal.frame = CGRectMake(Y.frame.origin.x + 50, 0, Size, Size);
-//    E.frame = CGRectMake(Equal.frame.origin.x + 70, 0, Size, Size);
-////    NSLog(@"%f",E.frame.origin.x);
-//}
-
+//self.frame（クラス自身の位置）を動かす
 - (void)move :(int)x :(int)y
 {
     self.frame = CGRectOffset(self.frame, x, y);
@@ -697,14 +738,25 @@ int LabelValue;
 
 - (void)canMoving:(NSString *)str
 {
-    if([str isEqualToString:@"A"]){
+    //divisionMode
+    if([str isEqualToString:@"divA"]){
         A.userInteractionEnabled = YES;
         A.backgroundColor = [UIColor orangeColor];
         A.tag = 101;
-    }else if([str isEqualToString:@"B"]){
+        
+    //transpositionMode
+    }else if([str isEqualToString:@"transA"]){
+        A.userInteractionEnabled = YES;
+        A.backgroundColor = [UIColor orangeColor];
+        A.tag = 201;
+    }else if([str isEqualToString:@"transB"]){
         B.userInteractionEnabled = YES;
         B.backgroundColor = [UIColor orangeColor];
-        B.tag = 102;
+        B.tag = 202;
+        
+        
+        
+    //未定
     }else if([str isEqualToString:@"X"]){
         X.userInteractionEnabled = YES;
         X.backgroundColor = [UIColor orangeColor];
@@ -723,27 +775,27 @@ int LabelValue;
     }
 }
 
-- (void)cannotMoving:(NSString *)str
-{
-    if([str isEqualToString:@"A"]){
-        A.userInteractionEnabled = NO;
-        A.backgroundColor = [UIColor clearColor];
-    }else if([str isEqualToString:@"B"]){
-        B.userInteractionEnabled = NO;
-        B.backgroundColor = [UIColor clearColor];
-    }else if([str isEqualToString:@"X"]){
-        X.userInteractionEnabled = NO;
-        X.backgroundColor = [UIColor clearColor];
-    }else if([str isEqualToString:@"Label"]){
-        Label.userInteractionEnabled = NO;
-        Label.backgroundColor = [UIColor clearColor];
-    }else if([str isEqualToString:@"AB"]){
-        A.userInteractionEnabled = NO;
-        B.userInteractionEnabled = NO;
-        A.backgroundColor = [UIColor clearColor];
-        B.backgroundColor = [UIColor clearColor];
-    }
-}
+//- (void)cannotMoving:(NSString *)str
+//{
+//    if([str isEqualToString:@"A"]){
+//        A.userInteractionEnabled = NO;
+//        A.backgroundColor = [UIColor clearColor];
+//    }else if([str isEqualToString:@"B"]){
+//        B.userInteractionEnabled = NO;
+//        B.backgroundColor = [UIColor clearColor];
+//    }else if([str isEqualToString:@"X"]){
+//        X.userInteractionEnabled = NO;
+//        X.backgroundColor = [UIColor clearColor];
+//    }else if([str isEqualToString:@"Label"]){
+//        Label.userInteractionEnabled = NO;
+//        Label.backgroundColor = [UIColor clearColor];
+//    }else if([str isEqualToString:@"AB"]){
+//        A.userInteractionEnabled = NO;
+//        B.userInteractionEnabled = NO;
+//        A.backgroundColor = [UIColor clearColor];
+//        B.backgroundColor = [UIColor clearColor];
+//    }
+//}
 
 /*****数値入力設定*****/
 - (void)receiveValue :(UILabel *)origin :(short int)index{
@@ -770,6 +822,8 @@ int LabelValue;
 //    NSLog(@"tag = %ld",(long)touch.view.tag);
     
     switch (touch.view.tag) {
+        
+        //divisionMode
         case 101:
             A.center = location;
 //            self.Code.text = @"÷";
@@ -777,10 +831,22 @@ int LabelValue;
             
             [AnimationClass fadeIn:Code :0];
             [AnimationClass fadeIn:B :0];
+            break;
             
+        //transpositionMode
+        case 201:
+            A.center = location;
             break;
-        case 2:
+            
+        case 202:
+            if([Code.text isEqualToString:@"-"])
+                B.text = [Code.text stringByAppendingString:B.text];
+            [AnimationClass fadeOut:Code :0];
+            B.center = location;
             break;
+        
+            
+            
         case 104:
             Label.center = [self labelLocation: location];
             break;
@@ -799,12 +865,22 @@ int LabelValue;
     [super touchesMoved:touches withEvent:event];
     
     switch (touch.view.tag) {
+            
+        //divisionMode
         case 101:
             A.center = location;
             break;
-        case 2:
+            
+        //transpositionMode
+        case 201:
+            A.center = location;
+            break;
+            
+        case 202:
             B.center = location;
             break;
+            
+            
         case 104:
             Label.center = [self labelLocation: location];
             Label.backgroundColor = [self subJudge:Label];
@@ -823,6 +899,7 @@ int LabelValue;
 //    CGPoint location = [touch locationInView:self];
     
     switch (touch.view.tag) {
+            //divisionMode
         case 101:
             if (CGRectContainsPoint(self.B.frame, self.A.center)) {
                 [self changeMode:@"divisionMode"];
@@ -835,8 +912,20 @@ int LabelValue;
             }
             [self back:A];
             break;
-        case 2:
+            
+        //transpositionMode
+        case 201:
+            [self back:A];
             break;
+        
+        case 202:
+            [self back:B];
+            if([Code.text isEqualToString:@"-"])
+                B.text = [B.text substringFromIndex:1];
+            [AnimationClass fadeIn:Code :0];
+            break;
+        
+        
         case 104:
             // 代入判定メソッド
             if (Label.backgroundColor == [UIColor redColor]) {
@@ -862,6 +951,8 @@ int LabelValue;
     int b = (int)[B.text integerValue];
     int e = (int)[E.text integerValue];
     
+    NSLog(@"a=%d, b=%d, e=%d",a,b,e);
+    
     if (e == Con) {
         if(a == Val)
             return YES;
@@ -875,13 +966,31 @@ int LabelValue;
 {
     int e = (int)[self.Mul.text integerValue];
     
-//    NSLog(@"Val = %d, e = %d",Val,e);
+    NSLog(@"Val = %d, e = %d",Val,e);
+    
     if(Val == e)
         return YES;
     return NO;
 }
 
-
+- (BOOL)checkMul
+{
+    int e;
+    if (![self isXY]) {
+        e = (int)[A.text integerValue];
+        NSLog(@"Ae = %d",e);
+    }else{
+        NSString *cb = [Code.text stringByAppendingString:B.text];
+        e = (int)[cb integerValue];
+        NSLog(@"Be = %d",e);
+    }
+    
+    if (e == Val) {
+        return YES;
+    }
+    
+    return NO;
+}
 /***** 更新処理 *****/
 //係数の乗法
 -(void)upDate
@@ -958,9 +1067,14 @@ int LabelValue;
     return CGPointMake(location.x + LabelPosition, location.y);
 }
 
+-(CGPoint)codeLocation :(UILabel *)lbl
+{
+    return CGPointMake(lbl.center.x - 70, lbl.center.y);
+}
 
 //****************************代入ステージ****************************//
 //代入判定メソッド
+//色が変わる
 - (UIColor *)subJudge :(UIView *)XY
 {
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
@@ -989,6 +1103,7 @@ int LabelValue;
 }
 
 //代入メソッド
+//実際に代入する
 - (void)subStart :(NSString *)str :(UIView *)XY
 {
 //    BOOL isCode = false;
@@ -1037,7 +1152,7 @@ int LabelValue;
 }
 
 
-- (void)setMode :(int)Val
+- (void)setMode :(int)val
 {
     NSLog(@"Call setMode");
     //移動距離
@@ -1047,7 +1162,7 @@ int LabelValue;
     Mul.hidden = NO;
     
     //値の入力
-    Mul.text = [NSString stringWithFormat:@"%d",Val];
+    Mul.text = [NSString stringWithFormat:@"%d",val];
     
     if ([Mul.text hasPrefix:@"-"]) {
         Mul.text = [@"( " stringByAppendingString:Mul.text];
@@ -1065,29 +1180,40 @@ int LabelValue;
         [AnimationClass moveAnime:B :MoveDistance :0];
         [AnimationClass moveAnime:Y :MoveDistance :0];
         
+        Val = val * (int)[A.text integerValue];
+        
     }else{
         //y部分に代入
         Mul.frame = CGRectMake(Y.frame.origin.x + 70, 0, Mul.frame.size.width, Size);
+        
+        //Code + B でValを求める
+        Val = val * (int)[[Code.text stringByAppendingString:B.text] integerValue];
+        
     }
     
     [AnimationClass moveAnime:Equal :MoveDistance :0];
     [AnimationClass moveAnime:E :MoveDistance :0];
-    
-    [AnimationClass fadeIn:Mul :1.0];
-    
+        
     [AnimationClass delay:1.5];
     
     [AnimationClass movePosition:self :91 :100 + 768 + 768];
     
+    appDelegate.form = self;
+    NSLog(@"form number 7");
+    NSLog(@"Val = %d",Val);
 }
 
 
+//****************************代入ステージ終了****************************//
+
 //一方解がXかYかの判定
+//Xがあるときtrue
 - (BOOL)isXY
 {
     
     NSLog(@"X = %@, Y = %@",X.text,Y.text);
     
+    //Xのラベルの判定
     if ([X.text isEqualToString:@"x"]) {
         return true;
     }else if([Y.text isEqualToString:@"y"]){
@@ -1097,5 +1223,4 @@ int LabelValue;
     return false;
 }
 
-//****************************代入ステージ終了****************************//
 @end
