@@ -202,6 +202,10 @@ int LabelValue;
             [self transPositionMode];  //9
             break;
         }
+        CASE (@"transPositionHasMode"){
+            [self transPositionHasMode];  //10
+            break;
+        }
         DEFAULT {
             NSLog(@"throght default");
             break;
@@ -675,6 +679,10 @@ int LabelValue;
         [self canMoving:@"transA"];
         [self setBack:A];
         [self bringSubviewToFront:A];
+        
+        //隠す
+        X.alpha = 0;
+        
     }else{
         
         //ラベルの配置
@@ -693,10 +701,91 @@ int LabelValue;
         [self canMoving:@"transB"];
         [self setBack:B];
         [self bringSubviewToFront:B];
+        
+        //隠す
+        Y.alpha = 0;
+        
     }
-
+    
+    //初期化と代入準備
     Mul.text = @"";
     [self receiveValue:Mul :5];
+    
+    //隠す
+    Mul.alpha = 0;
+    
+}
+
+//移項完了モード
+- (void)transPositionHasMode
+{
+    NSLog(@"TranspositionHasMode");
+    
+    int moving;
+    
+    //場合分け
+    if([self isXY]){    //Bを移項した場合
+        
+        Mul.text = B.text;
+        
+        /*********************ここの問題作成*******************/
+        if ([self isPMlabel:Mul]) {
+            Y.text = @"-";
+        }else{
+            Mul.text = [Mul.text substringFromIndex:1];
+            Y.text = @"+";
+        }
+        /****************************************************/
+        
+        [B removeFromSuperview];
+        [AnimationClass fadeIn:Y :0];
+        
+        //移動距離の算出
+        moving = Equal.frame.origin.x - Code.frame.origin.x;
+        
+    }else{  //Aを移項した場合
+        
+        Mul.text = A.text;
+        if ([self isPMlabel:Mul]) {
+            X.text = @"-";
+        }else{
+            X.text = @"+";
+            Mul.text = [Mul.text substringFromIndex:1];
+        }
+        [A removeFromSuperview];
+        [AnimationClass fadeIn:X :0];
+        
+        //Bがマイナスの時の処理
+        if ([Code.text isEqualToString:@"-"]) {
+            B.text = [Code.text stringByAppendingString:B.text];
+        }
+        [Code removeFromSuperview];
+        
+        moving = B.frame.origin.x;
+    }
+    
+    [AnimationClass fadeIn:Mul :0];
+    [AnimationClass delay:1];
+    
+    //詰める
+    
+    if (![self isXY]){  //Aを移行した場合
+        //横移動
+        [AnimationClass moveAnime:A:-moving :0];
+        [AnimationClass moveAnime:X :-moving :0];
+    }
+    
+    //横移動（共通）
+    [AnimationClass moveAnime:B :-moving :0];
+    [AnimationClass moveAnime:E :-moving :0];
+    [AnimationClass moveAnime:Y :-moving :0];
+    [AnimationClass moveAnime:Code :-moving :0];
+    [AnimationClass moveAnime:Equal :-moving :0];
+    [AnimationClass moveAnime:Mul :-moving :0];
+
+    //移動確認用
+//    A.backgroundColor = [UIColor Custom];
+//    B.backgroundColor = [UIColor Custom];
     
 }
 /*************************/
@@ -836,12 +925,14 @@ int LabelValue;
         //transpositionMode
         case 201:
             A.center = location;
+            [AnimationClass fadeIn:Mul :0];
             break;
             
         case 202:
             if([Code.text isEqualToString:@"-"])
                 B.text = [Code.text stringByAppendingString:B.text];
             [AnimationClass fadeOut:Code :0];
+            [AnimationClass fadeIn:Mul :0];
             B.center = location;
             break;
         
@@ -915,14 +1006,24 @@ int LabelValue;
             
         //transpositionMode
         case 201:
-            [self back:A];
+            if (CGRectContainsPoint(self.A.frame, self.Mul.center)) {
+                [self changeMode:@"transPositionHasMode"];
+            }else{
+                [self back:A];
+                [AnimationClass fadeOut:Mul :0];
+            }
             break;
         
         case 202:
-            [self back:B];
-            if([Code.text isEqualToString:@"-"])
-                B.text = [B.text substringFromIndex:1];
-            [AnimationClass fadeIn:Code :0];
+            if (CGRectContainsPoint(self.B.frame, self.Mul.center)) {
+                [self changeMode:@"transPositionHasMode"];
+            }else{
+                [self back:B];
+                if([Code.text isEqualToString:@"-"])
+                    B.text = [B.text substringFromIndex:1];
+                [AnimationClass fadeOut:Mul :0];
+                [AnimationClass fadeIn:Code :0];
+            }
             break;
         
         
@@ -1223,4 +1324,15 @@ int LabelValue;
     return false;
 }
 
+- (BOOL)isPMlabel :(UILabel *)label
+{
+    int l = (int)[label.text integerValue];
+    
+    if(l > 0){
+        return true;
+    }else{
+        return false;
+    }
+    
+}
 @end

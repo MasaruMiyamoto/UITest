@@ -60,5 +60,4 @@
 //一方解の判定
 - (BOOL)isXY;
 
-- (void)tPAction;
 @end
