@@ -66,6 +66,9 @@ SetField *Set;
         case 5:
             [self upDate5];
             break;
+        case 6:
+            [self upDate6];
+            break;
         default:
             break;
     }
@@ -177,6 +180,12 @@ SetField *Set;
     }
 }
 
+- (void)upDate6
+{
+    NSLog(@"update 6");
+    [Button isMove:true];
+}
+
 - (void)setUpdateMode:(NSString *)mode
 {
     int x;
@@ -191,6 +200,8 @@ SetField *Set;
         x = 4;
     else if([mode isEqualToString:@"upDate5"])
         x = 5;
+    else if([mode isEqualToString:@"upDate6"])
+        x = 6;
     else {
         x = 0;
 //        NSLog(@"IsUpdate = 0");

@@ -453,7 +453,7 @@ int LabelValue;
     B.backgroundColor = [UIColor clearColor];
     
     //数値入力判定
-    Mul.tag = 1;
+    [self receiveValue:Mul :5];
     
     //フェードイン/アウト
 //    [AnimationClass fadeOut:A :0];
@@ -716,17 +716,24 @@ int LabelValue;
     
 }
 
-//移項完了モード
+//⑩移項完了モード
 - (void)transPositionHasMode
 {
     NSLog(@"TranspositionHasMode");
     
     int moving;
     
+    //Mulに代入されたから色変更
+    Mul.backgroundColor = [UIColor orangeColor];
+    
     //場合分け
     if([self isXY]){    //Bを移項した場合
         
         Mul.text = B.text;
+        
+        B.frame = E.frame;
+        B.text = E.text;
+        B.backgroundColor = [UIColor clearColor];
         
         /*********************ここの問題作成*******************/
         if ([self isPMlabel:Mul]) {
@@ -737,7 +744,6 @@ int LabelValue;
         }
         /****************************************************/
         
-        [B removeFromSuperview];
         [AnimationClass fadeIn:Y :0];
         
         //移動距離の算出
@@ -746,20 +752,29 @@ int LabelValue;
     }else{  //Aを移項した場合
         
         Mul.text = A.text;
+        
+        A.frame = E.frame;
+        A.text = E.text;
+        A.backgroundColor = [UIColor clearColor];
+        
+        
+        
         if ([self isPMlabel:Mul]) {
             X.text = @"-";
         }else{
             X.text = @"+";
             Mul.text = [Mul.text substringFromIndex:1];
         }
-        [A removeFromSuperview];
+        
+        
+        
         [AnimationClass fadeIn:X :0];
         
         //Bがマイナスの時の処理
         if ([Code.text isEqualToString:@"-"]) {
             B.text = [Code.text stringByAppendingString:B.text];
         }
-        [Code removeFromSuperview];
+        [AnimationClass fadeOut:Code :0];
         
         moving = B.frame.origin.x;
     }
@@ -783,6 +798,42 @@ int LabelValue;
     [AnimationClass moveAnime:Equal :-moving :0];
     [AnimationClass moveAnime:Mul :-moving :0];
 
+    [AnimationClass delay:1];
+    
+    Code.frame = CGRectMake(Mul.frame.origin.x + 70, 0, Size, Size);
+    Code.text = @"=";
+    E.frame = CGRectMake(Code.frame.origin.x + 70, 0, Size, Size);
+    E.text = @"";
+    E.backgroundColor = [UIColor intoColor];
+    
+    //表示
+    [AnimationClass fadeIn:Code :0];
+    [AnimationClass fadeIn:E :0];
+    
+    //書き込み許可
+    [self deReceiveValue:Mul];
+    [self receiveValue:E :3];
+    
+    NSMutableArray *f;
+    if([self isXY]){
+        f = [NSMutableArray arrayWithObjects:A, E, nil];
+        A.backgroundColor = [UIColor redColor];
+    }else{
+        f = [NSMutableArray arrayWithObjects:B, E, nil];
+    }
+    [appDelegate.toyBox setObject:f forKey:@"obj"];
+    NSMutableArray *list = [NSMutableArray arrayWithObjects:@"obj", nil];
+    [appDelegate.toyBox setObject:list forKey:@"list"];
+    
+    appDelegate.form = self;
+    NSLog(@"form number 10");
+//    NSLog(@"Val = %d",Val);
+    
+    
+    
+    [appDelegate setUpdateMode:@"upDate6"];
+    [appDelegate upDate];
+    
     //移動確認用
 //    A.backgroundColor = [UIColor Custom];
 //    B.backgroundColor = [UIColor Custom];
@@ -896,6 +947,11 @@ int LabelValue;
         origin.backgroundColor = [UIColor intoColor];
     }
     
+}
+
+- (void)deReceiveValue :(UILabel *)origin
+{
+    origin.tag = 0;
 }
 /********************/
 
