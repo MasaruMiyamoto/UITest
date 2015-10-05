@@ -53,7 +53,7 @@
 
 //計算チェック
 - (BOOL)checkSum;
-- (BOOL)checkDiv;
+- (BOOL)checkDiv :(NSString *)str;
 - (BOOL)checkMul;
 
 - (void)substitution;

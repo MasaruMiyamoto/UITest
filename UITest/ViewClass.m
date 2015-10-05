@@ -171,17 +171,14 @@ int LabelValue;
             [self calculationMode:NO];  //3-2
             break;
         }
-        
         CASE (@"divisionLabel"){  //4-1
             [self divisionLabel];
             break;
         }
-        
         CASE (@"divisionMode"){
             [self divisionMode];  //4-2
             break;
         }
-        
         CASE (@"solutionMode"){
             [self solutionMode];  //5
             break;
@@ -204,6 +201,14 @@ int LabelValue;
         }
         CASE (@"transPositionHasMode"){
             [self transPositionHasMode];  //10
+            break;
+        }
+        CASE (@"divisionLabel2"){  //11
+            [self divisionLabel2];
+            break;
+        }
+        CASE (@"divisionMode2"){
+            [self divisionMode2];  //12
             break;
         }
         DEFAULT {
@@ -495,7 +500,7 @@ int LabelValue;
 //⑤解モード
 - (void)solutionMode
 {
-    NSLog(@"⑤SolutionMode");
+    NSLog(@"solutionMode");
     
     X.frame = CGRectMake(0, 0, Size, Size);
     Equal.frame = CGRectMake(self.X.frame.origin.x + 50, 0, Size, Size);
@@ -506,6 +511,9 @@ int LabelValue;
     [self addSubview:X];
     [self addSubview:Equal];
     [self addSubview:E];
+    
+    NSLog(@"X = %@, Y = %@",X.text, Y.text);
+    [appDelegate inputAns:[self isXY] :[E.text integerValue]];
     
     appDelegate.form = self;
     NSLog(@"form number 5");
@@ -810,6 +818,23 @@ int LabelValue;
     [AnimationClass fadeIn:Code :0];
     [AnimationClass fadeIn:E :0];
     
+    
+    //Valへ値の格納(Eとの正否判定)
+    if ([self isXY]) {
+        int valB = (int)[B.text integerValue];
+        int valE = (int)[[Y.text stringByAppendingString:Mul.text] integerValue];
+        
+        Val = valB + valE;
+    }else{
+        int valA = (int)[A.text integerValue];
+        int valE = (int)[[X.text stringByAppendingString:Mul.text] integerValue];
+        
+        Val = valA + valE;
+    }
+    //値の確認
+    NSLog(@"Val = %d",Val);
+    
+    
     //書き込み許可
     [self deReceiveValue:Mul];
     [self receiveValue:E :3];
@@ -817,7 +842,7 @@ int LabelValue;
     NSMutableArray *f;
     if([self isXY]){
         f = [NSMutableArray arrayWithObjects:A, E, nil];
-        A.backgroundColor = [UIColor redColor];
+//        A.backgroundColor = [UIColor redColor];
     }else{
         f = [NSMutableArray arrayWithObjects:B, E, nil];
     }
@@ -839,6 +864,129 @@ int LabelValue;
 //    B.backgroundColor = [UIColor Custom];
     
 }
+
+
+//⑪ 割り算準備モード2
+- (void)divisionLabel2
+{
+    NSLog(@"DivisionLabel2");
+    
+    //ラベル値の設定
+    if(![self isXY]){
+        //        NSLog(@"enter");
+        A.text = B.text;
+        X.text = Y.text;
+    }
+    Code.text = @"÷";
+    Y.text = @"=";
+    
+    //入力部分の設定
+    //    B.backgroundColor = [UIColor intoColor];
+    //    Mul.backgroundColor = [UIColor intoColor];
+    
+    //入力受付
+    [self receiveValue:B :2];
+    [self receiveValue:Mul :5];
+    
+    //全体のラベル設定
+    A.frame = CGRectMake(0, 0, Size, Size);
+    X.frame = CGRectMake(A.frame.origin.x + 60, 0, Size, Size);
+    Equal.frame = CGRectMake(X.frame.origin.x + 50, 0, Size, Size);
+    E.frame = CGRectMake(Equal.frame.origin.x + 70, 0, Size, Size);
+    Code.frame = CGRectMake(E.frame.origin.x + 70, 0, Size, Size);
+    B.frame = CGRectMake(Code.frame.origin.x + 70, 0, Size, Size);
+    Y.frame = CGRectMake(B.frame.origin.x + 70, 0, Size, Size);
+    Mul.frame = CGRectMake(Y.frame.origin.x + 70, 0, Size, Size);
+    
+    //移動アニメーション対応設定
+    [self canMoving:@"divA2"];
+    [self setBack:A];
+    
+    //    NSLog(@" code = %lf", mine.Code.frame.origin.x);
+    //    NSLog(@" mul = %lf", mine.Mul.frame.origin.x);
+    
+    //始めは隠している
+    Code.alpha = 0;
+    B.alpha = 0;
+    Y.alpha = 0;
+    Mul.alpha = 0;
+    
+    //self.frameへのはりつけ
+    [self addSubview:B];
+    [self addSubview:E];
+    [self addSubview:X];
+    [self addSubview:Y];
+    [self addSubview:Equal];
+    [self addSubview:Code];
+    [self addSubview:Mul];
+    //最前面に置く
+    [self addSubview:A];
+    
+}
+
+//⑫ 割り算モードその２
+- (void)divisionMode2
+{
+    NSLog(@"⑫DivisionMode2");
+    
+    B.text = A.text;
+    //    self.A.text = @"";
+    
+    int b = (int)[B.text integerValue];
+    if ([B.text hasPrefix:@"-"]) {
+        B.text = [@"( " stringByAppendingString:self.B.text];
+        B.text = [B.text stringByAppendingString:@" )"];
+        B.frame = CGRectMake(self.B.frame.origin.x, B.frame.origin.y, 120, Size);
+        Y.frame = CGRectOffset(Y.frame, 30, 0);
+        Mul.frame = CGRectOffset(Mul.frame, 30, 0);
+        B.textAlignment = NSTextAlignmentLeft;
+    }
+    
+    //入力完了
+    B.backgroundColor = [UIColor clearColor];
+    
+    //数値入力判定
+    [self receiveValue:Mul :5];
+    
+    //フェードイン/アウト
+    //    [AnimationClass fadeOut:A :0];
+    A.alpha = 0;
+    [AnimationClass fadeIn:B :0];
+    [AnimationClass fadeIn:Y :0];
+    [AnimationClass fadeIn:Mul :0];
+    
+    [AnimationClass delay:1];
+    
+    //横移動
+    [AnimationClass moveAnime:A:-60 :0];
+    [AnimationClass moveAnime:B :-60 :0];
+    [AnimationClass moveAnime:E :-60 :0];
+    [AnimationClass moveAnime:X :-60 :0];
+    [AnimationClass moveAnime:Y :-60 :0];
+    [AnimationClass moveAnime:Code :-60 :0];
+    [AnimationClass moveAnime:Equal :-60 :0];
+    [AnimationClass moveAnime:Mul :-60 :0];
+    
+    int a = (int)[E.text integerValue];
+    
+    //解の格納
+    Val = a/b;
+    
+    [appDelegate inputAns:[self isXY] :Val];
+    
+    //おもちゃ箱への登録
+    NSMutableArray *f = [NSMutableArray arrayWithObjects:A, Mul, nil];
+    [appDelegate.toyBox setObject:f forKey:@"obj"];
+    NSMutableArray *list = [NSMutableArray arrayWithObjects:@"obj", nil];
+    [appDelegate.toyBox setObject:list forKey:@"list"];
+    
+    appDelegate.form = self;
+    NSLog(@"form to 12");
+    
+    [appDelegate setUpdateMode:@"upDate7"];
+    [appDelegate upDate];
+}
+
 /*************************/
 /*************************/
 
@@ -883,6 +1031,10 @@ int LabelValue;
         A.userInteractionEnabled = YES;
         A.backgroundColor = [UIColor orangeColor];
         A.tag = 101;
+    }else if([str isEqualToString:@"divA2"]){//divisionMode2
+        A.userInteractionEnabled = YES;
+        A.backgroundColor = [UIColor orangeColor];
+        A.tag = 102;
         
     //transpositionMode
     }else if([str isEqualToString:@"transA"]){
@@ -978,6 +1130,16 @@ int LabelValue;
             [AnimationClass fadeIn:B :0];
             break;
             
+        //divisionMode2
+        case 102:
+            A.center = location;
+            //            self.Code.text = @"÷";
+            //            self.B.backgroundColor = [UIColor intoColor];
+            
+            [AnimationClass fadeIn:Code :0];
+            [AnimationClass fadeIn:B :0];
+            break;
+            
         //transpositionMode
         case 201:
             A.center = location;
@@ -1017,6 +1179,11 @@ int LabelValue;
         case 101:
             A.center = location;
             break;
+        
+        //divisionMode2
+        case 102:
+            A.center = location;
+            break;
             
         //transpositionMode
         case 201:
@@ -1054,6 +1221,17 @@ int LabelValue;
 //                self.Code.text = @"";
 //                self.B.backgroundColor = [UIColor clearColor];
                 
+                [AnimationClass fadeOut:Code :0];
+                [AnimationClass fadeOut:B :0];
+            }
+            [self back:A];
+            break;
+            
+        //divisionMode2
+        case 102:
+            if (CGRectContainsPoint(self.B.frame, self.A.center)) {
+                [self changeMode:@"divisionMode2"];
+            }else{
                 [AnimationClass fadeOut:Code :0];
                 [AnimationClass fadeOut:B :0];
             }
@@ -1119,9 +1297,16 @@ int LabelValue;
     return NO;
 }
 
-- (BOOL)checkDiv
+- (BOOL)checkDiv :(NSString *)str
 {
-    int e = (int)[self.Mul.text integerValue];
+    int e;
+    if ([str isEqualToString:@"Mul"]) {
+        e = (int)[Mul.text integerValue];
+    }else if([str isEqualToString:@"E"]){
+        e = (int)[E.text integerValue];
+    }else{
+        NSLog(@"error");
+    }
     
     NSLog(@"Val = %d, e = %d",Val,e);
     

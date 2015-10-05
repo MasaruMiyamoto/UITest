@@ -27,6 +27,11 @@ SetButton *Button;
 ViewClass *form;
 SetField *Set;
 
+//解の格納
+int ansX;
+int ansY;
+
+
 @synthesize View;
 @synthesize form;
 @synthesize IsUpdate;
@@ -69,7 +74,11 @@ SetField *Set;
         case 6:
             [self upDate6];
             break;
+        case 7:
+            [self upDate7];
+            break;
         default:
+            NSLog(@"over update number");
             break;
     }
 }
@@ -110,13 +119,13 @@ SetField *Set;
 
     if([form checkSum]){
         [self initToyBox];
-        ViewClass *Cf = [[ViewClass alloc] init];
-        Cf = [Cf copyWithPosition: form: 91: 510 +768];
-        [Cf changeMode:@"divisionLabel"];
+        ViewClass *f2 = [[ViewClass alloc] init];
+        f2 = [f2 copyWithPosition: form: 91: 510 +768];
+        [f2 changeMode:@"divisionLabel"];
 //        NSLog(@" %@",Cf.B.text);
-        [View.oya addSubview:Cf];
+        [View.oya addSubview:f2];
         
-        [AnimationClass fadeIn:Cf :0];
+        [AnimationClass fadeIn:f2 :0];
         
 //        [self setUpdateMode:@"upDate3"];
         [Button isMove:false];
@@ -129,7 +138,7 @@ SetField *Set;
     NSLog(@"3 mode");
     [Button isMove:true];
     
-    if([form checkDiv]){
+    if([form checkDiv :@"Mul"]){
 //        NSLog(@"Div OK");
         ViewClass *f3 = [[ViewClass alloc] init];
         f3 = [f3 copyWithPosition:form :91 :639 + 768];
@@ -184,6 +193,31 @@ SetField *Set;
 {
     NSLog(@"update 6");
     [Button isMove:true];
+    
+    if ([form checkDiv :@"E"]) {
+        NSLog(@"OK from 6");
+        [Button isMove:false];
+        
+        ViewClass *f6 = [[[ViewClass alloc] init] copyWithPosition:form :91 :form.frame.origin.y + 131];
+        [f6  changeMode:@"divisionLabel2"];
+        [View.oya addSubview:f6];
+        [AnimationClass fadeIn:f6 :0];
+        [Button isMove:false];
+    }
+}
+
+- (void)upDate7
+{
+    NSLog(@"update 7");
+    [Button isMove:true];
+    
+    if([form checkDiv :@"Mul"]){
+        NSLog(@"ansX = %d, ansY = %d",ansX, ansY);
+        
+//        ViewClass *f7 = [[ViewClass alloc] init];
+//        f7 = [f7 copyWithPosition:form :91 :639 + 768];
+        
+    }
 }
 
 - (void)setUpdateMode:(NSString *)mode
@@ -202,6 +236,8 @@ SetField *Set;
         x = 5;
     else if([mode isEqualToString:@"upDate6"])
         x = 6;
+    else if([mode isEqualToString:@"upDate7"])
+        x = 7;
     else {
         x = 0;
 //        NSLog(@"IsUpdate = 0");
@@ -211,6 +247,14 @@ SetField *Set;
         NSLog(@"mode x = %d",x);
 }
 
+- (void)inputAns :(BOOL)XY :(int)val
+{
+    if (XY) {
+        ansX = val;
+    }else{
+        ansY = val;
+    }
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
