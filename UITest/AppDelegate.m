@@ -12,6 +12,9 @@
 //#import "SelectButtons.h"
 #import "ViewController.h"
 #import "SetField.h"
+#import "AnswerClass.h"
+//NSLogのマクロ化（デバッグ時のみ表示）
+
 
 @interface AppDelegate ()
 
@@ -213,6 +216,15 @@ int ansY;
     
     if([form checkDiv :@"Mul"]){
         NSLog(@"ansX = %d, ansY = %d",ansX, ansY);
+        AnswerClass *ans = [[AnswerClass alloc] initWithPosition:91 :form.frame.origin.y + 131];
+        [ans setXY:ansX :ansY];
+        [ans selectMode:@"Parenthesis"];
+        
+        [View.oya addSubview:ans];
+        [AnimationClass fadeIn:ans :0];
+        
+        //おもちゃ箱の初期化
+        [self initToyBox];
         
 //        ViewClass *f7 = [[ViewClass alloc] init];
 //        f7 = [f7 copyWithPosition:form :91 :639 + 768];

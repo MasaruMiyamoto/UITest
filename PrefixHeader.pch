@@ -1,0 +1,20 @@
+//
+//  PrefixHeader.pch
+//  UITest
+//
+//  Created by miyamoto masaru on 2015/10/06.
+//  Copyright (c) 2015年 MasaruMiyamoto. All rights reserved.
+//
+
+#ifndef UITest_PrefixHeader_pch
+#define UITest_PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+//NSLogのマクロ化（デバッグ時のみ表示）
+#ifndef DEBUG
+#define DLOG(...)
+#endif
+
+#endif

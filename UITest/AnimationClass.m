@@ -8,6 +8,8 @@
 
 #import "AnimationClass.h"
 
+
+
 @implementation AnimationClass
 
 //**********アニメーション関係**********//

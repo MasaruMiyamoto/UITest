@@ -16,6 +16,7 @@
 
 #define custom colorWithRed:0.95 green:0.9 blue:0.0 alpha:1.0
 
+
 @implementation SetButton
 
 UILabel *btn,
@@ -408,6 +409,13 @@ AppDelegate *appDelegate;
             
 //            NSLog(@"In App");
 //            member.text = [NSString stringWithFormat:@"%@",btn.text];
+            
+            //文字数制限
+            if(member.text.length > 3 && btn.tag != 12){
+                break;
+            }
+            
+            
             if(member.tag == 0){
                 break;
             }

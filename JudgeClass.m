@@ -13,7 +13,6 @@
 #define Height 80
 #define Size 80
 
-
 @implementation JudgeClass
 
 UILabel *Code;

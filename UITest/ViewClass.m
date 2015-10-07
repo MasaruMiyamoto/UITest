@@ -19,6 +19,7 @@
 #define intoColor colorWithRed:0.2 green:0.8 blue:0.5 alpha:1.0
 #define Custom colorWithRed:0.95 green:0.9 blue:0.0 alpha:1.0
 
+
 @implementation ViewClass
 
 AppDelegate *appDelegate;
@@ -62,7 +63,7 @@ int LabelValue;
 {
     self = [super init];
     self.frame = CGRectMake(0, 0, Width, Height);
-    self.backgroundColor = [UIColor cyanColor];
+//    self.backgroundColor = [UIColor cyanColor];
     [self setLabel];
     return self;
 }
@@ -71,7 +72,7 @@ int LabelValue;
 {
     self = [super init];
     self.frame = CGRectMake(x, y, Width, Height);
-    self.backgroundColor = [UIColor cyanColor];
+//    self.backgroundColor = [UIColor cyanColor];
     [self setLabel];
     return self;
 }
@@ -456,6 +457,7 @@ int LabelValue;
     
     //入力完了
     B.backgroundColor = [UIColor clearColor];
+//    B.backgroundColor = [UIColor orangeColor];
     
     //数値入力判定
     [self receiveValue:Mul :5];
@@ -513,7 +515,7 @@ int LabelValue;
     [self addSubview:E];
     
     NSLog(@"X = %@, Y = %@",X.text, Y.text);
-    [appDelegate inputAns:[self isXY] :[E.text integerValue]];
+    [appDelegate inputAns:[self isXY] :(int)[E.text integerValue]];
     
     appDelegate.form = self;
     NSLog(@"form number 5");
@@ -716,7 +718,7 @@ int LabelValue;
     }
     
     //初期化と代入準備
-    Mul.text = @"";
+//    Mul.text = @"";
     [self receiveValue:Mul :5];
     
     //隠す
@@ -732,7 +734,7 @@ int LabelValue;
     int moving;
     
     //Mulに代入されたから色変更
-    Mul.backgroundColor = [UIColor orangeColor];
+    Mul.backgroundColor = [UIColor  clearColor];
     
     //場合分け
     if([self isXY]){    //Bを移項した場合
@@ -944,6 +946,7 @@ int LabelValue;
     
     //入力完了
     B.backgroundColor = [UIColor clearColor];
+//    B.backgroundColor = [UIColor orangeColor];
     
     //数値入力判定
     [self receiveValue:Mul :5];
@@ -1105,6 +1108,8 @@ int LabelValue;
 {
     origin.tag = 0;
 }
+
+
 /********************/
 
 /*****タッチイベント*****/
@@ -1502,6 +1507,7 @@ int LabelValue;
     
     //数値入力領域の表示
     Mul.hidden = NO;
+//    Mul.backgroundColor = [UIColor orangeColor];
     
     //値の入力
     Mul.text = [NSString stringWithFormat:@"%d",val];

@@ -8,6 +8,7 @@
 
 #import "RandomClass.h"
 
+
 @implementation RandomClass
 
 - (void)makeRandom

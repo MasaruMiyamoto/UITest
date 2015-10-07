@@ -12,6 +12,7 @@
 		44ABE3CE1B0EB39F007D7110 /* AnimationClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ABE3CD1B0EB39F007D7110 /* AnimationClass.m */; };
 		44AC726E1A962B3A00AFF9CD /* SelectButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AC726D1A962B3A00AFF9CD /* SelectButtons.m */; };
 		44AD14F21AA0351C00143EAF /* JudgeClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AD14F11AA0351C00143EAF /* JudgeClass.m */; };
+		44AD9FC41BC4DA9B00E6263F /* AnswerClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AD9FC31BC4DA9B00E6263F /* AnswerClass.m */; };
 		44B0BCF81A1C739F00203F57 /* SetButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 44B0BCF71A1C739F00203F57 /* SetButton.m */; };
 		44B0BCFA1A1C79C500203F57 /* res.gif in Resources */ = {isa = PBXBuildFile; fileRef = 44B0BCF91A1C79C500203F57 /* res.gif */; };
 		78A434371A1AF72C00469530 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A434361A1AF72C00469530 /* main.m */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		445A317E1BC38BCE002F11A0 /* UITest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITest-Prefix.pch"; sourceTree = "<group>"; };
 		44ABDF0F1ADF79880019ECD3 /* SetField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetField.h; sourceTree = "<group>"; };
 		44ABDF101ADF79880019ECD3 /* SetField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetField.m; sourceTree = "<group>"; };
 		44ABDF151ADFA0F90019ECD3 /* RandomClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomClass.h; sourceTree = "<group>"; };
@@ -45,6 +47,8 @@
 		44AC726D1A962B3A00AFF9CD /* SelectButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectButtons.m; sourceTree = "<group>"; };
 		44AD14F01AA0351C00143EAF /* JudgeClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JudgeClass.h; path = ../JudgeClass.h; sourceTree = "<group>"; };
 		44AD14F11AA0351C00143EAF /* JudgeClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JudgeClass.m; path = ../JudgeClass.m; sourceTree = "<group>"; };
+		44AD9FC21BC4DA9B00E6263F /* AnswerClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerClass.h; sourceTree = "<group>"; };
+		44AD9FC31BC4DA9B00E6263F /* AnswerClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerClass.m; sourceTree = "<group>"; };
 		44B0BCF61A1C739F00203F57 /* SetButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetButton.h; sourceTree = "<group>"; };
 		44B0BCF71A1C739F00203F57 /* SetButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetButton.m; sourceTree = "<group>"; };
 		44B0BCF91A1C79C500203F57 /* res.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = res.gif; sourceTree = "<group>"; };
@@ -122,6 +126,8 @@
 				44ABDF161ADFA0F90019ECD3 /* RandomClass.m */,
 				44ABE3CC1B0EB39F007D7110 /* AnimationClass.h */,
 				44ABE3CD1B0EB39F007D7110 /* AnimationClass.m */,
+				44AD9FC21BC4DA9B00E6263F /* AnswerClass.h */,
+				44AD9FC31BC4DA9B00E6263F /* AnswerClass.m */,
 				78A4343E1A1AF72C00469530 /* Main.storyboard */,
 				78A434411A1AF72C00469530 /* Images.xcassets */,
 				78A434431A1AF72C00469530 /* LaunchScreen.xib */,
@@ -136,6 +142,7 @@
 				78A434351A1AF72C00469530 /* Info.plist */,
 				78A434361A1AF72C00469530 /* main.m */,
 				44B0BCF91A1C79C500203F57 /* res.gif */,
+				445A317E1BC38BCE002F11A0 /* UITest-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -264,6 +271,7 @@
 				78A4343A1A1AF72C00469530 /* AppDelegate.m in Sources */,
 				78A434371A1AF72C00469530 /* main.m in Sources */,
 				44ABE3CE1B0EB39F007D7110 /* AnimationClass.m in Sources */,
+				44AD9FC41BC4DA9B00E6263F /* AnswerClass.m in Sources */,
 				78A4345F1A1AF95B00469530 /* ViewClass.m in Sources */,
 				44AD14F21AA0351C00143EAF /* JudgeClass.m in Sources */,
 				44AC726E1A962B3A00AFF9CD /* SelectButtons.m in Sources */,
@@ -391,6 +399,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "UITest/UITest-Prefix.pch";
 				INFOPLIST_FILE = UITest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -402,6 +412,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "UITest/UITest-Prefix.pch";
 				INFOPLIST_FILE = UITest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -453,7 +465,7 @@
 				78A434531A1AF72C00469530 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		78A434541A1AF72C00469530 /* Build configuration list for PBXNativeTarget "UITest" */ = {
 			isa = XCConfigurationList;
@@ -462,7 +474,7 @@
 				78A434561A1AF72C00469530 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		78A434571A1AF72C00469530 /* Build configuration list for PBXNativeTarget "UITestTests" */ = {
 			isa = XCConfigurationList;
@@ -471,7 +483,7 @@
 				78A434591A1AF72C00469530 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
