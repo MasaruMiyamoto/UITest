@@ -19,6 +19,7 @@
 @property(nonatomic, readonly)UIView *oya;
 
 - (void)newScroll;
+- (void)addScroll :(int)distY;
 //- (void)randomAction :(id)sender;
 @end
 

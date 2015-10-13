@@ -40,8 +40,8 @@ AppDelegate *appDelegate;
 
 - (void)resetPosition
 {
-    Code.text = @"";
-    Line.backgroundColor = [UIColor clearColor];
+    Code.alpha = 0;
+    Line.alpha = 0;
 }
 
 - (void)setLabel
@@ -51,11 +51,12 @@ AppDelegate *appDelegate;
     Code.font = [UIFont systemFontOfSize:50];
     Code.frame = CGRectMake(0, 0, Size, Size);
     Code.adjustsFontSizeToFitWidth = YES;
+    Code.textColor = [UIColor whiteChokeColor];
     [self addSubview:Code];
     
     Line = [[UILabel alloc]init];
     Line.frame = CGRectMake(0, Code.frame.origin.y + Size, Width, 3);
-    Line.backgroundColor = [UIColor blackColor];
+    Line.backgroundColor = [UIColor whiteChokeColor];
     [self addSubview:Line];
 }
 
@@ -120,25 +121,27 @@ AppDelegate *appDelegate;
     }
     
     Code.text = [Code.text stringByAppendingString:@" )"];
-    Line.backgroundColor = [UIColor blackColor];
+
+    Code.alpha = 1.0;
+    Line.alpha = 1.0;
 }
 
 - (void)changeTextColor :(UILabel *)a :(UILabel *)b :(int)change
 {
     switch (change) {
         case 1:
-            a.textColor = [UIColor redColor];
-            b.textColor = [UIColor redColor];
+            a.textColor = [UIColor pinkChokeColor];
+            b.textColor = [UIColor pinkChokeColor];
             break;
         
         case 2:
-            a.textColor = [UIColor blueColor];
-            b.textColor = [UIColor blueColor];
+            a.textColor = [UIColor blueChokeColor];
+            b.textColor = [UIColor blueChokeColor];
             break;
 
         default:
-            a.textColor = [UIColor blackColor];
-            b.textColor = [UIColor blackColor];
+            a.textColor = [UIColor whiteChokeColor];
+            b.textColor = [UIColor whiteChokeColor];
             break;
     }
 }

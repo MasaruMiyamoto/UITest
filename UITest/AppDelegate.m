@@ -90,7 +90,7 @@ int ansY;
 - (void)upDate1
 {
 //    NSLog(@"update 1");
-    
+    Jclass = [[JudgeClass alloc] init];
     NSMutableArray *member = [self.toyBox objectForKey:@"formula"];
     for (ViewClass *fs in member) {
         [fs upDate];
@@ -222,6 +222,8 @@ int ansY;
         
         [View.oya addSubview:ans];
         [AnimationClass fadeIn:ans :0];
+        
+        [View addScroll:100];
         
         //おもちゃ箱の初期化
         [self initToyBox];

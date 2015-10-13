@@ -50,109 +50,33 @@ AppDelegate *appDelegate;
     self.frame = CGRectMake(0, 0, side + during*2, side+during*4);
 //    self.backgroundColor = [UIColor redColor];
     
-    btn1 = [[UILabel alloc] init];
-    btn1.userInteractionEnabled = YES;
-    btn1.textAlignment = NSTextAlignmentCenter;
-    btn1.font = [UIFont systemFontOfSize:50];
-    btn1.frame = CGRectMake(locx,locy+during+during,side,side);
-    btn1.text = @"1";
-    btn1.backgroundColor = [UIColor custom];
-    [self addSubview:btn1];
+//    btn1 = [[UILabel alloc] init];
+//    btn1.userInteractionEnabled = YES;
+//    btn1.textAlignment = NSTextAlignmentCenter;
+//    btn1.font = [UIFont systemFontOfSize:50];
+//    btn1.frame = CGRectMake(locx,locy+during+during,side,side);
+//    btn1.text = @"1";
+//    btn1.backgroundColor = [UIColor custom];
+//    [self addSubview:btn1];
     
-    btn2 = [[UILabel alloc] init];
-    btn2.userInteractionEnabled = YES;
-    btn2.textAlignment = NSTextAlignmentCenter;
-    btn2.font = [UIFont systemFontOfSize:50];
-    btn2.frame = CGRectMake(locx+during,locy+during+during,side,side);
-    btn2.text = @"2";
-    btn2.backgroundColor = [UIColor custom];
-    [self addSubview:btn2];
+    btn1 = [self setButton:1];
+    btn2 = [self setButton:2];
+    btn3 = [self setButton:3];
+    btn4 = [self setButton:4];
+    btn5 = [self setButton:5];
+    btn6 = [self setButton:6];
+    btn7 = [self setButton:7];
+    btn8 = [self setButton:8];
+    btn9 = [self setButton:9];
+    btn0 = [self setButton:10];
+    btn_m = [self setButton:11];
     
-    btn3 = [[UILabel alloc] init];
-    btn3.userInteractionEnabled = YES;
-    btn3.textAlignment = NSTextAlignmentCenter;
-    btn3.font = [UIFont systemFontOfSize:50];
-    btn3.frame = CGRectMake(locx+during+during,locy+during+during,side,side);
-    btn3.text = @"3";
-    btn3.backgroundColor = [UIColor custom];
-    [self addSubview:btn3];
-    
-    btn4 = [[UILabel alloc] init];
-    btn4.userInteractionEnabled = YES;
-    btn4.textAlignment = NSTextAlignmentCenter;
-    btn4.font = [UIFont systemFontOfSize:50];
-    btn4.frame = CGRectMake(locx,locy+during,side,side);
-    btn4.text = @"4";
-    btn4.backgroundColor = [UIColor custom];
-    [self addSubview:btn4];
-    
-    btn5 = [[UILabel alloc] init];
-    btn5.userInteractionEnabled = YES;
-    btn5.textAlignment = NSTextAlignmentCenter;
-    btn5.font = [UIFont systemFontOfSize:50];
-    btn5.frame = CGRectMake(locx+during,locy+during,side,side);
-    btn5.text = @"5";
-    btn5.backgroundColor = [UIColor custom];
-    [self addSubview:btn5];
-    
-    btn6 = [[UILabel alloc] init];
-    btn6.userInteractionEnabled = YES;
-    btn6.textAlignment = NSTextAlignmentCenter;
-    btn6.font = [UIFont systemFontOfSize:50];
-    btn6.frame = CGRectMake(locx+during+during,locy+during,side,side);
-    btn6.text = @"6";
-    btn6.backgroundColor = [UIColor custom];
-    [self addSubview:btn6];
-    
-    btn7 = [[UILabel alloc] init];
-    btn7.userInteractionEnabled = YES;
-    btn7.textAlignment = NSTextAlignmentCenter;
-    btn7.font = [UIFont systemFontOfSize:50];
-    btn7.frame = CGRectMake(locx,locy,side,side);
-    btn7.text = @"7";
-    btn7.backgroundColor = [UIColor custom];
-    [self addSubview:btn7];
-    
-    btn8 = [[UILabel alloc] init];
-    btn8.userInteractionEnabled = YES;
-    btn8.textAlignment = NSTextAlignmentCenter;
-    btn8.font = [UIFont systemFontOfSize:50];
-    btn8.frame = CGRectMake(locx+during,locy,side,side);
-    btn8.text = @"8";
-    btn8.backgroundColor = [UIColor custom];
-    [self addSubview:btn8];
-    
-    btn9 = [[UILabel alloc] init];
-    btn9.userInteractionEnabled = YES;
-    btn9.textAlignment = NSTextAlignmentCenter;
-    btn9.font = [UIFont systemFontOfSize:50];
-    btn9.frame = CGRectMake(locx+during+during,locy,side,side);
-    btn9.text = @"9";
-    btn9.backgroundColor = [UIColor custom];
-    [self addSubview:btn9];
-    
-    btn0 = [[UILabel alloc] init];
-    btn0.userInteractionEnabled = YES;
-    btn0.textAlignment = NSTextAlignmentCenter;
-    btn0.font = [UIFont systemFontOfSize:50];
-    btn0.frame = CGRectMake(locx + during/2,locy+during+during+during,side,side);
-    btn0.text = @"0";
-    btn0.backgroundColor = [UIColor custom];
-    [self addSubview:btn0];
-    
-    btn_m = [[UILabel alloc] init];
-    btn_m.userInteractionEnabled = YES;
-    btn_m.textAlignment = NSTextAlignmentCenter;
-    btn_m.font = [UIFont systemFontOfSize:50];
-    btn_m.frame = CGRectMake(locx +during+ during/2,locy+during+during+during,side,side);
-    btn_m.text = @"-";
-    btn_m.backgroundColor = [UIColor custom];
-    [self addSubview:btn_m];
     
     del = [[UIImageView alloc] init];
     del.userInteractionEnabled = YES;
     del.frame = CGRectMake(locx+during, locy+during+during+during+during, side,side);
-    del.Image = [UIImage imageNamed:@"res.gif"];
+    del.Image = [UIImage imageNamed:@"blackboard.png"];
+    del.tag = 12;
     [self addSubview:del];
     
     btn = [[UILabel alloc] init];
@@ -164,22 +88,66 @@ AppDelegate *appDelegate;
     
    appDelegate = [[UIApplication sharedApplication] delegate];
     
-    btn1.tag = 1;
-    btn2.tag = 2;
-    btn3.tag = 3;
-    btn4.tag = 4;
-    btn5.tag = 5;
-    btn6.tag = 6;
-    btn7.tag = 7;
-    btn8.tag = 8;
-    btn9.tag = 9;
-    btn0.tag = 10;
-    btn_m.tag = 11;
-    del.tag = 12;
+//    btn1.tag = 1;
+//    btn2.tag = 2;
+//    btn3.tag = 3;
+//    btn4.tag = 4;
+//    btn5.tag = 5;
+//    btn6.tag = 6;
+//    btn7.tag = 7;
+//    btn8.tag = 8;
+//    btn9.tag = 9;
+//    btn0.tag = 10;
+//    btn_m.tag = 11;
+
+    
+    
+    btn1.frame = CGRectMake(locx,locy+during+during,side,side);
+    btn2.frame = CGRectMake(locx+during,locy+during+during,side,side);
+    btn3.frame = CGRectMake(locx+during+during,locy+during+during,side,side);
+    btn4.frame = CGRectMake(locx,locy+during,side,side);
+    btn5.frame = CGRectMake(locx+during,locy+during,side,side);
+    btn6.frame = CGRectMake(locx+during+during,locy+during,side,side);
+    btn7.frame = CGRectMake(locx,locy,side,side);
+    btn8.frame = CGRectMake(locx+during,locy,side,side);
+    btn9.frame = CGRectMake(locx+during+during,locy,side,side);
+    btn0.frame = CGRectMake(locx + during/2,locy+during+during+during,side,side);
+    btn_m.frame = CGRectMake(locx +during+ during/2,locy+during+during+during,side,side);
     
     [self isMove:true];
     
     return self;
+}
+
+- (UILabel *)setButton :(int)tag
+{
+    UILabel *origin = [[UILabel alloc] init];
+    origin.userInteractionEnabled = YES;
+    origin.textAlignment = NSTextAlignmentCenter;
+    origin.font = [UIFont systemFontOfSize:50];
+    origin.frame = CGRectMake(locx,locy+during+during,side,side);
+    
+    //色
+    origin.backgroundColor = [UIColor yellowColor];
+    origin.textColor = [UIColor blackColor];
+    
+    origin.tag = tag;
+    
+    switch (tag) {
+        case 10:
+            origin.text = @"0";
+            break;
+        case 11:
+            origin.text = @"-";
+            break;
+        default:
+            origin.text = [NSString stringWithFormat:@"%d",tag];
+            break;
+    }
+    
+    [self addSubview:origin];
+    
+    return origin;
 }
 
 - (void)move :(int)x :(int)y
@@ -298,10 +266,11 @@ AppDelegate *appDelegate;
 {
     UILabel *duplicateLabel = [[UILabel alloc] initWithFrame:label.frame];
     duplicateLabel.text = label.text;
+    duplicateLabel.textColor = label.textColor;
     duplicateLabel.textAlignment = NSTextAlignmentCenter;
     duplicateLabel.font = [UIFont systemFontOfSize:50];
     duplicateLabel.tag  = label.tag;
-    duplicateLabel.backgroundColor = [UIColor custom];
+    duplicateLabel.backgroundColor = label.backgroundColor;
     //    NSLog(@"DEEP");
     
     return duplicateLabel;
@@ -355,7 +324,8 @@ AppDelegate *appDelegate;
     if ([self canMove]) {
         
         btn = [self labelCopy:(int)touch.view.tag];
-        btn.center = CGPointMake(location.x, location.y);
+        btn.center = CGPointMake(location.x - 30, location.y - 30);
+        
         [self addSubview:btn];
         
     }
@@ -370,7 +340,7 @@ AppDelegate *appDelegate;
     CGPoint location = [touch locationInView:self];
     
     if([self canMove])
-    btn.center = CGPointMake(location.x, location.y);
+    btn.center = CGPointMake(location.x - 30, location.y - 30);
     
 }
 

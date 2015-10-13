@@ -39,7 +39,6 @@ CGPoint offset;
     [self initLabels];
     [self initSelects];
     [self initButtons];
-    
     RandomClass *ram = [[RandomClass alloc] init];
     [ram makeRandom];
     
@@ -58,7 +57,8 @@ CGPoint offset;
     //ラベルを貼付けるViewを作成
     oya = [[UIView alloc]init];
     oya.frame = CGRectMake(0, 0, 1024, 768);
-
+    oya.backgroundColor = [UIColor boardColor];
+    
     SetField *init = [[SetField alloc] init];
     [init firstSet:oya];
     [self initScroller:oya];
@@ -93,6 +93,7 @@ CGPoint offset;
 
 -(void)reStart:(id)sender
 {
+    
     [oya removeFromSuperview];
     [button removeFromSuperview];
     [selects removeFromSuperview];
@@ -150,10 +151,31 @@ CGPoint offset;
     oya.frame = CGRectMake(0, 0, 1024, oya.frame.size.height + 768);
 }
 
+- (void)scrollUpDate :(int)distY
+{
+    offset.y += distY;
+    //    NSLog(@"%f", offset.y);
+    oya.frame = CGRectMake(0, 0, 1024, oya.frame.size.height + distY);
+}
+
 - (void)newScroll
 {
+    
     [self scrollUpDate];
     [self upDate];
+    
+    sv.contentOffset = CGPointMake(0, oya.frame.size.height - 768*2);
+    [sv setContentOffset:offset animated:YES];
+}
+
+
+- (void)addScroll :(int)distY
+{
+    
+    [self scrollUpDate:distY];
+    [self upDate];
+    
+    sv.contentOffset = CGPointMake(0, oya.frame.size.height - 768 - distY);
     [sv setContentOffset:offset animated:YES];
 }
 

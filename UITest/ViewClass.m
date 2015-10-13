@@ -8,16 +8,15 @@
 
 #import "ViewClass.h"
 
-//switch文にNSString型を入力可能
-#define CASE(str) if ([__s__ isEqualToString:(str)])
-#define SWITCH(s) for (NSString *__s__ = (s); __s__; __s__ = nil)
-#define DEFAULT
+
 
 #define Size 80
 #define Width 440 + 100
 #define Height 80
+
 #define intoColor colorWithRed:0.2 green:0.8 blue:0.5 alpha:1.0
 #define Custom colorWithRed:0.95 green:0.9 blue:0.0 alpha:1.0
+
 
 
 @implementation ViewClass
@@ -77,68 +76,18 @@ int LabelValue;
     return self;
 }
 
-//- (void)initMul
-//{
-////    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, width + 100, height);
-////    A.tag = 0;
-//    [self mulMode];
-//    [self setMulPosition];
-//    
-//}
-
 //各ラベルの生成
 -(void)setLabel
 {
     
-    A = [[UILabel alloc] init];
-    A.textAlignment = NSTextAlignmentCenter;
-    A.font = [UIFont systemFontOfSize:50];
-    A.frame = CGRectMake(0, 0, Size, Size);
-    A.adjustsFontSizeToFitWidth = YES;
-    A.minimumScaleFactor = 20/50;
-    
-    B = [[UILabel alloc] init];
-    B.textAlignment = NSTextAlignmentCenter;
-    B.font = [UIFont systemFontOfSize:50];
-    B.adjustsFontSizeToFitWidth = YES;
-    B.minimumScaleFactor = 20/50;
-    
-    E = [[UILabel alloc] init];
-    E.textAlignment = NSTextAlignmentCenter;
-    E.font = [UIFont systemFontOfSize:50];
-    E.adjustsFontSizeToFitWidth = YES;
-    E.minimumScaleFactor = 20/50;
-    
-    X = [[UILabel alloc] init];
-    X.textAlignment = NSTextAlignmentCenter;
-    X.font = [UIFont systemFontOfSize:45];
-    X.adjustsFontSizeToFitWidth = YES;
-    X.minimumScaleFactor = 20/50;
-    
-    Y = [[UILabel alloc] init];
-    Y.textAlignment = NSTextAlignmentCenter;
-    Y.font = [UIFont systemFontOfSize:45];
-    Y.adjustsFontSizeToFitWidth = YES;
-    Y.minimumScaleFactor = 20/50;
-    
-    Equal = [[UILabel alloc] init];
-    Equal.textAlignment = NSTextAlignmentCenter;
-    Equal.font = [UIFont systemFontOfSize:45];
-    Equal.adjustsFontSizeToFitWidth = YES;
-    Equal.minimumScaleFactor = 20/50;
-    
-    Code = [[UILabel alloc] init];
-    Code.textAlignment = NSTextAlignmentCenter;
-    Code.font = [UIFont systemFontOfSize:45];
-    Code.adjustsFontSizeToFitWidth = YES;
-    Code.minimumScaleFactor = 20/50;
-    
-    Mul = [[UILabel alloc] init];
-    Mul.textAlignment = NSTextAlignmentCenter;
-    Mul.font = [UIFont systemFontOfSize:50];
-    Mul.adjustsFontSizeToFitWidth = YES;
-    Mul.minimumScaleFactor = 20/50;
-    Mul.text = @"";
+    A = [self setText:50];
+    B = [self setText:50];
+    E = [self setText:50];
+    X = [self setText:45];
+    Y = [self setText:45];
+    Equal = [self setText:45];
+    Code = [self setText:45];
+    Mul = [self setText:50];
     
     A.text = @"A";
     B.text = @"B";
@@ -147,8 +96,26 @@ int LabelValue;
     Y.text = @"y";
     Equal.text = @"=";
     Code.text = @"+";
+    Mul.text = @"";
+    
 }
 
+
+- (UILabel *)setText :(int)textSize
+{
+    UILabel *origin = [[UILabel alloc] init];
+    
+    origin = [[UILabel alloc] init];
+    origin.textAlignment = NSTextAlignmentCenter;
+    origin.font = [UIFont systemFontOfSize:textSize];
+    origin.textColor = [UIColor whiteChokeColor];
+    origin.adjustsFontSizeToFitWidth = YES;
+    origin.minimumScaleFactor = 20/50;
+    
+//    NSLog(@"setText");
+    
+    return origin;
+}
 /***** モード変更 *****/
 
 //外部参照による選択
@@ -1127,7 +1094,7 @@ int LabelValue;
         
         //divisionMode
         case 101:
-            A.center = location;
+            A.center = [self setLocation:location];
 //            self.Code.text = @"÷";
 //            self.B.backgroundColor = [UIColor intoColor];
             
@@ -1137,7 +1104,7 @@ int LabelValue;
             
         //divisionMode2
         case 102:
-            A.center = location;
+            A.center = [self setLocation:location];
             //            self.Code.text = @"÷";
             //            self.B.backgroundColor = [UIColor intoColor];
             
@@ -1147,7 +1114,7 @@ int LabelValue;
             
         //transpositionMode
         case 201:
-            A.center = location;
+            A.center = [self setLocation:location];
             [AnimationClass fadeIn:Mul :0];
             break;
             
@@ -1182,21 +1149,21 @@ int LabelValue;
             
         //divisionMode
         case 101:
-            A.center = location;
+            A.center = [self setLocation:location];
             break;
         
         //divisionMode2
         case 102:
-            A.center = location;
+            A.center = [self setLocation:location];
             break;
             
         //transpositionMode
         case 201:
-            A.center = location;
+            A.center = [self setLocation:location];
             break;
             
         case 202:
-            B.center = location;
+            B.center = [self setLocation:location];
             break;
             
             
@@ -1409,9 +1376,14 @@ int LabelValue;
 
 //********************//
 
+- (CGPoint) setLocation :(CGPoint)location
+{
+    return CGPointMake(location.x - 30, location.y - 30);
+}
+
 -(CGPoint)labelLocation :(CGPoint)location
 {
-    return CGPointMake(location.x + LabelPosition, location.y);
+    return CGPointMake(location.x + LabelPosition, location.y - 30);
 }
 
 -(CGPoint)codeLocation :(UILabel *)lbl

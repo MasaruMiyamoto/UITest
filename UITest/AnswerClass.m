@@ -94,9 +94,9 @@ UIView *labelY;
     Equal.text = @"=";
     E.text = [NSString stringWithFormat:@"%d",a];
     
-//    A.backgroundColor = [UIColor redColor];
-//    Equal.backgroundColor = [UIColor redColor];
-//    E.backgroundColor = [UIColor redColor];
+    A.textColor = [UIColor whiteChokeColor];
+    Equal.textColor = [UIColor whiteChokeColor];
+    E.textColor = [UIColor whiteChokeColor];
     
     A.frame = CGRectMake(0, 0, Size, Size);
     Equal.frame = CGRectMake(A.frame.origin.x + 50, 0, Size, Size);
@@ -119,6 +119,7 @@ UIView *labelY;
     Parenthesis.minimumScaleFactor = 20/50;
     
     Parenthesis.text = @"{";
+    Parenthesis.textColor = [UIColor whiteChokeColor];
     
     Parenthesis.frame = CGRectMake(0, -27, 50, 200);
     labelX.frame = CGRectMake(58, 0, labelX.frame.size.width, labelX.frame.size.height);
