@@ -14,9 +14,6 @@
 #define during 79
 #define lenge 30
 
-#define custom colorWithRed:0.95 green:0.9 blue:0.0 alpha:1.0
-
-
 @implementation SetButton
 
 UILabel *btn,
@@ -50,14 +47,6 @@ AppDelegate *appDelegate;
     self.frame = CGRectMake(0, 0, side + during*2, side+during*4);
 //    self.backgroundColor = [UIColor redColor];
     
-//    btn1 = [[UILabel alloc] init];
-//    btn1.userInteractionEnabled = YES;
-//    btn1.textAlignment = NSTextAlignmentCenter;
-//    btn1.font = [UIFont systemFontOfSize:50];
-//    btn1.frame = CGRectMake(locx,locy+during+during,side,side);
-//    btn1.text = @"1";
-//    btn1.backgroundColor = [UIColor custom];
-//    [self addSubview:btn1];
     
     btn1 = [self setButton:1];
     btn2 = [self setButton:2];
@@ -75,7 +64,7 @@ AppDelegate *appDelegate;
     del = [[UIImageView alloc] init];
     del.userInteractionEnabled = YES;
     del.frame = CGRectMake(locx+during, locy+during+during+during+during, side,side);
-    del.Image = [UIImage imageNamed:@"blackboard.png"];
+    del.Image = [UIImage imageNamed:@"res.gif"];
     del.tag = 12;
     [self addSubview:del];
     
@@ -86,21 +75,7 @@ AppDelegate *appDelegate;
     
     img = [[UIImageView alloc] init];
     
-   appDelegate = [[UIApplication sharedApplication] delegate];
-    
-//    btn1.tag = 1;
-//    btn2.tag = 2;
-//    btn3.tag = 3;
-//    btn4.tag = 4;
-//    btn5.tag = 5;
-//    btn6.tag = 6;
-//    btn7.tag = 7;
-//    btn8.tag = 8;
-//    btn9.tag = 9;
-//    btn0.tag = 10;
-//    btn_m.tag = 11;
-
-    
+    appDelegate = [[UIApplication sharedApplication] delegate];
     
     btn1.frame = CGRectMake(locx,locy+during+during,side,side);
     btn2.frame = CGRectMake(locx+during,locy+during+during,side,side);
@@ -125,10 +100,10 @@ AppDelegate *appDelegate;
     origin.userInteractionEnabled = YES;
     origin.textAlignment = NSTextAlignmentCenter;
     origin.font = [UIFont systemFontOfSize:50];
-    origin.frame = CGRectMake(locx,locy+during+during,side,side);
+    origin.frame = CGRectMake(locx,locy,side,side);
     
     //色
-    origin.backgroundColor = [UIColor yellowColor];
+    origin.backgroundColor = [UIColor custom];
     origin.textColor = [UIColor blackColor];
     
     origin.tag = tag;
@@ -200,6 +175,7 @@ AppDelegate *appDelegate;
         [AnimationClass fadeIn:btn9 :btn9.alpha];
         [AnimationClass fadeIn:btn_m :btn_m.alpha];
         [AnimationClass fadeIn:del :del.alpha];
+        NSLog(@"call true");
         
     }
     

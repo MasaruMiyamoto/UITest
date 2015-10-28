@@ -11,6 +11,16 @@
 
 @interface RandomClass : NSObject
 
-- (void)makeRandom;
+//数値の保持
+@property(nonatomic, readonly)int A;
+@property(nonatomic, readonly)int B;
+@property(nonatomic, readonly)int C;
+@property(nonatomic, readonly)int D;
+@property(nonatomic, readonly)int P;
+@property(nonatomic, readonly)int Q;
+
+- (void)enterFormula;
+- (BOOL)isIdefinite;
+
 
 @end

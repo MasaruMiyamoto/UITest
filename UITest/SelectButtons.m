@@ -22,11 +22,13 @@ UIButton *Sel2;
 UIButton *Random;
 UIButton *Start;
 
+bool chooseMode = false;
+
 - (id)init
 {
     self = [super init];
     self.frame = CGRectMake(0, 0, width*2, height*3 + 70);
-    [self setSelects];
+    [self setSelects :chooseMode];
     return self;
 }
 
@@ -35,46 +37,56 @@ UIButton *Start;
     self = [super init];
     self.frame = CGRectMake(0, 0, width*2, height*3 + 70);
 //    self.backgroundColor = [UIColor orangeColor];
-    [self setSelects];
+    [self setSelects :chooseMode];
     [self move:x :y];
     return self;
 }
 
-- (void)setSelects
+- (void)setSelects :(BOOL)chooseMode
 {
-    Sel1 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    Sel1.frame = CGRectMake(0, 0, width, height);
-    [Sel1.titleLabel setFont:[UIFont systemFontOfSize:35]];
-    Sel1.backgroundColor = [UIColor colorWithRed:1.0 green:0.36 blue:0.22 alpha:1.0];
-    [Sel1 setTitle:@"加減法" forState:UIControlStateNormal];
-    [Sel1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [Sel1 addTarget:self action:@selector(sel1Action:) forControlEvents:UIControlEventTouchUpInside];
-    Sel1.alpha = 0.6;
+    if (!chooseMode) {
+        
+        Random = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        Random.frame = CGRectMake(0, 0, width, height);
+        [Random.titleLabel setFont:[UIFont systemFontOfSize:35]];
+//        Random.backgroundColor = [UIColor colorWithRed:1.0 green:0.47 blue:1.0 alpha:1.0];
+        Random.backgroundColor = [UIColor buttonColor];
+        [Random setTitle:@"もんだい" forState:UIControlStateNormal];
+        [Random setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        
+        Start = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        Start.frame = CGRectMake(0, 0, 250, 110);
+        [Start.titleLabel setFont:[UIFont systemFontOfSize:50]];
+//        Start.backgroundColor = [UIColor colorWithRed:0.62 green:0.07 blue:0.15 alpha:1.0];
+        Start.backgroundColor = [UIColor buttonColor];
+        [Start setTitle:@"けいさん！" forState:UIControlStateNormal];
+        [Start setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        
+        Sel1.alpha = 1.0;
+    }else{
+        
+        Sel1 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        Sel1.frame = CGRectMake(0, 0, width, height);
+        [Sel1.titleLabel setFont:[UIFont systemFontOfSize:35]];
+//        Sel1.backgroundColor = [UIColor colorWithRed:1.0 green:0.36 blue:0.22 alpha:1.0];
+        Sel1.backgroundColor = [UIColor buttonColor];
+        [Sel1 setTitle:@"加減法" forState:UIControlStateNormal];
+        [Sel1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [Sel1 addTarget:self action:@selector(sel1Action:) forControlEvents:UIControlEventTouchUpInside];
+        Sel1.alpha = 0.6;
+        
+        Sel2 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        Sel2.frame = CGRectMake(0, 0, width, height);
+        [Sel2.titleLabel setFont:[UIFont systemFontOfSize:35]];
+//        Sel2.backgroundColor = [UIColor colorWithRed:0.0 green:0.47 blue:1.0 alpha:1.0];
+        Sel2.backgroundColor = [UIColor buttonColor];
+        [Sel2 setTitle:@"代入法" forState:UIControlStateNormal];
+        [Sel2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [Sel2 addTarget:self action:@selector(sel2Action:) forControlEvents:UIControlEventTouchUpInside];
+        Sel2.alpha = 0.6;
+        
+    }
     
-    Sel2 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    Sel2.frame = CGRectMake(0, 0, width, height);
-    [Sel2.titleLabel setFont:[UIFont systemFontOfSize:35]];
-    Sel2.backgroundColor = [UIColor colorWithRed:0.0 green:0.47 blue:1.0 alpha:1.0];
-    [Sel2 setTitle:@"代入法" forState:UIControlStateNormal];
-    [Sel2 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [Sel2 addTarget:self action:@selector(sel2Action:) forControlEvents:UIControlEventTouchUpInside];
-    Sel2.alpha = 0.6;
-    
-    Start = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    Start.frame = CGRectMake(0, 0, 250, 110);
-    [Start.titleLabel setFont:[UIFont systemFontOfSize:50]];
-    Start.backgroundColor = [UIColor colorWithRed:0.62 green:0.07 blue:0.15 alpha:1.0];
-    [Start setTitle:@"けいさん!" forState:UIControlStateNormal];
-    [Start setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    [Start addTarget:self action:@selector(startAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    Random = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    Random.frame = CGRectMake(0, 0, width, height);
-    [Random.titleLabel setFont:[UIFont systemFontOfSize:35]];
-    Random.backgroundColor = [UIColor colorWithRed:1.0 green:0.47 blue:1.0 alpha:1.0];
-    [Random setTitle:@"もんだい" forState:UIControlStateNormal];
-    [Random setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    [Random addTarget:self action:@selector(randomAction:) forControlEvents:UIControlEventTouchUpInside];
     
     [self setLocation];
     
@@ -129,6 +141,11 @@ UIButton *Start;
     Sel1.userInteractionEnabled = NO;
     Sel2.userInteractionEnabled = NO;
     Random.userInteractionEnabled = NO;
+    
+    Sel1.alpha = 0.5;
+    Sel2.alpha = 0.5;
+    Random.alpha = 0.5;
+    
     [Start setTitle:@"やりなおし" forState:UIControlStateNormal];
     
     [Start removeTarget:mainView action:@selector(startAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -136,5 +153,7 @@ UIButton *Start;
     [Start addTarget:mainView action:@selector(reStart:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-
+- (BOOL)isMode{
+    return chooseMode;
+}
 @end

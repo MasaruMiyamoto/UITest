@@ -14,11 +14,6 @@
 #define Width 440 + 100
 #define Height 80
 
-#define intoColor colorWithRed:0.2 green:0.8 blue:0.5 alpha:1.0
-#define Custom colorWithRed:0.95 green:0.9 blue:0.0 alpha:1.0
-
-
-
 @implementation ViewClass
 
 AppDelegate *appDelegate;
@@ -43,6 +38,7 @@ int Con;
 UIView *Label;
 int LabelPosition;
 int LabelValue;
+int LabelFlag;
 
 //@propertyの設定を実装
 @synthesize A;
@@ -116,6 +112,8 @@ int LabelValue;
     
     return origin;
 }
+
+
 /***** モード変更 *****/
 
 //外部参照による選択
@@ -179,6 +177,10 @@ int LabelValue;
             [self divisionMode2];  //12
             break;
         }
+        CASE (@"graphMode"){
+            [self graphMode];  //13
+            break;
+        }
         DEFAULT {
             NSLog(@"throght default");
             break;
@@ -220,6 +222,8 @@ int LabelValue;
     [self receiveValue:B :22];
     [self receiveValue:E :3];
     [self receiveValue:Code :4];
+    
+    
     
     [self addSubview:A];
     [self addSubview:B];
@@ -424,7 +428,8 @@ int LabelValue;
     
     //入力完了
     B.backgroundColor = [UIColor clearColor];
-//    B.backgroundColor = [UIColor orangeColor];
+    [self resetBorder:B];
+//    B.backgroundColor = [UIColor moveColor];
     
     //数値入力判定
     [self receiveValue:Mul :5];
@@ -531,6 +536,9 @@ int LabelValue;
     //代入受けるためのタグ
     X.tag = 1;
     Y.tag = 2;
+    
+    X.text = @"x";
+    Y.text = @"y";
     
     [self addSubview:A];
     [self addSubview:B];
@@ -696,12 +704,16 @@ int LabelValue;
 //⑩移項完了モード
 - (void)transPositionHasMode
 {
-    NSLog(@"TranspositionHasMode");
+    NSLog(@"⑩TranspositionHasMode");
     
     int moving;
     
     //Mulに代入されたから色変更
     Mul.backgroundColor = [UIColor  clearColor];
+    [self resetBorder:Mul];
+    
+    //動かないように
+    [self cannotMoving:@"AB"];
     
     //場合分け
     if([self isXY]){    //Bを移項した場合
@@ -711,6 +723,7 @@ int LabelValue;
         B.frame = E.frame;
         B.text = E.text;
         B.backgroundColor = [UIColor clearColor];
+        [self resetBorder:B];
         
         /*********************ここの問題作成*******************/
         if ([self isPMlabel:Mul]) {
@@ -733,7 +746,7 @@ int LabelValue;
         A.frame = E.frame;
         A.text = E.text;
         A.backgroundColor = [UIColor clearColor];
-        
+        [self resetBorder:A];
         
         
         if ([self isPMlabel:Mul]) {
@@ -751,14 +764,20 @@ int LabelValue;
         if ([Code.text isEqualToString:@"-"]) {
             B.text = [Code.text stringByAppendingString:B.text];
         }
+//        [AnimationClass fadeIn:B :0.5];
         [AnimationClass fadeOut:Code :0];
         
         moving = B.frame.origin.x;
     }
     
+    //初期化
+    E.text = @"";
+    
     [AnimationClass fadeIn:Mul :0];
     [AnimationClass delay:1];
     
+    //初期化(フェードアウトとの関係)
+    Code.text = @"=";
     //詰める
     
     if (![self isXY]){  //Aを移行した場合
@@ -775,13 +794,15 @@ int LabelValue;
     [AnimationClass moveAnime:Equal :-moving :0];
     [AnimationClass moveAnime:Mul :-moving :0];
 
-    [AnimationClass delay:1];
-    
     Code.frame = CGRectMake(Mul.frame.origin.x + 70, 0, Size, Size);
-    Code.text = @"=";
     E.frame = CGRectMake(Code.frame.origin.x + 70, 0, Size, Size);
-    E.text = @"";
-    E.backgroundColor = [UIColor intoColor];
+    
+    
+    
+//    E.backgroundColor = [UIColor intoColor];
+    
+    
+    [AnimationClass delay:1];
     
     //表示
     [AnimationClass fadeIn:Code :0];
@@ -811,7 +832,7 @@ int LabelValue;
     NSMutableArray *f;
     if([self isXY]){
         f = [NSMutableArray arrayWithObjects:A, E, nil];
-//        A.backgroundColor = [UIColor redColor];
+//        A.backgroundColor = [UIColor intoColor];
     }else{
         f = [NSMutableArray arrayWithObjects:B, E, nil];
     }
@@ -913,7 +934,8 @@ int LabelValue;
     
     //入力完了
     B.backgroundColor = [UIColor clearColor];
-//    B.backgroundColor = [UIColor orangeColor];
+    [self resetBorder:B];
+//    B.backgroundColor = [UIColor moveColor];
     
     //数値入力判定
     [self receiveValue:Mul :5];
@@ -957,6 +979,28 @@ int LabelValue;
     [appDelegate upDate];
 }
 
+- (void)graphMode
+{
+    NSLog(@"⑬GraphMode");
+    //Ax+By=E
+    
+    A.frame = CGRectMake(0, 0, Size, Size);
+    X.frame = CGRectMake(A.frame.origin.x + 60, 0, Size, Size);
+    Code.frame = CGRectMake(X.frame.origin.x +50, 0, Size, Size);
+    B.frame = CGRectMake(Code.frame.origin.x + 70, 0, Size, Size);
+    Y.frame = CGRectMake(B.frame.origin.x + 60, 0, Size, Size);
+    Equal.frame = CGRectMake(Y.frame.origin.x + 50, 0, Size, Size);
+    E.frame = CGRectMake(Equal.frame.origin.x + 70, 0, Size, Size);
+    
+    [self addSubview:A];
+    [self addSubview:B];
+    [self addSubview:E];
+    [self addSubview:X];
+    [self addSubview:Y];
+    [self addSubview:Equal];
+    [self addSubview:Code];
+    
+}
 /*************************/
 /*************************/
 
@@ -999,21 +1043,21 @@ int LabelValue;
     //divisionMode
     if([str isEqualToString:@"divA"]){
         A.userInteractionEnabled = YES;
-        A.backgroundColor = [UIColor orangeColor];
+        A.backgroundColor = [UIColor moveColor];
         A.tag = 101;
     }else if([str isEqualToString:@"divA2"]){//divisionMode2
         A.userInteractionEnabled = YES;
-        A.backgroundColor = [UIColor orangeColor];
+        A.backgroundColor = [UIColor moveColor];
         A.tag = 102;
         
     //transpositionMode
     }else if([str isEqualToString:@"transA"]){
         A.userInteractionEnabled = YES;
-        A.backgroundColor = [UIColor orangeColor];
+        A.backgroundColor = [UIColor moveColor];
         A.tag = 201;
     }else if([str isEqualToString:@"transB"]){
         B.userInteractionEnabled = YES;
-        B.backgroundColor = [UIColor orangeColor];
+        B.backgroundColor = [UIColor moveColor];
         B.tag = 202;
         
         
@@ -1021,43 +1065,43 @@ int LabelValue;
     //未定
     }else if([str isEqualToString:@"X"]){
         X.userInteractionEnabled = YES;
-        X.backgroundColor = [UIColor orangeColor];
+        X.backgroundColor = [UIColor moveColor];
         X.tag = 103;
     }else if([str isEqualToString:@"Label"]){
         Label.userInteractionEnabled = YES;
-        Label.backgroundColor = [UIColor orangeColor];
+        Label.backgroundColor = [UIColor moveColor];
         Label.tag = 104;
     }else if([str isEqualToString:@"AB"]){
         A.userInteractionEnabled = YES;
         B.userInteractionEnabled = YES;
-        A.backgroundColor = [UIColor orangeColor];
-        B.backgroundColor = [UIColor orangeColor];
+        A.backgroundColor = [UIColor moveColor];
+        B.backgroundColor = [UIColor moveColor];
         A.tag = 101;
         B.tag = 102;
     }
 }
 
-//- (void)cannotMoving:(NSString *)str
-//{
-//    if([str isEqualToString:@"A"]){
-//        A.userInteractionEnabled = NO;
-//        A.backgroundColor = [UIColor clearColor];
-//    }else if([str isEqualToString:@"B"]){
-//        B.userInteractionEnabled = NO;
-//        B.backgroundColor = [UIColor clearColor];
-//    }else if([str isEqualToString:@"X"]){
-//        X.userInteractionEnabled = NO;
-//        X.backgroundColor = [UIColor clearColor];
-//    }else if([str isEqualToString:@"Label"]){
-//        Label.userInteractionEnabled = NO;
-//        Label.backgroundColor = [UIColor clearColor];
-//    }else if([str isEqualToString:@"AB"]){
-//        A.userInteractionEnabled = NO;
-//        B.userInteractionEnabled = NO;
-//        A.backgroundColor = [UIColor clearColor];
-//        B.backgroundColor = [UIColor clearColor];
-//    }
-//}
+- (void)cannotMoving:(NSString *)str
+{
+    if([str isEqualToString:@"A"]){
+        A.userInteractionEnabled = NO;
+        A.backgroundColor = [UIColor clearColor];
+    }else if([str isEqualToString:@"B"]){
+        B.userInteractionEnabled = NO;
+        B.backgroundColor = [UIColor clearColor];
+    }else if([str isEqualToString:@"X"]){
+        X.userInteractionEnabled = NO;
+        X.backgroundColor = [UIColor clearColor];
+    }else if([str isEqualToString:@"Label"]){
+        Label.userInteractionEnabled = NO;
+        Label.backgroundColor = [UIColor clearColor];
+    }else if([str isEqualToString:@"AB"]){
+        A.userInteractionEnabled = NO;
+        B.userInteractionEnabled = NO;
+        A.backgroundColor = [UIColor clearColor];
+        B.backgroundColor = [UIColor clearColor];
+    }
+}
 
 /*****数値入力設定*****/
 - (void)receiveValue :(UILabel *)origin :(short int)index{
@@ -1066,7 +1110,8 @@ int LabelValue;
     //Codeだけがここ適用されない
     if(index != 4){
         origin.text = @"";
-        origin.backgroundColor = [UIColor intoColor];
+//        origin.backgroundColor = [UIColor intoColor];
+        [self setBorder:origin];
     }
     
 }
@@ -1076,6 +1121,18 @@ int LabelValue;
     origin.tag = 0;
 }
 
+//枠線処理
+- (void)setBorder :(UILabel *)origin
+{
+    [[origin layer] setBorderColor:[[UIColor whiteChokeColor] CGColor]];
+    [[origin layer] setBorderWidth:2.0];
+
+}
+
+- (void)resetBorder :(UILabel *)origin
+{
+    [[origin layer] setBorderWidth:0.0];
+}
 
 /********************/
 
@@ -1123,7 +1180,7 @@ int LabelValue;
                 B.text = [Code.text stringByAppendingString:B.text];
             [AnimationClass fadeOut:Code :0];
             [AnimationClass fadeIn:Mul :0];
-            B.center = location;
+            B.center = [self setLocation:location];
             break;
         
             
@@ -1151,7 +1208,7 @@ int LabelValue;
         case 101:
             A.center = [self setLocation:location];
             break;
-        
+            
         //divisionMode2
         case 102:
             A.center = [self setLocation:location];
@@ -1235,7 +1292,8 @@ int LabelValue;
         
         case 104:
             // 代入判定メソッド
-            if (Label.backgroundColor == [UIColor redColor]) {
+//            if (Label.backgroundColor == [UIColor intoColor]) {
+            if(LabelFlag){
                 NSMutableArray *list = [appDelegate.toyBox objectForKey:@"list"];
                 for (NSString *str in list) {
                     //        NSLog(@"Throgh");
@@ -1249,6 +1307,50 @@ int LabelValue;
             break;
     }
 //    NSLog(@"formal");
+}
+
+//タッチイベントキャンセル時の挙動
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [[self nextResponder] touchesCancelled:touches withEvent:event];
+    [super touchesCancelled:touches withEvent:event];
+    UITouch *touch = [touches anyObject];
+    //    CGPoint location = [touch locationInView:self];
+    
+    switch (touch.view.tag) {
+            //divisionMode
+        case 101:
+            [self back:A];
+            break;
+            
+            //divisionMode2
+        case 102:
+            [self back:A];
+            break;
+            
+            //transpositionMode
+        case 201:
+            [self back:A];
+            [AnimationClass fadeOut:Mul :0];
+            break;
+            
+        case 202:
+            [self back:B];
+            if([Code.text isEqualToString:@"-"])
+                B.text = [B.text substringFromIndex:1];
+            [AnimationClass fadeOut:Mul :0];
+            [AnimationClass fadeIn:Code :0];
+            break;
+            
+            
+        case 104:
+            // 代入判定メソッド
+            [self back:Label];
+            break;
+        default:
+            break;
+    }
+    //    NSLog(@"formal");
 }
 /*****ここまで*****/
 
@@ -1284,6 +1386,7 @@ int LabelValue;
     
     if(Val == e)
         return YES;
+    
     return NO;
 }
 
@@ -1383,7 +1486,7 @@ int LabelValue;
 
 -(CGPoint)labelLocation :(CGPoint)location
 {
-    return CGPointMake(location.x + LabelPosition, location.y - 30);
+    return CGPointMake(location.x, location.y - 30);
 }
 
 -(CGPoint)codeLocation :(UILabel *)lbl
@@ -1412,13 +1515,13 @@ int LabelValue;
                 if(member.tag == 0){
                     break;
                 }
-                
-                return [UIColor redColor];
+                LabelFlag = true;
+                return [UIColor intoColor];
             }
         }
     }
-    
-    return [UIColor orangeColor];
+    LabelFlag = false;
+    return [UIColor moveColor];
 }
 
 //代入メソッド
@@ -1446,6 +1549,7 @@ int LabelValue;
             
 //            NSLog(@"Label tag = %ld",XY.tag);
 //            NSLog(@"Label Val = %d",LabelValue);
+            
             //代入開始
             member.text = @"×";
             
@@ -1479,7 +1583,7 @@ int LabelValue;
     
     //数値入力領域の表示
     Mul.hidden = NO;
-//    Mul.backgroundColor = [UIColor orangeColor];
+//    Mul.backgroundColor = [UIColor moveColor];
     
     //値の入力
     Mul.text = [NSString stringWithFormat:@"%d",val];
@@ -1516,7 +1620,7 @@ int LabelValue;
         
     [AnimationClass delay:1.5];
     
-    [AnimationClass movePosition:self :91 :100 + 768 + 768];
+    [AnimationClass movePosition:self :91 :1668];
     
     appDelegate.form = self;
     NSLog(@"form number 7");

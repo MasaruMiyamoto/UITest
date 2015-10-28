@@ -11,6 +11,20 @@
 
 @implementation RandomClass
 
+int A, B, C, D, P, Q;
+
+bool stop = false;
+- (id)init
+{
+    self = [super init];
+    if(!stop){
+        [self makeRandom];
+    }else{
+        [self makeValue];
+    }
+    return self;
+}
+
 - (void)makeRandom
 {
     int min = -10;
@@ -44,6 +58,57 @@
     //    NSLog(@"p = %d, q = %d",p,q);
 //    NSLog(@"a = %d, b = %d, p = %d",a,b,p);
 //    NSLog(@"c = %d, d = %d, q = %d",c,d,q);
+    
+    
+    
+    //問題の保持
+//    a1 = a;
+//    b1 = b;
+//    e1 = p;
+//    
+//    a2 = c;
+//    b2 = d;
+//    e2 = q;
+    
+    int gcd1 = [self gcd:[self gcd:a :b] :p];
+    int gcd2 = [self gcd:[self gcd:c :d] :q];
+    
+    
+    
+    A = a/gcd1;
+    B = b/gcd1;
+    C = c/gcd2;
+    D = d/gcd2;
+    P = p/gcd1;
+    Q = q/gcd2;
+}
+
+- (void)makeValue
+{
+//    A = 1;
+//    B = 1;
+//    C = 1;
+//    D = 1;
+//    P = 1;
+//    Q = 1;
+    
+    A = 6;
+    B = 2;
+    C = 3;
+    D = 1;
+    P = 5;
+    Q = 1;
+    
+}
+
+- (void)enterFormula
+{
+    int a = A;
+    int b = B;
+    int c = C;
+    int d = D;
+    int p = P;
+    int q = Q;
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     
@@ -89,4 +154,26 @@
     le2.text = [NSString stringWithFormat:@"%d",q];
 }
 
+//解の判別
+- (BOOL)isIdefinite
+{
+    int delt = A*D - B*C;
+    if(delt == 0){
+        NSLog(@"解なしです");
+        return true;
+    }
+    return false;
+}
+
+- (int) gcd :(int)x :(int)y
+{
+    while (1) {
+        x = x % y;
+        if(x == 0)
+            return y;
+        y = y % x;
+        if (y == 0)
+            return x;
+    }
+}
 @end

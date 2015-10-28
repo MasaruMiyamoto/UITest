@@ -51,6 +51,9 @@
 //クラスの値のコピーとselfの位置の設定
 - (ViewClass *)copyWithPosition: (ViewClass *)origin :(int)x :(int)y;
 
+//枠線の無効
+- (void)resetBorder :(UILabel *)origin;
+
 //計算チェック
 - (BOOL)checkSum;
 - (BOOL)checkDiv :(NSString *)str;

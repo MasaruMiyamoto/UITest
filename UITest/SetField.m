@@ -26,7 +26,7 @@ int a2,b2,e2;
     [formula1 changeMode:@"standardMode"];
     [oya addSubview:formula1];
     
-    ViewClass *formula2 = [[ViewClass alloc] initWithPosition:91:252];
+    ViewClass *formula2 = [[ViewClass alloc] initWithPosition:91:123 + viewDist];
     //oya に　formula2　を追加、表示
 //    [formula2 setVariable:1 :2 :3];
     [formula2 changeMode:@"standardMode"];
@@ -60,7 +60,7 @@ int a2,b2,e2;
     [oya addSubview:formula1];
     
     //    NSLog(@"-------------");
-    ViewClass *formula2 = [[ViewClass alloc] initWithPosition: 91: 252 + 768];
+    ViewClass *formula2 = [[ViewClass alloc] initWithPosition: 91: 123 + viewDist + 768];
     //oya に　formula2　を追加、表示
     
     [self getVal:@"formula2"];
@@ -83,6 +83,7 @@ int a2,b2,e2;
     
     /**********/
     
+    [appDelegate.Button isMove:true];
     [appDelegate setUpdateMode:@"upDate1"];
 }
 
@@ -90,13 +91,13 @@ int a2,b2,e2;
 - (void)thirdSet :(UIView *)oya :(ViewClass *)view
 {
     
-    ViewClass *formula1 = [[ViewClass alloc] initWithPosition: 91: 230 + 768 +768];
+    ViewClass *formula1 = [[ViewClass alloc] initWithPosition: 91: view.frame.origin.y + viewDist*2];
     //oya に　formula1　を追加、表示
     [formula1 setVariable: a1: b1: e1];
     [formula1 changeMode:@"receptionMode"];
     [oya addSubview:formula1];
     
-    ViewClass *formula2 = [[ViewClass alloc] initWithPosition: 91: 359 + 768 +768];
+    ViewClass *formula2 = [[ViewClass alloc] initWithPosition: 91: formula1.frame.origin.y + viewDist];
     //oya に　formula2　を追加、表示
     
     [formula2 setVariable: a2: b2: e2];
@@ -105,10 +106,10 @@ int a2,b2,e2;
     
     //求めた一方解　[view] を表示する
     ViewClass *View = [[ViewClass alloc] init];
-    View = [View copyWithPosition:view :91 :100 + 768 + 768];
+    View = [View copyWithPosition:view :91 :view.frame.origin.y + viewDist];
     [View changeMode:@"substitutionMode"];
     [oya addSubview:View];
-    
+    NSLog(@"ViewY = %d",(int)View.frame.origin.y);
 //    NSLog(@"%d",[View isXY]);
     
     /*****おもちゃ箱に式のデータを保存*****/
@@ -142,6 +143,38 @@ int a2,b2,e2;
     [appDelegate setUpdateMode:@"upDate4"];
 }
 
+
+- (void)graphSet :(UIView *)oya :(int)location
+{
+    //係数の取得
+    [self getVal:@"formula1"];
+    [self getVal:@"formula2"];
+    
+    
+    ViewClass *formula1 = [[ViewClass alloc] initWithPosition: 91: location];
+    //oya に　formula1　を追加、表示
+    [formula1 changeMode:@"graphMode"];
+    [formula1 setVariable: a1: b1: e1];
+    [oya addSubview:formula1];
+    
+    //    NSLog(@"-------------");
+    ViewClass *formula2 = [[ViewClass alloc] initWithPosition: 91: location + viewDist/2];
+    //oya に　formula2　を追加、表示
+    [formula2 changeMode:@"graphMode"];
+    [formula2 setVariable: a2: b2: e2];
+    [oya addSubview:formula2];
+    
+    CreateField *field = [[CreateField alloc] initWithFrame:CGRectMake(50, 200 + 768, 500, 500)];
+    field.backgroundColor = [UIColor boardColor];
+    [[field layer] setBorderColor:[[UIColor whiteChokeColor] CGColor]];
+    [[field layer] setBorderWidth:1.5];
+    
+    
+    [field setPoint:a1 :b1 :e1 :1];
+    [field setPoint:a2 :b2 :e2 :2];
+    
+    [oya addSubview:field];
+}
 
 //大域変数に格納　原則secondSet内でのみの呼び出し
 - (void)getVal :(NSString *)str
