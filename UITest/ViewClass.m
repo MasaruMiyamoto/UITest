@@ -114,6 +114,33 @@ int LabelFlag;
 }
 
 
+- (void) initFont
+{
+    A = [self setFont:A];
+    B = [self setFont:B];
+    E = [self setFont:E];
+    X = [self setFont:X];
+    Y = [self setFont:Y];
+    Equal = [self setFont:Equal];
+    Code = [self setFont:Code];
+    Mul = [self setFont:Mul];
+}
+
+- (UILabel *)setFont :(UILabel *)origin
+{
+    if ([origin.text isEqualToString:@"x"] || [origin.text isEqualToString:@"y"])
+    {
+        origin.font = [UIFont fontWithName:@"Palatino-Italic" size:origin.font.pointSize];
+//        origin.font = [UIFont italicSystemFontOfSize:origin.font.pointSize];
+    }else{
+        origin.font = [UIFont fontWithName:@"Palatino" size:origin.font.pointSize];
+//        origin.font = [UIFont systemFontOfSize:origin.font.pointSize];
+    }
+    
+    return origin;
+}
+
+
 /***** モード変更 *****/
 
 //外部参照による選択
@@ -186,6 +213,7 @@ int LabelFlag;
             break;
         }
     }
+    [self initFont];
 }
 /**********/
 
@@ -208,22 +236,13 @@ int LabelFlag;
     Equal.frame = CGRectMake(Y.frame.origin.x + 50, 0, Size, Size);
     E.frame = CGRectMake(Equal.frame.origin.x + 70, 0, Size, Size);
 
-//    A.tag = 1;
-//    B.tag = 2;
-//    E.tag = 3;
-//    Code.tag = 4;
-    
-//    A.backgroundColor = [UIColor intoColor];
-//    B.backgroundColor = [UIColor intoColor];
-//    E.backgroundColor = [UIColor intoColor];
-
     //入力受付
     [self receiveValue:A :1];
     [self receiveValue:B :22];
     [self receiveValue:E :3];
     [self receiveValue:Code :4];
     
-    
+//    [self initFont];
     
     [self addSubview:A];
     [self addSubview:B];
@@ -465,7 +484,7 @@ int LabelFlag;
     [appDelegate.toyBox setObject:list forKey:@"list"];
     
     appDelegate.form = self;
-    NSLog(@"form to 4-2");
+//    NSLog(@"form to 4-2");
     
     [appDelegate setUpdateMode:@"upDate3"];
     [appDelegate upDate];
@@ -486,11 +505,11 @@ int LabelFlag;
     [self addSubview:Equal];
     [self addSubview:E];
     
-    NSLog(@"X = %@, Y = %@",X.text, Y.text);
+//    NSLog(@"X = %@, Y = %@",X.text, Y.text);
     [appDelegate inputAns:[self isXY] :(int)[E.text integerValue]];
     
     appDelegate.form = self;
-    NSLog(@"form number 5");
+//    NSLog(@"form number 5");
 }
 
 //⑥代入モード
@@ -625,8 +644,8 @@ int LabelFlag;
     [appDelegate.toyBox setObject:list forKey:@"list"];
     
     appDelegate.form = self;
-    NSLog(@"form number 8");
-    NSLog(@"Val = %d",Val);
+//    NSLog(@"form number 8");
+//    NSLog(@"Val = %d",Val);
     
     [appDelegate setUpdateMode:@"upDate5"];
 }
@@ -822,7 +841,7 @@ int LabelFlag;
         Val = valA + valE;
     }
     //値の確認
-    NSLog(@"Val = %d",Val);
+//    NSLog(@"Val = %d",Val);
     
     
     //書き込み許可
@@ -841,7 +860,7 @@ int LabelFlag;
     [appDelegate.toyBox setObject:list forKey:@"list"];
     
     appDelegate.form = self;
-    NSLog(@"form number 10");
+//    NSLog(@"form number 10");
 //    NSLog(@"Val = %d",Val);
     
     
@@ -973,7 +992,7 @@ int LabelFlag;
     [appDelegate.toyBox setObject:list forKey:@"list"];
     
     appDelegate.form = self;
-    NSLog(@"form to 12");
+//    NSLog(@"form to 12");
     
     [appDelegate setUpdateMode:@"upDate7"];
     [appDelegate upDate];
@@ -1360,7 +1379,7 @@ int LabelFlag;
     int b = (int)[B.text integerValue];
     int e = (int)[E.text integerValue];
     
-    NSLog(@"a=%d, b=%d, e=%d",a,b,e);
+//    NSLog(@"a=%d, b=%d, e=%d",a,b,e);
     
     if (e == Con) {
         if(a == Val)
@@ -1382,7 +1401,7 @@ int LabelFlag;
         NSLog(@"error");
     }
     
-    NSLog(@"Val = %d, e = %d",Val,e);
+//    NSLog(@"Val = %d, e = %d",Val,e);
     
     if(Val == e)
         return YES;
@@ -1395,11 +1414,11 @@ int LabelFlag;
     int e;
     if (![self isXY]) {
         e = (int)[A.text integerValue];
-        NSLog(@"Ae = %d",e);
+//        NSLog(@"Ae = %d",e);
     }else{
         NSString *cb = [Code.text stringByAppendingString:B.text];
         e = (int)[cb integerValue];
-        NSLog(@"Be = %d",e);
+//        NSLog(@"Be = %d",e);
     }
     
     if (e == Val) {
@@ -1623,8 +1642,8 @@ int LabelFlag;
     [AnimationClass movePosition:self :91 :1668];
     
     appDelegate.form = self;
-    NSLog(@"form number 7");
-    NSLog(@"Val = %d",Val);
+//    NSLog(@"form number 7");
+//    NSLog(@"Val = %d",Val);
 }
 
 
@@ -1635,7 +1654,7 @@ int LabelFlag;
 - (BOOL)isXY
 {
     
-    NSLog(@"X = %@, Y = %@",X.text,Y.text);
+//    NSLog(@"X = %@, Y = %@",X.text,Y.text);
     
     //Xのラベルの判定
     if ([X.text isEqualToString:@"x"]) {

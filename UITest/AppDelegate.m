@@ -88,7 +88,7 @@ int ansY;
 //倍数の入力と筆算クラスの生成
 - (void)upDate1
 {
-//    NSLog(@"update 1");
+    NSLog(@"update 1");
     
     JudgeClass *Jclass = [[JudgeClass alloc] init];
     NSMutableArray *member = [self.toyBox objectForKey:@"formula"];
@@ -164,7 +164,7 @@ int ansY;
         
         [View.oya addSubview:f3];
         
-        NSLog(@"sol = %d",(int)f3.frame.origin.y);
+//        NSLog(@"sol = %d",(int)f3.frame.origin.y);
         
         [Button isMove:false];
         [AnimationClass fadeIn:f3 :0];
@@ -192,7 +192,7 @@ int ansY;
     [f changeMode:@"receptionMode"];
     [View.oya addSubview:f];
     [AnimationClass fadeIn:f :0];
-    NSLog(@"fY = %d",(int)f.frame.origin.y);
+//    NSLog(@"fY = %d",(int)f.frame.origin.y);
     
     
     [AnimationClass delay:1];
@@ -201,7 +201,7 @@ int ansY;
     //移項モードへ
     ViewClass *f4 = [[[ViewClass alloc] init] copyWithPosition:form :91 :form.frame.origin.y + viewDist];
     [f4 changeMode:@"transPositionSetMode"];
-    NSLog(@"f4Y = %d",(int)f4.frame.origin.y);
+//    NSLog(@"f4Y = %d",(int)f4.frame.origin.y);
     [View.oya addSubview:f4];
     [AnimationClass fadeIn:f4 :0];
     
@@ -230,7 +230,7 @@ int ansY;
     [Button isMove:true];
     
     if ([form checkDiv :@"E"]) {
-        NSLog(@"OK from 6");
+//        NSLog(@"OK from 6");
         //枠線の無効化
         [self resetBorder];
         
@@ -250,7 +250,7 @@ int ansY;
     [Button isMove:true];
     
     if([form checkDiv :@"Mul"]){
-        NSLog(@"ansX = %d, ansY = %d",ansX, ansY);
+//        NSLog(@"ansX = %d, ansY = %d",ansX, ansY);
         AnswerClass *ans = [[AnswerClass alloc] initWithPosition:91 :form.frame.origin.y + viewDist];
         [ans setXY:ansX :ansY];
         [ans selectMode:@"Parenthesis"];
@@ -262,7 +262,7 @@ int ansY;
         [Button isMove:false];
         
         [View addScroll:View.oya.frame.size.height - ans.frame.origin.y + 50];
-        [AnimationClass delay:0.5];
+        [AnimationClass delay:1];
         
         [View.oya addSubview:ans];
         [AnimationClass fadeIn:ans :0];
@@ -298,7 +298,7 @@ int ansY;
     }
     
     IsUpdate = x;
-        NSLog(@"mode x = %d",x);
+//        NSLog(@"mode x = %d",x);
 }
 
 - (void)resetBorder

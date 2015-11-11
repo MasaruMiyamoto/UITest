@@ -99,7 +99,8 @@ AppDelegate *appDelegate;
     UILabel *origin = [[UILabel alloc] init];
     origin.userInteractionEnabled = YES;
     origin.textAlignment = NSTextAlignmentCenter;
-    origin.font = [UIFont systemFontOfSize:50];
+    origin.font = [UIFont fontWithName:@"Palatino-Italic" size:50];
+//    origin.font = [UIFont systemFontOfSize:50];
     origin.frame = CGRectMake(locx,locy,side,side);
     
     //色
@@ -175,7 +176,7 @@ AppDelegate *appDelegate;
         [AnimationClass fadeIn:btn9 :btn9.alpha];
         [AnimationClass fadeIn:btn_m :btn_m.alpha];
         [AnimationClass fadeIn:del :del.alpha];
-        NSLog(@"call true");
+//        NSLog(@"call true");
         
     }
     
@@ -244,7 +245,9 @@ AppDelegate *appDelegate;
     duplicateLabel.text = label.text;
     duplicateLabel.textColor = label.textColor;
     duplicateLabel.textAlignment = NSTextAlignmentCenter;
-    duplicateLabel.font = [UIFont systemFontOfSize:50];
+    
+    duplicateLabel.font = [UIFont fontWithName:@"Palatino" size:50];
+//    duplicateLabel.font = [UIFont systemFontOfSize:50];
     duplicateLabel.tag  = label.tag;
     duplicateLabel.backgroundColor = label.backgroundColor;
     //    NSLog(@"DEEP");
