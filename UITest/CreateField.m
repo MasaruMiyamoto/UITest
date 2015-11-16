@@ -15,38 +15,40 @@
 - (void)drawRect:(CGRect)rect {
     // Drawing code
     
+    int p = self.frame.size.height;
+    
     // x軸
     CGContextRef x = UIGraphicsGetCurrentContext();
     CGContextSetRGBStrokeColor(x, 1.0, 1.0, 1.0, 1.0);
     CGContextSetLineWidth(x, 2.0);
-    CGContextMoveToPoint(x, 0, 250);
-    CGContextAddLineToPoint(x, 500, 250);
+    CGContextMoveToPoint(x, 0, p/2);
+    CGContextAddLineToPoint(x, p, p/2);
     CGContextStrokePath(x);
     
     //メモリ
-    for(int i=0; i<500; i=i+25){
-        CGContextMoveToPoint(x, i, 245);
-        CGContextAddLineToPoint(x, i, 255);
+    for(int i=0; i<p; i=i+25){
+        CGContextMoveToPoint(x, i, p/2 - 5);
+        CGContextAddLineToPoint(x, i, p/2 + 5);
         CGContextStrokePath(x);
     }
     
     //y軸
     CGContextRef y = UIGraphicsGetCurrentContext();
     CGContextSetRGBStrokeColor(y, 255/255.0, 255/255.0, 255/255.0, 1);
-    CGContextMoveToPoint(y, 250, 0);
-    CGContextAddLineToPoint(y, 250, 500);
+    CGContextMoveToPoint(y, p/2, 0);
+    CGContextAddLineToPoint(y, p/2, p);
     CGContextStrokePath(y);
     
 
     //メモリ
-    for(int i=0; i<500; i=i+25){
-        CGContextMoveToPoint(y, 245, i);
-        CGContextAddLineToPoint(y, 255, i);
+    for(int i=0; i<p; i=i+25){
+        CGContextMoveToPoint(y, p/2 - 5, i);
+        CGContextAddLineToPoint(y, p/2 + 5, i);
         CGContextStrokePath(x);
     }
     
-    [self drawLiner1];
-    [self drawLiner2];
+    [self drawLiner1 :p];
+    [self drawLiner2 :p];
 //    [self drawQuadratic];
     
 }
@@ -70,7 +72,7 @@
     }
 }
 
--(void) drawLiner1{
+-(void) drawLiner1 :(int)p{
     CGPoint start,end;
     
     int a1,b1,c1;
@@ -78,20 +80,20 @@
     b1 = Y;
     c1 = E;
     
-    NSLog(@"%d %d %d",a1,b1,c1);
+//    NSLog(@"%d %d %d",a1,b1,c1);
     //グラフの座標系での座標の設定
-    start.x = -250;
+    start.x = -p/2;
     start.y = ((-1*a1)*start.x+c1*25)/b1;
     
-    end.x = 250;
+    end.x = p/2;
     end.y = -1*((-1*a1)*end.x+c1*25)/b1;
     
     //Viewに表示するために変換する
-    start = CGPointMake((int)start.x +250 , (int)((-1)*(start.y -250)));
-    end = CGPointMake((int)end.x +250, (int)(end.y + 250));
+    start = CGPointMake((int)start.x + p/2 , (int)((-1)*(start.y - p/2)));
+    end = CGPointMake((int)end.x + p/2, (int)(end.y + p/2));
     
-    NSLog(@"start(%f, %f)",start.x,start.y);
-    NSLog(@"end(%f, %f)",end.x,end.y);
+//    NSLog(@"start(%f, %f)",start.x,start.y);
+//    NSLog(@"end(%f, %f)",end.x,end.y);
     
     //Viewに描く
     CGContextRef draw = UIGraphicsGetCurrentContext();
@@ -103,7 +105,7 @@
 
 }
 
--(void) drawLiner2{
+-(void) drawLiner2 :(int)p{
     CGPoint start,end;
     
     int a1,b1,c1;
@@ -111,20 +113,20 @@
     b1 = B;
     c1 = C;
     
-    NSLog(@"%d %d %d",a1,b1,c1);
+//    NSLog(@"%d %d %d",a1,b1,c1);
     //グラフの座標系での座標の設定
-    start.x = -250;
+    start.x = -p/2;
     start.y = ((-1*a1)*start.x+c1*25)/b1;
     
-    end.x = 250;
+    end.x = p/2;
     end.y = -1*((-1*a1)*end.x+c1*25)/b1;
     
     //Viewに表示するために変換する
-    start = CGPointMake((int)start.x +250 , (int)((-1)*(start.y -250)));
-    end = CGPointMake((int)end.x +250, (int)(end.y + 250));
+    start = CGPointMake((int)start.x + p/2 , (int)((-1)*(start.y - p/2)));
+    end = CGPointMake((int)end.x + p/2, (int)(end.y + p/2));
     
-    NSLog(@"start(%f, %f)",start.x,start.y);
-    NSLog(@"end(%f, %f)",end.x,end.y);
+//    NSLog(@"start(%f, %f)",start.x,start.y);
+//    NSLog(@"end(%f, %f)",end.x,end.y);
     
     //Viewに描く
     CGContextRef draw = UIGraphicsGetCurrentContext();

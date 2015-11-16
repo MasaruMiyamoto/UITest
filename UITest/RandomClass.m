@@ -13,7 +13,7 @@
 
 int A, B, C, D, P, Q;
 
-bool stop = false;
+bool stop = true;
 - (id)init
 {
     self = [super init];
@@ -85,19 +85,19 @@ bool stop = false;
 
 - (void)makeValue
 {
-//    A = 1;
-//    B = 1;
-//    C = 1;
-//    D = 1;
-//    P = 1;
-//    Q = 1;
-    
-    A = 6;
-    B = 2;
-    C = 3;
+    A = 1;
+    B = 1;
+    C = 1;
     D = 1;
-    P = 5;
+    P = 1;
     Q = 1;
+    
+//    A = 6;
+//    B = 2;
+//    C = 3;
+//    D = 1;
+//    P = 5;
+//    Q = 1;
     
 }
 
@@ -160,6 +160,9 @@ bool stop = false;
     int delt = A*D - B*C;
     if(delt == 0){
         NSLog(@"解なしです");
+        if(A == C && B == D){
+            NSLog(@"重なる");
+        }
         return true;
     }
     return false;

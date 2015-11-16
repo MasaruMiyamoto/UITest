@@ -71,7 +71,8 @@ UIView *labelY;
     //A
     UILabel *A = [[UILabel alloc] init];
     A.textAlignment = NSTextAlignmentCenter;
-    A.font = [UIFont systemFontOfSize:50];
+    A.font = [UIFont fontWithName:@"Palatino-Italic" size:50];
+//    A.font = [UIFont systemFontOfSize:50];
     A.frame = CGRectMake(0, 0, 80, 80);
     A.adjustsFontSizeToFitWidth = YES;
     A.minimumScaleFactor = 20/50;
@@ -79,14 +80,16 @@ UIView *labelY;
     //=
     UILabel *Equal = [[UILabel alloc] init];
     Equal.textAlignment = NSTextAlignmentCenter;
-    Equal.font = [UIFont systemFontOfSize:45];
+    Equal.font = [UIFont fontWithName:@"Palatino" size:45];
+//    Equal.font = [UIFont systemFontOfSize:45];
     Equal.adjustsFontSizeToFitWidth = YES;
     Equal.minimumScaleFactor = 20/50;
     
     //E
     UILabel *E = [[UILabel alloc] init];
     E.textAlignment = NSTextAlignmentCenter;
-    E.font = [UIFont systemFontOfSize:50];
+    E.font = [UIFont fontWithName:@"Palatino" size:50];
+//    E.font = [UIFont systemFontOfSize:50];
     E.adjustsFontSizeToFitWidth = YES;
     E.minimumScaleFactor = 20/50;
     

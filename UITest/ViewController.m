@@ -172,49 +172,6 @@ CGPoint offset;
 
 
 //変更点の更新
-//- (void)upDate
-//{
-//    [self.view addSubview:oya];
-//    [self initScroller:oya];
-//    [self.view addSubview:button];
-//}
-//
-//- (void)scrollUpDate
-//{
-//    offset.y = oya.frame.size.height;
-////    NSLog(@"%f", offset.y);
-//    oya.frame = CGRectMake(0, 0, 1024, oya.frame.size.height + 768);
-//    
-//}
-//
-//- (void)scrollUpDate :(int)distY
-//{
-//    offset.y += distY;
-//    //    NSLog(@"%f", offset.y);
-//    oya.frame = CGRectMake(0, 0, 1024, oya.frame.size.height + distY);
-//}
-//
-//- (void)newScroll
-//{
-//    
-//    [self scrollUpDate];
-//    [self upDate];
-//    
-//    sv.contentOffset = CGPointMake(0, oya.frame.size.height - 768*2);
-//    [sv setContentOffset:offset animated:YES];
-//}
-//
-//
-//- (void)addScroll :(int)distY
-//{
-//    
-//    [self scrollUpDate:distY];
-//    [self upDate];
-//    
-//    sv.contentOffset = CGPointMake(0, oya.frame.size.height  - distY);
-//    [sv setContentOffset:offset animated:YES];
-//}
-
 - (void)scrollUpDate
 {
     [sv setContentOffset:offset animated:YES];
@@ -222,9 +179,9 @@ CGPoint offset;
 
 - (void)addScroll:(int)distY
 {
-    NSLog(@"offset = %d",(int)offset.y);
-    NSLog(@"oya.height = %d",(int)oya.frame.size.height);
-    NSLog(@"contentoffset = %d",(int)sv.contentOffset.y);
+//    NSLog(@"offset = %d",(int)offset.y);
+//    NSLog(@"oya.height = %d",(int)oya.frame.size.height);
+//    NSLog(@"contentoffset = %d",(int)sv.contentOffset.y);
     
     //offset上書き
     offset.y += distY;
@@ -233,9 +190,9 @@ CGPoint offset;
     oya.frame = CGRectMake(0, 0, 1024, oya.frame.size.height + distY);
     sv.contentSize = oya.bounds.size;
     
-    NSLog(@"offset = %d",(int)offset.y);
-    NSLog(@"oya.height = %d",(int)oya.frame.size.height);
-    NSLog(@"contentoffset = %d",(int)sv.contentOffset.y);
+//    NSLog(@"offset = %d",(int)offset.y);
+//    NSLog(@"oya.height = %d",(int)oya.frame.size.height);
+//    NSLog(@"contentoffset = %d",(int)sv.contentOffset.y);
     
     //self.viewにadd button too
 //    [sv addSubview:oya];
@@ -246,10 +203,10 @@ CGPoint offset;
     [sv setContentOffset:offset animated:YES];
 //    sv.contentOffset = CGPointMake(0, sv.contentOffset.y + distY);
     
-    NSLog(@"移動後");
-    NSLog(@"offset = %d",(int)offset.y);
-    NSLog(@"oya.height = %d",(int)oya.frame.size.height);
-    NSLog(@"contentoffset = %d",(int)sv.contentOffset.y);
+//    NSLog(@"移動後");
+//    NSLog(@"offset = %d",(int)offset.y);
+//    NSLog(@"oya.height = %d",(int)oya.frame.size.height);
+//    NSLog(@"contentoffset = %d",(int)sv.contentOffset.y);
 }
 
 /**********/

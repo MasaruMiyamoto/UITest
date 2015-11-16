@@ -99,7 +99,7 @@ AppDelegate *appDelegate;
     UILabel *origin = [[UILabel alloc] init];
     origin.userInteractionEnabled = YES;
     origin.textAlignment = NSTextAlignmentCenter;
-    origin.font = [UIFont fontWithName:@"Palatino-Italic" size:50];
+    origin.font = [UIFont fontWithName:@"Palatino" size:50];
 //    origin.font = [UIFont systemFontOfSize:50];
     origin.frame = CGRectMake(locx,locy,side,side);
     
@@ -183,12 +183,13 @@ AppDelegate *appDelegate;
     flag = f;
 }
 
+//- (void)
+
 - (BOOL)canMove
 {
-    
-    
     return flag;
 }
+
 - (id)labelCopy :(int)a
 {
     

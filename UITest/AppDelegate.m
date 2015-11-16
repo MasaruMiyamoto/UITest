@@ -117,7 +117,7 @@ int ansY;
 //筆算の正否判定と割り算クラスの生成
 - (void)upDate2
 {
-//    NSLog(@"2 mode");
+    NSLog(@"update 2");
 //    NSLog(@" %d",[form checkSum]);
 
     if([form checkSum]){

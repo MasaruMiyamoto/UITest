@@ -109,7 +109,7 @@ int a2,b2,e2;
     View = [View copyWithPosition:view :91 :view.frame.origin.y + viewDist];
     [View changeMode:@"substitutionMode"];
     [oya addSubview:View];
-    NSLog(@"ViewY = %d",(int)View.frame.origin.y);
+//    NSLog(@"ViewY = %d",(int)View.frame.origin.y);
 //    NSLog(@"%d",[View isXY]);
     
     /*****おもちゃ箱に式のデータを保存*****/
@@ -164,7 +164,7 @@ int a2,b2,e2;
     [formula2 setVariable: a2: b2: e2];
     [oya addSubview:formula2];
     
-    CreateField *field = [[CreateField alloc] initWithFrame:CGRectMake(50, 200 + 768, 500, 500)];
+    CreateField *field = [[CreateField alloc] initWithFrame:CGRectMake(50, 200 + 768, 400, 400)];
     field.backgroundColor = [UIColor boardColor];
     [[field layer] setBorderColor:[[UIColor whiteChokeColor] CGColor]];
     [[field layer] setBorderWidth:1.5];
