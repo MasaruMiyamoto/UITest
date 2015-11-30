@@ -27,7 +27,8 @@ UILabel *btn,
         *btn7,
         *btn8,
         *btn9,
-        *btn_m;
+        *btn_m,
+        *btn_p;
 
 UIImageView *img,
             *del;
@@ -59,13 +60,13 @@ AppDelegate *appDelegate;
     btn9 = [self setButton:9];
     btn0 = [self setButton:10];
     btn_m = [self setButton:11];
-    
+    btn_p = [self setButton:12];
     
     del = [[UIImageView alloc] init];
     del.userInteractionEnabled = YES;
     del.frame = CGRectMake(locx+during, locy+during+during+during+during, side,side);
     del.Image = [UIImage imageNamed:@"res.gif"];
-    del.tag = 12;
+    del.tag = 13;
     [self addSubview:del];
     
     btn = [[UILabel alloc] init];
@@ -77,17 +78,21 @@ AppDelegate *appDelegate;
     
     appDelegate = [[UIApplication sharedApplication] delegate];
     
-    btn1.frame = CGRectMake(locx,locy+during+during,side,side);
-    btn2.frame = CGRectMake(locx+during,locy+during+during,side,side);
-    btn3.frame = CGRectMake(locx+during+during,locy+during+during,side,side);
-    btn4.frame = CGRectMake(locx,locy+during,side,side);
-    btn5.frame = CGRectMake(locx+during,locy+during,side,side);
-    btn6.frame = CGRectMake(locx+during+during,locy+during,side,side);
-    btn7.frame = CGRectMake(locx,locy,side,side);
-    btn8.frame = CGRectMake(locx+during,locy,side,side);
-    btn9.frame = CGRectMake(locx+during+during,locy,side,side);
-    btn0.frame = CGRectMake(locx + during/2,locy+during+during+during,side,side);
-    btn_m.frame = CGRectMake(locx +during+ during/2,locy+during+during+during,side,side);
+    btn1.frame = CGRectMake(locx, locy+during+during, side, side);
+    btn2.frame = CGRectMake(locx+during, locy+during+during, side, side);
+    btn3.frame = CGRectMake(locx+during+during, locy+during+during, side, side);
+    
+    btn4.frame = CGRectMake(locx, locy+during, side, side);
+    btn5.frame = CGRectMake(locx+during, locy+during, side, side);
+    btn6.frame = CGRectMake(locx+during+during, locy+during, side, side);
+    
+    btn7.frame = CGRectMake(locx, locy, side, side);
+    btn8.frame = CGRectMake(locx+during, locy, side, side);
+    btn9.frame = CGRectMake(locx+during+during, locy, side, side);
+    
+    btn0.frame = CGRectMake(locx+during, locy+during+during+during, side, side);
+    btn_m.frame = CGRectMake(locx+during+during, locy+during+during+during, side, side);
+    btn_p.frame = CGRectMake(locx, locy+during+during+during, side, side);
     
     [self isMove:true];
     
@@ -115,6 +120,9 @@ AppDelegate *appDelegate;
             break;
         case 11:
             origin.text = @"-";
+            break;
+        case 12:
+            origin.text = @"+";
             break;
         default:
             origin.text = [NSString stringWithFormat:@"%d",tag];
@@ -160,6 +168,7 @@ AppDelegate *appDelegate;
         [AnimationClass fadeOut:btn8 :0.5];
         [AnimationClass fadeOut:btn9 :0.5];
         [AnimationClass fadeOut:btn_m :0.5];
+        [AnimationClass fadeOut:btn_p :0.5];
         [AnimationClass fadeOut:del :0.5];
         
     }else{
@@ -175,6 +184,7 @@ AppDelegate *appDelegate;
         [AnimationClass fadeIn:btn8 :btn8.alpha];
         [AnimationClass fadeIn:btn9 :btn9.alpha];
         [AnimationClass fadeIn:btn_m :btn_m.alpha];
+        [AnimationClass fadeIn:btn_p :btn_p.alpha];
         [AnimationClass fadeIn:del :del.alpha];
 //        NSLog(@"call true");
         
@@ -228,6 +238,9 @@ AppDelegate *appDelegate;
             btn = [self deepLabelCopy:btn_m];
             break;
         case 12:
+            btn = [self deepLabelCopy:btn_p];
+            break;
+        case 13:
             img = [self deepImageCopy:del];
             [self setBack:img];
             return img;
@@ -361,7 +374,7 @@ AppDelegate *appDelegate;
 //            member.text = [NSString stringWithFormat:@"%@",btn.text];
             
             //文字数制限
-            if(member.text.length > 3 && btn.tag != 12){
+            if(member.text.length > 3 && btn.tag != 13){
                 break;
             }
             
@@ -378,11 +391,24 @@ AppDelegate *appDelegate;
                         member.text = [member.text substringFromIndex:1];
                         isCode = true;
                     }
+                    
+                    if(btn.tag == 12){
+                        for (UILabel *member in fmember){
+                            if (member.tag == 4 ){
+                                if([member.text isEqualToString:@"-"]){
+                                    [btn removeFromSuperview];
+                                    member.text = @"+";
+                                }
+                            }
+                        }
+                    }
+                    
                 }
                 
             }
         }
     }
+    
     if(isCode){
         for (UILabel *member in fmember){
             if (member.tag == 4 ){
@@ -394,6 +420,9 @@ AppDelegate *appDelegate;
             }
         }
     }
+    
+    
+    
 }
 
 - (NSString *)chengeMember :(NSString *)x :(NSInteger)y{
@@ -420,6 +449,23 @@ AppDelegate *appDelegate;
     }
     
     if(y == 12){
+        a = @"+";
+        if(![x hasPrefix:@"0"] && [x hasPrefix:@"+"]){
+            //            NSLog(@"1");
+            [btn removeFromSuperview];
+            return x = [@"+" stringByAppendingString:x];
+        }else if([x hasPrefix:@"-"]){
+            //            NSLog(@"2");
+            [btn removeFromSuperview];
+            return [x substringFromIndex:1];
+        }        else{
+            //            NSLog(@"3");
+//            [btn removeFromSuperview];
+            return x;
+        }
+    }
+    
+    if(y == 13){
         [btn removeFromSuperview];
         return x = @"";
     }

@@ -1036,18 +1036,23 @@ int LabelFlag;
     _ValB = b;
     _ValE = e;
     
-    A.text = [NSString stringWithFormat:@"%d",a];
-    E.text = [NSString stringWithFormat:@"%d",e];
+//    A.text = [NSString stringWithFormat:@"%d",a];
+//    E.text = [NSString stringWithFormat:@"%d",e];
+
+    A.text = [CommonMethod outputString:a :true];
+    E.text = [CommonMethod outputString:e :false];
     
     if(b>0){
         Code.text = @"+";
-        B.text = [NSString stringWithFormat:@"%d",b];
+//        B.text = [NSString stringWithFormat:@"%d",b];
+        B.text = [CommonMethod outputString:b :true];
     }else if(b<0){
         Code.text = @"-";
-        B.text = [NSString stringWithFormat:@"%d",-b];
+//        B.text = [NSString stringWithFormat:@"%d",-b];
+        B.text = [CommonMethod outputString:-b :true];
     }
     
-//    NSLog(@"a = %d, b = %d, e = %d",_ValA,_ValB,_ValE);
+    NSLog(@"a = %d, b = %d, e = %d",_ValA,_ValB,_ValE);
 }
 
 - (void) setResult:(int)val :(int)con
@@ -1444,17 +1449,21 @@ int LabelFlag;
         mul = (int)[Mul.text integerValue];
     }
     
-    A.text = [NSString stringWithFormat:@"%d",_ValA*mul];
-    E.text = [NSString stringWithFormat:@"%d",_ValE*mul];
+//    A.text = [NSString stringWithFormat:@"%d",_ValA*mul];
+//    E.text = [NSString stringWithFormat:@"%d",_ValE*mul];
+    A.text = [CommonMethod outputString:_ValA*mul :true];
+    E.text = [CommonMethod outputString:_ValE*mul :false];
     
     if(_ValB*mul >= 0){
         Code.text = @"+";
-        B.text = [NSString stringWithFormat:@"%d",_ValB*mul];
+//        B.text = [NSString stringWithFormat:@"%d",_ValB*mul];
+        B.text = [CommonMethod outputString:_ValB*mul :true];
     }else if(_ValB*mul < 0){
         Code.text = @"-";
-        B.text = [NSString stringWithFormat:@"%d",-_ValB*mul];
+//        B.text = [NSString stringWithFormat:@"%d",-_ValB*mul];
+        B.text = [CommonMethod outputString:-_ValB*mul :true];
     }
-    
+//    NSLog(@"B = %@ in update from viewclass",B.text);
 }
 
 //labelの内容とself.frameの位置の設定
@@ -1677,4 +1686,7 @@ int LabelFlag;
     }
     
 }
+
+
+
 @end

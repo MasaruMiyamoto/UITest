@@ -13,7 +13,7 @@
 
 int A, B, C, D, P, Q;
 
-bool stop = true;
+bool stop = false;
 - (id)init
 {
     self = [super init];
@@ -119,7 +119,8 @@ bool stop = true;
     UILabel *lb1 = member[2];
     UILabel *le1 = member[3];
     
-    la1.text = [NSString stringWithFormat:@"%d",a];
+//    la1.text = [NSString stringWithFormat:@"%d",a];
+    la1.text = [CommonMethod outputString:a :true];
     
     if(b < 0){
         lc1.text = [NSString stringWithFormat:@"-"];
@@ -128,10 +129,11 @@ bool stop = true;
         lc1.text = [NSString stringWithFormat:@"+"];
     }
     
-    lb1.text = [NSString stringWithFormat:@"%d",b];
+//    lb1.text = [NSString stringWithFormat:@"%d",b];
+    lb1.text = [CommonMethod outputString:b :true];
     
-    le1.text = [NSString stringWithFormat:@"%d",p];
-    
+//    le1.text = [NSString stringWithFormat:@"%d",p];
+    le1.text = [CommonMethod outputString:p :false];
     
     member = [appDelegate.toyBox objectForKey:@"formula2"];
     
@@ -140,7 +142,8 @@ bool stop = true;
     UILabel *lb2 = member[2];
     UILabel *le2 = member[3];
     
-    la2.text = [NSString stringWithFormat:@"%d",c];
+//    la2.text = [NSString stringWithFormat:@"%d",c];
+    la2.text = [CommonMethod outputString:c :true];
     
     if(d < 0){
         lc2.text = [NSString stringWithFormat:@"-"];
@@ -149,9 +152,11 @@ bool stop = true;
         lc2.text = [NSString stringWithFormat:@"+"];
     }
     
-    lb2.text = [NSString stringWithFormat:@"%d",d];
+//    lb2.text = [NSString stringWithFormat:@"%d",d];
+    lb2.text = [CommonMethod outputString:d :true];
     
-    le2.text = [NSString stringWithFormat:@"%d",q];
+//    le2.text = [NSString stringWithFormat:@"%d",q];
+    le2.text = [CommonMethod outputString:q :false];
 }
 
 //解の判別

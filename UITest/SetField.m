@@ -187,14 +187,16 @@ int a2,b2,e2;
     UILabel *lb = member[2];
     UILabel *le = member[3];
     
-    int a = (int)[la.text integerValue];
+//    int a = (int)[la.text integerValue];
+    int a = [CommonMethod inputInteger:la.text :true];
     
-    int b = (int)[lb.text integerValue];
-    if( [lc.text hasPrefix:@"-"]){
-        b = -1 * b;
+    
+    int b = [CommonMethod inputInteger:lb.text :true];
+    if([lc.text isEqualToString:@"-"]){
+        b = -b;
     }
     
-    int e = (int)[le.text integerValue];
+    int e = [CommonMethod inputInteger:le.text :false];
     
     if([str hasPrefix:@"formula1"]){
         a1 = a;

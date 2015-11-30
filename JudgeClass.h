@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CommonMethod.h"
 @class ViewClass;
 
 @interface JudgeClass : UIView

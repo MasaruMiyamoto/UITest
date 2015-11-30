@@ -65,14 +65,23 @@ AppDelegate *appDelegate;
     int A1,B1,E1;
     int A2,B2,E2;
     
-    A1 = (int)[f1.A.text integerValue];
-    B1 = (int)[[f1.Code.text stringByAppendingString:f1.B.text] integerValue];
-    E1 = (int)[f1.E.text integerValue];
+//    A1 = (int)[f1.A.text integerValue];
+//    B1 = (int)[[f1.Code.text stringByAppendingString:f1.B.text] integerValue];
+//    E1 = (int)[f1.E.text integerValue];
+
+    NSLog(@"%@",[f1.Code.text stringByAppendingString:f1.B.text]);
+    A1 = [CommonMethod inputInteger:f1.A.text :true];
+    B1 = [CommonMethod inputInteger:[f1.Code.text stringByAppendingString:f1.B.text] :true];
+    E1 = [CommonMethod inputInteger:f1.E.text :false];
     
-    A2 = (int)[f2.A.text integerValue];
-    B2 = (int)[[f2.Code.text stringByAppendingString:f2.B.text] integerValue];
-    E2 = (int)[f2.E.text integerValue];
     
+//    A2 = (int)[f2.A.text integerValue];
+//    B2 = (int)[[f2.Code.text stringByAppendingString:f2.B.text] integerValue];
+//    E2 = (int)[f2.E.text integerValue];
+    
+    A2 = [CommonMethod inputInteger:f2.A.text :true];
+    B2 = [CommonMethod inputInteger:[f2.Code.text stringByAppendingString:f2.B.text] :true];
+    E2 = [CommonMethod inputInteger:f2.E.text :false];
     
 //    NSLog(@"A1 = %d, A2 = %d",A1,A2);
 //    NSLog(@"B1 = %d, B2 = %d",B1,B2);

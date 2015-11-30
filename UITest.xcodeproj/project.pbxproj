@@ -17,6 +17,7 @@
 		44B0BCF81A1C739F00203F57 /* SetButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 44B0BCF71A1C739F00203F57 /* SetButton.m */; };
 		44B0BCFA1A1C79C500203F57 /* res.gif in Resources */ = {isa = PBXBuildFile; fileRef = 44B0BCF91A1C79C500203F57 /* res.gif */; };
 		44BBA1531BD5E67400B15D0A /* CreateField.m in Sources */ = {isa = PBXBuildFile; fileRef = 44BBA1521BD5E67400B15D0A /* CreateField.m */; };
+		44CADF191C06DEBE0043B8C5 /* CommonMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CADF181C06DEBE0043B8C5 /* CommonMethod.m */; };
 		78A434371A1AF72C00469530 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A434361A1AF72C00469530 /* main.m */; };
 		78A4343A1A1AF72C00469530 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A434391A1AF72C00469530 /* AppDelegate.m */; };
 		78A4343D1A1AF72C00469530 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A4343C1A1AF72C00469530 /* ViewController.m */; };
@@ -57,6 +58,8 @@
 		44B0BCF91A1C79C500203F57 /* res.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = res.gif; sourceTree = "<group>"; };
 		44BBA1511BD5E67400B15D0A /* CreateField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateField.h; sourceTree = "<group>"; };
 		44BBA1521BD5E67400B15D0A /* CreateField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateField.m; sourceTree = "<group>"; };
+		44CADF171C06DEBE0043B8C5 /* CommonMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonMethod.h; sourceTree = "<group>"; };
+		44CADF181C06DEBE0043B8C5 /* CommonMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonMethod.m; sourceTree = "<group>"; };
 		78A434311A1AF72C00469530 /* UITest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UITest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78A434351A1AF72C00469530 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		78A434361A1AF72C00469530 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -135,6 +138,8 @@
 				44AD9FC31BC4DA9B00E6263F /* AnswerClass.m */,
 				44BBA1511BD5E67400B15D0A /* CreateField.h */,
 				44BBA1521BD5E67400B15D0A /* CreateField.m */,
+				44CADF171C06DEBE0043B8C5 /* CommonMethod.h */,
+				44CADF181C06DEBE0043B8C5 /* CommonMethod.m */,
 				78A4343E1A1AF72C00469530 /* Main.storyboard */,
 				78A434411A1AF72C00469530 /* Images.xcassets */,
 				78A434431A1AF72C00469530 /* LaunchScreen.xib */,
@@ -280,6 +285,7 @@
 				44B0BCF81A1C739F00203F57 /* SetButton.m in Sources */,
 				78A4343A1A1AF72C00469530 /* AppDelegate.m in Sources */,
 				78A434371A1AF72C00469530 /* main.m in Sources */,
+				44CADF191C06DEBE0043B8C5 /* CommonMethod.m in Sources */,
 				44ABE3CE1B0EB39F007D7110 /* AnimationClass.m in Sources */,
 				44AD9FC41BC4DA9B00E6263F /* AnswerClass.m in Sources */,
 				78A4345F1A1AF95B00469530 /* ViewClass.m in Sources */,

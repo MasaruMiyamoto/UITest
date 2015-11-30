@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
 #import "AnimationClass.h"
+#include "CommonMethod.h"
 
 //式の作成用クラス(予定)
 @interface ViewClass : UIView

@@ -11,6 +11,7 @@
 #import "ViewClass.h"
 #import "SetButton.h"
 #import "CreateField.h"
+#import "CommonMethod.h"
 
 @interface SetField : NSObject
 
