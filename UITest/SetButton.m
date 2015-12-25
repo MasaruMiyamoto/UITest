@@ -382,7 +382,21 @@ AppDelegate *appDelegate;
             if(member.tag == 0){
                 break;
             }
-            if(member.tag != 4){
+            
+            if(member.tag == 10){
+                if(btn.tag == 11){
+                    [btn removeFromSuperview];
+                    member.text = @"-";
+                }else if(btn.tag == 12){
+                    [btn removeFromSuperview];
+                    member.text = @"+";
+                }else if(btn.tag == 13){
+                    [btn removeFromSuperview];
+                    member.text = @"";
+                }
+            
+                
+            }else if(member.tag != 4){
 //                NSLog(@"tag");
                 member.text = [self chengeMember:member.text :btn.tag];
                 

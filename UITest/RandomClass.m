@@ -13,7 +13,9 @@
 
 int A, B, C, D, P, Q;
 
-bool stop = false;
+//ランダム問題にするかどうか。falseならランダム
+bool stop = true;
+
 - (id)init
 {
     self = [super init];
@@ -85,19 +87,19 @@ bool stop = false;
 
 - (void)makeValue
 {
-    A = 1;
-    B = 1;
-    C = 1;
-    D = 1;
-    P = 1;
-    Q = 1;
-    
-//    A = 6;
-//    B = 2;
-//    C = 3;
+//    A = 1;
+//    B = 1;
+//    C = 1;
 //    D = 1;
-//    P = 5;
+//    P = 1;
 //    Q = 1;
+    
+    A = -9;
+    B = 1;
+    C = -6;
+    D = 1;
+    P = 10;
+    Q = 4;
     
 }
 

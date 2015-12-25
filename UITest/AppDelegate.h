@@ -28,6 +28,7 @@
 @property (retain, nonatomic) ViewClass *form;
 @property (retain, nonatomic) SetField *Set;
 
+- (void)initClass;
 - (void)initToyBox;
 - (void)upDate;
 - (void)setUpdateMode:(NSString *)mode;

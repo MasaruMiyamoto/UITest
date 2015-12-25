@@ -289,7 +289,7 @@ int LabelFlag;
 {
     NSLog(@"③CalculationMode");
     
-    appDelegate = [[UIApplication sharedApplication] delegate];
+    
     
     if(Change){
         //yが残る
@@ -310,18 +310,26 @@ int LabelFlag;
 //        E.tag = 3;
         
         //入力受付
+        
+//        NSLog(@"val = %d B",Val);
         [self receiveValue:B :2];
+        [self addSubview:B];
+        
+        
         [self receiveValue:E :3];
         
-        [self addSubview:B];
+        
         [self addSubview:Y];
         [self addSubview:Equal];
         [self addSubview:E];
         
         //数値入力に必要
-        A.text = @"";
+        A.text = @"0";
+        A.hidden = YES;
         A.frame = CGRectMake(0, 0, 80, 80);
         [self addSubview:A];
+        
+        appDelegate = [[UIApplication sharedApplication] delegate];
         
         NSMutableArray *f = [NSMutableArray arrayWithObjects:A, B, E, nil];
         [appDelegate.toyBox setObject:f forKey:@"obj"];
@@ -336,6 +344,7 @@ int LabelFlag;
         //Ax = E
         
         A.text = @"";
+        B.text = @"0";
         E.text = @"";
         
         A.frame = CGRectMake(0, 0, 80, 80);
@@ -350,6 +359,7 @@ int LabelFlag;
 //        E.tag = 3;
         
         //入力受付
+        
         [self receiveValue:A :1];
         [self receiveValue:E :3];
         
@@ -357,6 +367,8 @@ int LabelFlag;
         [self addSubview:X];
         [self addSubview:Equal];
         [self addSubview:E];
+        
+        appDelegate = [[UIApplication sharedApplication] delegate];
         
         NSMutableArray *f = [NSMutableArray arrayWithObjects:A, E, nil];
         [appDelegate.toyBox setObject:f forKey:@"obj"];
@@ -375,7 +387,7 @@ int LabelFlag;
     NSLog(@"④-1DivisionLabel");
     
     //ラベル値の設定
-    if([A.text isEqualToString:@""]){
+    if([CommonMethod inputInteger:B.text :true] != 0){
         //        NSLog(@"enter");
         A.text = B.text;
         X.text = Y.text;
@@ -386,6 +398,45 @@ int LabelFlag;
     //入力部分の設定
 //    B.backgroundColor = [UIColor intoColor];
 //    Mul.backgroundColor = [UIColor intoColor];
+    
+    //係数が1のとき
+    if([CommonMethod inputInteger:A.text :true] == 1){
+        
+        int a = (int)[E.text integerValue];
+        
+        //解の格納
+        Val = a;
+        
+        //解の保持
+        Mul.text = E.text;
+        
+        X.frame = CGRectMake(0, 0, Size, Size);
+        Equal.frame = CGRectMake(X.frame.origin.x + 50, 0, Size, Size);
+        E.frame = CGRectMake(Equal.frame.origin.x + 70, 0, Size, Size);
+        
+        [self addSubview:X];
+        [self addSubview:Equal];
+        [self addSubview:E];
+        
+        self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y - viewDist, self.frame.size.width, self.frame.size.height);
+        
+        self.hidden = YES;
+        
+        //おもちゃ箱への登録
+        NSMutableArray *f = [NSMutableArray arrayWithObjects:A, Mul, nil];
+        [appDelegate.toyBox setObject:f forKey:@"obj"];
+        NSMutableArray *list = [NSMutableArray arrayWithObjects:@"obj", nil];
+        [appDelegate.toyBox setObject:list forKey:@"list"];
+        
+        appDelegate.form = self;
+        //    NSLog(@"form to 4-2");
+        
+        NSLog(@"check from viewclass 4");
+        [appDelegate setUpdateMode:@"upDate3"];
+        [appDelegate upDate];
+        
+        return;
+    }
     
     //入力受付
     [self receiveValue:B :2];
@@ -435,6 +486,11 @@ int LabelFlag;
     B.text = A.text;
     //    self.A.text = @"";
     
+    if([B.text isEqualToString:@"-"]){
+        B.text = @"-1";
+    }
+    
+    
     int b = (int)[B.text integerValue];
     if ([B.text hasPrefix:@"-"]) {
         B.text = [@"( " stringByAppendingString:self.B.text];
@@ -447,7 +503,7 @@ int LabelFlag;
     
     //入力完了
     B.backgroundColor = [UIColor clearColor];
-    [self resetBorder:B];
+    [CommonMethod resetBorder:B];
 //    B.backgroundColor = [UIColor moveColor];
     
     //数値入力判定
@@ -545,9 +601,23 @@ int LabelFlag;
     
     A.frame = CGRectMake(0, 0, Size, Size);
     X.frame = CGRectMake(A.frame.origin.x + 60, 0, Size, Size);
+    
+//    if([A.text isEqualToString:@""]){
+//        X.frame = CGRectOffset(X.frame, -60, 0);
+//    }
+    
+    X.frame = [CommonMethod cleanPosition:X.frame :A.text];
+    
     Code.frame = CGRectMake(X.frame.origin.x +50, 0, Size, Size);
     B.frame = CGRectMake(Code.frame.origin.x + 70, 0, Size, Size);
     Y.frame = CGRectMake(B.frame.origin.x + 60, 0, Size, Size);
+    
+//    if([B.text isEqualToString:@""]){
+//        Y.frame = CGRectOffset(Y.frame, -60, 0);
+//    }
+    
+    Y.frame = [CommonMethod cleanPosition:Y.frame :B.text];
+    
     Equal.frame = CGRectMake(Y.frame.origin.x + 50, 0, Size, Size);
     E.frame = CGRectMake(Equal.frame.origin.x + 70, 0, Size, Size);
     Mul.frame = CGRectMake(E.frame.origin.x + 100, 0, Size, Size);
@@ -587,9 +657,13 @@ int LabelFlag;
         //ラベルの配置
         A.frame = CGRectMake(0, 0, Size, Size);
         
+        
         Code.frame = CGRectMake(A.frame.origin.x +60, 0, Size, Size);
         B.frame = CGRectMake(Code.frame.origin.x + 70, 0, Size, Size);
+        
         Y.frame = CGRectMake(B.frame.origin.x + 60, 0, Size, Size);
+        Y.frame = [CommonMethod cleanPosition:Y.frame :B.text];
+
         Equal.frame = CGRectMake(Y.frame.origin.x + 50, 0, Size, Size);
         E.frame = CGRectMake(Equal.frame.origin.x + 70, 0, Size, Size);
         
@@ -607,7 +681,10 @@ int LabelFlag;
         
         //ラベルの配置
         A.frame = CGRectMake(0, 0, Size, Size);
+        
         X.frame = CGRectMake(A.frame.origin.x + 60, 0, Size, Size);
+        X.frame = [CommonMethod cleanPosition:X.frame :A.text];
+        
         Code.frame = CGRectMake(X.frame.origin.x +50, 0, Size, Size);
         B.frame = CGRectMake(Code.frame.origin.x + 70, 0, Size, Size);
         
@@ -645,7 +722,7 @@ int LabelFlag;
     
     appDelegate.form = self;
 //    NSLog(@"form number 8");
-//    NSLog(@"Val = %d",Val);
+    NSLog(@"Val = %d",Val);
     
     [appDelegate setUpdateMode:@"upDate5"];
 }
@@ -672,7 +749,10 @@ int LabelFlag;
         
         Code.frame = CGRectMake(A.frame.origin.x +60, 0, Size, Size);
         B.frame = CGRectMake(Code.frame.origin.x + 70, 0, Size, Size);
+        
         Y.frame = CGRectMake(B.frame.origin.x + 60, 0, Size, Size);
+        Y.frame = [CommonMethod cleanPosition:Y.frame :B.text];
+        
         Equal.frame = CGRectMake(Y.frame.origin.x + 50, 0, Size, Size);
         E.frame = CGRectMake(Equal.frame.origin.x + 70, 0, Size, Size);
         
@@ -691,7 +771,10 @@ int LabelFlag;
         
         //ラベルの配置
         A.frame = CGRectMake(0, 0, Size, Size);
+        
         X.frame = CGRectMake(A.frame.origin.x + 60, 0, Size, Size);
+        X.frame = [CommonMethod cleanPosition:X.frame :A.text];
+        
         Code.frame = CGRectMake(X.frame.origin.x +50, 0, Size, Size);
         B.frame = CGRectMake(Code.frame.origin.x + 70, 0, Size, Size);
         
@@ -729,7 +812,7 @@ int LabelFlag;
     
     //Mulに代入されたから色変更
     Mul.backgroundColor = [UIColor  clearColor];
-    [self resetBorder:Mul];
+    [CommonMethod resetBorder:Mul];
     
     //動かないように
     [self cannotMoving:@"AB"];
@@ -742,7 +825,7 @@ int LabelFlag;
         B.frame = E.frame;
         B.text = E.text;
         B.backgroundColor = [UIColor clearColor];
-        [self resetBorder:B];
+        [CommonMethod resetBorder:B];
         
         /*********************ここの問題作成*******************/
         if ([self isPMlabel:Mul]) {
@@ -765,7 +848,7 @@ int LabelFlag;
         A.frame = E.frame;
         A.text = E.text;
         A.backgroundColor = [UIColor clearColor];
-        [self resetBorder:A];
+        [CommonMethod resetBorder:A];
         
         
         if ([self isPMlabel:Mul]) {
@@ -863,7 +946,7 @@ int LabelFlag;
 //    NSLog(@"form number 10");
 //    NSLog(@"Val = %d",Val);
     
-    
+    NSLog(@"self.frame = %d in transHas",(int)self.frame.origin.y);
     
     [appDelegate setUpdateMode:@"upDate6"];
     [appDelegate upDate];
@@ -892,6 +975,47 @@ int LabelFlag;
     //入力部分の設定
     //    B.backgroundColor = [UIColor intoColor];
     //    Mul.backgroundColor = [UIColor intoColor];
+    
+    //係数が1のとき
+    if([CommonMethod inputInteger:A.text :true] == 1){
+        
+        int a = (int)[E.text integerValue];
+        
+        //解の格納
+        Val = a;
+        
+        //解の保持
+        Mul.text = E.text;
+        
+        X.frame = CGRectMake(0, 0, Size, Size);
+        Equal.frame = CGRectMake(X.frame.origin.x + 50, 0, Size, Size);
+        E.frame = CGRectMake(Equal.frame.origin.x + 70, 0, Size, Size);
+        
+        [self addSubview:X];
+        [self addSubview:Equal];
+        [self addSubview:E];
+        
+        self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y - viewDist, self.frame.size.width, self.frame.size.height);
+        
+        self.hidden = YES;
+        
+        [appDelegate inputAns:[self isXY] :[CommonMethod inputInteger:E.text :false]];
+        
+        //おもちゃ箱への登録
+        NSMutableArray *f = [NSMutableArray arrayWithObjects:A, Mul, nil];
+        [appDelegate.toyBox setObject:f forKey:@"obj"];
+        NSMutableArray *list = [NSMutableArray arrayWithObjects:@"obj", nil];
+        [appDelegate.toyBox setObject:list forKey:@"list"];
+        
+        appDelegate.form = self;
+        //    NSLog(@"form to 4-2");
+        
+        NSLog(@"check from viewclass 11");
+        [appDelegate setUpdateMode:@"upDate7"];
+        [appDelegate upDate];
+        
+        return;
+    }
     
     //入力受付
     [self receiveValue:B :2];
@@ -941,6 +1065,10 @@ int LabelFlag;
     B.text = A.text;
     //    self.A.text = @"";
     
+    if([B.text isEqualToString:@"-"]){
+        B.text = @"-1";
+    }
+    
     int b = (int)[B.text integerValue];
     if ([B.text hasPrefix:@"-"]) {
         B.text = [@"( " stringByAppendingString:self.B.text];
@@ -953,7 +1081,7 @@ int LabelFlag;
     
     //入力完了
     B.backgroundColor = [UIColor clearColor];
-    [self resetBorder:B];
+    [CommonMethod resetBorder:B];
 //    B.backgroundColor = [UIColor moveColor];
     
     //数値入力判定
@@ -1052,7 +1180,7 @@ int LabelFlag;
         B.text = [CommonMethod outputString:-b :true];
     }
     
-    NSLog(@"a = %d, b = %d, e = %d",_ValA,_ValB,_ValE);
+//    NSLog(@"a = %d, b = %d, e = %d",_ValA,_ValB,_ValE);
 }
 
 - (void) setResult:(int)val :(int)con
@@ -1135,7 +1263,7 @@ int LabelFlag;
     if(index != 4){
         origin.text = @"";
 //        origin.backgroundColor = [UIColor intoColor];
-        [self setBorder:origin];
+        [CommonMethod setBorder:origin];
     }
     
 }
@@ -1143,19 +1271,6 @@ int LabelFlag;
 - (void)deReceiveValue :(UILabel *)origin
 {
     origin.tag = 0;
-}
-
-//枠線処理
-- (void)setBorder :(UILabel *)origin
-{
-    [[origin layer] setBorderColor:[[UIColor whiteChokeColor] CGColor]];
-    [[origin layer] setBorderWidth:2.0];
-
-}
-
-- (void)resetBorder :(UILabel *)origin
-{
-    [[origin layer] setBorderWidth:0.0];
 }
 
 /********************/
@@ -1380,11 +1495,15 @@ int LabelFlag;
 
 -(BOOL)checkSum
 {
-    int a = (int)[A.text integerValue];
-    int b = (int)[B.text integerValue];
-    int e = (int)[E.text integerValue];
+//    int a = (int)[A.text integerValue];
+//    int b = (int)[B.text integerValue];
+//    int e = (int)[E.text integerValue];
     
-//    NSLog(@"a=%d, b=%d, e=%d",a,b,e);
+    int a = [CommonMethod inputInteger:A.text :false];
+    int b = [CommonMethod inputInteger:B.text :false];
+    int e = [CommonMethod inputInteger:E.text :false];
+    
+    NSLog(@"a=%d, b=%d, e=%d",a,b,e);
     
     if (e == Con) {
         if(a == Val)
@@ -1418,12 +1537,14 @@ int LabelFlag;
 {
     int e;
     if (![self isXY]) {
-        e = (int)[A.text integerValue];
-//        NSLog(@"Ae = %d",e);
+//        e = (int)[A.text integerValue];
+        e = [CommonMethod inputInteger:A.text :false];
+        NSLog(@"Ae = %d",e);
     }else{
         NSString *cb = [Code.text stringByAppendingString:B.text];
-        e = (int)[cb integerValue];
-//        NSLog(@"Be = %d",e);
+//        e = (int)[cb integerValue];
+        e = [CommonMethod inputInteger:cb :false];
+        NSLog(@"Be = %d",e);
     }
     
     if (e == Val) {
@@ -1588,6 +1709,7 @@ int LabelFlag;
                 [AnimationClass fadeOut:str :0];
             }
             
+            //call update4
             [appDelegate upDate];
             
         }
@@ -1599,7 +1721,7 @@ int LabelFlag;
 {
     self.alpha = 1.0;
     [self setMode :LabelValue];
-    [appDelegate setUpdateMode:@"upDate5"];
+//    [appDelegate setUpdateMode:@"upDate5"];
 }
 
 
@@ -1621,7 +1743,7 @@ int LabelFlag;
         Mul.text = [Mul.text stringByAppendingString:@" )"];
         Mul.frame = CGRectMake(Mul.frame.origin.x, Mul.frame.origin.y, 120, Size);
         Mul.textAlignment = NSTextAlignmentLeft;
-        MoveDistance += 20;
+        MoveDistance += 30;
     }
     
     if (![self isXY]) {     //x部分に代入するため、x部分の変更を判定
@@ -1632,15 +1754,39 @@ int LabelFlag;
         [AnimationClass moveAnime:B :MoveDistance :0];
         [AnimationClass moveAnime:Y :MoveDistance :0];
         
-        Val = val * (int)[A.text integerValue];
+//        Val = val * (int)[A.text integerValue];
+        Val = val * [CommonMethod inputInteger:A.text :true];
         
     }else{
         //y部分に代入
         Mul.frame = CGRectMake(Y.frame.origin.x + 70, 0, Mul.frame.size.width, Size);
         
         //Code + B でValを求める
-        Val = val * (int)[[Code.text stringByAppendingString:B.text] integerValue];
+//        Val = val * (int)[[Code.text stringByAppendingString:B.text] integerValue];
+        int b = [CommonMethod inputInteger:B.text :true];
+        if([Code.text isEqualToString:@"-"]){
+            b = -b;
+        }
         
+        Val = val * b;
+        
+    }
+    
+    //係数が１の処理
+    if([Y.text isEqualToString:@"y"]){
+        if([A.text isEqualToString:@""]){
+            A.text = @"1";
+            NSLog(@"A to 1");
+        }else if([A.text isEqualToString:@"-"]){
+            A.text = @"-1";
+        }
+    }else{
+        if([B.text isEqualToString:@""]){
+            B.text = @"1";
+            NSLog(@"B to 1");
+        }else if([B.text isEqualToString:@"-"]){
+            B.text = @"-1";
+        }
     }
     
     [AnimationClass moveAnime:Equal :MoveDistance :0];
@@ -1648,9 +1794,16 @@ int LabelFlag;
         
     [AnimationClass delay:1.5];
     
-    [AnimationClass movePosition:self :91 :1668];
+    appDelegate = [[UIApplication sharedApplication] delegate];
+//    NSLog(@"form.y = %d", (int));
     
+    if(self.frame.origin.y >= 1668){
+        [AnimationClass movePosition:self :91 :1668];
+    }else{
+        [AnimationClass movePosition:self :91 :1668 - viewDist];
+    }
     appDelegate.form = self;
+    
 //    NSLog(@"form number 7");
 //    NSLog(@"Val = %d",Val);
 }

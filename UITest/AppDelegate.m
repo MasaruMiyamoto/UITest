@@ -23,7 +23,7 @@
 
 
 
-//JudgeClass *Jclass;
+JudgeClass *Jclass;
 ViewController *View;
 SetButton *Button;
 ViewClass *form;
@@ -42,14 +42,22 @@ int ansY;
     // Override point for customization after application launch.
     self.toyBox = [[NSMutableDictionary alloc] init];
     Button = [[SetButton alloc] init];
-//    Jclass = [[JudgeClass alloc] init];
+    Jclass = [[JudgeClass alloc] init];
     form = [[ViewClass alloc] init];
 //    Set = [[SetField alloc] init];
 //    [View randomAction:nil];
     return YES;
 }
 
-- (void)initToyBox{
+- (void)initClass
+{
+    self.toyBox = [[NSMutableDictionary alloc] init];
+    Button = [[SetButton alloc] init];
+    Jclass = [[JudgeClass alloc] init];
+}
+
+- (void)initToyBox
+{
     self.toyBox = [[NSMutableDictionary alloc] init];
 }
 
@@ -90,7 +98,7 @@ int ansY;
 {
     NSLog(@"update 1");
     
-    JudgeClass *Jclass = [[JudgeClass alloc] init];
+//    JudgeClass *Jclass = [[JudgeClass alloc] init];
     NSMutableArray *member = [self.toyBox objectForKey:@"formula"];
     for (ViewClass *fs in member) {
         [fs upDate];
@@ -98,18 +106,25 @@ int ansY;
     }
     
 //    NSLog(@"for out");
-    if([Jclass judgeCheck:member[0] :member[1]] != 0){
-        [Jclass setPosition:10 :252 + 768];
-        [View.oya addSubview:Jclass];
-        [View.oya bringSubviewToFront:Jclass];
-        
-        [AnimationClass fadeIn:Jclass :0];
-        
-//        NSLog(@"Jclass position.y = %f",Jclass.frame.origin.y);
-//        NSLog(@"ちぇけらー！");
+    if(![Jclass enterCheck]){
+        if([Jclass judgeCheck:member[0] :member[1]] != 0){
+            [Jclass setPosition:10 :252 + 768];
+            [View.oya addSubview:Jclass];
+            [View.oya bringSubviewToFront:Jclass];
+            
+            [AnimationClass fadeIn:Jclass :0];
+            
+//            NSLog(@"Jclass position.y = %f",Jclass.frame.origin.y);
+//            NSLog(@"ちぇけらー！");
+        }else{
+            [Jclass resetPosition];
+//            NSLog(@"ここ通った？");
+        }
     }else{
-        [Jclass resetPosition];
-//        NSLog(@"ここ通った？");
+        if ([Jclass checkPL]) {
+            [Jclass makeCulClass];
+        }
+        NSLog(@"enter step for App class");
     }
 //    NSLog(@"1 mode");
 }
@@ -164,13 +179,15 @@ int ansY;
         
         [View.oya addSubview:f3];
         
-//        NSLog(@"sol = %d",(int)f3.frame.origin.y);
+        NSLog(@"f3 = %d",(int)f3.frame.origin.y);
+        NSLog(@"view = %d",(int)View.oya.frame.size.height);
         
         [Button isMove:false];
         [AnimationClass fadeIn:f3 :0];
         [AnimationClass delay:2];
         
-        [View addScroll:728];
+//        [View addScroll:50];
+        [View addScroll:768 + f3.frame.origin.y - View.oya.frame.size.height + f3.frame.size.height];
         SetField *Set = [[SetField alloc] init];
         [Set thirdSet:View.oya :f3];
         
@@ -186,7 +203,7 @@ int ansY;
 //    NSLog(@"%@",form.A.text);
     
     
-//    NSLog(@"formY = %d",(int)form.frame.origin.y);
+    NSLog(@"formY = %d",(int)form.frame.origin.y);
     //代入前の式の表示
     ViewClass *f = [[[ViewClass alloc] init] copyWithPosition:form :91 :form.frame.origin.y - viewDist];
     [f changeMode:@"receptionMode"];
@@ -221,6 +238,7 @@ int ansY;
         [f5 changeMode:@"transPositionMode"];
         [View.oya addSubview:f5];
         [AnimationClass fadeIn:f5 :0];
+        
     }
 }
 
@@ -250,7 +268,7 @@ int ansY;
     [Button isMove:true];
     
     if([form checkDiv :@"Mul"]){
-//        NSLog(@"ansX = %d, ansY = %d",ansX, ansY);
+        NSLog(@"ansX = %d, ansY = %d",ansX, ansY);
         AnswerClass *ans = [[AnswerClass alloc] initWithPosition:91 :form.frame.origin.y + viewDist];
         [ans setXY:ansX :ansY];
         [ans selectMode:@"Parenthesis"];
@@ -261,8 +279,11 @@ int ansY;
         
         [Button isMove:false];
         
-        [View addScroll:View.oya.frame.size.height - ans.frame.origin.y + 50];
-        [AnimationClass delay:1];
+        if (form.frame.origin.y > 1928) {
+            [View addScroll:View.oya.frame.size.height - ans.frame.origin.y + 50];
+            [AnimationClass delay:1];
+        }
+        
         
         [View.oya addSubview:ans];
         [AnimationClass fadeIn:ans :0];
@@ -303,10 +324,10 @@ int ansY;
 
 - (void)resetBorder
 {
-    [form resetBorder:form.A];
-    [form resetBorder:form.B];
-    [form resetBorder:form.E];
-    [form resetBorder:form.Mul];
+    [CommonMethod resetBorder:form.A];
+    [CommonMethod resetBorder:form.B];
+    [CommonMethod resetBorder:form.E];
+    [CommonMethod resetBorder:form.Mul];
 }
 
 - (void)inputAns :(BOOL)XY :(int)val

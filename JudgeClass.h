@@ -14,6 +14,9 @@
 
 - (void)setPosition:(int)x :(int)y;
 - (void)resetPosition;
+- (BOOL)enterCheck;
 - (int)judgeCheck:(ViewClass *)f1 :(ViewClass *)f2;
 
+- (BOOL) checkPL;
+- (void) makeCulClass;
 @end

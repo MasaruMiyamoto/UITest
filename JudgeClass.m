@@ -15,15 +15,23 @@
 
 @implementation JudgeClass
 
-UILabel *Code;
+//UILabel *Code;
 UILabel *Line;
 
+bool EnterFlag;
+bool PLflag;
+
+int A1,B1,E1;
+int A2,B2,E2;
+
+ViewClass *Code;
 ViewClass *formula;
 AppDelegate *appDelegate;
 
 - (id)init{
     self = [super init];
     self.frame = CGRectMake(0, 0, Width, Height);
+    EnterFlag = false;
 //    NSLog(@"make judgecalss");
     [self setLabel];
     [self makeClass];
@@ -46,30 +54,39 @@ AppDelegate *appDelegate;
 
 - (void)setLabel
 {
-    Code = [[UILabel alloc] init];
-    Code.textAlignment = NSTextAlignmentCenter;
-    Code.font = [UIFont systemFontOfSize:50];
+    Code = [[ViewClass alloc] init];
+//    Code.textAlignment = NSTextAlignmentCenter;
+//    Code.font = [UIFont systemFontOfSize:50];
     Code.frame = CGRectMake(0, 0, Size, Size);
-    Code.adjustsFontSizeToFitWidth = YES;
-    Code.textColor = [UIColor whiteChokeColor];
+    Code.A.frame = CGRectMake(0, 0, Size, Size);
+    Code.A.text = @"";
+//    Code.adjustsFontSizeToFitWidth = YES;
+    Code.A.textColor = [UIColor whiteChokeColor];
+    Code.A.tag = 10;
+    [Code addSubview:Code.A];
     [self addSubview:Code];
     
     Line = [[UILabel alloc]init];
-    Line.frame = CGRectMake(0, Code.frame.origin.y + Size, Width, 3);
+    Line.frame = CGRectMake(0, Code.frame.origin.y + Size + 5, Width, 3);
     Line.backgroundColor = [UIColor whiteChokeColor];
     [self addSubview:Line];
 }
 
+- (BOOL)enterCheck
+{
+    return EnterFlag;
+}
+
 - (int)judgeCheck:(ViewClass *)f1 :(ViewClass *)f2
 {
-    int A1,B1,E1;
-    int A2,B2,E2;
+
     
 //    A1 = (int)[f1.A.text integerValue];
 //    B1 = (int)[[f1.Code.text stringByAppendingString:f1.B.text] integerValue];
 //    E1 = (int)[f1.E.text integerValue];
 
-    NSLog(@"%@",[f1.Code.text stringByAppendingString:f1.B.text]);
+//    NSLog(@"%@ from jadgeClass",[f1.Code.text stringByAppendingString:f1.B.text]);
+    
     A1 = [CommonMethod inputInteger:f1.A.text :true];
     B1 = [CommonMethod inputInteger:[f1.Code.text stringByAppendingString:f1.B.text] :true];
     E1 = [CommonMethod inputInteger:f1.E.text :false];
@@ -94,46 +111,52 @@ AppDelegate *appDelegate;
     
     if(A1 - A2 == 0){
         [self events:f1.A :f2.A :1 :NO];
-        [formula changeMode:@"calculationModeX"];
-        [formula setResult:B1-B2 :E1-E2];
-        appDelegate.form = formula;
         return 1;
     }else if(A1 + A2 == 0){
         [self events:f1.A :f2.A :2 :YES];
-        [formula changeMode:@"calculationModeX"];
-        [formula setResult:B1+B2 :E1+E2];
-        appDelegate.form = formula;
         return 2;
     }else if(B1 - B2 == 0){
         [self events:f1.B :f2.B :1 :NO];
-        [formula changeMode:@"calculationModeY"];
-        [formula setResult:A1-A2 :E1-E2];
-        appDelegate.form = formula;
         return 3;
     }else if(B1 + B2 == 0){
         [self events:f1.B :f2.B :2 :YES];
-        [formula changeMode:@"calculationModeY"];
-        [formula setResult:A1+A2 :E1+E2];
-        appDelegate.form = formula;
         return 4;
     }
+    
     return 0;
 }
+
 
 - (void)writeCode:(BOOL)flag
 {
 //    NSLog(@"OK");
-    if(flag){
-        Code.text = @"+";
-    }else{
-        Code.text = @"-";
-    }
+//    if(flag){
+//        Code.text = @"+";
+//    }else{
+//        Code.text = @"-";
+//    }
+//    
+//    Code.text = [Code.text stringByAppendingString:@" )"];
     
-    Code.text = [Code.text stringByAppendingString:@" )"];
-
+    PLflag = flag;
+    
+    //おもちゃ箱への登録
+    NSMutableArray *f = [NSMutableArray arrayWithObjects:Code.A, nil];
+    [appDelegate.toyBox setObject:f forKey:@"obj"];
+    NSMutableArray *list = [NSMutableArray arrayWithObjects:@"obj", nil];
+    [appDelegate.toyBox setObject:list forKey:@"list"];
+    
+    appDelegate.form = Code;
+    
+    [CommonMethod setBorder:Code.A];
+    
     Code.alpha = 1.0;
     Line.alpha = 1.0;
+    
+    EnterFlag = true;
 }
+
+
 
 - (void)changeTextColor :(UILabel *)a :(UILabel *)b :(int)change
 {
@@ -181,4 +204,44 @@ AppDelegate *appDelegate;
     [self writeCode:flag];
 }
 
+
+/*********************ここから後半処理***************************/
+- (BOOL) checkPL
+{
+    if ([Code.A.text isEqualToString:@"+"] && PLflag) {
+        return true;
+    }
+    else if([Code.A.text isEqualToString:@"-"] && !PLflag){
+        return true;
+    }
+    
+    return false;
+}
+
+- (void) makeCulClass
+{
+    [CommonMethod resetBorder:Code.A];
+    
+    if(A1 - A2 == 0){
+        [formula setResult:B1-B2 :E1-E2];
+        [formula changeMode:@"calculationModeX"];
+        appDelegate.form = formula;
+    }else if(A1 + A2 == 0){
+        [formula setResult:B1+B2 :E1+E2];
+        [formula changeMode:@"calculationModeX"];
+        appDelegate.form = formula;
+    }else if(B1 - B2 == 0){
+        [formula setResult:A1-A2 :E1-E2];
+        [formula changeMode:@"calculationModeY"];
+        appDelegate.form = formula;
+    }else if(B1 + B2 == 0){
+        [formula setResult:A1+A2 :E1+E2];
+        [formula changeMode:@"calculationModeY"];
+        appDelegate.form = formula;
+    }
+    
+    [AnimationClass fadeIn:formula :0];
+    
+    Code.A.text = [Code.A.text stringByAppendingString:@" )"];
+}
 @end

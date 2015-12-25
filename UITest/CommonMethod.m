@@ -49,4 +49,27 @@
 //    NSLog(@"output %@",str);
     return str;
 }
+
+//枠線処理
++ (void)setBorder :(UILabel *)origin
+{
+    [[origin layer] setBorderColor:[[UIColor whiteChokeColor] CGColor]];
+    [[origin layer] setBorderWidth:2.0];
+    
+}
+
++ (void)resetBorder :(UILabel *)origin
+{
+    [[origin layer] setBorderWidth:0.0];
+}
+
+//係数が空の時の整頓
++ (CGRect)cleanPosition :(CGRect)AB :(NSString *)XY
+{
+    if([XY isEqualToString:@""]){
+        AB = CGRectOffset(AB, -60, 0);
+    }
+    
+    return AB;
+}
 @end
