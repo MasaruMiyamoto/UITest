@@ -84,7 +84,8 @@ CGPoint offset;
     [self.view addSubview:button];
     appDelegate.Button = button;
     
-//    [button isMove:false];
+    [button isMove:false];
+    
 //    appDelegate.Button = [[SetButton alloc] init];
 //    appDelegate.Button = button;
     /**********/

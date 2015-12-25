@@ -14,7 +14,7 @@
 int A, B, C, D, P, Q;
 
 //ランダム問題にするかどうか。falseならランダム
-bool stop = true;
+bool stop = false;
 
 - (id)init
 {

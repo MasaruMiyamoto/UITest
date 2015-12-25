@@ -94,6 +94,7 @@ int LabelFlag;
     Code.text = @"+";
     Mul.text = @"";
     
+//    A.backgroundColor = [UIColor redColor];
 }
 
 
@@ -237,10 +238,10 @@ int LabelFlag;
     E.frame = CGRectMake(Equal.frame.origin.x + 70, 0, Size, Size);
 
     //入力受付
-    [self receiveValue:A :1];
-    [self receiveValue:B :22];
-    [self receiveValue:E :3];
-    [self receiveValue:Code :4];
+//    [self receiveValue:A :1];
+//    [self receiveValue:B :22];
+//    [self receiveValue:E :3];
+//    [self receiveValue:Code :4];
     
 //    [self initFont];
     
@@ -602,19 +603,26 @@ int LabelFlag;
     A.frame = CGRectMake(0, 0, Size, Size);
     X.frame = CGRectMake(A.frame.origin.x + 60, 0, Size, Size);
     
-//    if([A.text isEqualToString:@""]){
-//        X.frame = CGRectOffset(X.frame, -60, 0);
-//    }
+    if([A.text isEqualToString:@"1"]){
+        A.text = @"";
+    }
+    
+    if([A.text isEqualToString:@"-1"]){
+        A.text = @"-";
+    }
     
     X.frame = [CommonMethod cleanPosition:X.frame :A.text];
+//    if([A.text isEqualToString:@""]){
+//        self.frame = CGRectOffset(self.frame, -Size, 0);
+//    }
     
     Code.frame = CGRectMake(X.frame.origin.x +50, 0, Size, Size);
     B.frame = CGRectMake(Code.frame.origin.x + 70, 0, Size, Size);
     Y.frame = CGRectMake(B.frame.origin.x + 60, 0, Size, Size);
     
-//    if([B.text isEqualToString:@""]){
-//        Y.frame = CGRectOffset(Y.frame, -60, 0);
-//    }
+    if([B.text isEqualToString:@"1"]){
+        B.text = @"";
+    }
     
     Y.frame = [CommonMethod cleanPosition:Y.frame :B.text];
     
@@ -638,6 +646,8 @@ int LabelFlag;
     [self addSubview:Code];
     [self addSubview:Mul];
 
+//    [self bringSubviewToFront:A];
+    
     Mul.hidden = YES;
     
 }
@@ -1659,6 +1669,10 @@ int LabelFlag;
         for (UILabel *member in fmember){
             
             CGRect convertStr = [self convertRect:member.frame fromView:[fmember objectAtIndex:0]];
+            
+//            NSLog(@"str %@",NSStringFromCGRect(convertStr));
+//            NSLog(@"btn %@",NSStringFromCGPoint(point));
+            
             if(CGRectContainsPoint(convertStr, point)){
                 
                 if(member.tag == 0){
@@ -1735,6 +1749,10 @@ int LabelFlag;
     Mul.hidden = NO;
 //    Mul.backgroundColor = [UIColor moveColor];
     
+    if(self.frame.origin.x < 91){
+        self.frame = CGRectOffset(self.frame, Size, 0);
+    }
+    
     //値の入力
     Mul.text = [NSString stringWithFormat:@"%d",val];
     
@@ -1748,7 +1766,13 @@ int LabelFlag;
     
     if (![self isXY]) {     //x部分に代入するため、x部分の変更を判定
         //x部分に代入
-        Mul.frame = CGRectMake(X.frame.origin.x + 70, 0, Mul.frame.size.width, Size);
+        if([A.text isEqualToString:@""]){
+            X.frame = CGRectOffset(X.frame, 60, 0);
+            Mul.frame = CGRectMake(X.frame.origin.x + 70, 0, Mul.frame.size.width, Size);
+            MoveDistance += 60;
+        }else{
+            Mul.frame = CGRectMake(X.frame.origin.x + 70, 0, Mul.frame.size.width, Size);
+        }
         
         [AnimationClass moveAnime:Code :MoveDistance :0];
         [AnimationClass moveAnime:B :MoveDistance :0];
@@ -1759,7 +1783,13 @@ int LabelFlag;
         
     }else{
         //y部分に代入
-        Mul.frame = CGRectMake(Y.frame.origin.x + 70, 0, Mul.frame.size.width, Size);
+        if([B.text isEqualToString:@""]){
+            Y.frame = CGRectOffset(Y.frame, 60, 0);
+            Mul.frame = CGRectMake(Y.frame.origin.x + 70, 0, Mul.frame.size.width, Size);
+            MoveDistance += 60;
+        }else{
+            Mul.frame = CGRectMake(Y.frame.origin.x + 70, 0, Mul.frame.size.width, Size);
+        }
         
         //Code + B でValを求める
 //        Val = val * (int)[[Code.text stringByAppendingString:B.text] integerValue];
