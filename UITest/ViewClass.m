@@ -860,14 +860,14 @@ int LabelFlag;
         A.backgroundColor = [UIColor clearColor];
         [CommonMethod resetBorder:A];
         
-        
+        /*********************ここの問題作成*******************/
         if ([self isPMlabel:Mul]) {
             X.text = @"-";
         }else{
             X.text = @"+";
             Mul.text = [Mul.text substringFromIndex:1];
         }
-        
+        /****************************************************/
         
         
         [AnimationClass fadeIn:X :0];
@@ -1311,6 +1311,8 @@ int LabelFlag;
         //divisionMode2
         case 102:
             A.center = [self setLocation:location];
+            
+            
             //            self.Code.text = @"÷";
             //            self.B.backgroundColor = [UIColor intoColor];
             
@@ -1320,6 +1322,7 @@ int LabelFlag;
             
         //transpositionMode
         case 201:
+            Val = [CommonMethod inputInteger:A.text :false];
             A.center = [self setLocation:location];
             [AnimationClass fadeIn:Mul :0];
             break;
@@ -1327,6 +1330,7 @@ int LabelFlag;
         case 202:
             if([Code.text isEqualToString:@"-"])
                 B.text = [Code.text stringByAppendingString:B.text];
+            Val = [CommonMethod inputInteger:B.text :false];
             [AnimationClass fadeOut:Code :0];
             [AnimationClass fadeIn:Mul :0];
             B.center = [self setLocation:location];
@@ -1366,10 +1370,28 @@ int LabelFlag;
         //transpositionMode
         case 201:
             A.center = [self setLocation:location];
+            
+            if(A.center.x > Equal.center.x){
+                A.text = [NSString stringWithFormat:@"%d", -Val];
+                A.backgroundColor = [UIColor moveColor2];
+            }else{
+                A.text = [NSString stringWithFormat:@"%d", Val];
+                A.backgroundColor = [UIColor moveColor];
+            }
+            
             break;
             
         case 202:
             B.center = [self setLocation:location];
+            
+            if(B.center.x > Equal.center.x){
+                B.text = [NSString stringWithFormat:@"%d", -Val];
+                B.backgroundColor = [UIColor moveColor2];
+            }else{
+                B.text = [NSString stringWithFormat:@"%d", Val];
+                B.backgroundColor = [UIColor moveColor];
+            }
+            
             break;
             
             
@@ -1418,6 +1440,8 @@ int LabelFlag;
             
         //transpositionMode
         case 201:
+            A.text = [NSString stringWithFormat:@"%d", Val];
+            A.backgroundColor = [UIColor moveColor];
             if (CGRectContainsPoint(self.A.frame, self.Mul.center)) {
                 [self changeMode:@"transPositionHasMode"];
             }else{
@@ -1427,6 +1451,8 @@ int LabelFlag;
             break;
         
         case 202:
+            B.text = [NSString stringWithFormat:@"%d", Val];
+            B.backgroundColor = [UIColor moveColor];
             if (CGRectContainsPoint(self.B.frame, self.Mul.center)) {
                 [self changeMode:@"transPositionHasMode"];
             }else{
@@ -1628,6 +1654,11 @@ int LabelFlag;
     tmp = CGPointMake(obj.center.x, obj.center.y);
 }
 
+- (void)setRect:(UIView *)obj
+{
+    tmp = CGPointMake(obj.frame.origin.x, obj.frame.origin.y);
+}
+
 - (void)back:(UIView *)lbl
 {
     [UIView beginAnimations:nil context:nil];
@@ -1827,11 +1858,15 @@ int LabelFlag;
     appDelegate = [[UIApplication sharedApplication] delegate];
 //    NSLog(@"form.y = %d", (int));
     
-    if(self.frame.origin.y >= 1668){
-        [AnimationClass movePosition:self :91 :1668];
-    }else{
-        [AnimationClass movePosition:self :91 :1668 - viewDist];
-    }
+    NSLog(@"tmp %@",NSStringFromCGPoint(tmp));
+    
+//    if(self.frame.origin.y >= 1668){
+//        [AnimationClass movePosition:self :91 :1668];
+//    }else{
+//        [AnimationClass movePosition:self :91 :1668 - viewDist];
+//    }
+    
+    [AnimationClass movePosition:self :91 :tmp.y + viewDist];
     appDelegate.form = self;
     
 //    NSLog(@"form number 7");

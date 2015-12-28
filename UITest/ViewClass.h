@@ -56,6 +56,7 @@
 - (BOOL)checkSum;
 - (BOOL)checkDiv :(NSString *)str;
 - (BOOL)checkMul;
+- (void)setRect:(UIView *)obj;
 
 - (void)substitution;
 //一方解の判定

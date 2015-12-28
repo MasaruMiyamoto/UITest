@@ -41,6 +41,7 @@
 
 //ラベルの色
 #define moveColor colorWithRed:220/255.0 green:110/255.0 blue:0/255.0 alpha:1.0
+#define moveColor2 colorWithRed:220/255.0 green:50/255.0 blue:0/255.0 alpha:1.0
 
 //代入可能の色
 #define intoColor colorWithRed:200/255.0 green:50/255.0 blue:30/255.0 alpha:1.0

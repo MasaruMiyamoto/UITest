@@ -109,8 +109,12 @@ int a2,b2,e2;
     View = [View copyWithPosition:view :91 :view.frame.origin.y + viewDist];
     [View changeMode:@"substitutionMode"];
     [oya addSubview:View];
-//    NSLog(@"ViewY = %d",(int)View.frame.origin.y);
+    
+    NSLog(@"View %@",NSStringFromCGRect(View.frame));
 //    NSLog(@"%d",[View isXY]);
+    
+    [formula1 setRect:View];
+    [formula2 setRect:View];
     
     /*****おもちゃ箱に式のデータを保存*****/
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
