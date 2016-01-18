@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		441F94D61C3CF5970003F0CA /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 441F94D51C3CF5970003F0CA /* icon.png */; };
+		441F94D81C3CF7790003F0CA /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 441F94D71C3CF7790003F0CA /* image.jpg */; };
+		441F94E21C3D08790003F0CA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78A434431A1AF72C00469530 /* LaunchScreen.xib */; };
+		441F94E41C3D0A3F0003F0CA /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 441F94E31C3D0A3F0003F0CA /* star.png */; };
+		441F94EA1C3D0F1B0003F0CA /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 441F94E91C3D0F1B0003F0CA /* splash.png */; };
 		44ABDF111ADF79880019ECD3 /* SetField.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ABDF101ADF79880019ECD3 /* SetField.m */; };
 		44ABDF171ADFA0F90019ECD3 /* RandomClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ABDF161ADFA0F90019ECD3 /* RandomClass.m */; };
 		44ABE3CE1B0EB39F007D7110 /* AnimationClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ABE3CD1B0EB39F007D7110 /* AnimationClass.m */; };
@@ -14,6 +19,8 @@
 		44AD086A1BC67D40005AAC03 /* blackboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 44AD08691BC67D40005AAC03 /* blackboard.png */; };
 		44AD14F21AA0351C00143EAF /* JudgeClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AD14F11AA0351C00143EAF /* JudgeClass.m */; };
 		44AD9FC41BC4DA9B00E6263F /* AnswerClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AD9FC31BC4DA9B00E6263F /* AnswerClass.m */; };
+		44AE17211C3CF4E500C4D312 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78A4343E1A1AF72C00469530 /* Main.storyboard */; };
+		44AE17221C3CF4F000C4D312 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78A434431A1AF72C00469530 /* LaunchScreen.xib */; };
 		44B0BCF81A1C739F00203F57 /* SetButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 44B0BCF71A1C739F00203F57 /* SetButton.m */; };
 		44B0BCFA1A1C79C500203F57 /* res.gif in Resources */ = {isa = PBXBuildFile; fileRef = 44B0BCF91A1C79C500203F57 /* res.gif */; };
 		44BBA1531BD5E67400B15D0A /* CreateField.m in Sources */ = {isa = PBXBuildFile; fileRef = 44BBA1521BD5E67400B15D0A /* CreateField.m */; };
@@ -21,9 +28,7 @@
 		78A434371A1AF72C00469530 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A434361A1AF72C00469530 /* main.m */; };
 		78A4343A1A1AF72C00469530 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A434391A1AF72C00469530 /* AppDelegate.m */; };
 		78A4343D1A1AF72C00469530 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A4343C1A1AF72C00469530 /* ViewController.m */; };
-		78A434401A1AF72C00469530 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78A4343E1A1AF72C00469530 /* Main.storyboard */; };
 		78A434421A1AF72C00469530 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78A434411A1AF72C00469530 /* Images.xcassets */; };
-		78A434451A1AF72C00469530 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78A434431A1AF72C00469530 /* LaunchScreen.xib */; };
 		78A434511A1AF72C00469530 /* UITestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A434501A1AF72C00469530 /* UITestTests.m */; };
 		78A4345F1A1AF95B00469530 /* ViewClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A4345E1A1AF95B00469530 /* ViewClass.m */; };
 /* End PBXBuildFile section */
@@ -39,7 +44,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		445A317E1BC38BCE002F11A0 /* UITest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITest-Prefix.pch"; sourceTree = "<group>"; };
+		441F94D51C3CF5970003F0CA /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		441F94D71C3CF7790003F0CA /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpg; sourceTree = "<group>"; };
+		441F94DB1C3CFA220003F0CA /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ja; path = ja.lproj/Main.storyboard; sourceTree = "<group>"; };
+		441F94DC1C3CFA220003F0CA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
+		441F94DD1C3CFCB50003F0CA /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		441F94DE1C3CFCB50003F0CA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		441F94E31C3D0A3F0003F0CA /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
+		441F94E91C3D0F1B0003F0CA /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
+		445A317E1BC38BCE002F11A0 /* miyamoto-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "miyamoto-Prefix.pch"; sourceTree = "<group>"; };
 		44ABDF0F1ADF79880019ECD3 /* SetField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetField.h; sourceTree = "<group>"; };
 		44ABDF101ADF79880019ECD3 /* SetField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetField.m; sourceTree = "<group>"; };
 		44ABDF151ADFA0F90019ECD3 /* RandomClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomClass.h; sourceTree = "<group>"; };
@@ -60,17 +73,15 @@
 		44BBA1521BD5E67400B15D0A /* CreateField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateField.m; sourceTree = "<group>"; };
 		44CADF171C06DEBE0043B8C5 /* CommonMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonMethod.h; sourceTree = "<group>"; };
 		44CADF181C06DEBE0043B8C5 /* CommonMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonMethod.m; sourceTree = "<group>"; };
-		78A434311A1AF72C00469530 /* UITest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UITest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		78A434311A1AF72C00469530 /* miyamoto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = miyamoto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78A434351A1AF72C00469530 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		78A434361A1AF72C00469530 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		78A434381A1AF72C00469530 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		78A434391A1AF72C00469530 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		78A4343B1A1AF72C00469530 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		78A4343C1A1AF72C00469530 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		78A4343F1A1AF72C00469530 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		78A434411A1AF72C00469530 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		78A434441A1AF72C00469530 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		78A4344A1A1AF72C00469530 /* UITestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UITestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		78A4344A1A1AF72C00469530 /* miyamotoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = miyamotoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		78A4344F1A1AF72C00469530 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		78A434501A1AF72C00469530 /* UITestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UITestTests.m; sourceTree = "<group>"; };
 		78A4345D1A1AF95B00469530 /* ViewClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewClass.h; sourceTree = "<group>"; };
@@ -107,8 +118,8 @@
 		78A434321A1AF72C00469530 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				78A434311A1AF72C00469530 /* UITest.app */,
-				78A4344A1A1AF72C00469530 /* UITestTests.xctest */,
+				78A434311A1AF72C00469530 /* miyamoto.app */,
+				78A4344A1A1AF72C00469530 /* miyamotoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -152,10 +163,14 @@
 			isa = PBXGroup;
 			children = (
 				78A434351A1AF72C00469530 /* Info.plist */,
+				441F94E91C3D0F1B0003F0CA /* splash.png */,
+				441F94D51C3CF5970003F0CA /* icon.png */,
+				441F94D71C3CF7790003F0CA /* image.jpg */,
 				44AD08691BC67D40005AAC03 /* blackboard.png */,
+				441F94E31C3D0A3F0003F0CA /* star.png */,
 				78A434361A1AF72C00469530 /* main.m */,
 				44B0BCF91A1C79C500203F57 /* res.gif */,
-				445A317E1BC38BCE002F11A0 /* UITest-Prefix.pch */,
+				445A317E1BC38BCE002F11A0 /* miyamoto-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -180,9 +195,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		78A434301A1AF72C00469530 /* UITest */ = {
+		78A434301A1AF72C00469530 /* miyamoto */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 78A434541A1AF72C00469530 /* Build configuration list for PBXNativeTarget "UITest" */;
+			buildConfigurationList = 78A434541A1AF72C00469530 /* Build configuration list for PBXNativeTarget "miyamoto" */;
 			buildPhases = (
 				78A4342D1A1AF72C00469530 /* Sources */,
 				78A4342E1A1AF72C00469530 /* Frameworks */,
@@ -192,14 +207,14 @@
 			);
 			dependencies = (
 			);
-			name = UITest;
+			name = miyamoto;
 			productName = UITest;
-			productReference = 78A434311A1AF72C00469530 /* UITest.app */;
+			productReference = 78A434311A1AF72C00469530 /* miyamoto.app */;
 			productType = "com.apple.product-type.application";
 		};
-		78A434491A1AF72C00469530 /* UITestTests */ = {
+		78A434491A1AF72C00469530 /* miyamotoTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 78A434571A1AF72C00469530 /* Build configuration list for PBXNativeTarget "UITestTests" */;
+			buildConfigurationList = 78A434571A1AF72C00469530 /* Build configuration list for PBXNativeTarget "miyamotoTests" */;
 			buildPhases = (
 				78A434461A1AF72C00469530 /* Sources */,
 				78A434471A1AF72C00469530 /* Frameworks */,
@@ -210,9 +225,9 @@
 			dependencies = (
 				78A4344C1A1AF72C00469530 /* PBXTargetDependency */,
 			);
-			name = UITestTests;
+			name = miyamotoTests;
 			productName = UITestTests;
-			productReference = 78A4344A1A1AF72C00469530 /* UITestTests.xctest */;
+			productReference = 78A4344A1A1AF72C00469530 /* miyamotoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -233,7 +248,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 78A4342C1A1AF72C00469530 /* Build configuration list for PBXProject "UITest" */;
+			buildConfigurationList = 78A4342C1A1AF72C00469530 /* Build configuration list for PBXProject "miyamoto" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -246,8 +261,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				78A434301A1AF72C00469530 /* UITest */,
-				78A434491A1AF72C00469530 /* UITestTests */,
+				78A434301A1AF72C00469530 /* miyamoto */,
+				78A434491A1AF72C00469530 /* miyamotoTests */,
 			);
 		};
 /* End PBXProject section */
@@ -257,10 +272,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				78A434401A1AF72C00469530 /* Main.storyboard in Resources */,
+				44AE17221C3CF4F000C4D312 /* LaunchScreen.xib in Resources */,
+				441F94D61C3CF5970003F0CA /* icon.png in Resources */,
+				44AE17211C3CF4E500C4D312 /* Main.storyboard in Resources */,
 				44AD086A1BC67D40005AAC03 /* blackboard.png in Resources */,
+				441F94D81C3CF7790003F0CA /* image.jpg in Resources */,
+				441F94E41C3D0A3F0003F0CA /* star.png in Resources */,
 				44B0BCFA1A1C79C500203F57 /* res.gif in Resources */,
-				78A434451A1AF72C00469530 /* LaunchScreen.xib in Resources */,
+				441F94EA1C3D0F1B0003F0CA /* splash.png in Resources */,
 				78A434421A1AF72C00469530 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -269,6 +288,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				441F94E21C3D08790003F0CA /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,7 +328,7 @@
 /* Begin PBXTargetDependency section */
 		78A4344C1A1AF72C00469530 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 78A434301A1AF72C00469530 /* UITest */;
+			target = 78A434301A1AF72C00469530 /* miyamoto */;
 			targetProxy = 78A4344B1A1AF72C00469530 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -317,7 +337,8 @@
 		78A4343E1A1AF72C00469530 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				78A4343F1A1AF72C00469530 /* Base */,
+				441F94DB1C3CFA220003F0CA /* ja */,
+				441F94DC1C3CFA220003F0CA /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -325,7 +346,8 @@
 		78A434431A1AF72C00469530 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				78A434441A1AF72C00469530 /* Base */,
+				441F94DD1C3CFCB50003F0CA /* ja */,
+				441F94DE1C3CFCB50003F0CA /* en */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
@@ -367,7 +389,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -403,7 +425,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -415,11 +437,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_PREFIX_HEADER = "UITest/UITest-Prefix.pch";
+				GCC_PREFIX_HEADER = "UITest/miyamoto-Prefix.pch";
 				INFOPLIST_FILE = UITest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = miyamoto;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -428,11 +451,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_PREFIX_HEADER = "UITest/UITest-Prefix.pch";
+				GCC_PREFIX_HEADER = "UITest/miyamoto-Prefix.pch";
 				INFOPLIST_FILE = UITest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = miyamoto;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
@@ -451,7 +475,7 @@
 				);
 				INFOPLIST_FILE = UITestTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = miyamotoTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UITest.app/UITest";
 			};
 			name = Debug;
@@ -466,7 +490,7 @@
 				);
 				INFOPLIST_FILE = UITestTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = miyamotoTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UITest.app/UITest";
 			};
 			name = Release;
@@ -474,7 +498,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		78A4342C1A1AF72C00469530 /* Build configuration list for PBXProject "UITest" */ = {
+		78A4342C1A1AF72C00469530 /* Build configuration list for PBXProject "miyamoto" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				78A434521A1AF72C00469530 /* Debug */,
@@ -483,7 +507,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		78A434541A1AF72C00469530 /* Build configuration list for PBXNativeTarget "UITest" */ = {
+		78A434541A1AF72C00469530 /* Build configuration list for PBXNativeTarget "miyamoto" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				78A434551A1AF72C00469530 /* Debug */,
@@ -492,7 +516,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		78A434571A1AF72C00469530 /* Build configuration list for PBXNativeTarget "UITestTests" */ = {
+		78A434571A1AF72C00469530 /* Build configuration list for PBXNativeTarget "miyamotoTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				78A434581A1AF72C00469530 /* Debug */,

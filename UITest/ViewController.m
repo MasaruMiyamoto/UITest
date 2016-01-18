@@ -40,7 +40,6 @@ int svLocation;
 
 CGPoint offset;
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];

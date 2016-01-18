@@ -39,6 +39,10 @@ int ansY;
 @synthesize IsUpdate;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    //スプラッシュの停止時間
+    sleep(2);
+    
     // Override point for customization after application launch.
     self.toyBox = [[NSMutableDictionary alloc] init];
     Button = [[SetButton alloc] init];
