@@ -59,6 +59,9 @@
 - (void)setRect:(UIView *)obj;
 
 - (void)substitution;
+
+- (void)move :(int)x :(int)y;
+
 //一方解の判定
 - (BOOL)isXY;
 

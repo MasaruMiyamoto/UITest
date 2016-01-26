@@ -24,8 +24,11 @@
 
 UIView *oya;
 UIScrollView *sv;
+UIButton *graph;
+
 
 @synthesize oya;
+@synthesize graph;
 
 //ViewClass *formula1;
 //ViewClass *formula2;
@@ -33,6 +36,7 @@ UIScrollView *sv;
 SetButton *button;
 SelectButtons *selects;
 RandomClass *ram;
+
 
 AppDelegate *appDelegate;
 
@@ -89,6 +93,22 @@ CGPoint offset;
 //    appDelegate.Button = [[SetButton alloc] init];
 //    appDelegate.Button = button;
     /**********/
+    
+    
+    /******グラフボタンの設置******/
+    graph = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    graph.frame = CGRectMake(750, 600, 150, 70);
+    [graph.titleLabel setFont:[UIFont systemFontOfSize:35]];
+    graph.backgroundColor = [UIColor buttonColor];
+    [graph setTitle:@"グラフ" forState:UIControlStateNormal];
+    [graph setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [graph addTarget:self action:@selector(graphAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:graph];
+//    graph.alpha = 0;
+    
+    /***************************/
+    
 }
 
 - (void)initScroller :(UIView *)oyaView
@@ -161,7 +181,7 @@ CGPoint offset;
             [selects dontSelects:self];
             [appDelegate upDate];
         }else{
-            [self addScroll: 768];
+//            [self addScroll: 768];
             [self graphLabels];
             [selects dontSelects:self];
             [appDelegate upDate];
@@ -169,6 +189,10 @@ CGPoint offset;
     }
 }
 
+- (void) graphAction :(id)sender
+{
+    [self graphLabels];
+}
 
 /**********/
 
@@ -225,8 +249,12 @@ CGPoint offset;
 - (void)graphLabels
 {
     SetField *init = [[SetField alloc] init];
-    [init graphSet:oya :50+768];
-    appDelegate.View = self;
+    
+//    [init graphSet:oya :50+768];
+//    NSLog(@"%d ram", ram.A);
+    [init graphSet:self.view :ram];
+
+//    appDelegate.View = self;
 }
 
 

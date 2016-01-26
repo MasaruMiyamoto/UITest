@@ -14,6 +14,7 @@
 		44AD086A1BC67D40005AAC03 /* blackboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 44AD08691BC67D40005AAC03 /* blackboard.png */; };
 		44AD14F21AA0351C00143EAF /* JudgeClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AD14F11AA0351C00143EAF /* JudgeClass.m */; };
 		44AD9FC41BC4DA9B00E6263F /* AnswerClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AD9FC31BC4DA9B00E6263F /* AnswerClass.m */; };
+		44AE41571C55F100007C2FC6 /* Graph.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AE41561C55F100007C2FC6 /* Graph.m */; };
 		44B0BCF81A1C739F00203F57 /* SetButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 44B0BCF71A1C739F00203F57 /* SetButton.m */; };
 		44B0BCFA1A1C79C500203F57 /* res.gif in Resources */ = {isa = PBXBuildFile; fileRef = 44B0BCF91A1C79C500203F57 /* res.gif */; };
 		44BBA1531BD5E67400B15D0A /* CreateField.m in Sources */ = {isa = PBXBuildFile; fileRef = 44BBA1521BD5E67400B15D0A /* CreateField.m */; };
@@ -53,6 +54,8 @@
 		44AD14F11AA0351C00143EAF /* JudgeClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JudgeClass.m; path = ../JudgeClass.m; sourceTree = "<group>"; };
 		44AD9FC21BC4DA9B00E6263F /* AnswerClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerClass.h; sourceTree = "<group>"; };
 		44AD9FC31BC4DA9B00E6263F /* AnswerClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerClass.m; sourceTree = "<group>"; };
+		44AE41551C55F100007C2FC6 /* Graph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Graph.h; sourceTree = "<group>"; };
+		44AE41561C55F100007C2FC6 /* Graph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Graph.m; sourceTree = "<group>"; };
 		44B0BCF61A1C739F00203F57 /* SetButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetButton.h; sourceTree = "<group>"; };
 		44B0BCF71A1C739F00203F57 /* SetButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetButton.m; sourceTree = "<group>"; };
 		44B0BCF91A1C79C500203F57 /* res.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = res.gif; sourceTree = "<group>"; };
@@ -116,30 +119,32 @@
 		78A434331A1AF72C00469530 /* UITest */ = {
 			isa = PBXGroup;
 			children = (
+				44ABE3CC1B0EB39F007D7110 /* AnimationClass.h */,
+				44ABE3CD1B0EB39F007D7110 /* AnimationClass.m */,
+				44AD9FC21BC4DA9B00E6263F /* AnswerClass.h */,
+				44AD9FC31BC4DA9B00E6263F /* AnswerClass.m */,
 				78A434381A1AF72C00469530 /* AppDelegate.h */,
 				78A434391A1AF72C00469530 /* AppDelegate.m */,
-				78A4343B1A1AF72C00469530 /* ViewController.h */,
-				78A4343C1A1AF72C00469530 /* ViewController.m */,
-				78A4345D1A1AF95B00469530 /* ViewClass.h */,
-				78A4345E1A1AF95B00469530 /* ViewClass.m */,
+				44CADF171C06DEBE0043B8C5 /* CommonMethod.h */,
+				44CADF181C06DEBE0043B8C5 /* CommonMethod.m */,
+				44BBA1511BD5E67400B15D0A /* CreateField.h */,
+				44BBA1521BD5E67400B15D0A /* CreateField.m */,
+				44AE41551C55F100007C2FC6 /* Graph.h */,
+				44AE41561C55F100007C2FC6 /* Graph.m */,
+				44AD14F01AA0351C00143EAF /* JudgeClass.h */,
+				44AD14F11AA0351C00143EAF /* JudgeClass.m */,
+				44ABDF151ADFA0F90019ECD3 /* RandomClass.h */,
+				44ABDF161ADFA0F90019ECD3 /* RandomClass.m */,
 				44B0BCF61A1C739F00203F57 /* SetButton.h */,
 				44B0BCF71A1C739F00203F57 /* SetButton.m */,
 				44ABDF0F1ADF79880019ECD3 /* SetField.h */,
 				44ABDF101ADF79880019ECD3 /* SetField.m */,
 				44AC726C1A962B3A00AFF9CD /* SelectButtons.h */,
 				44AC726D1A962B3A00AFF9CD /* SelectButtons.m */,
-				44AD14F01AA0351C00143EAF /* JudgeClass.h */,
-				44AD14F11AA0351C00143EAF /* JudgeClass.m */,
-				44ABDF151ADFA0F90019ECD3 /* RandomClass.h */,
-				44ABDF161ADFA0F90019ECD3 /* RandomClass.m */,
-				44ABE3CC1B0EB39F007D7110 /* AnimationClass.h */,
-				44ABE3CD1B0EB39F007D7110 /* AnimationClass.m */,
-				44AD9FC21BC4DA9B00E6263F /* AnswerClass.h */,
-				44AD9FC31BC4DA9B00E6263F /* AnswerClass.m */,
-				44BBA1511BD5E67400B15D0A /* CreateField.h */,
-				44BBA1521BD5E67400B15D0A /* CreateField.m */,
-				44CADF171C06DEBE0043B8C5 /* CommonMethod.h */,
-				44CADF181C06DEBE0043B8C5 /* CommonMethod.m */,
+				78A4343B1A1AF72C00469530 /* ViewController.h */,
+				78A4343C1A1AF72C00469530 /* ViewController.m */,
+				78A4345D1A1AF95B00469530 /* ViewClass.h */,
+				78A4345E1A1AF95B00469530 /* ViewClass.m */,
 				78A4343E1A1AF72C00469530 /* Main.storyboard */,
 				78A434411A1AF72C00469530 /* Images.xcassets */,
 				78A434431A1AF72C00469530 /* LaunchScreen.xib */,
@@ -291,6 +296,7 @@
 				78A4345F1A1AF95B00469530 /* ViewClass.m in Sources */,
 				44AD14F21AA0351C00143EAF /* JudgeClass.m in Sources */,
 				44AC726E1A962B3A00AFF9CD /* SelectButtons.m in Sources */,
+				44AE41571C55F100007C2FC6 /* Graph.m in Sources */,
 				44ABDF171ADFA0F90019ECD3 /* RandomClass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -367,7 +373,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -403,7 +409,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -418,6 +424,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "UITest/UITest-Prefix.pch";
 				INFOPLIST_FILE = UITest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 2;
@@ -431,6 +438,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "UITest/UITest-Prefix.pch";
 				INFOPLIST_FILE = UITest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 2;

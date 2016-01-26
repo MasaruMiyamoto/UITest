@@ -18,6 +18,8 @@
 UIView *labelX;
 UIView *labelY;
 
+BOOL ansFlag = false;
+
 @implementation AnswerClass
 
 //クラスの初期化メソッド
@@ -59,8 +61,13 @@ UIView *labelY;
 //x ,y への入力(外部参照)
 - (void)setXY :(int)X :(int)Y
 {
-    labelX = [self setLabel:X :@"x"];
-    labelY = [self setLabel:Y :@"y"];
+    if ( X != 0 && Y != 0){
+        labelX = [self setLabel:X :@"x"];
+        labelY = [self setLabel:Y :@"y"];
+        ansFlag = true;
+    }else{
+        ansFlag = false;
+    }
 }
 
 //解の生成
@@ -115,22 +122,24 @@ UIView *labelY;
 //中括弧を使った表示
 - (void)setParenthesis
 {
-    UILabel *Parenthesis = [[UILabel alloc] init];
-    Parenthesis.textAlignment = NSTextAlignmentCenter;
-    Parenthesis.font = [UIFont systemFontOfSize:150];
-    Parenthesis.adjustsFontSizeToFitWidth = YES;
-    Parenthesis.minimumScaleFactor = 20/50;
     
-    Parenthesis.text = @"{";
-    Parenthesis.textColor = [UIColor whiteChokeColor];
-    
-    Parenthesis.frame = CGRectMake(0, -27, 50, 200);
-    labelX.frame = CGRectMake(58, 0, labelX.frame.size.width, labelX.frame.size.height);
-    labelY.frame = CGRectMake(58, 88, labelY.frame.size.width, labelY.frame.size.height);
-    
-    [self addSubview:Parenthesis];
-    [self addSubview:labelX];
-    [self addSubview:labelY];
-    
+    if (ansFlag) {
+        UILabel *Parenthesis = [[UILabel alloc] init];
+        Parenthesis.textAlignment = NSTextAlignmentCenter;
+        Parenthesis.font = [UIFont systemFontOfSize:150];
+        Parenthesis.adjustsFontSizeToFitWidth = YES;
+        Parenthesis.minimumScaleFactor = 20/50;
+        
+        Parenthesis.text = @"{";
+        Parenthesis.textColor = [UIColor whiteChokeColor];
+        
+        Parenthesis.frame = CGRectMake(0, -27, 50, 200);
+        labelX.frame = CGRectMake(58, 0, labelX.frame.size.width, labelX.frame.size.height);
+        labelY.frame = CGRectMake(58, 88, labelY.frame.size.width, labelY.frame.size.height);
+        
+        [self addSubview:Parenthesis];
+        [self addSubview:labelX];
+        [self addSubview:labelY];
+    }
 }
 @end

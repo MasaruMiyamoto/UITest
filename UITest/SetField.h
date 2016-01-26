@@ -8,10 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "ViewClass.h"
-#import "SetButton.h"
+
 #import "CreateField.h"
 #import "CommonMethod.h"
+#import "Graph.h"
+#import "RandomClass.h"
+#import "SetButton.h"
+#import "ViewClass.h"
 
 @interface SetField : NSObject
 
@@ -19,5 +22,5 @@
 - (void)secondSet :(UIView *)oya;
 - (void)thirdSet :(UIView *)oya :(ViewClass *)view;
 
-- (void)graphSet :(UIView *)oya :(int)location;
+- (void)graphSet :(UIView *)oya :(RandomClass *)ramdom;
 @end

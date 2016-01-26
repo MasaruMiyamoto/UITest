@@ -20,8 +20,9 @@
 @property(nonatomic, readonly)int P;
 @property(nonatomic, readonly)int Q;
 
+- (int)enterFormula :(NSString *)str;
 - (void)enterFormula;
 - (BOOL)isIdefinite;
-
+- (int)outAns :(BOOL)xy;
 
 @end

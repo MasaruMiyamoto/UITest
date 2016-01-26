@@ -13,8 +13,13 @@
 
 int A, B, C, D, P, Q;
 
+int ansX, ansY;
+
+AppDelegate *appDelegate;
+
 //ランダム問題にするかどうか。falseならランダム
-bool stop = false;
+//bool stop = false;
+bool stop = true;
 
 - (id)init
 {
@@ -24,6 +29,9 @@ bool stop = false;
     }else{
         [self makeValue];
     }
+    
+    [self getAns];
+    
     return self;
 }
 
@@ -94,13 +102,52 @@ bool stop = false;
 //    P = 1;
 //    Q = 1;
     
-    A = 3;
-    B = 4;
-    C = 3;
-    D = 4;
-    P = 10;
-    Q = 4;
+    A = 1;
+    B = -2;
+    C = 1;
+    D = -2;
+    P = -4;
+    Q = 2;
     
+}
+
+- (int)enterFormula :(NSString *)str
+{
+    int a = 100;
+    
+    SWITCH(str){
+        
+        CASE(@"A"){
+            a = A;
+            break;
+        }
+        CASE(@"B"){
+            a = B;
+            break;
+        }
+        CASE(@"C"){
+            a = C;
+            break;
+        }
+        CASE(@"D"){
+            a = D;
+            break;
+        }
+        CASE(@"P"){
+            a = P;
+            break;
+        }
+        CASE(@"Q"){
+            a = Q;
+            break;
+        }
+        DEFAULT {
+            NSLog(@"throght default");
+            break;
+        }
+    }
+    
+    return a;
 }
 
 - (void)enterFormula
@@ -112,7 +159,7 @@ bool stop = false;
     int p = P;
     int q = Q;
     
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    appDelegate = [[UIApplication sharedApplication] delegate];
     
     NSMutableArray *member = [appDelegate.toyBox objectForKey:@"formula1"];
     
@@ -121,7 +168,7 @@ bool stop = false;
     UILabel *lb1 = member[2];
     UILabel *le1 = member[3];
     
-//    la1.text = [NSString stringWithFormat:@"%d",a];
+    //    la1.text = [NSString stringWithFormat:@"%d",a];
     la1.text = [CommonMethod outputString:a :true];
     
     if(b < 0){
@@ -131,10 +178,10 @@ bool stop = false;
         lc1.text = [NSString stringWithFormat:@"+"];
     }
     
-//    lb1.text = [NSString stringWithFormat:@"%d",b];
+    //    lb1.text = [NSString stringWithFormat:@"%d",b];
     lb1.text = [CommonMethod outputString:b :true];
     
-//    le1.text = [NSString stringWithFormat:@"%d",p];
+    //    le1.text = [NSString stringWithFormat:@"%d",p];
     le1.text = [CommonMethod outputString:p :false];
     
     member = [appDelegate.toyBox objectForKey:@"formula2"];
@@ -144,7 +191,7 @@ bool stop = false;
     UILabel *lb2 = member[2];
     UILabel *le2 = member[3];
     
-//    la2.text = [NSString stringWithFormat:@"%d",c];
+    //    la2.text = [NSString stringWithFormat:@"%d",c];
     la2.text = [CommonMethod outputString:c :true];
     
     if(d < 0){
@@ -154,12 +201,33 @@ bool stop = false;
         lc2.text = [NSString stringWithFormat:@"+"];
     }
     
-//    lb2.text = [NSString stringWithFormat:@"%d",d];
+    //    lb2.text = [NSString stringWithFormat:@"%d",d];
     lb2.text = [CommonMethod outputString:d :true];
     
-//    le2.text = [NSString stringWithFormat:@"%d",q];
+    //    le2.text = [NSString stringWithFormat:@"%d",q];
     le2.text = [CommonMethod outputString:q :false];
 }
+
+- (void) getAns
+{
+    if([self isIdefinite]){
+        NSLog(@"解なし");
+    }else{
+        int delt = A * D - B * C;
+        int child1 = D * P + (-1 * B * Q);
+        int child2 = (-1 * C * P) + A * Q;
+        
+        ansX = child1 / delt;
+        ansY = child2 / delt;
+    }
+    
+    NSLog(@"AnsX = %d, AnsY = %d",ansX, ansY);
+    
+    [appDelegate inputTrueAns:true :ansX];
+    [appDelegate inputTrueAns:false :ansY];
+    
+}
+
 
 //解の判別
 - (BOOL)isIdefinite
@@ -186,4 +254,16 @@ bool stop = false;
             return x;
     }
 }
+
+- (int)outAns :(BOOL)xy
+{
+    if(xy){
+        return ansX;
+    }else{
+        return ansY;
+    }
+    
+    return 1000;
+}
+
 @end

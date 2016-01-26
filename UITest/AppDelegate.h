@@ -32,6 +32,7 @@
 - (void)initToyBox;
 - (void)upDate;
 - (void)setUpdateMode:(NSString *)mode;
+- (void)inputTrueAns :(BOOL)XY :(int)val;
 - (void)inputAns :(BOOL)XY :(int)val;
 
 @end

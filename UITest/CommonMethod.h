@@ -16,5 +16,5 @@
 + (void)setBorder :(UILabel *)origin;
 + (void)resetBorder :(UILabel *)origin;
 + (CGRect)cleanPosition :(CGRect)AB :(NSString *)XY;
-    
++ (int)getChild :(int)child :(int)parent;
 @end

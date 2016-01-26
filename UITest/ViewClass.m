@@ -209,6 +209,10 @@ int LabelFlag;
             [self graphMode];  //13
             break;
         }
+        CASE (@"graphFormulaMode"){
+            [self graphFormulaMode];  //14
+            break;
+        }
         DEFAULT {
             NSLog(@"throght default");
             break;
@@ -1156,6 +1160,175 @@ int LabelFlag;
     [self addSubview:Y];
     [self addSubview:Equal];
     [self addSubview:Code];
+    
+}
+
+- (void)graphFormulaMode
+{
+    NSLog(@"⑭GraphFormulaMode");
+    //y = の形にする
+    
+    int a = -[CommonMethod inputInteger:A.text :true];
+    int b1 = [CommonMethod inputInteger:B.text :true];
+    if([Code.text isEqualToString:@"-"]){
+        b1 = -b1;
+    }
+    int b2 = [CommonMethod inputInteger:B.text :true];
+    if([Code.text isEqualToString:@"-"]){
+        b2 = -b2;
+    }
+    int e = [CommonMethod inputInteger:E.text :false];
+    
+    A.text = [CommonMethod outputString:a/b1 :true];
+    E.text = [CommonMethod outputString:e/b2 :false];
+    
+    
+    NSLog(@"a = %d",a);
+    NSLog(@"b = %d",b1);
+    NSLog(@"e = %d",e);
+    
+    
+    UILabel *Code2 = [self setText:45];
+    
+    Code.text = @"+";
+    Code2.text = @"+";
+
+    UIView *dView1 = [[UIView alloc]init];
+    UIView *dView2 = [[UIView alloc]init];
+    
+//    dView1.backgroundColor = [UIColor cyanColor];
+    
+    
+    //座標の確定
+    Y.frame = CGRectMake(10, 0, Size, Size);
+    Equal.frame = CGRectMake(Y.frame.origin.x + 50, 0, Size, Size);
+    
+    
+    //変数項
+    if (a%b1 == 0) {
+        NSLog(@"OK 0");
+        A.frame = CGRectMake(0, 0, Size, Size);
+        dView1.frame = CGRectMake(Equal.frame.origin.x + 70, 0, Size, Size);
+        [dView1 addSubview:A];
+    }else{
+        //正負の処理
+        
+        if (a < 0) {
+            a = -a;
+            Code.text = @"-";
+        }
+        
+        if (b1 < 0) {
+            b1 = -b1;
+            if([Code.text isEqualToString:@"+"]){
+//                NSLog(@"Code = -");
+                Code.text = @"-";
+            }else{
+                Code.text = @"+";
+            }
+        }
+        
+        int child = [CommonMethod getChild:a :b1];
+        
+        UIView *line = [[UIView alloc]init];
+        line.backgroundColor = [UIColor whiteChokeColor];
+        line.frame = CGRectMake(0, Size/2, Size, 2);
+        
+        A = [self setText:45];
+        B = [self setText:45];
+        
+        A.text = [CommonMethod outputString:a/child :false];
+        B.text = [CommonMethod outputString:b1/child :false];
+        
+        A.frame = CGRectMake(0, 0, Size, Size/2);
+        B.frame = CGRectMake(0, Size/2 + 10, Size, Size/2);
+        
+        if([Code.text isEqualToString:@"-"]){
+//            NSLog(@"OK -");
+            Code.frame = CGRectMake(Equal.frame.origin.x + 50, 0, Size, Size);
+            dView1.frame = CGRectMake(Code.frame.origin.x + 60, 0, Size, Size);
+            [self addSubview:Code];
+            
+        }else{
+            dView1.frame = CGRectMake(Equal.frame.origin.x + 70, 0, Size, Size);
+        }
+        
+        [dView1 addSubview:line];
+        [dView1 addSubview:A];
+        [dView1 addSubview:B];
+        
+        
+    }
+    
+    //定数項
+    dView2.frame = CGRectMake(0, 0, Size, Size);
+    
+    if(e%b2 == 0){
+        if(e/b2 < 0){
+            Code2.text = @"-";
+            E.text = [E.text substringFromIndex:1];
+        }
+//        NSLog(@"OK");
+        E.frame = CGRectMake(0, 0, Size, Size);
+        [dView2 addSubview:E];
+        
+    }else{
+        
+        if (e < 0) {
+            e = -e;
+            Code2.text = @"-";
+        }
+        
+        if (b2 < 0) {
+            b2 = -b2;
+            if([Code2.text isEqualToString:@"+"]){
+                Code2.text = @"-";
+            }else{
+                Code2.text = @"+";
+            }
+        }
+        
+        int child = [CommonMethod getChild:e :b2];
+        
+        UIView *line = [[UIView alloc]init];
+        line.backgroundColor = [UIColor whiteChokeColor];
+        line.frame = CGRectMake(0, Size/2, Size, 2);
+        
+        E = [self setText:45];
+        Mul = [self setText:45];
+        
+        E.text = [CommonMethod outputString:e/child :false];
+        Mul.text = [CommonMethod outputString:b2/child :false];
+        
+        E.frame = CGRectMake(0, 0, Size, Size/2);
+        Mul.frame = CGRectMake(0, Size/2 + 10, Size, Size/2);
+        
+        dView2.frame = CGRectMake(0, 0, Size, Size);
+        
+        [dView2 addSubview:line];
+        [dView2 addSubview:E];
+        [dView2 addSubview:Mul];
+    }
+    
+    X.frame = CGRectMake(dView1.frame.origin.x + 60, 0, Size, Size);
+    
+    Code2.frame = CGRectMake(X.frame.origin.x +50, 0, Size, Size);
+    dView2.frame = CGRectMake(Code2.frame.origin.x + 70, 0, Size, Size);
+    
+    NSLog(@"E = %@",E.text);
+    NSLog(@"Mul = %@",Mul.text);
+//    NSLog(@"%lf",[[Code2 text] sizeWithFont:[Code2 font]]);
+//    NSLog(@"%lf",[[Code text] sizeWithFont:[Code font]]);
+//    NSLog(@"x = %lf",dView2.frame.origin.x);
+    
+    
+    [self addSubview:Y];
+    [self addSubview:Equal];
+    [self addSubview:dView1];
+    [self addSubview:X];
+    [self addSubview:Code2];
+    [self addSubview:dView2];
+    
     
 }
 /*************************/

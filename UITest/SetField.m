@@ -159,36 +159,44 @@ int a2,b2,e2;
 }
 
 
-- (void)graphSet :(UIView *)oya :(int)location
+- (void)graphSet :(UIView *)oya :(RandomClass *)ramdom
 {
+    
     //係数の取得
-    [self getVal:@"formula1"];
-    [self getVal:@"formula2"];
+    a1 = [ramdom enterFormula:@"A"];
+    b1 = [ramdom enterFormula:@"B"];
+    e1 = [ramdom enterFormula:@"P"];
+    
+    a2 = [ramdom enterFormula:@"C"];
+    b2 = [ramdom enterFormula:@"D"];
+    e2 = [ramdom enterFormula:@"Q"];
     
     
-    ViewClass *formula1 = [[ViewClass alloc] initWithPosition: 91: location];
+    NSLog(@"a1 = %d, ram.A = %d",a1, ramdom.A);
+    
+    //グラフViewクラスの作成
+    Graph *graph = [[Graph alloc] init];
+    
+    //解を入れる
+    [graph getAns:[ramdom outAns:true] :[ramdom outAns:false]];
+    
+    ViewClass *formula1 = [[ViewClass alloc] init];
     //oya に　formula1　を追加、表示
     [formula1 changeMode:@"graphMode"];
     [formula1 setVariable: a1: b1: e1];
-    [oya addSubview:formula1];
     
-    //    NSLog(@"-------------");
-    ViewClass *formula2 = [[ViewClass alloc] initWithPosition: 91: location + viewDist/2];
-    //oya に　formula2　を追加、表示
+//    NSLog(@"-------------");
+    ViewClass *formula2 = [[ViewClass alloc] init];
+//    oya に　formula2　を追加、表示
     [formula2 changeMode:@"graphMode"];
     [formula2 setVariable: a2: b2: e2];
-    [oya addSubview:formula2];
     
-    CreateField *field = [[CreateField alloc] initWithFrame:CGRectMake(50, 200 + 768, 400, 400)];
-    field.backgroundColor = [UIColor boardColor];
-    [[field layer] setBorderColor:[[UIColor whiteChokeColor] CGColor]];
-    [[field layer] setBorderWidth:1.5];
+    [graph setPoint:a1 :b1 :e1 :a2 :b2 :e2];
+    [graph initFormula:formula1 :formula2];
     
+    [oya addSubview:graph];
     
-    [field setPoint:a1 :b1 :e1 :1];
-    [field setPoint:a2 :b2 :e2 :2];
-    
-    [oya addSubview:field];
+    [graph animationGraph];
 }
 
 //大域変数に格納　原則secondSet内でのみの呼び出し
@@ -224,4 +232,5 @@ int a2,b2,e2;
     }
     
 }
+
 @end

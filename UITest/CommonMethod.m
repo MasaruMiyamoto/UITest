@@ -72,4 +72,19 @@
     
     return AB;
 }
+
++ (int)getChild :(int)child :(int)parent
+{
+    int count;
+    
+    while(1){
+        count = parent % child;
+        if(count == 0)break;
+        parent = child;
+        child = count;
+    }
+    
+    return child;
+}
+
 @end

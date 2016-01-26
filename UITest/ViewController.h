@@ -11,6 +11,7 @@
 @interface ViewController : UIViewController
 
 @property(nonatomic, readonly)UIView *oya;
+@property(nonatomic, readonly)UIButton *graph;
 
 //- (void)newScroll;
 - (void)addScroll :(int)distY;

@@ -33,6 +33,9 @@
 #define pinkChokeColor colorWithRed:247/255.0 green:171/255.0 blue:173/255.0 alpha:0.85
 #define blueChokeColor colorWithRed:126/255.0 green:203/255.0 blue:220/255.0 alpha:0.85
 
+//グラフの色
+#define graphColor colorWithRed:35/255.0 green:59/255.0 blue:108/255.0 alpha:1.0
+
 //入力ボタンの色
 #define buttonColor colorWithRed:30/255.0 green:160/255.0 blue:30/255.0 alpha:1.0
 

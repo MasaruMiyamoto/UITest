@@ -29,6 +29,11 @@ SetButton *Button;
 ViewClass *form;
 //SetField *Set;
 
+
+//計算解
+int tAnsX;
+int tAnsY;
+
 //解の格納
 int ansX;
 int ansY;
@@ -269,6 +274,7 @@ int ansY;
     
     if([form checkDiv :@"Mul"]){
         NSLog(@"ansX = %d, ansY = %d",ansX, ansY);
+        NSLog(@"tAnsX = %d, tAnsY = %d",tAnsX, tAnsY);
         AnswerClass *ans = [[AnswerClass alloc] initWithPosition:91 :form.frame.origin.y + viewDist];
         [ans setXY:ansX :ansY];
         [ans selectMode:@"Parenthesis"];
@@ -280,13 +286,15 @@ int ansY;
         [Button isMove:false];
         
         if (form.frame.origin.y > 1928) {
-            [View addScroll:View.oya.frame.size.height - ans.frame.origin.y + 50];
+            [View addScroll:View.oya.frame.size.height - ans.frame.origin.y + 70];
             [AnimationClass delay:1];
         }
         
         
         [View.oya addSubview:ans];
         [AnimationClass fadeIn:ans :0];
+        [AnimationClass delay:1];
+        [AnimationClass fadeIn:View.graph :0];
         //おもちゃ箱の初期化
         [self initToyBox];
         
@@ -329,6 +337,16 @@ int ansY;
     [CommonMethod resetBorder:form.E];
     [CommonMethod resetBorder:form.Mul];
 }
+
+- (void)inputTrueAns :(BOOL)XY :(int)val
+{
+    if (XY) {
+        tAnsX = val;
+    }else{
+        tAnsY = val;
+    }
+}
+
 
 - (void)inputAns :(BOOL)XY :(int)val
 {
