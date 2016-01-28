@@ -60,6 +60,9 @@ CreateField *field;
     
     [f2 move:0 :viewDist/2];
     
+//    f1.Y.textColor = [UIColor blueChokeColor];
+//    f2.Y.textColor = [UIColor pinkChokeColor];
+    
     Parenthesis = [[UILabel alloc] init];
     Parenthesis.textAlignment = NSTextAlignmentCenter;
     Parenthesis.font = [UIFont systemFontOfSize:120];
@@ -81,7 +84,7 @@ CreateField *field;
     
     Yajirusi1 = [[UILabel alloc] init];
     Yajirusi1.textAlignment = NSTextAlignmentCenter;
-    Yajirusi1.font = [UIFont systemFontOfSize:80];
+    Yajirusi1.font = [UIFont systemFontOfSize:40];
     Yajirusi1.adjustsFontSizeToFitWidth = YES;
     Yajirusi1.minimumScaleFactor = 20/50;
     //    Parenthesis.backgroundColor = [UIColor redColor];
@@ -89,7 +92,7 @@ CreateField *field;
     Yajirusi1.text = @"↓";
     Yajirusi1.textColor = [UIColor whiteChokeColor];
     
-    Yajirusi1.frame = CGRectMake(view1.frame.origin.x + 150, view1.frame.origin.y + 150, 80, 20);
+    Yajirusi1.frame = CGRectMake(view1.frame.origin.x + 150, view1.frame.origin.y + 150, 80, 40);
     [self addSubview:Yajirusi1];
     
     /****************グラフの式の表示*******************/
@@ -102,6 +105,8 @@ CreateField *field;
     ViewClass *f4 = [[ViewClass alloc] init];
     f4 = [f4 copyWithPosition: f2: f2.frame.origin.x: f2.frame.origin.y + 50];
     
+    f3.Y.textColor = [UIColor blueChokeColor];
+    f4.Y.textColor = [UIColor pinkChokeColor];
     
     Parenthesis2 = [[UILabel alloc] init];
     Parenthesis2.textAlignment = NSTextAlignmentCenter;
