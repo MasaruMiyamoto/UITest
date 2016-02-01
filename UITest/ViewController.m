@@ -105,7 +105,7 @@ CGPoint offset;
     [graph addTarget:self action:@selector(graphAction:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:graph];
-//    graph.alpha = 0;
+    graph.alpha = 0;
     
     /***************************/
     

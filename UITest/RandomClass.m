@@ -18,8 +18,8 @@ int ansX, ansY;
 AppDelegate *appDelegate;
 
 //ランダム問題にするかどうか。falseならランダム
-//bool stop = false;
-bool stop = true;
+bool stop = false;
+//bool stop = true;
 
 - (id)init
 {
